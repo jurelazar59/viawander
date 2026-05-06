@@ -143,6 +143,18 @@ input,textarea,select{font-family:var(--body)}
 .pdf-footer-bar{ position:fixed; bottom:0; left:0; right:0; background:#1C1510; padding:7px 64px; display:flex; justify-content:space-between; align-items:center; -webkit-print-color-adjust:exact; print-color-adjust:exact }
 .pdf-footer-bar span{ font-family:'Karla',sans-serif; font-size:.5rem; color:rgba(242,235,217,.25); letter-spacing:.09em; text-transform:uppercase }
 
+/* ══ FALLBACK NOTICE ══ */
+#fallbackNotice{display:none;background:rgba(196,137,42,.08);border-bottom:1px solid rgba(196,137,42,.18);padding:.7rem 2.5rem;align-items:center;justify-content:space-between;gap:1rem}
+#fallbackNotice.show{display:flex}
+.fn-msg{font-family:var(--ui);font-size:.72rem;font-weight:500;color:var(--ink2);display:flex;align-items:center;gap:.5rem}
+.fn-icon{color:var(--gold);font-size:.85rem;flex-shrink:0}
+.fn-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.fn-try{font-family:var(--ui);font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:transparent;border:1px solid rgba(196,137,42,.35);padding:.32rem .8rem;border-radius:2px;cursor:pointer;transition:all .15s}
+.fn-try:hover{background:rgba(196,137,42,.12);border-color:var(--gold)}
+.fn-close{font-family:var(--ui);font-size:.7rem;color:var(--ink4);cursor:pointer;padding:.2rem;transition:color .15s;line-height:1}
+.fn-close:hover{color:var(--ink2)}
+@media(max-width:720px){#fallbackNotice{flex-direction:column;align-items:flex-start;padding:.7rem 1.25rem}}
+
 /* ══ PRICE ALERT MODAL ══ */
 .alert-modal-overlay {
   display: none;
@@ -4690,19 +4702,26 @@ select.budget-select:focus,
 /* ══ LANGUAGE SELECTOR — nav dark version ══ */
 .hero-nav .lang-select,
 .itin-topbar .lang-select{
-  color:rgba(242,235,217,.8);
-  border:1.5px solid rgba(242,235,217,.2);
-  background:rgba(242,235,217,.06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(242,235,217,0.5)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right .45rem center;
+  color:rgba(242,235,217,.9);
+  border:1.5px solid rgba(242,235,217,.18);
+  background:rgba(0,0,0,.38) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(242,235,217,0.55)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right .45rem center;
   padding-right:1.5rem;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
 }
 .hero-nav .lang-select:hover,
 .itin-topbar .lang-select:hover{
-  border-color:rgba(242,235,217,.45);
-  color:rgba(242,235,217,1);
+  background-color:rgba(0,0,0,.55);
+  border-color:rgba(242,235,217,.35);
+  color:#F2EBD9;
 }
 .hero-nav .lang-select option,
 .itin-topbar .lang-select option{
   background:#1C1510;color:#F2EBD9;
+}
+.hero-nav .lang-bar,
+.itin-topbar .lang-bar{
+  border-right-color:rgba(242,235,217,.12);
 }
 
 /* ══ SIGN IN BUTTON — forest green ══ */
@@ -5279,6 +5298,17 @@ select.budget-select:focus,
         </div>
       </div>
       <div class="mast-right"><img id="iHeroImg" src="" alt=""></div>
+    </div>
+  </div>
+
+  <div id="fallbackNotice">
+    <div class="fn-msg">
+      <span class="fn-icon">⚠</span>
+      Couldn't connect to our servers — showing a sample itinerary. Your choices were not used.
+    </div>
+    <div class="fn-actions">
+      <button class="fn-try" onclick="regenItin()">Try again →</button>
+      <span class="fn-close" onclick="document.getElementById('fallbackNotice').classList.remove('show')" title="Dismiss">✕</span>
     </div>
   </div>
 
@@ -6207,6 +6237,8 @@ function renderItin(data){
   }).join('');
 
   document.getElementById('itinMain').innerHTML=(data.days||[]).map((day,di)=>renderDayPane(day,di)).join('');
+  const notice = document.getElementById('fallbackNotice');
+  if(notice) notice.classList.toggle('show', !!data._isFallback);
   renderAside(data);
   renderStays(data);
   renderTransport(data);
@@ -6918,6 +6950,7 @@ function makeFallback(){
       {mode:'bus',name:isSl?'FlixBus do Splita':'FlixBus to Split',detail:isSl?'Prek Zagreba ali Reke':'Via Zagreb or Rijeka',duration:'8–10h',price:'€25–45',link:'https://flixbus.com'},
       {mode:'ferry',name:isSl?'Nočna trajektna linija iz Ancone':'Overnight ferry from Ancona',detail:'Jadrolinija',duration:'9h',price:'€55',link:'https://jadrolinija.hr'}
     ],
+    _isFallback: true,
     days
   };
 }
