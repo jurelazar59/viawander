@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/itinerary.js": { "runtime": "edge" },
+    "api/packing.js":   { "runtime": "edge" },
+    "api/mood.js":      { "runtime": "edge" }
+  },
+  "rewrites": [
+    { "source": "/api/itinerary", "destination": "/api/itinerary" },
+    { "source": "/api/packing",   "destination": "/api/packing"   },
+    { "source": "/api/mood",      "destination": "/api/mood"      }
+  ]
+}
