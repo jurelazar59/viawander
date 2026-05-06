@@ -5703,6 +5703,7 @@ const T = () => LANGS[currentLang];
 function t(key){ return T()[key] || LANGS.en[key] || key; }
 
 function applyLang(lang){
+  if(!LANGS[lang]) lang = 'en';
   currentLang = lang;
   document.getElementById('htmlRoot').lang = lang;
 
@@ -6256,7 +6257,12 @@ function switchTier(tier,btn){
 
 function sanitiseAI(str){
   if(!str) return '';
-  return String(str);
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function safeUrl(url){
+  if(!url) return '#';
+  const s = String(url).trim();
+  return /^https?:\/\//i.test(s) ? s : '#';
 }
 
 function renderDayPane(day, di){
@@ -6271,18 +6277,18 @@ function renderDayPane(day, di){
 
   const uid_act = di + '_activity';
   const afterProse = act.name
-    ? '<button class="place-chip" id="chip_'+uid_act+'" data-uid="'+uid_act+'" onclick="openSwap(this.dataset.uid,event)">'+act.name+'</button> — '+(act.desc||'')+' ('+(act.price||'')+').'
-    : (day.afternoon||'');
+    ? '<button class="place-chip" id="chip_'+uid_act+'" data-uid="'+uid_act+'" onclick="openSwap(this.dataset.uid,event)">'+sanitiseAI(act.name)+'</button> — '+sanitiseAI(act.desc||'')+' ('+sanitiseAI(act.price||'')+').'
+    : sanitiseAI(day.afternoon||'');
 
   var out = '';
   out += '<div class="day-pane'+(di===0?' on':'')+'" id="dpane'+di+'">';
   out += '<div class="day-hdr"><div class="day-num">0'+(di+1)+'</div>';
   out += '<div style="flex:1"><div class="day-lbl">'+t('day_label')+' '+(di+1)+'</div>';
-  out += '<div class="day-title">'+(day.title||'')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' Note</button></div>';
+  out += '<div class="day-title">'+sanitiseAI(day.title||'')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' Note</button></div>';
   out += '<div class="note-inline" id="ni_day'+di+'">'+renderNoteField('day'+di)+'</div>';
   out += '</div></div>';
   out += '<div class="tblock morning"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('morning')+'</span></div>';
-  out += '<div class="prose-wrap">'+(day.morning||'')+'</div></div>';
+  out += '<div class="prose-wrap">'+sanitiseAI(day.morning||'')+'</div></div>';
   out += lunchBlock;
   out += '<div class="tblock afternoon"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('afternoon')+'</span></div>';
   out += '<div class="prose-wrap">'+afterProse+'</div>';
@@ -6290,7 +6296,7 @@ function renderDayPane(day, di){
   out += '</div>';
   out += dinnerBlock;
   out += '<div class="tblock evening"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('evening')+'</span></div>';
-  out += '<div class="prose-wrap">'+(day.evening||'')+'</div></div>';
+  out += '<div class="prose-wrap">'+sanitiseAI(day.evening||'')+'</div></div>';
   out += renderMoodPanel(di, day.title||'');
   out += renderCostBreakdown(day, di);
   out += '</div>';
@@ -6370,9 +6376,9 @@ function buildSwapOpts(type, tier, alts, tierData, di, uid){
       +'onclick="selectSwap(this.dataset.uid,this,this.dataset.name,this.dataset.price)">'
       +'<img src="'+img+'" alt="">'
       +'<div>'
-        +'<div class="so-name">'+(o.name||'')+'</div>'
-        +'<div class="so-sub">'+(o.cuisine||o.price||'')+'</div>'
-        +'<div class="so-desc">'+(o.desc||'')+'</div>'
+        +'<div class="so-name">'+sanitiseAI(o.name||'')+'</div>'
+        +'<div class="so-sub">'+sanitiseAI(o.cuisine||o.price||'')+'</div>'
+        +'<div class="so-desc">'+sanitiseAI(o.desc||'')+'</div>'
       +'</div>'
       +'<div class="so-right">'
         +'<div class="so-price">'+price+'</div>'
@@ -6443,15 +6449,15 @@ function renderAside(data){
   document.getElementById('itinAside').innerHTML = `
     <div class="aside-sec">
       <div class="aside-lbl">${t('itin_aside_cost')}</div>
-      <div class="aside-big">${data.estimated_daily_cost||'€100–150'}<small>${t('itin_aside_cost_sub')}</small></div>
+      <div class="aside-big">${sanitiseAI(data.estimated_daily_cost||'€100–150')}<small>${t('itin_aside_cost_sub')}</small></div>
     </div>
     <div class="aside-sec">
       <div class="aside-lbl">${t('itin_aside_about')}</div>
-      <div class="aside-prose">${data.hero_description||''}</div>
+      <div class="aside-prose">${sanitiseAI(data.hero_description||'')}</div>
     </div>
     <div class="aside-sec">
       <div class="aside-lbl">${t('itin_aside_tip')}</div>
-      <div class="aside-tip">${data.insider_tip||''}</div>
+      <div class="aside-tip">${sanitiseAI(data.insider_tip||'')}</div>
     </div>
     <div class="aside-sec" id="asideSels">
       <div class="aside-lbl">${t('itin_aside_sels')}</div>
@@ -6459,11 +6465,11 @@ function renderAside(data){
     </div>
     <div class="aside-sec">
       <div class="aside-lbl">${t('itin_aside_months')}</div>
-      <div class="aside-tip">${data.best_months||''}</div>
+      <div class="aside-tip">${sanitiseAI(data.best_months||'')}</div>
     </div>
     <div class="aside-sec">
       <div class="aside-lbl">${t('itin_aside_pack')}</div>
-      <div class="aside-tip">${data.packing_tip||''}</div>
+      <div class="aside-tip">${sanitiseAI(data.packing_tip||'')}</div>
     </div>`;
 }
 
@@ -6475,7 +6481,7 @@ function updateAside(){
     return;
   }
   el.innerHTML = `<div class="aside-lbl">${t('itin_aside_sels')}</div><div class="sel-list">`+
-    entries.map(c=>`<div class="sel-item"><span class="sel-type">${c.type}</span><span class="sel-name">${c.name}</span>${c.price?`<span class="sel-price">${c.price}</span>`:''}</div>`).join('')+
+    entries.map(c=>`<div class="sel-item"><span class="sel-type">${sanitiseAI(c.type)}</span><span class="sel-name">${sanitiseAI(c.name)}</span>${c.price?`<span class="sel-price">${sanitiseAI(c.price)}</span>`:''}</div>`).join('')+
     `</div>`;
 }
 
@@ -6497,19 +6503,19 @@ function renderStays(data){
         const best = p===minP;
         return `<div class="stay-card" id="stay_${di}_${i}" onclick="pickStay(${di},${i},'${esc(o.name)}','${esc(o.price_per_night)}')">
           <div class="stay-chk">✓</div>
-          <img class="stay-img" src="${gStay(di*3+i)}" alt="${o.name||''}" loading="lazy">
+          <img class="stay-img" src="${gStay(di*3+i)}" alt="${sanitiseAI(o.name||'')}" loading="lazy">
           <div class="stay-body">
-            <div class="stay-plat"><span class="pdot ${platDots[o.platform]||'c-local'}"></span>${o.platform} · ${o.type||''}</div>
-            <div class="stay-name">${o.name||''}</div>
-            <div class="stay-desc">${o.desc||''}</div>
+            <div class="stay-plat"><span class="pdot ${platDots[o.platform]||'c-local'}"></span>${sanitiseAI(o.platform)} · ${sanitiseAI(o.type||'')}</div>
+            <div class="stay-name">${sanitiseAI(o.name||'')}</div>
+            <div class="stay-desc">${sanitiseAI(o.desc||'')}</div>
             <div class="stay-footer">
               <div>
-                <div class="stay-price">${o.price_per_night||''}<span>/noč</span></div>
+                <div class="stay-price">${sanitiseAI(o.price_per_night||'')}<span>/noč</span></div>
                 ${best?`<div class="best-tag">${t('stays_best')}</div>`:''}
               </div>
               <div style="text-align:right">
-                <div class="stay-stars">★ ${o.rating||''}</div>
-                <a class="btn-bk" href="${o.link||'#'}" target="_blank" onclick="event.stopPropagation()">Book →</a>
+                <div class="stay-stars">★ ${sanitiseAI(o.rating||'')}</div>
+                <a class="btn-bk" href="${safeUrl(o.link)}" target="_blank" onclick="event.stopPropagation()">Book →</a>
               </div>
             </div>
           </div>
@@ -6530,7 +6536,7 @@ function renderStays(data){
       }).join('');
 
       return `<div class="stay-day-block">
-        <div class="stay-day-title">${t('stays_night')} ${di+1} · ${day.title||''}</div>
+        <div class="stay-day-title">${t('stays_night')} ${di+1} · ${sanitiseAI(day.title||'')}</div>
         <div class="stay-day-sub">${t('stays_select')}</div>
         <div class="stays-grid">${cards}</div>
         <div class="pc-bar-wrap"><div class="pc-title">${t('stays_compare')}</div>${compRows}</div>
@@ -6600,35 +6606,35 @@ function renderTransport(data){
     if(isCheapest) badges.push('<span class="trans-badge tb-cheap">Best price</span>');
 
     const detailItems = [
-      tr.duration ? '<div class="td-item"><span class="td-label">Duration</span>' + tr.duration + '</div>' : '',
-      tr.frequency? '<div class="td-item"><span class="td-label">Frequency</span>' + tr.frequency + '</div>' : '',
-      tr.notes    ? '<div class="td-item" style="grid-column:1/-1"><span class="td-label">Note</span>' + tr.notes + '</div>' : '',
+      tr.duration ? '<div class="td-item"><span class="td-label">Duration</span>' + sanitiseAI(tr.duration) + '</div>' : '',
+      tr.frequency? '<div class="td-item"><span class="td-label">Frequency</span>' + sanitiseAI(tr.frequency) + '</div>' : '',
+      tr.notes    ? '<div class="td-item" style="grid-column:1/-1"><span class="td-label">Note</span>' + sanitiseAI(tr.notes) + '</div>' : '',
     ].filter(Boolean).join('');
 
     return '<div class="trans-card' + (isRec?' recommended':'') + '" id="tc_' + origIdx + '">' +
       '<div class="trans-card-head" onclick="toggleTransCard(' + origIdx + ',\'' + esc(tr.name||'') + '\',\'' + esc(tr.price||'') + '\')">' +
         '<div class="trans-mode-icon">' + (modeIcons[tr.mode]||modeIcons.bus) + '</div>' +
         '<div class="trans-name-block">' +
-          '<div class="trans-name">' + (tr.name||'') + '</div>' +
-          (tr.detail ? '<div class="trans-detail-text">' + tr.detail + '</div>' : '') +
+          '<div class="trans-name">' + sanitiseAI(tr.name||'') + '</div>' +
+          (tr.detail ? '<div class="trans-detail-text">' + sanitiseAI(tr.detail) + '</div>' : '') +
           (badges.length ? '<div class="trans-badges">' + badges.join('') + '</div>' : '') +
         '</div>' +
         '<div class="trans-dur-block">' +
-          '<div class="trans-duration">' + (tr.duration||'—') + '</div>' +
+          '<div class="trans-duration">' + sanitiseAI(tr.duration||'—') + '</div>' +
           '<div class="trans-dur-label">journey</div>' +
         '</div>' +
         '<div class="trans-price-block">' +
-          '<div class="trans-price">' + (tr.price||'—') + '</div>' +
+          '<div class="trans-price">' + sanitiseAI(tr.price||'—') + '</div>' +
           '<div class="trans-price-pp">per person</div>' +
         '</div>' +
       '</div>' +
       '<div class="trans-price-bar-wrap">' +
         '<div class="trans-price-bar-track"><div class="trans-price-bar-fill" style="width:' + priceWidth + '%"></div></div>' +
-        '<div class="trans-price-bar-label">' + (tr.price||'') + '</div>' +
+        '<div class="trans-price-bar-label">' + sanitiseAI(tr.price||'') + '</div>' +
       '</div>' +
       '<div class="trans-details">' +
         (detailItems ? '<div class="trans-details-grid">' + detailItems + '</div>' : '') +
-        '<a class="trans-book-btn" href="' + (tr.link||'#') + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book now →</a>' +
+        '<a class="trans-book-btn" href="' + safeUrl(tr.link) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book now →</a>' +
       '</div>' +
     '</div>';
   }).join('');
@@ -6692,9 +6698,15 @@ function toggleMastMore(e){ e.stopPropagation(); document.getElementById('mastMo
 function closeMastMore(){ const m=document.getElementById('mastMoreMenu'); if(m) m.classList.remove('open'); }
 document.addEventListener('click', closeMastMore);
 async function regenItin(){
+  const savedChoices = Object.assign({}, userChoices);
   Object.keys(userChoices).forEach(k=>delete userChoices[k]);
   const h=startLoad();
-  try{ itinData=await fetchItinerary(); } catch(e){ itinData=makeFallback(); }
+  try{
+    itinData=await fetchItinerary();
+  } catch(e){
+    Object.assign(userChoices, savedChoices);
+    itinData=makeFallback();
+  }
   stopLoad(h);
   setTimeout(()=>{ renderItin(itinData); showPg('pg-itin'); },500);
 }
@@ -7871,7 +7883,7 @@ function renderCostBreakdown(day, di){
       '<td>' +
         '<span class="cb-row-cat">' + row.cat + '</span>' +
         '<span class="cb-row-icon">' + row.icon + '</span>' +
-        '<span class="cb-row-name">' + row.name + '</span>' +
+        '<span class="cb-row-name">' + sanitiseAI(row.name) + '</span>' +
       '</td>' +
       '<td>' + ppCell + '</td>' +
     '</tr>';
@@ -7936,6 +7948,7 @@ Make items specific to the destination, season and travel style. Include 4-8 ite
 For beach destinations include different items than mountain. For winter different than summer.`;
 
     const r = await fetch('/api/packing', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt }) });
+    if(!r.ok) throw new Error('API ' + r.status);
     const d = await r.json();
     const raw = d.content.map(b=>b.text||'').join('');
     const clean = raw.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,'').trim();
@@ -8288,7 +8301,7 @@ function shareItin(){
     // Build permanent shareable Base64 URL
     try {
       const payload = { itinData, quizData:{dest:S.dest,dateFrom:S.dateFrom,dateTo:S.dateTo,comp:S.comp,vibes:S.vibes,budget:S.budget}, lang:currentLang };
-      const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(payload))));
       const shareUrl = window.location.origin + window.location.pathname + '?trip=' + b64;
       if(navigator.share){
         navigator.share({title: itinData.title||'My Via Trip', text:'Check out my travel plan made with Via', url: shareUrl});
@@ -8317,24 +8330,7 @@ function showToast(msg){
   setTimeout(()=>t.remove(), 4000);
 }
 
-// Check for shared trip in URL on load
-function checkSharedTrip(){
-  const params = new URLSearchParams(window.location.search);
-  const tripB64 = params.get('trip');
-  if(!tripB64) return;
-  try {
-    const payload = JSON.parse(decodeURIComponent(escape(atob(tripB64))));
-    if(payload.itinData && payload.quizData){
-      itinData = payload.itinData;
-      Object.assign(S, payload.quizData);
-      currentTier = payload.quizData.budget || 'mid';
-      if(payload.lang) applyLang(payload.lang);
-      renderItin(itinData);
-      showPg('pg-itin');
-      showToast('Viewing a shared Via itinerary. Plan your own trip for free!');
-    }
-  } catch(e){}
-}
+// Removed: duplicate checkSharedTrip (overridden by the full version below)
 
 /* ══════════════════════════════════════
    TRIP CARD (Instagram / WhatsApp)
@@ -8795,19 +8791,26 @@ function checkSharedTrip(){
   const tripB64 = params.get('trip');
   if(!tripB64) return;
   try {
-    const payload = JSON.parse(decodeURIComponent(escape(atob(tripB64))));
-    if(payload.itinData && payload.quizData){
-      itinData = payload.itinData;
-      Object.assign(S, payload.quizData);
-      currentTier = payload.quizData.budget || 'mid';
-      if(payload.lang) applyLang(payload.lang);
-      isSharedView = true;
-      renderItin(itinData);
-      // Show shared banner above the itin
-      const banner = document.getElementById('sharedBanner');
-      if(banner) banner.style.display = 'block';
-      showPg('pg-itin');
-    }
+    const json = new TextDecoder().decode(new Uint8Array(Array.from(atob(tripB64), c => c.charCodeAt(0))));
+    const payload = JSON.parse(json);
+    const qd = payload.quizData;
+    if(!payload.itinData || !qd || typeof qd.dest !== 'string') return;
+    const VALID_BUDGETS = ['budget','mid','comfortable','luxury'];
+    itinData = payload.itinData;
+    S.dest     = String(qd.dest).slice(0, 200);
+    S.dateFrom = typeof qd.dateFrom === 'string' ? qd.dateFrom.slice(0,10) : '';
+    S.dateTo   = typeof qd.dateTo   === 'string' ? qd.dateTo.slice(0,10)   : '';
+    S.comp     = typeof qd.comp     === 'string' ? qd.comp.slice(0,100)    : '';
+    S.vibes    = Array.isArray(qd.vibes) ? qd.vibes.filter(v=>typeof v==='string').slice(0,10) : [];
+    S.budget   = VALID_BUDGETS.includes(qd.budget) ? qd.budget : 'mid';
+    S.pace     = typeof qd.pace === 'string' ? qd.pace.slice(0,50) : 'balanced';
+    currentTier = S.budget;
+    applyLang(payload.lang);
+    isSharedView = true;
+    renderItin(itinData);
+    const banner = document.getElementById('sharedBanner');
+    if(banner) banner.style.display = 'block';
+    showPg('pg-itin');
   } catch(e){ console.warn('Invalid shared trip URL'); }
 }
 
@@ -9164,7 +9167,7 @@ function buildCollabLink(){
       lang: currentLang,
       mode: 'coplanner'
     };
-    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+    const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(payload))));
     return window.location.origin + window.location.pathname + '?trip=' + b64;
   } catch(e){ return window.location.href; }
 }
@@ -9742,6 +9745,7 @@ async function fetchMoodActivities(di, moodId, moodIcon){
 
   try {
     const r = await fetch('/api/mood', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt }) });
+    if(!r.ok) throw new Error('API ' + r.status);
     const d = await r.json();
     const raw = (d.content||[]).map(function(b){return b.text||'';}).join('');
     const clean = raw.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,'').trim();
@@ -9756,12 +9760,12 @@ async function fetchMoodActivities(di, moodId, moodIcon){
         activities.map(function(act, i){
           return '<div class="mood-activity">'+
             '<div class="mood-activity-info">'+
-              '<div class="mood-activity-name">'+act.name+'</div>'+
-              '<div class="mood-activity-desc">'+act.desc+'</div>'+
+              '<div class="mood-activity-name">'+sanitiseAI(act.name)+'</div>'+
+              '<div class="mood-activity-desc">'+sanitiseAI(act.desc)+'</div>'+
             '</div>'+
             '<div class="mood-activity-right">'+
-              '<div class="mood-activity-price">'+(act.price||'')+'</div>'+
-              (act.link ? '<a href="'+act.link+'" target="_blank" rel="noopener" style="font-family:var(--ui);font-size:.6rem;color:var(--ink3);text-decoration:none;border-bottom:1px solid var(--cr3)">Find on maps ↗</a>' : '') +
+              '<div class="mood-activity-price">'+sanitiseAI(act.price||'')+'</div>'+
+              (safeUrl(act.link)!=='#' ? '<a href="'+safeUrl(act.link)+'" target="_blank" rel="noopener" style="font-family:var(--ui);font-size:.6rem;color:var(--ink3);text-decoration:none;border-bottom:1px solid var(--cr3)">Find on maps ↗</a>' : '') +
               '<button class="btn-add-activity" onclick="addMoodActivity('+di+','+i+',event)">'+addLabel+' →</button>'+
             '</div>'+
           '</div>';
