@@ -6177,19 +6177,22 @@ IMPORTANT — LINKS: In every "link" field, replace "Restaurant name", "Activity
 async function doSubmit(){
   currentTier = S.budget || 'mid';
   const h = startLoad();
+  let _fetchErr = null;
   try {
     itinData = await fetchItinerary();
   } catch(e) {
     console.error(e);
+    _fetchErr = e;
     itinData = makeFallback();
   }
   stopLoad(h);
+  if(_fetchErr) alert('DEBUG fetch error:\n' + _fetchErr.message);
   setTimeout(function(){
     try {
       renderItin(itinData);
     } catch(e){
       console.error('renderItin failed:', e);
-      // Last resort: inject fallback HTML directly
+      alert('DEBUG renderItin error:\n' + e.message + '\n\nData keys: ' + Object.keys(itinData||{}).join(', '));
       itinData = makeFallback();
       try { renderItin(itinData); } catch(e2){ console.error(e2); }
     }
