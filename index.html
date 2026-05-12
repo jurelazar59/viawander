@@ -6128,9 +6128,9 @@ Return this exact JSON structure:
 Make exactly ${days} day objects. Use authentic local restaurant and hotel names for ${dest}.
 IMPORTANT — LINKS: In every "link" field, replace "Restaurant name", "Activity name", "Property name" with the ACTUAL name of the place you are recommending, URL-encoded. Example: if you recommend "Konoba Matejuška", the link must be "https://www.google.com/maps/search/Konoba+Matejuška+Split". For accommodation, use the actual property name in the Booking.com search URL. Never use generic placeholder names in link fields. Budget default: "${S.budget}" tier.`;
 
-  // AbortController for timeout — 50 seconds max
+  // AbortController for timeout — 58 seconds max (Vercel limit is 60s)
   const controller = new AbortController();
-  const timeoutId = setTimeout(function(){ controller.abort(); }, 50000);
+  const timeoutId = setTimeout(function(){ controller.abort(); }, 58000);
 
   let apiResponse;
   try {
