@@ -491,6 +491,8 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   position:absolute;
   bottom:2rem;left:2.5rem;right:2.5rem;
 }
+.skel-dest-label{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,235,217,.55);margin-bottom:.5rem}
+.skel-dest-title{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:rgba(242,235,217,.92);line-height:1.15;letter-spacing:-.02em}
 
 /* Skeleton shimmer blocks */
 @keyframes shimmer{
@@ -575,6 +577,18 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   width:8px;height:8px;border-radius:50%;
   background:var(--cr3);flex-shrink:0;
 }
+
+/* Step indicators */
+.skel-steps{display:flex;align-items:center;gap:0;padding:.9rem 2.5rem;background:var(--ink);border-bottom:1px solid rgba(242,235,217,.07)}
+.skel-step{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.skel-step-dot{width:8px;height:8px;border-radius:50%;background:rgba(242,235,217,.2);transition:background .4s,box-shadow .4s;flex-shrink:0}
+.skel-step.active .skel-step-dot{background:var(--gold);box-shadow:0 0 0 3px rgba(196,137,42,.2)}
+.skel-step.done .skel-step-dot{background:rgba(196,137,42,.5)}
+.skel-step-label{font-size:.72rem;letter-spacing:.04em;color:rgba(242,235,217,.3);transition:color .4s;white-space:nowrap}
+.skel-step.active .skel-step-label{color:rgba(242,235,217,.8)}
+.skel-step.done .skel-step-label{color:rgba(242,235,217,.45)}
+.skel-step-line{flex:1;height:1px;background:rgba(242,235,217,.1);min-width:16px;margin:0 .5rem}
+@media(max-width:480px){.skel-step-label{display:none}.skel-steps{padding:.9rem 1.25rem}}
 
 /* Status bar at bottom */
 .skel-status{
@@ -5031,13 +5045,8 @@ select.budget-select:focus,
     <img class="skel-hero-img" id="skelHeroImg" src="" alt="">
     <div class="skel-hero-overlay"></div>
     <div class="skel-hero-content">
-      <div class="skel-block" style="height:12px;width:220px;margin-bottom:10px;opacity:.6"></div>
-      <div class="skel-block" style="height:36px;width:480px;max-width:90%;margin-bottom:14px"></div>
-      <div style="display:flex;gap:8px">
-        <div class="skel-block" style="height:24px;width:110px;border-radius:100px"></div>
-        <div class="skel-block" style="height:24px;width:80px;border-radius:100px"></div>
-        <div class="skel-block" style="height:24px;width:130px;border-radius:100px"></div>
-      </div>
+      <div class="skel-dest-label" id="skelDestLabel"></div>
+      <div class="skel-dest-title" id="skelDestTitle">Building your itinerary…</div>
     </div>
   </div>
 
@@ -5170,6 +5179,29 @@ select.budget-select:focus,
         <div class="skel-block-light" style="height:12px;width:80%;margin-bottom:5px"></div>
         <div class="skel-block-light" style="height:12px;width:65%"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- Step indicators -->
+  <div class="skel-steps" id="skelSteps">
+    <div class="skel-step active" id="sstep0">
+      <div class="skel-step-dot"></div>
+      <span class="skel-step-label" data-en="Researching" data-sl="Raziskujem" data-de="Recherchiere" data-it="Ricercando" data-fr="Recherche" data-hr="Istražujem" data-es="Investigando"></span>
+    </div>
+    <div class="skel-step-line"></div>
+    <div class="skel-step" id="sstep1">
+      <div class="skel-step-dot"></div>
+      <span class="skel-step-label" data-en="Picking places" data-sl="Izbiram mesta" data-de="Orte auswählen" data-it="Scelgo luoghi" data-fr="Sélection" data-hr="Biram mjesta" data-es="Eligiendo"></span>
+    </div>
+    <div class="skel-step-line"></div>
+    <div class="skel-step" id="sstep2">
+      <div class="skel-step-dot"></div>
+      <span class="skel-step-label" data-en="Building route" data-sl="Gradim pot" data-de="Route planen" data-it="Costruisco" data-fr="Itinéraire" data-hr="Gradim rutu" data-es="Construyendo"></span>
+    </div>
+    <div class="skel-step-line"></div>
+    <div class="skel-step" id="sstep3">
+      <div class="skel-step-dot"></div>
+      <span class="skel-step-label" data-en="Finishing up" data-sl="Dokončujem" data-de="Abschluss" data-it="Finalizando" data-fr="Finalisation" data-hr="Završavam" data-es="Finalizando"></span>
     </div>
   </div>
 
@@ -5677,7 +5709,15 @@ const LANGS = {
     stays_compare:'Usporedba cijena · po noći', stays_best:'Najbolja cijena',
     trans_intro:'Tvoje opcije za dolazak na destinaciju. Usporedi cijenu, vrijeme i udobnost — zatim rezerviraj izravno.',
     morning:'Jutro', afternoon:'Poslijepodne', evening:'Večer',
-    step_label:'Korak', pack_load:'Pripravljamo seznam za pakiranje…', pack_load:'Pripremamo vašu listu pakovanja…', step_label:'Korak', day_label:'Dan',
+    pack_load:'Pripremamo vašu listu pakovanja…', step_label:'Korak', day_label:'Dan',
+    pace_eye:'Tvoj tempo', pace_title:'Kako voliš putovati?', pace_hint:'Najbolji planovi prilagođavaju se tvom ritmu.',
+    collab_eye:'Planiraj zajedno', collab_title:'Putuješ s nekim?', collab_hint:'Dodaj e-mail — dobivaju link za pregled i prijedloge.',
+    collab_add:'Dodaj', collab_note:'Suplaneri vide plan i predlažu promjene. Ti imaš posljednju riječ.',
+    toast_link:'Link kopiran.', toast_saved:'Putovanje spremljeno.', toast_unlocked:'Via Plus otključan.',
+    shared_banner:'Pregledavaš tuđe putovanje. Planiraj svoje besplatno.',
+    shared_banner_cta:'Planiraj moje putovanje →',
+    alert_eye:'Upozorenje na cijenu', alert_title:'Prati cijene za ovo putovanje',
+    alert_submit:'Postavi upozorenje →', alert_success_title:'Upozorenje aktivno.',
   },
   es: {
     code:'es', label:'ES', name:'Español',
@@ -5724,6 +5764,14 @@ const LANGS = {
     trans_intro:'Tus opciones para llegar al destino. Compara precio, tiempo y comodidad — luego reserva directamente.',
     morning:'Mañana', afternoon:'Tarde', evening:'Noche',
     pack_load:'Preparando tu lista de equipaje…', step_label:'Paso', day_label:'Día',
+    pace_eye:'Tu ritmo', pace_title:'¿Cómo viajas?', pace_hint:'Los mejores itinerarios se adaptan a tu ritmo.',
+    collab_eye:'Planificar juntos', collab_title:'¿Viajas con alguien?', collab_hint:'Añade un email — recibirán un enlace para ver y sugerir cambios.',
+    collab_add:'Añadir', collab_note:'Los coplanificadores ven el plan y sugieren cambios. Tú tienes la última palabra.',
+    toast_link:'Enlace copiado.', toast_saved:'Viaje guardado.', toast_unlocked:'Via Plus desbloqueado.',
+    shared_banner:'Estás viendo el viaje de otra persona. Planifica el tuyo gratis.',
+    shared_banner_cta:'Planificar mi viaje →',
+    alert_eye:'Alerta de precios', alert_title:'Seguir los precios para este viaje',
+    alert_submit:'Activar alerta →', alert_success_title:'Alerta activada.',
   },
 };
 
@@ -5960,10 +6008,21 @@ function startLoad(){
   // Set hero image to destination photo
   const heroImg = document.getElementById('skelHeroImg');
   if(heroImg){
-    const imgUrl = heroImgs[S.dest] || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+    const imgUrl = gHero();
     heroImg.src = imgUrl;
     heroImg.onerror = function(){ this.style.display='none'; };
   }
+
+  const destLabel = document.getElementById('skelDestLabel');
+  const destTitle = document.getElementById('skelDestTitle');
+  const destName = S.dest || 'your destination';
+  if(destLabel) destLabel.textContent = 'Now building';
+  if(destTitle) destTitle.textContent = destName;
+
+  // Set step labels for current language
+  document.querySelectorAll('.skel-step-label').forEach(function(el){
+    el.textContent = el.getAttribute('data-'+currentLang) || el.getAttribute('data-en') || '';
+  });
 
   // Status bar phrases
   const phrases = t('load_phrases');
@@ -5992,6 +6051,13 @@ function startLoad(){
                  (Math.random()*0.6+0.2);
     prog = Math.min(prog + step, 92);
     if(fill) fill.style.width = prog + '%';
+    const stepIdx = prog < 25 ? 0 : prog < 60 ? 1 : prog < 85 ? 2 : 3;
+    [0,1,2,3].forEach(function(i){
+      const s = document.getElementById('sstep'+i);
+      if(!s) return;
+      s.classList.toggle('active', i === stepIdx);
+      s.classList.toggle('done', i < stepIdx);
+    });
   }, 300);
 
   return {pi_, bi_};
@@ -6005,11 +6071,103 @@ function stopLoad(h){
 }
 
 /* ══ IMAGES ══ */
-const heroImgs={'Italy':'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=900&q=80&auto=format&fit=crop','Balkans & Adriatic':'https://images.unsplash.com/photo-1555990793-da11153b2473?w=900&q=80&auto=format&fit=crop','Greece & Islands':'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=900&q=80&auto=format&fit=crop','France & Spain':'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=900&q=80&auto=format&fit=crop','Central Europe':'https://images.unsplash.com/photo-1541849546-216549ae216d?w=900&q=80&auto=format&fit=crop','Scandinavia':'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=900&q=80&auto=format&fit=crop','British Isles':'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=900&q=80&auto=format&fit=crop'};
+const heroImgs={
+  // Regions
+  'Italy':'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=900&q=80&auto=format&fit=crop',
+  'Balkans & Adriatic':'https://images.unsplash.com/photo-1555990793-da11153b2473?w=900&q=80&auto=format&fit=crop',
+  'Greece & Islands':'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=900&q=80&auto=format&fit=crop',
+  'France & Spain':'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=900&q=80&auto=format&fit=crop',
+  'Central Europe':'https://images.unsplash.com/photo-1541849546-216549ae216d?w=900&q=80&auto=format&fit=crop',
+  'Scandinavia':'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=900&q=80&auto=format&fit=crop',
+  'British Isles':'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=900&q=80&auto=format&fit=crop',
+  // Cities — Italy
+  'Rome':'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=900&q=80&auto=format&fit=crop',
+  'Florence':'https://images.unsplash.com/photo-1541370976299-4d24be63e9d3?w=900&q=80&auto=format&fit=crop',
+  'Venice':'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=900&q=80&auto=format&fit=crop',
+  'Milan':'https://images.unsplash.com/photo-1513581166391-887a96ddeafd?w=900&q=80&auto=format&fit=crop',
+  'Naples':'https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=900&q=80&auto=format&fit=crop',
+  'Amalfi Coast':'https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=900&q=80&auto=format&fit=crop',
+  'Sicily':'https://images.unsplash.com/photo-1589555767521-fc6e0f2c72c1?w=900&q=80&auto=format&fit=crop',
+  'Tuscany':'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=80&auto=format&fit=crop',
+  // Cities — France
+  'Paris':'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=80&auto=format&fit=crop',
+  'Nice':'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=900&q=80&auto=format&fit=crop',
+  'Lyon':'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80&auto=format&fit=crop',
+  'Bordeaux':'https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?w=900&q=80&auto=format&fit=crop',
+  'Marseille':'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&q=80&auto=format&fit=crop',
+  'Provence':'https://images.unsplash.com/photo-1494548162494-384bba4ab999?w=900&q=80&auto=format&fit=crop',
+  // Cities — Spain
+  'Barcelona':'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=900&q=80&auto=format&fit=crop',
+  'Madrid':'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=900&q=80&auto=format&fit=crop',
+  'Seville':'https://images.unsplash.com/photo-1559564977-2eb3ac27ef4d?w=900&q=80&auto=format&fit=crop',
+  'Granada':'https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?w=900&q=80&auto=format&fit=crop',
+  'San Sebastian':'https://images.unsplash.com/photo-1583425423759-bb3d0d7ee0c0?w=900&q=80&auto=format&fit=crop',
+  'Valencia':'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f?w=900&q=80&auto=format&fit=crop',
+  'Ibiza':'https://images.unsplash.com/photo-1573551089778-46a7abc39d9f?w=900&q=80&auto=format&fit=crop',
+  // Cities — Greece
+  'Athens':'https://images.unsplash.com/photo-1555993539-1732b0258235?w=900&q=80&auto=format&fit=crop',
+  'Santorini':'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=900&q=80&auto=format&fit=crop',
+  'Mykonos':'https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=900&q=80&auto=format&fit=crop',
+  'Crete':'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=900&q=80&auto=format&fit=crop',
+  'Rhodes':'https://images.unsplash.com/photo-1601837862579-6498de13b4cb?w=900&q=80&auto=format&fit=crop',
+  // Cities — Croatia & Adriatic
+  'Dubrovnik':'https://images.unsplash.com/photo-1555990793-da11153b2473?w=900&q=80&auto=format&fit=crop',
+  'Split':'https://images.unsplash.com/photo-1555990793-da11153b2473?w=900&q=80&auto=format&fit=crop',
+  'Hvar':'https://images.unsplash.com/photo-1560538808-5e4c4e8f0cb3?w=900&q=80&auto=format&fit=crop',
+  'Zagreb':'https://images.unsplash.com/photo-1553288743-490ef9460769?w=900&q=80&auto=format&fit=crop',
+  'Kotor':'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=900&q=80&auto=format&fit=crop',
+  'Montenegro':'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=900&q=80&auto=format&fit=crop',
+  'Slovenia':'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
+  'Ljubljana':'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
+  // Cities — Central Europe
+  'Prague':'https://images.unsplash.com/photo-1541849546-216549ae216d?w=900&q=80&auto=format&fit=crop',
+  'Vienna':'https://images.unsplash.com/photo-1516550135131-fe3dcb0bedc4?w=900&q=80&auto=format&fit=crop',
+  'Budapest':'https://images.unsplash.com/photo-1508003336636-e7e68da6f9fd?w=900&q=80&auto=format&fit=crop',
+  'Amsterdam':'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=900&q=80&auto=format&fit=crop',
+  'Berlin':'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=900&q=80&auto=format&fit=crop',
+  'Munich':'https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=900&q=80&auto=format&fit=crop',
+  'Bruges':'https://images.unsplash.com/photo-1491557345352-5929e343eb89?w=900&q=80&auto=format&fit=crop',
+  'Brussels':'https://images.unsplash.com/photo-1491557345352-5929e343eb89?w=900&q=80&auto=format&fit=crop',
+  // Cities — Scandinavia
+  'Copenhagen':'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=900&q=80&auto=format&fit=crop',
+  'Stockholm':'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=900&q=80&auto=format&fit=crop',
+  'Oslo':'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=900&q=80&auto=format&fit=crop',
+  'Helsinki':'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=900&q=80&auto=format&fit=crop',
+  'Reykjavik':'https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=900&q=80&auto=format&fit=crop',
+  // Cities — UK & Ireland
+  'London':'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=900&q=80&auto=format&fit=crop',
+  'Edinburgh':'https://images.unsplash.com/photo-1557800636-894a64c1696f?w=900&q=80&auto=format&fit=crop',
+  'Dublin':'https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=900&q=80&auto=format&fit=crop',
+  // Cities — Portugal
+  'Lisbon':'https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?w=900&q=80&auto=format&fit=crop',
+  'Porto':'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=900&q=80&auto=format&fit=crop',
+  'Algarve':'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80&auto=format&fit=crop',
+  // Other popular destinations
+  'Istanbul':'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=900&q=80&auto=format&fit=crop',
+  'Morocco':'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=900&q=80&auto=format&fit=crop',
+  'Marrakech':'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=900&q=80&auto=format&fit=crop',
+  'Egypt':'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=900&q=80&auto=format&fit=crop',
+  'Tokyo':'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=900&q=80&auto=format&fit=crop',
+  'Kyoto':'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=80&auto=format&fit=crop',
+  'New York':'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=900&q=80&auto=format&fit=crop',
+  'Thailand':'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80&auto=format&fit=crop',
+  'Bali':'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=80&auto=format&fit=crop',
+};
 const foodImgs=['https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1551218808-94e220e084d2?w=300&q=70&auto=format&fit=crop'];
 const stayImgs=['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=400&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=400&q=70&auto=format&fit=crop'];
 const modeIcons={plane:`<svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>`,train:`<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M12 3v8M8 17l-2 4M16 17l2 4M8 17h8"/></svg>`,bus:`<svg viewBox="0 0 24 24"><path d="M8 6v12M16 6v12M3 10h18M3 14h18"/><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="7.5" cy="19" r="1"/><circle cx="16.5" cy="19" r="1"/></svg>`,ferry:`<svg viewBox="0 0 24 24"><path d="M2 20a2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1"/><path d="M4 18l-1-5h18l-1 5M12 3v6M8 9h8"/></svg>`,car:`<svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 0 1-2-2V9l3-4h12l3 4v6a2 2 0 0 1-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>`};
-function gHero(){ return heroImgs[S.dest]||'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80&auto=format&fit=crop'; }
+function gHero(){
+  const dest = (S.dest||'').trim();
+  if(heroImgs[dest]) return heroImgs[dest];
+  // Case-insensitive partial match
+  const destLower = dest.toLowerCase();
+  for(const key of Object.keys(heroImgs)){
+    if(destLower.includes(key.toLowerCase()) || key.toLowerCase().includes(destLower)){
+      return heroImgs[key];
+    }
+  }
+  return 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=900&q=80&auto=format&fit=crop';
+}
 function gFood(i){ return foodImgs[i%foodImgs.length]; }
 function gStay(i){ return stayImgs[i%stayImgs.length]; }
 
