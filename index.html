@@ -6177,13 +6177,19 @@ IMPORTANT — LINKS: In every "link" field, replace "Restaurant name", "Activity
 async function doSubmit(){
   currentTier = S.budget || 'mid';
   const h = startLoad();
+  let _debugErr = null;
   try {
     itinData = await fetchItinerary();
   } catch(e) {
     console.error(e);
+    _debugErr = e;
     itinData = makeFallback();
   }
   stopLoad(h);
+  if(_debugErr){
+    const msg = (_debugErr && _debugErr.message) ? _debugErr.message : String(_debugErr);
+    alert('DEBUG — API error:\n' + msg);
+  }
   setTimeout(function(){
     try {
       renderItin(itinData);
