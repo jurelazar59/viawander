@@ -18,6 +18,16 @@
   <meta name="twitter:image" content="https://viawander.co/og-image.jpg">
   <meta name="description" content="Via plans your full trip itinerary in 2 minutes. Real restaurants, bookable hotels, day-by-day activities. Free. 7 languages.">
   <link rel="canonical" href="https://viawander.co">
+  <!-- hreflang for international SEO -->
+  <link rel="alternate" hreflang="en"       href="https://viawander.co/">
+  <link rel="alternate" hreflang="sl"       href="https://viawander.co/?lang=sl">
+  <link rel="alternate" hreflang="de"       href="https://viawander.co/?lang=de">
+  <link rel="alternate" hreflang="it"       href="https://viawander.co/?lang=it">
+  <link rel="alternate" hreflang="fr"       href="https://viawander.co/?lang=fr">
+  <link rel="alternate" hreflang="hr"       href="https://viawander.co/?lang=hr">
+  <link rel="alternate" hreflang="es"       href="https://viawander.co/?lang=es">
+  <link rel="alternate" hreflang="sr"       href="https://viawander.co/?lang=sr">
+  <link rel="alternate" hreflang="x-default" href="https://viawander.co/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -5513,556 +5523,13 @@ select.budget-select:focus,
   </div>
 </div>
 
+<!-- External data files (extracted for faster initial parse) -->
+<script src="/langs.js"></script>
+<script src="/posts.js"></script>
 <script>
 /* ══════════════════════════════════════
-   TRANSLATIONS
+   TRANSLATIONS  (see /langs.js)
 ══════════════════════════════════════ */
-const LANGS = {
-  en: {
-    code:'en', label:'EN', name:'English',
-    stamp:'Handcrafted travel plans',
-    nav_how:'How it works', nav_stories:'Stories', nav_plan:'Plan a trip',
-    hero_title_html:'Travel planned<em>like a friend</em>did it.',
-    hero_deck:'Not a list of links. A real plan for every day. Restaurant chosen, hotel picked. Swap anything, compare prices, book in one click.',
-    hero_cta:'Plan my trip', hero_note:'Free · No account needed · 2 minutes',
-    strip_trips:'Trips planned', strip_rating:'Average rating', strip_int:'Integrated', strip_int2:'Integrated', strip_tiers:'3 budget tiers', strip_rec:'Every recommendation',
-    how_eye:'How it works', how_title_html:'A plan, not a list.<br><em>Ready to book.</em>',
-    feat1_title:'Tell us how you travel', feat1_body:'Where, when, who, and how you like to travel. Takes two minutes.',
-    feat2_title:'Your complete day plan', feat2_body:'Restaurant chosen, hotel picked, all for your budget. Every named place is clickable and swappable.',
-    feat3_title:'Swap, compare, book', feat3_body:'Tap any place to see alternatives. Switch budget tiers globally. Compare prices. Book with one click.',
-    testi_eye:'Real travellers', testi_title_html:'They went. <em>They loved it.</em>',
-    footer_tag:'Travel planned like a friend did it.',
-    footer_product:'Product', footer_how:'How it works', footer_dest:'Destinations', footer_partners:'Booking partners',
-    footer_company:'Company', footer_about:'About', footer_blog:'Blog', footer_press:'Press',
-    footer_legal:'Legal', footer_privacy:'Privacy', footer_terms:'Terms', footer_made:'For people who actually go.',
-    q_back:'← Back', q_continue:'Continue', q_build:'Build my itinerary',
-    q1_eye:'Where in the world', q1_title:'Where do you want to go?', q1_hint:'Pick a region, or type your own below.', q1_custom_placeholder:"Or type your own: 'Lisbon', 'The Azores', 'Marrakech'…",
-    dest_surprise:'Surprise me', dest_surprise_sub:"We'll find you something good",
-    q2_eye:'When are you going', q2_title:'What are your travel dates?', q2_hint:'Exact dates help us find real prices.', q2_depart:'Departure', q2_return:'Return',
-    q3_eye:'Your group', q3_title:"Who's travelling with you?", q3_hint:'Affects pace, hotel size, and atmosphere.',
-    comp_solo:'Solo', comp_solo_desc:'Your pace, your call', comp_couple:'Couple', comp_couple_desc:'Two is the magic number', comp_family:'Family', comp_family_desc:'Kids in tow', comp_friends:'Friends', comp_friends_desc:'The best kind of chaos', comp_honey:'Honeymoon', comp_honey_desc:'Everything a notch up',
-    q4_eye:'Your travel style', q4_title:'What does the ideal day look like?', q4_hint:'Choose everything that speaks to you.',
-    vibe_culture:'Culture & History', vibe_food:'Food & Wine', vibe_adventure:'Adventure & Hiking', vibe_beach:'Beach & Relaxation', vibe_night:'Nightlife & Social', vibe_hidden:'Hidden Gems', vibe_luxury:'Luxury', vibe_budget:'Budget Smart',
-    q5_eye:'Your budget', q6_eye:'Your pace', q7_eye:'Plan together', q5_title:"What's your daily budget per person?", q5_hint:'Default for all recommendations. Switch any time.',
-    budget_back:'Backpacker · under €50/day', budget_mid:'Mid-range · €50–150/day', budget_comf:'Comfortable · €150–300/day', budget_lux:'Luxury · €300+/day',
-    budget_back_short:'Backpacker', budget_mid_short:'Mid-range', budget_comf_short:'Comfortable', budget_lux_short:'Luxury',
-    q6_eye:'Almost there', q6_title:'One last thing.', q6_hint:'Your plan will be ready in under a minute.',
-    q6_name:'First name', q6_name_ph:'What should we call you?', q6_email:'Email', q6_email_ph:"We'll send your itinerary here", q6_spam:'No spam. Ever.', q6_notes:'Anything specific? (optional)', q6_notes_ph:'Dietary needs, must-sees, accessibility, things you hate…',
-    load_cap:'Building your personalised itinerary',
-    load_phrases:['Checking what locals actually go to…','Picking the restaurant for your budget…','Comparing Airbnb and Booking.com…','Mapping the daily route…','Checking local hotels and stays…','Putting it all together…','Almost done…'],
-    tab_itin:'Itinerary', tab_stays:'Where to stay', tab_transport:'Getting there',
-    budget_label:'Budget level:',
-    itin_kicker:" — personalised itinerary · ", itin_share:'Share →', itin_regen:'Regenerate ↺', itin_over:'Start over', itin_pdf:'↓ PDF', itin_alert:'🔔 Price alert',
-    itin_aside_cost:'Estimated daily cost', itin_aside_cost_sub:'per person · all in', itin_aside_about:'About this trip', itin_aside_tip:'Local insight', itin_aside_sels:'Your selections', itin_aside_sels_empty:'Tap any restaurant, hotel, or activity. It shows up here.', itin_aside_months:'Best time to visit', itin_aside_pack:'Packing tip',
-    rec_lunch:'Lunch', rec_dinner:'Dinner', rec_activity:'Activity', rec_swap:'Swap →',
-    swap_title:'Swap or change budget tier', swap_close:'Close',
-    swap_tier_budget:'Budget', swap_tier_mid:'Mid', swap_tier_comf:'Comfort', swap_tier_lux:'Luxury',
-    stays_intro:'Choose your accommodation for each night. Prices are live-linked to Airbnb, Booking.com, and verified local properties.',
-    stays_night:'Night', stays_select:'Select your preferred accommodation',
-    stays_compare:'Price comparison · per night', stays_best:'Best',
-    trans_intro:'Your options for getting there. Compare price, time and comfort, then book direct.',
-    morning:'Morning', afternoon:'Afternoon', evening:'Evening',
-    pack_load:'Building your packing list…', step_label:'Step', day_label:'Day',
-    pace_eye:'Your pace', pace_title:'How do you like to explore?', pace_hint:'Pace makes the difference. A slow trip and a packed one feel completely different.',
-    pace_relaxed:'Relaxed', pace_relaxed_count:'2–3 things / day', pace_relaxed_desc:'Linger over lunch. Wander without a plan. Actually rest.',
-    pace_balanced:'Balanced', pace_balanced_count:'3–4 things / day', pace_balanced_desc:'See the highlights and still have time to breathe.',
-    pace_full:'Full', pace_full_count:'5+ things / day', pace_full_desc:'Maximise every hour. You can sleep when you get home.',
-    fdt_label:'Leave one day unplanned', fdt_desc:'No schedule, nothing booked. Just a few loose ideas. The best day often comes from wandering.',
-    collab_eye:'Plan together', collab_title:'Travelling with someone?', collab_hint:'Add their email and they get a link to view and suggest swaps. Totally optional.',
-    collab_add:'Add person', collab_input_ph:'friend@email.com', collab_note:'Co-planners can see the full itinerary and suggest swaps. No account needed.',
-    load_eyebrow:'Now building',
-    freeday_eyebrow:'Unplanned day', freeday_title:'This day is yours.',
-    hg_eyebrow:'What locals actually do',
-    tweak_ph:'Tweak this day… e.g. add a beach stop, make it more relaxed', tweak_btn:'↺ Rewrite', tweak_status:'Rewriting day…',
-    note_btn:'Note',
-    tab_pack:'Packing list',
-    trans_empty:'No transport options available for this route.', trans_per_person:'per person',
-    mood_title:'What are you in the mood for today?', mood_sub:"Tap a mood — we'll suggest activities for today.", mood_find:'Finding the best options…', mood_add:'Add to day', collab_role:'Can view and suggest swaps', collab_remove:'Remove',
-  blog_all:'All stories', blog_dest:'Destinations', blog_tips:'Travel tips', blog_partner:'Partner stories', blog_eye:'Via Journal', blog_hero_title_html:'Stories from the road.<br><em>Places worth knowing.</em>', blog_hero_sub:'Destination guides, travel tips, and partner stories.', blog_home:'← Home', blog_back:'← Back to stories', blog_read:'Read story', blog_cat_dest:'Destination', blog_cat_tips:'Travel tips', blog_cat_partner:'Partner story',
-  },
-  sl: {
-    code:'sl', label:'SL', name:'Slovenščina',
-    stamp:'Ročno načrtovana potovanja',
-    nav_how:'Kako deluje', nav_stories:'Zgodbe', nav_plan:'Načrtuj potovanje',
-    hero_title_html:'Potovanje načrtovano<em>kot bi ga naredil prijatelj.</em>',
-    hero_deck:'Ne zgolj seznam povezav. Pravi načrt za vsak dan — restavracija že izbrana, hotel že določen, aktivnosti predlagane. Zamenjaj karkoli, primerjaj cene, rezerviraj z enim klikom.',
-    hero_cta:'Načrtuj moje potovanje', hero_note:'Brezplačno · Brez registracije · 2 minuti',
-    strip_trips:'Načrtovanih poti', strip_rating:'Povprečna ocena', strip_int:'Integrirano', strip_int2:'Integrirano', strip_tiers:'3 proračunske ravni', strip_rec:'Za vsako priporočilo',
-    how_eye:'Kako deluje', how_title_html:'Načrt, ne seznam.<br><em>Pripravljen za rezervacijo.</em>',
-    feat1_title:'Povej nam, kako potuješ', feat1_body:'Kam, kdaj, s kom in kako potuješ. Dve minuti.',
-    feat2_title:'Prejmi popoln dnevni načrt', feat2_body:'Restavracija izbrana, hotel določen, vse za tvoj proračun. Vsako ime je klikabilno in zamenljivo.',
-    feat3_title:'Zamenjaj, primerjaj, rezerviraj', feat3_body:'Pritisni na katero koli mesto za alternative. Zamenjaj proračunsko raven globalno. Primerjaj cene. Rezerviraj z enim klikom.',
-    testi_eye:'Pravi popotniki', testi_title_html:'Šli so. <em>In se zaljubili.</em>',
-    footer_tag:'Potovanje načrtovano kot bi ga naredil prijatelj.',
-    footer_product:'Produkt', footer_how:'Kako deluje', footer_dest:'Destinacije', footer_partners:'Partnerji za rezervacije',
-    footer_company:'Podjetje', footer_about:'O nas', footer_blog:'Blog', footer_press:'Tisk',
-    footer_legal:'Pravno', footer_privacy:'Zasebnost', footer_terms:'Pogoji', footer_made:'Za tiste, ki res grejo.',
-    q_back:'← Nazaj', q_continue:'Naprej', q_build:'Načrtuj moje potovanje',
-    q1_eye:'Kam na svetu', q1_title:'Kam bi šel/šla?', q1_hint:'Izberi regijo ali vnesi svojo destinacijo spodaj.', q1_custom_placeholder:"Ali vpiši svojo: 'Lizbona', 'Azori', 'Marakeš'…",
-    dest_surprise:'Preseneti me', dest_surprise_sub:'Poiskali bomo kaj dobrega',
-    q2_eye:'Kdaj greš', q2_title:'Kateri so tvoji datumi potovanja?', q2_hint:'Točni datumi nam pomagajo najti realne cene.', q2_depart:'Odhod', q2_return:'Vrnitev',
-    q3_eye:'Tvoja skupina', q3_title:'Kdo potuje s teboj?', q3_hint:'Vpliva na tempo, velikost nastanitve in vzdušje.',
-    comp_solo:'Sam/a', comp_solo_desc:'Tvoj tempo, tvoja odločitev', comp_couple:'Par', comp_couple_desc:'Dva je prava številka', comp_family:'Družina', comp_family_desc:'Z otroki', comp_friends:'Prijatelji', comp_friends_desc:'Najboljša vrsta kaosa', comp_honey:'Medeni tedni', comp_honey_desc:'Vse malce bolj posebno',
-    q4_eye:'Tvoj slog potovanja', q4_title:'Kako izgleda idealen dan?', q4_hint:'Izberi vse, kar ti ustreza.',
-    vibe_culture:'Kultura in zgodovina', vibe_food:'Hrana in vino', vibe_adventure:'Pustolovščine in pohodništvo', vibe_beach:'Plaža in sprostitev', vibe_night:'Nočno življenje', vibe_hidden:'Skrite bisere', vibe_luxury:'Luksuz', vibe_budget:'Pametno varčevanje',
-    q5_eye:'Tvoj proračun', q6_eye:'Vaš tempo', q7_eye:'Načrtujte skupaj', q5_title:'Koliko namenjaš na dan?', q5_hint:'Privzeta vrednost za vsa priporočila. Zamenjaj kadarkoli.',
-    budget_back:'Nahrbtničar (pod 50 €/dan)', budget_mid:'Srednji razred (50–150 €/dan)', budget_comf:'Udobno (150–300 €/dan)', budget_lux:'Luksuz (300+ €/dan)',
-    budget_back_short:'Nahrbtničar', budget_mid_short:'Srednji razred', budget_comf_short:'Udobno', budget_lux_short:'Luksuz',
-    q6_eye:'Skoraj tam', q6_title:'Še ena zadeva.', q6_hint:'Načrt bo gotov v minuti ali dveh.',
-    q6_name:'Ime', q6_name_ph:'Kako naj te imenujemo?', q6_email:'E-pošta', q6_email_ph:'Na ta naslov pošljemo tvoj načrt', q6_spam:'Brez neželene pošte. Nikoli.', q6_notes:'Kaj posebnega? (neobvezno)', q6_notes_ph:'Prehranske zahteve, obvezni ogledi, dostopnost, stvari, ki jih ne marate…',
-    load_cap:'Sestavljamo tvoj načrt',
-    load_phrases:['Iščemo skrite bisere…','Izbiramo restavracijo za tvoj proračun…','Preverjamo, kaj lokalni res priporočajo…','Primerjamo Airbnb in Booking.com…','Risamo popolno dnevno pot…','Preverjamo lokalne nastanitve…','Skoraj pripravljeno…'],
-    tab_itin:'Načrt potovanja', tab_stays:'Nastanitev', tab_transport:'Kako priti tja',
-    budget_label:'Proračunska raven:',
-    itin_kicker:" — osebni načrt · ", itin_share:'Deli →', itin_regen:'Ustvari znova ↺', itin_over:'Začni znova', itin_pdf:'↓ PDF', itin_alert:'🔔 Opozorilo o ceni',
-    itin_aside_cost:'Ocenjeni dnevni stroški', itin_aside_cost_sub:'na osebo · vse vključeno', itin_aside_about:'O tem potovanju', itin_aside_tip:'Nasvet domačina', itin_aside_sels:'Tvoje izbire', itin_aside_sels_empty:'Tapni katero koli restavracijo, hotel ali aktivnost. Prikaže se tukaj.', itin_aside_months:'Najboljši čas za obisk', itin_aside_pack:'Nasvet za pakiranje',
-    rec_lunch:'Kosilo', rec_dinner:'Večerja', rec_activity:'Aktivnost', rec_swap:'Zamenjaj →',
-    swap_title:'Zamenjaj ali prilagodi proračunsko raven', swap_close:'Zapri',
-    swap_tier_budget:'Varčno', swap_tier_mid:'Srednje', swap_tier_comf:'Udobno', swap_tier_lux:'Luksuz',
-    stays_intro:'Izberi nastanitev za vsako noč. Cene so posodobljene v realnem času z Airbnb, Booking.com in preverjenimi lokalnimi ponudniki.',
-    stays_night:'Noč', stays_select:'Izberi svojo nastanitev',
-    stays_compare:'Primerjava cen · na noč', stays_best:'Najboljša',
-    trans_intro:'Tvoje možnosti za pot do destinacije. Primerjaj ceno, čas in udobje, potem rezerviraj neposredno.',
-    morning:'Jutro', afternoon:'Popoldne', evening:'Večer',
-    step_label:'Korak', pack_load:'Pripravljamo seznam za pakiranje…', day_label:'Dan',
-    pace_eye:'Tvoj tempo', pace_title:'Kako rad potuješ?', pace_hint:'Najboljši načrti se prilagodijo tvojemu ritmu, ne obratno.',
-    collab_eye:'Načrtuj skupaj', collab_title:'Potuješ z nekom?', collab_hint:'Dodaj e-poštni naslov. Dobijo povezavo za ogled in predlaganje sprememb.',
-    collab_add:'Dodaj', collab_note:'Souredniki vidijo celoten načrt in predlagajo zamenjave. Zadnja beseda je tvoja.',
-    toast_link:'Povezava kopirana.', toast_saved:'Potovanje shranjeno.', toast_unlocked:'Via Plus odklenjen.',
-    shared_banner:'Ogledaš si potovanje nekoga drugega. Načrtuj svojega brezplačno.',
-    shared_banner_cta:'Načrtuj moje potovanje →',
-    alert_eye:'Opozorilo o ceni', alert_title:'Spremljaj cene za to potovanje',
-    alert_submit:'Nastavi opozorilo →', alert_success_title:'Opozorilo aktivno.',
-    pace_relaxed:'Sproščeno', pace_relaxed_count:'2–3 stvari / dan', pace_relaxed_desc:'Dolgotrajno kosilo. Sprehod brez načrta. Pravi počitek.',
-    pace_balanced:'Uravnoteženo', pace_balanced_count:'3–4 stvari / dan', pace_balanced_desc:'Vidiš bistveno in imaš čas za dih.',
-    pace_full:'Polno', pace_full_count:'5+ stvari / dan', pace_full_desc:'Maksimalno izkoristi vsako uro. Spat boš doma.',
-    fdt_label:'Pusti en dan nenačrtovan', fdt_desc:'Brez urnika, nič rezerviranega. Samo nekaj prostih idej. Najboljši dan pogosto pride sam od sebe.',
-    collab_input_ph:'prijatelj@email.com',
-    load_eyebrow:'Gradimo tvoj načrt',
-    freeday_eyebrow:'Nenačrtovan dan', freeday_title:'Ta dan je tvoj.',
-    hg_eyebrow:'Kar domačini dejansko počnejo',
-    tweak_ph:'Prilagodi ta dan… npr. dodaj obisk plaže, naredi bolj sproščeno', tweak_btn:'↺ Prepiši', tweak_status:'Prepisujem dan…',
-    note_btn:'Opomba',
-    tab_pack:'Seznam za pakiranje',
-    trans_empty:'Za to pot ni razpoložljivih prevoznih možnosti.', trans_per_person:'na osebo',
-    mood_title:'Kaj ti je danes do tega?', mood_sub:'Izberi razpoloženje — predlagamo aktivnosti za ta dan.', mood_find:'Iščemo najboljše možnosti…', mood_add:'Dodaj na dan', collab_role:'Vidi načrt in predlaga spremembe', collab_remove:'Odstrani',
-  blog_all:'Vse zgodbe', blog_dest:'Destinacije', blog_tips:'Potovalni nasveti', blog_partner:'Partnerske zgodbe', blog_eye:'Via Journal', blog_hero_title_html:'Zgodbe s poti.<br><em>Kraji, ki jih je vredno poznati.</em>', blog_hero_sub:'Vodniki po destinacijah, potovalni nasveti in partnerske zgodbe.', blog_home:'← Domov', blog_back:'← Nazaj na zgodbe', blog_read:'Preberi zgodbo', blog_cat_dest:'Destinacija', blog_cat_tips:'Potovalni nasveti', blog_cat_partner:'Partnerska zgodba',
-  },
-  de: {
-    code:'de', label:'DE', name:'Deutsch',
-    stamp:'Handgefertigte Reisepläne',
-    nav_how:'So funktioniert\'s', nav_stories:'Erfahrungen', nav_plan:'Reise planen',
-    hero_title_html:'Reisen geplant<em>wie von einem Freund</em> — für dich.',
-    hero_deck:'Keine Linkliste. Ein echter Tagesplan: Restaurant ausgewählt, Hotel gebucht, Aktivitäten vorgeschlagen. Alles austauschbar, Preise vergleichbar, mit einem Klick buchbar.',
-    hero_cta:'Meine Reise planen', hero_note:'Kostenlos · Kein Konto erforderlich · 2 Minuten',
-    strip_trips:'Geplante Reisen', strip_rating:'Durchschnittsbewertung', strip_int:'Integriert', strip_int2:'Integriert', strip_tiers:'3 Budgetstufen', strip_rec:'Für jede Empfehlung',
-    how_eye:'So funktioniert\'s', how_title_html:'Ein Plan, keine Liste.<br><em>Bereit zur Buchung.</em>',
-    feat1_title:'Erzähl uns, wie du reist', feat1_body:'Beantworte ein paar durchdachte Fragen — wohin, wann, mit wem und wie. Dauert zwei Minuten.',
-    feat2_title:'Dein vollständiger Tagesplan', feat2_body:'Restaurant ausgewählt, Hotel gebucht. Alles auf dein Budget abgestimmt. Jeder Ort ist anklickbar und austauschbar.',
-    feat3_title:'Wechseln, vergleichen, buchen', feat3_body:'Tippe auf jeden Ort für Alternativen. Wechsle die Budgetstufe für die gesamte Reise. Vergleiche Preise. Buche mit einem Klick.',
-    testi_eye:'Echte Reisende', testi_title_html:'Sie sind gereist. <em>Sie haben es geliebt.</em>',
-    footer_tag:'Reisen geplant, wie ein Freund es tun würde.',
-    footer_product:'Produkt', footer_how:'So funktioniert\'s', footer_dest:'Reiseziele', footer_partners:'Buchungspartner',
-    footer_company:'Über Via', footer_about:'Über uns', footer_blog:'Blog', footer_press:'Presse',
-    footer_legal:'Rechtliches', footer_privacy:'Datenschutz', footer_terms:'AGB', footer_made:'Für Menschen, die wissen, warum sie reisen.',
-    q_back:'← Zurück', q_continue:'Weiter', q_build:'Meinen Reiseplan erstellen',
-    q1_eye:'Wohin in der Welt', q1_title:'Wohin zieht es dich?', q1_hint:'Wähle eine Region oder tippe dein Ziel ein.', q1_custom_placeholder:"Oder eigenes eingeben: 'Lissabon', 'Azoren', 'Marrakesch'…",
-    dest_surprise:'Überrasch mich', dest_surprise_sub:'Wir wählen etwas Wunderbares',
-    q2_eye:'Wann verreist du', q2_title:'Wann sind deine Reisedaten?', q2_hint:'Genaue Daten helfen uns, echte Preise zu finden.', q2_depart:'Abreise', q2_return:'Rückreise',
-    q3_eye:'Deine Gruppe', q3_title:'Wer reist mit dir?', q3_hint:'Wir passen Tempo, Unterkunftsgröße und Atmosphäre an deine Gruppe an.',
-    comp_solo:'Solo', comp_solo_desc:'Dein Tempo, deine Regeln', comp_couple:'Pärchen', comp_couple_desc:'Zu zweit ist es am schönsten', comp_family:'Familie', comp_family_desc:'Mit Kindern unterwegs', comp_friends:'Freunde', comp_friends_desc:'Das beste Chaos', comp_honey:'Flitterwochen', comp_honey_desc:'Unvergesslich machen',
-    q4_eye:'Dein Reisestil', q4_title:'Wie sieht ein idealer Tag aus?', q4_hint:'Wähle alles, was dir anspricht.',
-    vibe_culture:'Kultur & Geschichte', vibe_food:'Essen & Wein', vibe_adventure:'Abenteuer & Wandern', vibe_beach:'Strand & Entspannung', vibe_night:'Nachtleben & Gesellschaft', vibe_hidden:'Geheimtipps', vibe_luxury:'Luxus', vibe_budget:'Clever sparen',
-    q5_eye:'Dein Budget', q6_eye:'Ihr Tempo', q7_eye:'Gemeinsam planen', q5_title:'Was gibst du pro Tag aus?', q5_hint:'Bestimmt den Standard für alle Empfehlungen. Jederzeit änderbar.',
-    budget_back:'Backpacker (unter 50 €/Tag)', budget_mid:'Mittelklasse (50–150 €/Tag)', budget_comf:'Komfortabel (150–300 €/Tag)', budget_lux:'Luxus (300+ €/Tag)',
-    budget_back_short:'Backpacker', budget_mid_short:'Mittelklasse', budget_comf_short:'Komfortabel', budget_lux_short:'Luxus',
-    q6_eye:'Fast geschafft', q6_title:'Fast fertig.', q6_hint:'Dein Plan ist in einer Minute bereit.',
-    q6_name:'Vorname', q6_name_ph:'Wie sollen wir dich nennen?', q6_email:'E-Mail', q6_email_ph:'Wir schicken deinen Plan hierher', q6_spam:'Kein Spam. Niemals.', q6_notes:'Besondere Wünsche? (optional)', q6_notes_ph:'Ernährungsbedürfnisse, Must-Sees, Barrierefreiheit, was du nicht magst…',
-    load_cap:'Dein Reiseplan wird gerade erstellt',
-    load_phrases:['Geheimtipps werden gesucht…','Das Restaurant für dein Budget wird ausgewählt…','Was die Einheimischen wirklich empfehlen…','Airbnb und Booking.com werden verglichen…','Die perfekte Tagesroute wird geplant…','Lokale Unterkünfte werden geprüft…','Fast fertig…'],
-    tab_itin:'Reiseplan', tab_stays:'Unterkunft', tab_transport:'Anreise',
-    budget_label:'Budgetstufe:',
-    itin_kicker:" — persönlicher Reiseplan · ", itin_share:'Teilen →', itin_regen:'Neu erstellen ↺', itin_over:'Von vorn anfangen', itin_pdf:'↓ PDF', itin_alert:'🔔 Preisalarm',
-    itin_aside_cost:'Geschätzte Tageskosten', itin_aside_cost_sub:'pro Person · alles inklusive', itin_aside_about:'Über diese Reise', itin_aside_tip:'Geheimtipp', itin_aside_sels:'Deine Auswahl', itin_aside_sels_empty:'Tippe auf ein Restaurant, eine Aktivität oder ein Hotel — deine Wahl erscheint hier.', itin_aside_months:'Beste Reisezeit', itin_aside_pack:'Packtipp',
-    rec_lunch:'Mittagessen', rec_dinner:'Abendessen', rec_activity:'Aktivität', rec_swap:'Wechseln →',
-    swap_title:'Wechseln oder Budgetstufe ändern', swap_close:'Schließen',
-    swap_tier_budget:'Günstig', swap_tier_mid:'Mittel', swap_tier_comf:'Komfort', swap_tier_lux:'Luxus',
-    stays_intro:'Wähle deine Unterkunft für jede Nacht. Preise sind in Echtzeit verknüpft mit Airbnb, Booking.com und verifizierten lokalen Unterkünften verknüpft.',
-    stays_night:'Nacht', stays_select:'Wähle deine bevorzugte Unterkunft',
-    stays_compare:'Preisvergleich · pro Nacht', stays_best:'Bestes Angebot',
-    trans_intro:'Deine Optionen für die Anreise. Preis, Zeit und Komfort vergleichen — dann direkt buchen.',
-    morning:'Morgen', afternoon:'Nachmittag', evening:'Abend',
-    pack_load:'Wir erstellen deine Packliste…', step_label:'Schritt', day_label:'Tag',
-    pace_eye:'Dein Tempo', pace_title:'Wie reist du am liebsten?',
-    pace_hint:'Die besten Pläne passen sich deinem Rhythmus an.',
-    collab_eye:'Gemeinsam planen', collab_title:'Reist du mit jemandem?',
-    collab_hint:'E-Mail hinzufügen — sie erhalten einen Link zum Anzeigen und Vorschlagen.',
-    collab_add:'Hinzufügen', collab_note:'Mitplaner können den Plan sehen und Änderungen vorschlagen. Du hast das letzte Wort.',
-    toast_link:'Link kopiert.', toast_saved:'Reise gespeichert.', toast_unlocked:'Via Plus freigeschaltet.',
-    shared_banner:'Du siehst die Reise von jemand anderem. Plane deine eigene kostenlos.',
-    shared_banner_cta:'Meine Reise planen →',
-    alert_eye:'Preisalarm', alert_title:'Preise für diese Reise verfolgen',
-    alert_submit:'Alarm setzen →', alert_success_title:'Alarm aktiv.',
-    pace_relaxed:'Entspannt', pace_relaxed_count:'2–3 Dinge / Tag', pace_relaxed_desc:'Lang beim Mittagessen sitzen. Ziellos schlendern. Wirklich ausruhen.',
-    pace_balanced:'Ausgewogen', pace_balanced_count:'3–4 Dinge / Tag', pace_balanced_desc:'Die Highlights sehen und trotzdem Zeit zum Durchatmen haben.',
-    pace_full:'Vollgas', pace_full_count:'5+ Dinge / Tag', pace_full_desc:'Jede Stunde ausnutzen. Schlafen kannst du wieder zu Hause.',
-    fdt_label:'Einen Tag frei lassen', fdt_desc:'Kein Plan, keine Buchungen. Nur ein paar lose Ideen. Der beste Tag entsteht oft aus dem Nichts.',
-    collab_input_ph:'freund@email.com',
-    load_eyebrow:'Wird erstellt',
-    freeday_eyebrow:'Ungeplanter Tag', freeday_title:'Dieser Tag gehört dir.',
-    hg_eyebrow:'Was Einheimische wirklich machen',
-    tweak_ph:'Diesen Tag anpassen… z.B. einen Strandbesuch hinzufügen, entspannter gestalten', tweak_btn:'↺ Neu schreiben', tweak_status:'Tag wird neu geschrieben…',
-    note_btn:'Notiz',
-    tab_pack:'Packliste',
-    trans_empty:'Keine Transportoptionen für diese Route verfügbar.', trans_per_person:'pro Person',
-    mood_title:'Wonach ist dir heute?', mood_sub:'Wähle deine Stimmung — wir schlagen passende Aktivitäten vor.', mood_find:'Suche die besten Optionen…', mood_add:'Zum Tag hinzufügen', collab_role:'Kann den Plan sehen und Änderungen vorschlagen', collab_remove:'Entfernen',
-  blog_all:'Alle Beiträge', blog_dest:'Reiseziele', blog_tips:'Reisetipps', blog_partner:'Partnergeschichten', blog_eye:'Via Journal', blog_hero_title_html:'Geschichten von unterwegs.<br><em>Orte, die es wert sind.</em>', blog_hero_sub:'Reisezielführer, Tipps und Partnergeschichten.', blog_home:'← Startseite', blog_back:'← Zurück zu den Beiträgen', blog_read:'Weiterlesen', blog_cat_dest:'Reiseziel', blog_cat_tips:'Reisetipps', blog_cat_partner:'Partnerbeitrag',
-  },
-  it: {
-    code:'it', label:'IT', name:'Italiano',
-    stamp:'Piani di viaggio artigianali',
-    nav_how:'Come funziona', nav_stories:'Storie', nav_plan:'Pianifica un viaggio',
-    hero_title_html:'Il viaggio pianificato<em>come lo farebbe un amico</em>per te.',
-    hero_deck:'Non un elenco di link. Un vero piano giorno per giorno — il ristorante già scelto, l\'hotel già prenotato, le attività suggerite. Scambia tutto, confronta i prezzi, prenota con un clic.',
-    hero_cta:'Pianifica il mio viaggio', hero_note:'Gratuito · Nessun account · 2 minuti',
-    strip_trips:'Viaggi pianificati', strip_rating:'Valutazione media', strip_int:'Integrato', strip_int2:'Integrato', strip_tiers:'3 fasce di budget', strip_rec:'Per ogni consiglio',
-    how_eye:'Come funziona', how_title_html:'Un piano, non una lista.<br><em>Pronto per la prenotazione.</em>',
-    feat1_title:'Raccontaci come viaggi', feat1_body:'Dove, quando, con chi e come. Quattro domande. Due minuti.',
-    feat2_title:'Il tuo piano giornaliero completo', feat2_body:'Ristorante scelto, hotel prenotato — tutto per il tuo budget. Ogni posto è cliccabile e scambiabile.',
-    feat3_title:'Scambia, confronta, prenota', feat3_body:'Tocca qualsiasi posto per vedere le alternative. Cambia la fascia di budget globalmente. Confronta i prezzi. Prenota con un clic.',
-    testi_eye:'Viaggiatori veri', testi_title_html:'Sono andati. <em>L\'hanno amato.</em>',
-    footer_tag:'Il viaggio pianificato come te lo consiglierebbe un amico.',
-    footer_product:'Prodotto', footer_how:'Come funziona', footer_dest:'Destinazioni', footer_partners:'Partner di prenotazione',
-    footer_company:'Azienda', footer_about:'Chi siamo', footer_blog:'Blog', footer_press:'Stampa',
-    footer_legal:'Legale', footer_privacy:'Privacy', footer_terms:'Termini', footer_made:'Per chi viaggia sapendo quello che cerca.',
-    q_back:'← Indietro', q_continue:'Continua', q_build:'Crea il mio itinerario',
-    q1_eye:'Dove nel mondo', q1_title:'Dove vuoi andare?', q1_hint:'Scegli una regione o inserisci la tua destinazione.', q1_custom_placeholder:"O scrivi la tua: 'Lisbona', 'Le Azzorre', 'Marrakech'…",
-    dest_surprise:'Sorprendimi', dest_surprise_sub:'Sceglieremo qualcosa di meraviglioso',
-    q2_eye:'Quando parti', q2_title:'Quali sono le tue date di viaggio?', q2_hint:'Le date precise ci aiutano a trovare prezzi reali.', q2_depart:'Partenza', q2_return:'Ritorno',
-    q3_eye:'Il tuo gruppo', q3_title:'Chi viaggia con te?', q3_hint:'Adattiamo il ritmo, la dimensione dell\'alloggio e l\'atmosfera al tuo gruppo.',
-    comp_solo:'Solo/a', comp_solo_desc:'Il tuo ritmo, le tue regole', comp_couple:'Coppia', comp_couple_desc:'In due è meglio', comp_family:'Famiglia', comp_family_desc:'Con i bambini', comp_friends:'Amici', comp_friends_desc:'Il caos più bello', comp_honey:'Luna di miele', comp_honey_desc:'Rendila indimenticabile',
-    q4_eye:'Il tuo stile di viaggio', q4_title:'Com\'è la tua giornata ideale?', q4_hint:'Scegli tutto ciò che ti ispira.',
-    vibe_culture:'Cultura e storia', vibe_food:'Cibo e vino', vibe_adventure:'Avventura ed escursioni', vibe_beach:'Spiaggia e relax', vibe_night:'Vita notturna', vibe_hidden:'Gemme nascoste', vibe_luxury:'Lusso', vibe_budget:'Risparmio intelligente',
-    q5_eye:'Il tuo budget', q6_eye:'Il vostro ritmo', q7_eye:'Pianificare insieme', q5_title:'Quanto spendi al giorno?', q5_hint:'Definisce il livello predefinito per ogni consiglio. Cambio in qualsiasi momento.',
-    budget_back:'Zaino in spalla (meno di 50 €/giorno)', budget_mid:'Fascia media (50–150 €/giorno)', budget_comf:'Comodo (150–300 €/giorno)', budget_lux:'Lusso (oltre 300 €/giorno)',
-    budget_back_short:'Economico', budget_mid_short:'Fascia media', budget_comf_short:'Comodo', budget_lux_short:'Lusso',
-    q6_eye:'Quasi fatto', q6_title:'Un\'ultima cosa.', q6_hint:'Il tuo piano è pronto in meno di un minuto.',
-    q6_name:'Nome', q6_name_ph:'Come dobbiamo chiamarti?', q6_email:'Email', q6_email_ph:'Ti invieremo l\'itinerario qui', q6_spam:'Zero spam. Mai.', q6_notes:'Qualcosa di specifico? (opzionale)', q6_notes_ph:'Esigenze alimentari, luoghi da non perdere, accessibilità, cose che non ami…',
-    load_cap:'Stiamo costruendo il tuo itinerario',
-    load_phrases:['Alla ricerca delle gemme nascoste…','Scegliendo il ristorante per il tuo budget…','Verificando cosa amano davvero i locali…','Confrontando Airbnb con Booking.com…','Tracciando il percorso perfetto…','Verificando gli alloggi locali…','Quasi pronto…'],
-    tab_itin:'Itinerario', tab_stays:'Dove dormire', tab_transport:'Come arrivare',
-    budget_label:'Fascia di budget:',
-    itin_kicker:" — itinerario personalizzato · ", itin_share:'Condividi →', itin_regen:'Rigenera ↺', itin_over:'Ricomincia', itin_pdf:'↓ PDF', itin_alert:'🔔 Avviso prezzi',
-    itin_aside_cost:'Costo giornaliero stimato', itin_aside_cost_sub:'a persona · tutto incluso', itin_aside_about:'Su questo viaggio', itin_aside_tip:'Consiglio del posto', itin_aside_sels:'Le tue scelte', itin_aside_sels_empty:'Tocca un ristorante, un\'attività o un hotel — le tue scelte appariranno qui.', itin_aside_months:'Periodo migliore', itin_aside_pack:'Consiglio per i bagagli',
-    rec_lunch:'Pranzo', rec_dinner:'Cena', rec_activity:'Attività', rec_swap:'Scambia →',
-    swap_title:'Scambia o cambia fascia di budget', swap_close:'Chiudi',
-    swap_tier_budget:'Economico', swap_tier_mid:'Medio', swap_tier_comf:'Comodo', swap_tier_lux:'Lusso',
-    stays_intro:'Scegli il tuo alloggio per ogni notte. I prezzi sono collegati in tempo reale ad Airbnb, Booking.com e strutture locali verificate.',
-    stays_night:'Notte', stays_select:'Seleziona il tuo alloggio preferito',
-    stays_compare:'Confronto prezzi · per notte', stays_best:'Miglior prezzo',
-    trans_intro:'Le tue opzioni per arrivare a destinazione. Confronta prezzo, tempo e comfort — poi prenota direttamente.',
-    morning:'Mattina', afternoon:'Pomeriggio', evening:'Sera',
-    pack_load:'Stiamo preparando la lista dei bagagli…', step_label:'Passo', day_label:'Giorno',
-    pace_eye:'Il tuo ritmo', pace_title:'Come viaggi?',
-    pace_hint:'I migliori itinerari si adattano al tuo ritmo.',
-    collab_eye:'Pianificare insieme', collab_title:'Viaggi con qualcuno?',
-    collab_hint:'Aggiungi email — ricevono un link per vedere e suggerire modifiche.',
-    collab_add:'Aggiungi', collab_note:"I co-pianificatori vedono il piano e suggeriscono cambiamenti. Tu hai l'ultima parola.",
-    toast_link:'Link copiato.', toast_saved:'Viaggio salvato.', toast_unlocked:'Via Plus sbloccato.',
-    shared_banner:'Stai visualizzando il viaggio di qualcun altro. Pianifica il tuo gratis.',
-    shared_banner_cta:'Pianifica il mio viaggio →',
-    alert_eye:'Avviso prezzi', alert_title:'Monitora i prezzi per questo viaggio',
-    alert_submit:'Imposta avviso →', alert_success_title:'Avviso attivo.',
-    pace_relaxed:'Rilassato', pace_relaxed_count:'2–3 cose / giorno', pace_relaxed_desc:'Pranzo lungo. Passeggiata senza meta. Riposo vero.',
-    pace_balanced:'Bilanciato', pace_balanced_count:'3–4 cose / giorno', pace_balanced_desc:'Vedi le cose principali e hai ancora tempo per respirare.',
-    pace_full:'Intenso', pace_full_count:'5+ cose / giorno', pace_full_desc:'Massimizza ogni ora. Dormirai quando torni a casa.',
-    fdt_label:'Lascia un giorno libero', fdt_desc:'Nessun programma, niente prenotazioni. Solo qualche idea vaga. Il giorno migliore arriva spesso da solo.',
-    collab_input_ph:'amico@email.com',
-    load_eyebrow:'Stiamo costruendo',
-    freeday_eyebrow:'Giorno libero', freeday_title:'Questa giornata è tua.',
-    hg_eyebrow:'Cosa fanno davvero i locali',
-    tweak_ph:'Modifica questa giornata… es. aggiungi una sosta in spiaggia, rendila più rilassata', tweak_btn:'↺ Riscrivi', tweak_status:'Riscrivendo la giornata…',
-    note_btn:'Nota',
-    tab_pack:'Lista bagagli',
-    trans_empty:'Nessuna opzione di trasporto disponibile per questo percorso.', trans_per_person:'a persona',
-    mood_title:'Che voglia hai oggi?', mood_sub:"Scegli un'atmosfera — suggeriremo attività per oggi.", mood_find:'Cercando le migliori opzioni…', mood_add:'Aggiungi alla giornata', collab_role:'Può vedere il piano e suggerire modifiche', collab_remove:'Rimuovi',
-  blog_all:'Tutte le storie', blog_dest:'Destinazioni', blog_tips:'Consigli di viaggio', blog_partner:'Storie partner', blog_eye:'Via Journal', blog_hero_title_html:'Storie dalla strada.<br><em>Luoghi che vale la pena conoscere.</em>', blog_hero_sub:'Guide alle destinazioni, consigli di viaggio e storie dai partner.', blog_home:'← Home', blog_back:'← Torna alle storie', blog_read:'Leggi la storia', blog_cat_dest:'Destinazione', blog_cat_tips:'Consigli di viaggio', blog_cat_partner:'Storia partner',
-  },
-  fr: {
-    code:'fr', label:'FR', name:'Français',
-    stamp:'Des itinéraires de voyage artisanaux',
-    nav_how:'Comment ça marche', nav_stories:'Témoignages', nav_plan:'Planifier un voyage',
-    hero_title_html:'Votre voyage planifié<em>comme par un ami</em>qui connaît tout.',
-    hero_deck:'Pas une liste de liens. Un vrai plan jour par jour — le restaurant est déjà choisi, l\'hôtel est déjà réservé. Échangez n\'importe quoi, comparez les prix, réservez en un clic.',
-    hero_cta:'Planifier mon voyage', hero_note:'Gratuit · Sans compte · 2 minutes',
-    strip_trips:'Voyages planifiés', strip_rating:'Note moyenne', strip_int:'Intégré', strip_int2:'Intégré', strip_tiers:'3 niveaux de budget', strip_rec:'Pour chaque recommandation',
-    how_eye:'Comment ça marche', how_title_html:'Un plan, pas une liste.<br><em>Prêt à réserver.</em>',
-    feat1_title:'Dites-nous comment vous voyagez', feat1_body:'Répondez à quelques questions — où, quand, avec qui et comment. Deux minutes.',
-    feat2_title:'Votre plan journalier complet', feat2_body:'Restaurant choisi, hôtel réservé. Tout selon votre budget. Chaque lieu est cliquable et interchangeable.',
-    feat3_title:'Échanger, comparer, réserver', feat3_body:'Touchez n\'importe quel endroit pour voir les alternatives. Changez de niveau de budget globalement. Comparez les prix. Réservez en un clic.',
-    testi_eye:'Vrais voyageurs', testi_title_html:'Ils sont partis. <em>Ils ont adoré.</em>',
-    footer_tag:'Votre voyage planifié comme par un ami qui connaît tout.',
-    footer_product:'Produit', footer_how:'Comment ça marche', footer_dest:'Destinations', footer_partners:'Partenaires de réservation',
-    footer_company:'Entreprise', footer_about:'À propos', footer_blog:'Blog', footer_press:'Presse',
-    footer_legal:'Mentions légales', footer_privacy:'Confidentialité', footer_terms:'CGU', footer_made:"Pour les voyageurs qui savent ce qu'ils veulent.",
-    q_back:'← Retour', q_continue:'Continuer', q_build:'Créer mon itinéraire',
-    q1_eye:'Où dans le monde', q1_title:'Où rêvez-vous d\'aller ?', q1_hint:'Choisissez une région ou saisissez votre propre destination.', q1_custom_placeholder:"Ou tapez la vôtre : 'Lisbonne', 'Les Açores', 'Marrakech'…",
-    dest_surprise:'Surprenez-moi', dest_surprise_sub:'Nous choisirons quelque chose de merveilleux',
-    q2_eye:'Quand partez-vous', q2_title:'Quelles sont vos dates de voyage ?', q2_hint:'Des dates précises nous aident à trouver de vrais prix.', q2_depart:'Départ', q2_return:'Retour',
-    q3_eye:'Votre groupe', q3_title:'Qui voyage avec vous ?', q3_hint:'Nous adaptons le rythme, la taille du logement et l\'ambiance à votre groupe.',
-    comp_solo:'Solo', comp_solo_desc:'Votre rythme, vos règles', comp_couple:'En couple', comp_couple_desc:'À deux, c\'est mieux', comp_family:'Famille', comp_family_desc:'Avec les enfants', comp_friends:'Amis', comp_friends_desc:'Le meilleur des chaos', comp_honey:'Lune de miel', comp_honey_desc:'Rendez-la inoubliable',
-    q4_eye:'Votre style de voyage', q4_title:'À quoi ressemble une journée idéale ?', q4_hint:'Choisissez tout ce qui vous parle.',
-    vibe_culture:'Culture et histoire', vibe_food:'Gastronomie et vins', vibe_adventure:'Aventure et randonnée', vibe_beach:'Plage et détente', vibe_night:'Vie nocturne', vibe_hidden:'Pépites cachées', vibe_luxury:'Luxe', vibe_budget:'Budget malin',
-    q5_eye:'Votre budget', q6_eye:'Votre rythme', q7_eye:'Planifier ensemble', q5_title:'Quel est votre budget journalier par personne ?', q5_hint:'Définit le niveau par défaut pour toutes les recommandations. Changeable à tout moment.',
-    budget_back:'Routard (moins de 50 €/jour)', budget_mid:'Milieu de gamme (50–150 €/jour)', budget_comf:'Confortable (150–300 €/jour)', budget_lux:'Luxe (plus de 300 €/jour)',
-    budget_back_short:'Routard', budget_mid_short:'Milieu de gamme', budget_comf_short:'Confortable', budget_lux_short:'Luxe',
-    q6_eye:'On y est presque', q6_title:'Une dernière chose.', q6_hint:'Votre plan sera prêt dans une minute.',
-    q6_name:'Prénom', q6_name_ph:'Comment vous appelez-vous ?', q6_email:'E-mail', q6_email_ph:'Votre plan arrivera ici', q6_spam:'Zéro spam. Jamais.', q6_notes:'Quelque chose de particulier ? (optionnel)', q6_notes_ph:'Régimes alimentaires, incontournables, accessibilité, ce que vous n\'aimez pas…',
-    load_cap:'Votre itinéraire est en cours de création',
-    load_phrases:['Recherche des pépites cachées…','Sélection du restaurant pour votre budget…','Vérification de ce que les locaux aiment vraiment…','Comparaison Airbnb et Booking.com…','Tracé du parcours journalier parfait…','Vérification des hébergements locaux…','Presque prêt…'],
-    tab_itin:'Itinéraire', tab_stays:'Où dormir', tab_transport:'Comment s\'y rendre',
-    budget_label:'Niveau de budget :',
-    itin_kicker:" — itinéraire personnalisé · ", itin_share:'Partager →', itin_regen:'Recréer ↺', itin_over:'Recommencer', itin_pdf:'↓ PDF', itin_alert:'🔔 Alerte de prix',
-    itin_aside_cost:'Coût journalier estimé', itin_aside_cost_sub:'par personne · tout compris', itin_aside_about:'À propos de ce voyage', itin_aside_tip:'Bon à savoir', itin_aside_sels:'Vos choix', itin_aside_sels_empty:'Touchez un restaurant, une activité ou un hôtel — vos choix apparaîtront ici.', itin_aside_months:'Meilleure période', itin_aside_pack:'Conseil bagages',
-    rec_lunch:'Déjeuner', rec_dinner:'Dîner', rec_activity:'Activité', rec_swap:'Changer →',
-    swap_title:'Changer ou modifier le niveau de budget', swap_close:'Fermer',
-    swap_tier_budget:'Économique', swap_tier_mid:'Moyen', swap_tier_comf:'Confort', swap_tier_lux:'Luxe',
-    stays_intro:'Choisissez votre hébergement pour chaque nuit. Les prix sont synchronisés en temps réel avec Airbnb, Booking.com et aux établissements locaux vérifiés.',
-    stays_night:'Nuit', stays_select:'Sélectionnez votre hébergement préféré',
-    stays_compare:'Comparaison des prix · par nuit', stays_best:'Meilleur prix',
-    trans_intro:'Vos options pour vous rendre à destination. Comparez prix, durée et confort — puis réservez directement.',
-    morning:'Matin', afternoon:'Après-midi', evening:'Soir',
-    pack_load:'Préparation de votre liste de bagages…', step_label:'Étape', day_label:'Jour',
-    pace_eye:'Votre rythme', pace_title:'Comment voyagez-vous?',
-    pace_hint:"Les meilleurs itinéraires s'adaptent à votre rythme.",
-    collab_eye:'Planifier ensemble', collab_title:"Vous voyagez avec quelqu'un?",
-    collab_hint:'Ajoutez un email — ils reçoivent un lien pour voir et suggérer des modifications.',
-    collab_add:'Ajouter', collab_note:"Les co-planificateurs voient le plan et suggèrent des changements. Vous avez le dernier mot.",
-    toast_link:'Lien copié.', toast_saved:'Voyage sauvegardé.', toast_unlocked:'Via Plus débloqué.',
-    shared_banner:"Vous consultez le voyage de quelqu'un d'autre. Planifiez le vôtre gratuitement.",
-    shared_banner_cta:'Planifier mon voyage →',
-    alert_eye:'Alerte prix', alert_title:'Suivre les prix pour ce voyage',
-    alert_submit:"Activer l'alerte →", alert_success_title:'Alerte activée.',
-    pace_relaxed:'Détendu', pace_relaxed_count:'2–3 activités / jour', pace_relaxed_desc:'Déjeuner sans se presser. Se balader sans but. Vraiment se reposer.',
-    pace_balanced:'Équilibré', pace_balanced_count:'3–4 activités / jour', pace_balanced_desc:'Voir les incontournables tout en gardant le temps de souffler.',
-    pace_full:'Intensif', pace_full_count:'5+ activités / jour', pace_full_desc:'Optimiser chaque heure. Vous dormirez chez vous.',
-    fdt_label:'Laisser une journée libre', fdt_desc:"Pas de programme, rien de réservé. Quelques idées en vrac. Les meilleures journées arrivent souvent à l'improviste.",
-    collab_input_ph:'ami@email.com',
-    load_eyebrow:'En cours de création',
-    freeday_eyebrow:'Journée libre', freeday_title:'Cette journée est à vous.',
-    hg_eyebrow:'Ce que font vraiment les locaux',
-    tweak_ph:'Modifier cette journée… ex. ajouter une étape à la plage, la rendre plus détendue', tweak_btn:'↺ Réécrire', tweak_status:'Réécriture en cours…',
-    note_btn:'Note',
-    tab_pack:'Liste de bagages',
-    trans_empty:"Pas d'options de transport disponibles pour cet itinéraire.", trans_per_person:'par personne',
-    mood_title:"Quelle humeur aujourd'hui?", mood_sub:"Choisissez une humeur — nous suggérerons des activités.", mood_find:'Recherche des meilleures options…', mood_add:'Ajouter à la journée', collab_role:'Peut voir le plan et suggérer des modifications', collab_remove:'Supprimer',
-  blog_all:'Toutes les histoires', blog_dest:'Destinations', blog_tips:'Conseils voyage', blog_partner:'Histoires partenaires', blog_eye:'Via Journal', blog_hero_title_html:'Des récits de voyage.<br><em>Des lieux qui valent le détour.</em>', blog_hero_sub:'Guides de destinations, conseils et histoires de nos partenaires.', blog_home:'← Accueil', blog_back:'← Retour aux récits', blog_read:'Lire le récit', blog_cat_dest:'Destination', blog_cat_tips:'Conseils voyage', blog_cat_partner:'Histoire partenaire',
-  },
-  hr: {
-    code:'hr', label:'HR', name:'Hrvatski',
-    stamp:'Ručno izrađeni planovi putovanja',
-    nav_how:'Kako funkcionira', nav_stories:'Iskustva', nav_plan:'Planiraj putovanje',
-    hero_title_html:'Putovanje planirano<em>kao što bi to napravio prijatelj</em>za tebe.',
-    hero_deck:'Ne popis linkova. Pravi plan za svaki dan — restoran već odabran, hotel već rezerviran, aktivnosti predložene. Zamijeni bilo što, usporedi cijene, rezerviraj jednim klikom.',
-    hero_cta:'Planiraj moje putovanje', hero_note:'Besplatno · Bez registracije · 2 minute',
-    strip_trips:'Planiranih putovanja', strip_rating:'Prosječna ocjena', strip_int:'Integrirano', strip_int2:'Integrirano', strip_tiers:'3 razine proračuna', strip_rec:'Za svaku preporuku',
-    how_eye:'Kako funkcionira', how_title_html:'Plan, a ne popis.<br><em>Spreman za rezervaciju.</em>',
-    feat1_title:'Reci nam kako putuješ', feat1_body:'Odgovori na nekoliko promišljenih pitanja — kamo, kada, s kime i kako. Dvije minute.',
-    feat2_title:'Dobij potpuni dnevni plan', feat2_body:'Restoran odabran, hotel rezerviran — sve prema tvom proračunu. Svako ime je klikabilno i zamjenjivo.',
-    feat3_title:'Zamijeni, usporedi, rezerviraj', feat3_body:'Dotakni bilo koje mjesto za alternative. Promijeni razinu proračuna globalno. Usporedi cijene. Rezerviraj jednim klikom.',
-    testi_eye:'Pravi putnici', testi_title_html:'Otišli su. <em>Bili su oduševljeni.</em>',
-    footer_tag:'Putovanje planirano kao što bi to napravio prijatelj.',
-    footer_product:'Proizvod', footer_how:'Kako funkcionira', footer_dest:'Destinacije', footer_partners:'Partneri za rezervacije',
-    footer_company:'Tvrtka', footer_about:'O nama', footer_blog:'Blog', footer_press:'Tisak',
-    footer_legal:'Pravno', footer_privacy:'Privatnost', footer_terms:'Uvjeti', footer_made:'Za ljude koji znaju zašto putuju.',
-    q_back:'← Natrag', q_continue:'Nastavi', q_build:'Izradi moj itinerar',
-    q1_eye:'Kamo na svijetu', q1_title:'Kamo ideš?', q1_hint:'Odaberi regiju ili upiši svoju destinaciju.', q1_custom_placeholder:"Ili upiši svoju: 'Lisabon', 'Azori', 'Marakeš'…",
-    dest_surprise:'Iznenadi me', dest_surprise_sub:'Odabrat ćemo nešto prekrasno',
-    q2_eye:'Kada ideš', q2_title:'Koji su tvoji datumi putovanja?', q2_hint:'Točni datumi pomažu nam pronaći stvarne cijene.', q2_depart:'Polazak', q2_return:'Povratak',
-    q3_eye:'Tvoja grupa', q3_title:'Tko putuje s tobom?', q3_hint:'Prilagođavamo tempo, veličinu smještaja i atmosferu tvojoj grupi.',
-    comp_solo:'Sam/a', comp_solo_desc:'Tvoj tempo, tvoja odločitev', comp_couple:'Par', comp_couple_desc:'Dvoje je savršen broj', comp_family:'Obitelj', comp_family_desc:'S djecom', comp_friends:'Prijatelji', comp_friends_desc:'Najljepši kaos', comp_honey:'Medeni tjedan', comp_honey_desc:'Učini ga nezaboravnim',
-    q4_eye:'Tvoj stil putovanja', q4_title:'Kako izgleda idealan dan?', q4_hint:'Odaberi sve što ti odgovara.',
-    vibe_culture:'Kultura i povijest', vibe_food:'Hrana i vino', vibe_adventure:'Pustolovine i planinarenje', vibe_beach:'Plaža i opuštanje', vibe_night:'Noćni život', vibe_hidden:'Skriveni dragulji', vibe_luxury:'Luksuz', vibe_budget:'Pametna štednja',
-    q5_eye:'Tvoj proračun', q6_eye:'Vaš tempo', q7_eye:'Planirajmo zajedno', q5_title:'Koliko trošiš na dan?', q5_hint:'Postavlja zadanu razinu za sva preporuče. Mijenjaj kada hoćeš.',
-    budget_back:'Ruksak (ispod 50 €/dan)', budget_mid:'Srednja klasa (50–150 €/dan)', budget_comf:'Udobno (150–300 €/dan)', budget_lux:'Luksuz (300+ €/dan)',
-    budget_back_short:'Ruksak', budget_mid_short:'Srednja klasa', budget_comf_short:'Udobno', budget_lux_short:'Luksuz',
-    q6_eye:'Skoro smo tu', q6_title:'Zadnji korak.', q6_hint:'Plan je gotov za minutu.',
-    q6_name:'Ime', q6_name_ph:'Kako da te zovemo?', q6_email:'E-mail', q6_email_ph:'Plan šaljemo na ovaj mail', q6_spam:'Nula spama. Ikad.', q6_notes:'Nešto posebno? (neobavezno)', q6_notes_ph:'Prehrambene potrebe, obvezne atrakcije, pristupačnost, stvari koje ne voliš…',
-    load_cap:'Izrađujemo tvoj plan putovanja',
-    load_phrases:['Tražimo skrivene dragulje…','Biramo restoran za tvoj proračun…','Provjeravamo što lokalni zaista preporučuju…','Uspoređujemo Airbnb i Booking.com…','Crtamo savršenu dnevnu rutu…','Provjeravamo lokalne smještaje…','Još malo…'],
-    tab_itin:'Itinerar', tab_stays:'Gdje spavati', tab_transport:'Kako stići',
-    budget_label:'Razina proračuna:',
-    itin_kicker:" — osobni itinerar · ", itin_share:'Podijeli →', itin_regen:'Izradi ponovo ↺', itin_over:'Počni ispočetka', itin_pdf:'↓ PDF', itin_alert:'🔔 Upozorenje na cijenu',
-    itin_aside_cost:'Procijenjeni dnevni troškovi', itin_aside_cost_sub:'po osobi · sve uključeno', itin_aside_about:'O ovom putovanju', itin_aside_tip:'Savjet od lokala', itin_aside_sels:'Tvoji odabiri', itin_aside_sels_empty:'Dotakni restoran, aktivnost ili hotel — tvoji odabiri pojavit će se ovdje.', itin_aside_months:'Najbolje vrijeme za posjet', itin_aside_pack:'Savjet za pakiranje',
-    rec_lunch:'Ručak', rec_dinner:'Večera', rec_activity:'Aktivnost', rec_swap:'Zamijeni →',
-    swap_title:'Zamijeni ili promijeni razinu proračuna', swap_close:'Zatvori',
-    swap_tier_budget:'Štedljivo', swap_tier_mid:'Srednje', swap_tier_comf:'Udobno', swap_tier_lux:'Luksuz',
-    stays_intro:'Odaberi smještaj za svaku noć. Cijene su u realnom vremenu povezane s Airbnb, Booking.com i provjerenim lokalnim smještajima.',
-    stays_night:'Noć', stays_select:'Odaberi željeni smještaj',
-    stays_compare:'Usporedba cijena · po noći', stays_best:'Najbolja cijena',
-    trans_intro:'Tvoje opcije za dolazak na destinaciju. Usporedi cijenu, vrijeme i udobnost — zatim rezerviraj izravno.',
-    morning:'Jutro', afternoon:'Poslijepodne', evening:'Večer',
-    pack_load:'Pripremamo vašu listu pakovanja…', step_label:'Korak', day_label:'Dan',
-    pace_eye:'Tvoj tempo', pace_title:'Kako voliš putovati?', pace_hint:'Najbolji planovi prilagođavaju se tvom ritmu.',
-    collab_eye:'Planiraj zajedno', collab_title:'Putuješ s nekim?', collab_hint:'Dodaj e-mail — dobivaju link za pregled i prijedloge.',
-    collab_add:'Dodaj', collab_note:'Suplaneri vide plan i predlažu promjene. Ti imaš posljednju riječ.',
-    toast_link:'Link kopiran.', toast_saved:'Putovanje spremljeno.', toast_unlocked:'Via Plus otključan.',
-    shared_banner:'Pregledavaš tuđe putovanje. Planiraj svoje besplatno.',
-    shared_banner_cta:'Planiraj moje putovanje →',
-    alert_eye:'Upozorenje na cijenu', alert_title:'Prati cijene za ovo putovanje',
-    alert_submit:'Postavi upozorenje →', alert_success_title:'Upozorenje aktivno.',
-    pace_relaxed:'Opušteno', pace_relaxed_count:'2–3 stvari / dan', pace_relaxed_desc:'Dugi ručak. Šetnja bez cilja. Pravi odmor.',
-    pace_balanced:'Uravnoteženo', pace_balanced_count:'3–4 stvari / dan', pace_balanced_desc:'Vidiš bitno i imaš vremena za dah.',
-    pace_full:'Nabijeno', pace_full_count:'5+ stvari / dan', pace_full_desc:'Iskoristi svaki sat. Spavat ćeš kod kuće.',
-    fdt_label:'Ostavi jedan dan slobodan', fdt_desc:'Bez rasporeda, ništa rezervirano. Samo par ideja. Najbolji dan često dođe sam od sebe.',
-    collab_input_ph:'prijatelj@email.com',
-    load_eyebrow:'Gradimo tvoj plan',
-    freeday_eyebrow:'Slobodan dan', freeday_title:'Ovaj dan je tvoj.',
-    hg_eyebrow:'Što lokalni zaista rade',
-    tweak_ph:'Prilagodi ovaj dan… npr. dodaj plažu, učini ga opuštenijim', tweak_btn:'↺ Prepiši', tweak_status:'Prepisujem dan…',
-    note_btn:'Bilješka',
-    tab_pack:'Lista pakovanja',
-    trans_empty:'Nema dostupnih opcija prijevoza za ovu rutu.', trans_per_person:'po osobi',
-    mood_title:'Kako se osjećate danas?', mood_sub:'Odaberi raspoloženje — predložit ćemo aktivnosti za danas.', mood_find:'Tražimo najbolje opcije…', mood_add:'Dodaj u dan', collab_role:'Vidi plan i može predlagati promjene', collab_remove:'Ukloni',
-  blog_all:'Sve priče', blog_dest:'Destinacije', blog_tips:'Putni savjeti', blog_partner:'Partnerske priče', blog_eye:'Via Journal', blog_hero_title_html:'Priče s puta.<br><em>Mjesta vrijedna pozornosti.</em>', blog_hero_sub:'Vodiči, savjeti i partnerske priče o destinacijama.', blog_home:'← Početna', blog_back:'← Natrag na priče', blog_read:'Čitaj priču', blog_cat_dest:'Destinacija', blog_cat_tips:'Putni savjeti', blog_cat_partner:'Partnerska priča',
-  },
-  es: {
-    code:'es', label:'ES', name:'Español',
-    stamp:'Itinerarios de viaje artesanales',
-    nav_how:'Cómo funciona', nav_stories:'Testimonios', nav_plan:'Planificar un viaje',
-    hero_title_html:'Tu viaje planificado<em>como lo haría un amigo</em>que lo sabe todo.',
-    hero_deck:'No una lista de enlaces. Un plan real día a día — el restaurante ya elegido, el hotel ya reservado. Cambia lo que quieras, compara precios, reserva con un clic.',
-    hero_cta:'Planificar mi viaje', hero_note:'Gratis · Sin cuenta · 2 minutos',
-    strip_trips:'Viajes planificados', strip_rating:'Valoración media', strip_int:'Integrado', strip_int2:'Integrado', strip_tiers:'3 niveles de presupuesto', strip_rec:'Para cada recomendación',
-    how_eye:'Cómo funciona', how_title_html:'Un plan, no una lista.<br><em>Listo para reservar.</em>',
-    feat1_title:'Cuéntanos cómo viajas', feat1_body:'Responde unas preguntas — adónde, cuándo, con quién y cómo. Dos minutos.',
-    feat2_title:'Tu plan diario completo', feat2_body:'Restaurante elegido, hotel reservado — todo según tu presupuesto. Cada lugar es clicable e intercambiable.',
-    feat3_title:'Cambia, compara, reserva', feat3_body:'Toca cualquier lugar para ver alternativas. Cambia el nivel de presupuesto globalmente. Compara precios. Reserva con un clic.',
-    testi_eye:'Viajeros reales', testi_title_html:'Fueron. <em>Les encantó.</em>',
-    footer_tag:'Tu viaje planificado como lo haría un amigo que lo sabe todo.',
-    footer_product:'Producto', footer_how:'Cómo funciona', footer_dest:'Destinos', footer_partners:'Socios de reserva',
-    footer_company:'Empresa', footer_about:'Sobre nosotros', footer_blog:'Blog', footer_press:'Prensa',
-    footer_legal:'Legal', footer_privacy:'Privacidad', footer_terms:'Términos', footer_made:'Para quienes viajan con propósito.',
-    q_back:'← Atrás', q_continue:'Continuar', q_build:'Crear mi itinerario',
-    q1_eye:'Dónde en el mundo', q1_title:'¿Dónde sueñas con viajar?', q1_hint:'Elige una región o escribe tu destino.', q1_custom_placeholder:"O escribe el tuyo: 'Lisboa', 'Las Azores', 'Marrakech'…",
-    dest_surprise:'Sorpréndeme', dest_surprise_sub:'Elegiremos algo maravilloso',
-    q2_eye:'Cuándo vas', q2_title:'¿Cuáles son tus fechas de viaje?', q2_hint:'Las fechas exactas nos ayudan a encontrar precios reales.', q2_depart:'Salida', q2_return:'Regreso',
-    q3_eye:'Tu grupo', q3_title:'¿Quién viaja contigo?', q3_hint:'Adaptamos el ritmo, el tamaño del alojamiento y el ambiente a tu grupo.',
-    comp_solo:'Solo/a', comp_solo_desc:'Tu ritmo, tus reglas', comp_couple:'Pareja', comp_couple_desc:'De dos en dos es mejor', comp_family:'Familia', comp_family_desc:'Con niños', comp_friends:'Amigos', comp_friends_desc:'El mejor caos', comp_honey:'Luna de miel', comp_honey_desc:'Hazla inolvidable',
-    q4_eye:'Tu estilo de viaje', q4_title:'¿Cómo es un día ideal?', q4_hint:'Elige todo lo que te inspire.',
-    vibe_culture:'Cultura e historia', vibe_food:'Gastronomía y vinos', vibe_adventure:'Aventura y senderismo', vibe_beach:'Playa y relax', vibe_night:'Vida nocturna', vibe_hidden:'Joyas ocultas', vibe_luxury:'Lujo', vibe_budget:'Ahorro inteligente',
-    q5_eye:'Tu presupuesto', q6_eye:'Tu ritmo', q7_eye:'Planificar juntos', q5_title:'¿Cuál es tu presupuesto diario por persona?', q5_hint:'Define el nivel para todas las recomendaciones. Cámbialo cuando quieras.',
-    budget_back:'Mochilero (menos de 50 €/día)', budget_mid:'Gama media (50–150 €/día)', budget_comf:'Cómodo (150–300 €/día)', budget_lux:'Lujo (más de 300 €/día)',
-    budget_back_short:'Mochilero', budget_mid_short:'Gama media', budget_comf_short:'Cómodo', budget_lux_short:'Lujo',
-    q6_eye:'Ya casi', q6_title:'Una última cosa.', q6_hint:'Tu plan estará listo en un minuto.',
-    q6_name:'Nombre', q6_name_ph:'¿Cómo debemos llamarte?', q6_email:'Correo electrónico', q6_email_ph:'Te mandamos el plan aquí', q6_spam:'Cero spam. Nunca.', q6_notes:'¿Algo específico? (opcional)', q6_notes_ph:'Necesidades dietéticas, imprescindibles, accesibilidad, cosas que no te gustan…',
-    load_cap:'Preparando tu itinerario',
-    load_phrases:['Buscando joyas ocultas…','Eligiendo el restaurante para tu presupuesto…','Verificando qué recomiendan los locales…','Comparando Airbnb con Booking.com…','Trazando la ruta diaria perfecta…','Verificando alojamientos locales…','Casi listo…'],
-    tab_itin:'Itinerario', tab_stays:'Dónde dormir', tab_transport:'Cómo llegar',
-    budget_label:'Nivel de presupuesto:',
-    itin_kicker:" — itinerario personalizado · ", itin_share:'Compartir →', itin_regen:'Volver a crear ↺', itin_over:'Empezar desde cero', itin_pdf:'↓ PDF', itin_alert:'🔔 Alerta de precios',
-    itin_aside_cost:'Coste diario estimado', itin_aside_cost_sub:'por persona · todo incluido', itin_aside_about:'Sobre este viaje', itin_aside_tip:'Consejo del lugar', itin_aside_sels:'Tus elecciones', itin_aside_sels_empty:'Toca un restaurante, actividad u hotel — tus elecciones aparecerán aquí.', itin_aside_months:'Mejor época para visitar', itin_aside_pack:'Consejo de equipaje',
-    rec_lunch:'Almuerzo', rec_dinner:'Cena', rec_activity:'Actividad', rec_swap:'Cambiar →',
-    swap_title:'Cambiar o modificar el nivel de presupuesto', swap_close:'Cerrar',
-    swap_tier_budget:'Económico', swap_tier_mid:'Medio', swap_tier_comf:'Cómodo', swap_tier_lux:'Lujo',
-    stays_intro:'Elige tu alojamiento para cada noche. Los precios están actualizados en tiempo real con Airbnb, Booking.com y establecimientos locales verificados.',
-    stays_night:'Noche', stays_select:'Selecciona tu alojamiento preferido',
-    stays_compare:'Comparación de precios · por noche', stays_best:'Mejor precio',
-    trans_intro:'Tus opciones para llegar al destino. Compara precio, tiempo y comodidad — luego reserva directamente.',
-    morning:'Mañana', afternoon:'Tarde', evening:'Noche',
-    pack_load:'Preparando tu lista de equipaje…', step_label:'Paso', day_label:'Día',
-    pace_eye:'Tu ritmo', pace_title:'¿Cómo viajas?', pace_hint:'Los mejores itinerarios se adaptan a tu ritmo.',
-    collab_eye:'Planificar juntos', collab_title:'¿Viajas con alguien?', collab_hint:'Añade un email — recibirán un enlace para ver y sugerir cambios.',
-    collab_add:'Añadir', collab_note:'Los coplanificadores ven el plan y sugieren cambios. Tú tienes la última palabra.',
-    toast_link:'Enlace copiado.', toast_saved:'Viaje guardado.', toast_unlocked:'Via Plus desbloqueado.',
-    shared_banner:'Estás viendo el viaje de otra persona. Planifica el tuyo gratis.',
-    shared_banner_cta:'Planificar mi viaje →',
-    alert_eye:'Alerta de precios', alert_title:'Seguir los precios para este viaje',
-    alert_submit:'Activar alerta →', alert_success_title:'Alerta activada.',
-    pace_relaxed:'Relajado', pace_relaxed_count:'2–3 cosas / día', pace_relaxed_desc:'Un almuerzo largo. Caminar sin rumbo. Descansar de verdad.',
-    pace_balanced:'Equilibrado', pace_balanced_count:'3–4 cosas / día', pace_balanced_desc:'Ver lo imprescindible y aun así tener tiempo para respirar.',
-    pace_full:'Intenso', pace_full_count:'5+ cosas / día', pace_full_desc:'Aprovechar cada hora. Ya dormirás en casa.',
-    fdt_label:'Deja un día sin planificar', fdt_desc:'Sin agenda, nada reservado. Solo algunas ideas sueltas. El mejor día llega a menudo sin planificarlo.',
-    collab_input_ph:'amigo@email.com',
-    load_eyebrow:'Estamos construyendo',
-    freeday_eyebrow:'Día libre', freeday_title:'Este día es tuyo.',
-    hg_eyebrow:'Lo que hacen los locales de verdad',
-    tweak_ph:'Ajusta este día… ej. añade una parada en la playa, hazlo más relajado', tweak_btn:'↺ Reescribir', tweak_status:'Reescribiendo el día…',
-    note_btn:'Nota',
-    tab_pack:'Lista de equipaje',
-    trans_empty:'No hay opciones de transporte disponibles para esta ruta.', trans_per_person:'por persona',
-    mood_title:'¿Qué te apetece hoy?', mood_sub:'Elige un estado de ánimo — te sugeriremos actividades.', mood_find:'Buscando las mejores opciones…', mood_add:'Añadir al día', collab_role:'Puede ver el plan y sugerir cambios', collab_remove:'Eliminar',
-  blog_all:'Todas las historias', blog_dest:'Destinos', blog_tips:'Consejos de viaje', blog_partner:'Historias de socios', blog_eye:'Via Journal', blog_hero_title_html:'Historias del camino.<br><em>Lugares que merece la pena conocer.</em>', blog_hero_sub:'Guías de destinos, consejos de viaje e historias de socios.', blog_home:'← Inicio', blog_back:'← Volver a las historias', blog_read:'Leer historia', blog_cat_dest:'Destino', blog_cat_tips:'Consejos de viaje', blog_cat_partner:'Historia de socio',
-  },
-  sr: {
-    code:'sr', label:'SR', name:'Srpski',
-    stamp:'Tvoj sledeći put, već isplaniran.',
-    nav_how:'Kako radi', nav_stories:'Priče', nav_plan:'Planiraj put',
-    hero_title_html:'Put isplaniran<em>kao od dobrog druga.</em>',
-    hero_deck:'Ujutru kafa u proverenoj kafani, ručak gde jedu lokaci, hotel rezervisan u pravom kvartu. Nema guglanja. Sve je već složeno.',
-    hero_cta:'Napravi moj plan', hero_note:'Besplatno · bez registracije · gotovo za 2 minuta',
-    strip_trips:'Isplaniranih puteva', strip_rating:'Prosečna ocena', strip_int:'Integrisano', strip_int2:'Integrisano', strip_tiers:'3 budžetska nivoa', strip_rec:'Svaka preporuka',
-    how_eye:'Kako radi', how_title_html:'Plan, ne lista.<br><em>Spreman za rezervaciju.</em>',
-    feat1_title:'Reci nam kakvo putovanje hoćeš', feat1_body:'Destinacija, datumi, budžet, vibes — odgovoriš na par pitanja, mi složimo ostalo.',
-    feat2_title:'Dobijaš pravi itinerer', feat2_body:'Ne spisak atrakcija. Konkretan plan po danima: restoran, smeštaj, aktivnost, sve na jednom mestu.',
-    feat3_title:'Rezerviši direktno, bez gubljenja vremena', feat3_body:'Hoteli sa live cenama. Porediš Booking i Airbnb u sekundi. Klikneš, rezervišeš, gotovo.',
-    testi_eye:'Šta kažu putnici', testi_title_html:'Manje guglanja. <em>Više uživanja.</em>',
-    footer_tag:'Put isplaniran kao od dobrog druga.',
-    footer_product:'Produkt', footer_how:'Kako radi', footer_dest:'Destinacije', footer_partners:'Partneri za rezervacije',
-    footer_company:'Kompanija', footer_about:'O nama', footer_blog:'Blog', footer_press:'Za medije',
-    footer_legal:'Pravno', footer_privacy:'Privatnost', footer_terms:'Uslovi korišćenja', footer_made:'Za ljude koji zaista odlaze.',
-    q_back:'← Nazad', q_continue:'Nastavi', q_build:'Napravi moj itinerer',
-    q1_eye:'Kuda ideš', q1_title:'Gde ti je sledeća destinacija?', q1_hint:'Izaberi region ili ukucaj svoju destinaciju dole.', q1_custom_placeholder:"npr. 'Lisabon', 'Kjoto', 'Marakeš'…",
-    dest_surprise:'Iznenadi me', dest_surprise_sub:'Naći ćemo nešto dobro',
-    q2_eye:'Kad ideš', q2_title:'Koji su tvoji datumi putovanja?', q2_hint:'Tačni datumi pomažu nam da nađemo realne cene.', q2_depart:'Polazak', q2_return:'Povratak',
-    q3_eye:'S kim putuješ', q3_title:'Ko ide s tobom?', q3_hint:'Utiče na tempo, veličinu hotela i atmosferu.',
-    comp_solo:'Solo', comp_solo_desc:'Tvoj tempo, tvoja odluka', comp_couple:'Par', comp_couple_desc:'Dvoje je savršen broj', comp_family:'Porodica', comp_family_desc:'Deca idu s vama', comp_friends:'Ekipa', comp_friends_desc:'Najbolji haos na svetu', comp_honey:'Medeni mesec', comp_honey_desc:'Sve malo posebnije',
-    q4_eye:'Tvoj stil', q4_title:'Kako izgleda tvoj savršen dan na putu?', q4_hint:'Izaberi sve što ti odgovara.',
-    vibe_culture:'Kultura i istorija', vibe_food:'Hrana i vino', vibe_adventure:'Avantura i planinarenje', vibe_beach:'Plaža i opuštanje', vibe_night:'Noćni život', vibe_hidden:'Skriveni biseri', vibe_luxury:'Luksuz', vibe_budget:'Pametna štednja',
-    q5_eye:'Budžet', q6_eye:'Tvoj tempo', q7_eye:'Planiraj zajedno', q5_title:'Koliko planiraš da trošiš po osobi dnevno?', q5_hint:'Važi za sve preporuke. Menjaj kad god hoćeš.',
-    budget_back:'Bekpeker · ispod 50 €/dan', budget_mid:'Srednji · 50–150 €/dan', budget_comf:'Udobno · 150–300 €/dan', budget_lux:'Luksuz · 300+ €/dan',
-    budget_back_short:'Bekpeker', budget_mid_short:'Srednji', budget_comf_short:'Udobno', budget_lux_short:'Luksuz',
-    q6_eye:'Još malo', q6_title:'Jedna stvar pre nego što složimo plan.', q6_hint:'Plan je gotov za manje od minut.',
-    q6_name:'Ime', q6_name_ph:'Kako da te zovemo?', q6_email:'Imejl', q6_email_ph:'Šaljemo ti plan ovde', q6_spam:'Bez spama. Ikad.', q6_notes:'Nešto posebno? (opciono)', q6_notes_ph:'Ishrana, mesta koja moraš videti, pristupačnost, stvari koje mrziš…',
-    load_cap:'Pravimo tvoj personalizovani itinerer',
-    load_phrases:['Pitamo lokace gde se zapravo jede…','Tražimo hotel u pravom kvartu…','Slažemo plan po danima…','Biramo između restorana za tvoj budžet…','Proveravamo lokalne smeštaje…','Računamo sve do poslednjeg evra…','Još sekund, mora biti savršeno…'],
-    tab_itin:'Itinerer', tab_stays:'Gde spavaš', tab_transport:'Kako stižeš',
-    budget_label:'Nivo budžeta:',
-    itin_kicker:" — personalizovani plan · ", itin_share:'Podeli →', itin_regen:'Generiši ponovo ↺', itin_over:'Počni iznova', itin_pdf:'↓ PDF', itin_alert:'🔔 Obaveštenje o ceni',
-    itin_aside_cost:'Procenjeni dnevni trošak', itin_aside_cost_sub:'po osobi · sve uključeno', itin_aside_about:'O ovom putovanju', itin_aside_tip:'Savet od lokaca', itin_aside_sels:'Tvoj izbor', itin_aside_sels_empty:'Klikni na restoran, hotel ili aktivnost. Pojavljuje se ovde.', itin_aside_months:'Kad je najlepše ići', itin_aside_pack:'Savet za pakovanje',
-    rec_lunch:'Ručak', rec_dinner:'Večera', rec_activity:'Aktivnost', rec_swap:'Zameni →',
-    swap_title:'Zameni ili promeni nivo budžeta', swap_close:'Zatvori',
-    swap_tier_budget:'Ekonomično', swap_tier_mid:'Srednje', swap_tier_comf:'Udobno', swap_tier_lux:'Luksuz',
-    stays_intro:'Izaberi smeštaj za svaku noć. Live cene sa Airbnb, Booking.com i proverenih lokalnih adresa.',
-    stays_night:'Noć', stays_select:'Izaberi smeštaj',
-    stays_compare:'Poređenje cena · po noći', stays_best:'Najbolji',
-    trans_intro:'Opcije za dolazak do destinacije. Poredi cenu, vreme i udobnost pa rezerviši direktno.',
-    morning:'Jutro', afternoon:'Popodne', evening:'Veče',
-    pack_load:'Pravimo listu za pakovanje…', step_label:'Korak', day_label:'Dan',
-    pace_eye:'Tvoj ritam', pace_title:'Kako voliš da putuješ?', pace_hint:'Dobar plan ide uz tvoj ritam, ne protiv njega.',
-    collab_eye:'Planiraj zajedno', collab_title:'Putuješ s nekim?', collab_hint:'Dodaj imejl adresu. Dobijaju link da vide plan i predlože izmene.',
-    collab_add:'Dodaj', collab_note:'Saplaner vidi ceo plan i može da predlaže zamene. Poslednja reč je tvoja.',
-    toast_link:'Link kopiran.', toast_saved:'Putovanje sačuvano.', toast_unlocked:'Via Plus aktiviran.',
-    shared_banner:'Gledaš tuđe putovanje. Napravi svoje besplatno.',
-    shared_banner_cta:'Planiraj moj put →',
-    alert_eye:'Obaveštenje o ceni', alert_title:'Prati cene za ovo putovanje',
-    alert_submit:'Postavi obaveštenje →', alert_success_title:'Obaveštenje aktivno.',
-    pace_relaxed:'Opušteno', pace_relaxed_count:'2–3 stvari / dan', pace_relaxed_desc:'Dugi ručak. Šetnja bez cilja. Pravi odmor.',
-    pace_balanced:'Uravnoteženo', pace_balanced_count:'3–4 stvari / dan', pace_balanced_desc:'Vidiš bitno i imaš vremena za dah.',
-    pace_full:'Nabijeno', pace_full_count:'5+ stvari / dan', pace_full_desc:'Iskoristi svaki sat. Spavaćeš kod kuće.',
-    fdt_label:'Ostavi jedan dan slobodan', fdt_desc:'Bez rasporeda, ništa rezervisano. Samo par ideja. Najbolji dan često dođe sam od sebe.',
-    collab_input_ph:'drug@email.com',
-    load_eyebrow:'Pravimo tvoj plan',
-    freeday_eyebrow:'Slobodan dan', freeday_title:'Ovaj dan je tvoj.',
-    hg_eyebrow:'Šta lokaci zapravo rade',
-    tweak_ph:'Prilagodi ovaj dan… npr. dodaj plažu, učini ga opuštenijim', tweak_btn:'↺ Prepiši', tweak_status:'Prepisujem dan…',
-    note_btn:'Napomena',
-    tab_pack:'Lista za pakovanje',
-    trans_empty:'Nema dostupnih opcija prevoza za ovu rutu.', trans_per_person:'po osobi',
-    mood_title:'Kako si raspoložen danas?', mood_sub:'Izaberi raspoloženje — predlažemo aktivnosti za danas.', mood_find:'Tražimo najbolje opcije…', mood_add:'Dodaj u dan', collab_role:'Vidi plan i može da predlaže izmene', collab_remove:'Ukloni',
-  blog_all:'Sve priče', blog_dest:'Destinacije', blog_tips:'Putni saveti', blog_partner:'Partnerske priče', blog_eye:'Via Journal', blog_hero_title_html:'Priče s puta.<br><em>Mesta vredna pažnje.</em>', blog_hero_sub:'Vodiči, saveti i partnerske priče o destinacijama.', blog_home:'← Početna', blog_back:'← Nazad na priče', blog_read:'Čitaj priču', blog_cat_dest:'Destinacija', blog_cat_tips:'Putni saveti', blog_cat_partner:'Partnerska priča',
-  },
-};
 
 let currentLang = 'en';
 const T = () => LANGS[currentLang];
@@ -6073,6 +5540,21 @@ function applyLang(lang){
   if(!LANGS[lang]) lang = 'en';
   currentLang = lang;
   document.getElementById('htmlRoot').lang = lang;
+
+  // Update page title and meta description for SEO
+  const pageTitle = t('page_title');
+  if(pageTitle) document.title = pageTitle;
+  const metaDescEl = document.querySelector('meta[name="description"]');
+  if(metaDescEl){ const md = t('meta_desc'); if(md) metaDescEl.content = md; }
+  // Update OG/Twitter meta tags
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if(ogTitle && pageTitle) ogTitle.content = pageTitle;
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if(ogDesc){ const md = t('meta_desc'); if(md) ogDesc.content = md; }
+  const twTitle = document.querySelector('meta[name="twitter:title"]');
+  if(twTitle && pageTitle) twTitle.content = pageTitle;
+  const twDesc = document.querySelector('meta[name="twitter:description"]');
+  if(twDesc){ const md = t('meta_desc'); if(md) twDesc.content = md; }
 
   // Update all data-t elements
   document.querySelectorAll('[data-t]').forEach(el => {
@@ -6716,6 +6198,8 @@ async function doSubmit(){
       try { renderItin(itinData); } catch(e2){ console.error(e2); }
     }
     showPg('pg-itin');
+    // Save to SW cache for offline access
+    setTimeout(swSaveItin, 200);
     // Fire-and-forget email — only if we have a real itinerary and a real email
     if(S.email && !itinData._isFallback){
       sendItineraryEmail(itinData).catch(function(e){ console.warn('Email send failed:', e.message); });
@@ -7826,9 +7310,15 @@ function buildPrintLayer(){
   let h = '';
 
   // ── COVER PAGE ──────────────────────────────────────
-  h += '<div class="pdf-cover">';
-  h += '<div class="pdf-cover-stripe"></div>';
-  h += '<div class="pdf-cover-body">';
+  const heroUrl = gHero();
+  const coverBg = heroUrl
+    ? 'background:#1C1510 url('+heroUrl+'&w=1200&q=80&auto=format&fit=crop) center/cover no-repeat;-webkit-print-color-adjust:exact;print-color-adjust:exact'
+    : 'background:#1C1510';
+  h += '<div class="pdf-cover" style="'+coverBg+'">';
+  // Dark overlay so text remains legible over the photo
+  h += '<div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(28,21,16,.82) 0%,rgba(28,21,16,.70) 60%,rgba(28,21,16,.88) 100%);-webkit-print-color-adjust:exact;print-color-adjust:exact"></div>';
+  h += '<div class="pdf-cover-stripe" style="z-index:1"></div>';
+  h += '<div class="pdf-cover-body" style="position:relative;z-index:1">';
   h += '<div class="pdf-cover-logo">via<span>.</span></div>';
   h += '<div class="pdf-cover-tagline">Travel planned like a friend did it</div>';
   h += '<div class="pdf-cover-eyebrow">' + userName + ' — personalised itinerary</div>';
@@ -7842,7 +7332,7 @@ function buildPrintLayer(){
     h += '<div class="pdf-cover-tip"><div class="pdf-cover-tip-eye">Local insight</div><div class="pdf-cover-tip-text">' + data.insider_tip + '</div></div>';
   }
   h += '</div>';
-  h += '<div class="pdf-cover-footer">Planned with via. · viawander.co · ' + today + '</div>';
+  h += '<div class="pdf-cover-footer" style="position:relative;z-index:1">Planned with via. · viawander.co · ' + today + '</div>';
   h += '</div>';
 
   // ── DAY PAGES ────────────────────────────────────────
@@ -10512,93 +10002,7 @@ const BLOG_KEY = 'via_blog_posts_v1';
 let currentBlogFilter = 'all';
 let currentArticleId = null;
 
-/* ── Seed posts (shown until real posts added) ── */
-const SEED_POSTS = [
-  {
-    id: 'seed_1',
-    title: 'Pet dni v Dubrovniku brez gneče',
-    excerpt: 'Mestno obzidje ob osmih zjutraj. Trajekt na Lokrum opoldne. Večerja v Konavlah, štirideset minut proti jugu, kamor ne zaide noben turistični avtobus. Lokalni vodič po Dubrovniku poleti.',
-    body: '<p>Vsi prispejo ob istem času. Križarke privezejo ob desetih, izlijejo potnike na Stradun in odplujejo ob štirih popoldne. Mesto je na obeh koncih tega okna popolnoma drugačno.</p><h2>Obzidje ob zori</h2><p>Vrata se odprejo ob osmih. Do pol desetih prispe vročina skupaj s prvimi skupinami. Preteči celoten krog — 1,9 km — preden senca izgine z vzhodnega dela. Razgledi nad starim pristaniščem so zjutraj vseeno lepši.</p><h2>Zapusti staro mesto</h2><p>Otok Lokrum je petnajst minut s trajektom. Tamkajšnji pavlini se za turiste zares ne zmenijo. Vzemi s seboj kosilo. Restavracija na otoku je draga, hrana pa solidna — a ne to si prišel iskat.</p><h2>Jedi v Konavlah</h2><p>Dolina južno od Dubrovnika daje najboljše vino na Hrvaškem in jo skoraj nihče ne obišče. Konavoski dvori pri izviru reke Ljute postrežejo z jagnjetino, pečeno pod peko — tradicionalnim zvonastim pokrovom, pokopanim v žerjavici. Rezerviraj vnaprej. Domov se vrni po sončnem zahodu, ko je obalna cesta prazna.</p>',
-    category: 'destination',
-    sponsored: false,
-    sponsorName: '',
-    author: 'Uredništvo Via',
-    authorInitials: 'VE',
-    date: new Date(Date.now() - 86400000 * 7).toISOString(),
-    image: 'https://images.unsplash.com/photo-1555990793-da11153b2473?w=900&q=80',
-    featured: true,
-  },
-  {
-    id: 'seed_2',
-    title: 'Vlak iz Ljubljane na Dunaj: počasneje je bolje',
-    excerpt: 'Štiri ure na regionalnem vlaku skozi dolino Save. Zakaj ICE zamudi vse, kar je vredno videti, in kaj početi na Zidanem Mostu, ko zamuja tvoja zveza.',
-    body: '<p>Hitri vlak potrebuje 2 uri in 20 minut ter vozi večino poti skozi predore. Regionalni prek Zidanega Mosta vzame štiri ure in sledi reki Savi skozi dolino brez ceste — samo tirnice.</p><p>Sedi na desni strani, ko voziš proti severu. Reka se prikazuje in izginja. Na Zidanem Mostu — kjer se Sava sreča s Savinjo — je razpotje, ki izgleda točno kot kulisa vohunskega filma iz šestdesetih. Če zamuja tvoja zveza, pojdi peš do sotočja. Sedem minut hoje.</p><blockquote>Vozovnica stane 12 €. ICE stane 60 €. Razlika ni sorazmerna.</blockquote><h2>Kaj vzeti s seboj</h2><p>Sendviči na slovenskih železniških postajah so boljši, kot bi pričakoval. Kava pride v papirnatem lončku, ki malce pušča. Prinesi svojo, če ti je mar. Razgledi čez Štajersko v zadnji uri pred Dunajem so dovolj dobri, da ostaneš buden.</p>',
-    category: 'tips',
-    sponsored: false,
-    sponsorName: '',
-    author: 'Uredništvo Via',
-    authorInitials: 'VE',
-    date: new Date(Date.now() - 86400000 * 14).toISOString(),
-    image: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=900&q=80',
-    featured: false,
-  },
-  {
-    id: 'seed_3',
-    title: 'Pafos: kar ti v brošuri ne povedo',
-    excerpt: 'Mozaiki Unesco v Kato Pafosu so resnično svetovnega razreda. Plažni klubi niso. Praktičen vodič za štiri dni v zahodnem Cipru.',
-    body: '<p>Mozaiki Unesco v Kato Pafosu sodijo med najboljše rimske tlakovanine v Sredozemlju. Ležijo v arheološkem parku na prostem, deset minut hoje od pristanišča. Vstopnina je 4,50 €. V torek zjutraj septembra jih boš imel skoraj povsem zase.</p><h2>Pristaniško območje</h2><p>Pafossko pristanišče obkrožajo restavracije, ki so solidne, a ne izjemne. Pojdi deset minut v notranjost mesta in cene se prepolovijo, kakovost pa ostane podobna. Pokrita tržnica na ulici Agoras je vredna pol ure tvojega časa že samo zavoljo pridelkov.</p><h2>Kako se premikati</h2><p>Najem avtomobila je poceni (okrog 25 €/dan) in nujen za vse izven mesta. Cesta na polotok Akamas je v zadnjem delu makadamska — primerna za manjši terenec ali samozavestnega voznika s hatchbackom. Izlet z ladjo do Modre lagune stane 35 € in vključuje kosilo. Enkrat se splača.</p>',
-    category: 'destination',
-    sponsored: false,
-    sponsorName: '',
-    author: 'Uredništvo Via',
-    authorInitials: 'VE',
-    date: new Date(Date.now() - 86400000 * 21).toISOString(),
-    image: 'https://images.unsplash.com/photo-1557456170-0cf4f4d0d362?w=900&q=80',
-    featured: false,
-  },
-  {
-    id: 'seed_5',
-    title: 'Postojnska jama: kaj vedeti, preden greš pod zemljo',
-    excerpt: 'Štiriindvajset kilometrov jam, sto let star vlakec in edina jamska vretenčarka na svetu. Vse, kar potrebuješ za obisk najpomembnejše naravne znamenitosti v Sloveniji.',
-    body: '<p>Postojnska jama ni turistična past v preobleki naravnega čudeža. Ravno obratno — gre za pravo geološko čudo, ki privabi milijon obiskovalcev na leto. Jama je dolga 24 kilometrov in je največja kraška jama v Evropi, odprta za javnost. Obiskovalce sprejema od leta 1819 — med prvimi organiziranimi skupinami so bili Napoleonovi vojaki. Električna razsvetljava je bila nameščena, preden so postavili Eifflov stolp.</p><h2>Praktične informacije</h2><p>Vstopnina vključuje 4 km vožnje z jamskim vlakom — enim najstarejših podzemnih vlakov na svetu — in 1,7 km vodenega ogleda peš. Celoten obisk traja okoli 90 minut. Temperatura v jami je skozi vse leto stalna 10 °C, kar avgusta preseneti. Prinesi tanek plašč ne glede na vreme zunaj.</p><p>Vstopnice kupi na spletu, preden prideš. Poleti so vrste za vstopnice na licu mesta dolge, urniki pa se zapolnijo že dopoldne. Uradna stran je postojnska-jama.eu — ne kupuj pri preprodajalcih z doplačilom.</p><h2>Proteus anguinus</h2><p>V jami živi Proteus anguinus, človeška ribica: slepa, bleda, na jamsko življenje prilagojena dvoživka, ki lahko živi več kot sto let in preživi leta brez hrane. Je edina jamska vretenčarka, ki izvira iz Evrope. Postojnski vzrejni program je vzredil na stotine teh živali. Videl jih boš v vivariju med sprehodom — majhne, prosojne, docela čudne. Nič drugega ne izgleda tako.</p><blockquote>Slovenci ji pravijo "človeška ribica" — ker njena bleda, skoraj prosojna koža spominja na človeško meso. Ko jo enkrat vidiš, ime dobi neprijetno logičen smisel.</blockquote><h2>Predjamski grad</h2><p>Devet kilometrov od Postojne stoji Predjamski grad, zgrajen neposredno v ustje skalne votline na polovici 123-metrske pečine. Izgleda izmišljeno. Ni. Sedanja zgradba izvira iz 16. stoletja. Kombinirana vstopnica za Postojnsko jamo in Predjamo je vredna cene, obisk obeh v enem dnevu pa je povsem izvedljiv — vožnja traja dvanajst minut.</p><h2>Kako priti</h2><p>Postojna je uro vožnje od Ljubljane (54 km po avtocesti A1). Z avtobusom vozita Nomago in FlixBus neposredno z Avtobusne postaje Ljubljana, pot traja okoli 1 h 15 min. Vhod v jamo je pet minut hoje od avtobusne postaje v Postojni. Do Predjamskega gradu z javnim prevozom ni dostopa — vzemi avto ali dodaj grad k rezervaciji prek sistema Postojnske jame, ki vključuje prevoz.</p>',
-    category: 'destination',
-    sponsored: false,
-    sponsorName: '',
-    author: 'Uredništvo Via',
-    authorInitials: 'VE',
-    date: new Date(Date.now() - 86400000 * 2).toISOString(),
-    image: 'https://images.unsplash.com/photo-1756320689173-227422d1280a?w=900&q=80',
-    featured: true,
-  },
-  {
-    id: 'seed_6',
-    title: 'Prekmurje: del Slovenije, o katerem nihče ne govori',
-    excerpt: 'Ravno, tiho in trmasto pri svojem načinu življenja. Severovzhodni kot Slovenije ima termalne kopeli, svojsko kuhinjo in tempo, ki se popolnoma razlikuje od preostale države.',
-    body: '<p>Večina tistih, ki obiščejo Slovenijo, naredi enako zanko: Ljubljana, Bled, Piran. To je dobra zanka. A obstaja regija na severovzhodu — ob meji z Avstrijo, Madžarsko in Hrvaško — ki deluje na povsem drugi frekvenci. Prekmurje je edini del Slovenije, ki leži čez reko Muro, in je bil stoletja geografsko ter kulturno odrezan od preostale države. To začutiš takoj.</p><h2>Pokrajina</h2><p>Prekmurje je ravno. Julijskih Alp tu ni videti. Teren je kmetijski — sončnice, bučke, koruzna polja v dolgih vrstah — ki ga na severu prekinjajo Goričko gričevje, nežno, poraščeno z gozdom in skoraj brez turistov. To je pokrajina, ki se odpre počasnemu gibanju: kolesarjenje med vasmi, postanki na kmetijah, brezskrbno popoldne v termalni kopeli.</p><h2>Hrana</h2><p>Prekmurska kuhinja je dovolj samosvoja, da ti Ljubljančani povedo, da je skoraj madžarska. Niso daleč od resnice. Bograč je mesna enolončnica, počasi kuhana s tremi vrstami mesa in papriko — težka, okrepčilna, ne podobna ničemer, kar bi jedel v Ljubljani. Gibanica je regionalna večplastna pita, polnjena z makom, orehi, skuto in jabolki, pečena skupaj v izmenjujočih se plasteh. Naroči jo povsod.</p><blockquote>Prekmurska gibanica je zaščitena z oznako EU kot tradicionalna posebnost. Potovanja ne prenaša dobro. Jej jo tukaj.</blockquote><p>V Murski Soboti, regionalnem središču, sobotna tržnica prodaja bučno olje — stiskano iz praženih semen, temnozeleno, z okusom po oreških — ki ga boš hotel odnesti domov v steklenici. Paše k vsemu.</p><h2>Terme Banovci in Terme 3000</h2><p>Tamkajšnje terme niso luksuzni resorti. So veliki, domači, družinam prijazni kraji, kamor Slovenci in Madžari prihajajo za vikend, da se v topli mineralni vodi sprostijo brez posebnega programa. Terme Banovci pri Veržeju imajo bolj tiho, podeželsko vzdušje. Terme 3000 v Moravskih Toplicah so večje in bolj urejene. Obe staneta precej pod 20 € za cel dan. Zunaj vrhunca poletne sezone rezervacije ni treba narejati daleč vnaprej.</p><h2>Kako priti</h2><p>Murska Sobota je 190 km od Ljubljane — okrog dve uri z avtom po avtocestah A1 in A5. Z vlakom pot traja okoli 2 h 45 min s prestopom v Pragerskem, vlaki vozijo tri- do štirikrat na dan. Izvedljivo je, a avto ti da več svobode. Nastani se v Murski Soboti ali okolici in Goričko ter terme obiskuj kot dnevne izlete. Dve noči zadostujeta, da razumeš, kaj je ta regija. Tri noči so boljše.</p>',
-    category: 'destination',
-    sponsored: false,
-    sponsorName: '',
-    author: 'Uredništvo Via',
-    authorInitials: 'VE',
-    date: new Date(Date.now() - 86400000 * 1).toISOString(),
-    image: 'https://images.unsplash.com/photo-1535222830855-fd60aca7e065?w=900&q=80',
-    featured: false,
-  },
-  {
-    id: 'seed_4',
-    title: 'Zakaj priporočamo rezervacijo nastanitve vsaj 6 tednov vnaprej',
-    excerpt: 'Partnerska zgodba: kako zgodnje načrtovanje vpliva na to, kaj ti je sploh na voljo — in zakaj je to pomembnejše v predsezonskem obdobju kot v poletni konici.',
-    body: '<p>To je partnerska zgodba, napisana v sodelovanju z Booking.com. Via zasluži provizijo, ko rezerviraš prek naših povezav, brez dodatnih stroškov za tebe. Izpostavljamo le partnerje, katerih storitve sami uporabljamo.</p><h2>Podatki</h2><p>Podatki Booking.com za evropske destinacije kažejo, da so nastanitve z oceno 8,5 ali več v predsezonskem obdobju (maj–junij, september–oktober) praviloma popolnoma zasedene 6–8 tednov pred prihodom. V glavni sezoni (julij–avgust) se to okno za obalne destinacije podaljša na 10–12 tednov.</p><h2>Kaj to pomeni v praksi</h2><p>Če prideš na Santorini avgusta z rezervacijo dva tedna vnaprej, izbiraš med tistim, kar je ostalo. Kar je pogosto povsem sprejemljiva soba — a ne tista s pogledom na kaldero, po ceni, ki si jo načrtoval.</p><blockquote>Zgodnje načrtovanje ni stvar tesnobe. Gre za to, da imaš možnosti.</blockquote><p>Motor za itinerarje Via privzeto pripravi možnosti nastanitev z neposrednimi povezavami za rezervacijo. Priporoča se, da te povezave odpreš takoj, ko je tvoj itinerar pripravljen — ne dva tedna pred odhodom.</p>',
-    category: 'partner',
-    sponsored: true,
-    sponsorName: 'Booking.com',
-    author: 'Via x Booking.com',
-    authorInitials: 'VB',
-    date: new Date(Date.now() - 86400000 * 3).toISOString(),
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80',
-    featured: false,
-  },
-]
+/* ── Seed posts defined in /posts.js ── */
 
 /* ── Storage helpers ── */
 function getBlogPosts(){
@@ -11307,11 +10711,59 @@ function showTimeoutBar(msg){
 /* ══ INIT ══ */
 handleUpgradeReturn(); // Check for Stripe redirect on page load
 buildLangBar();
-applyLang('en');
+// Read ?lang= URL param for localised direct links (hreflang SEO)
+(function(){
+  const urlLang = new URLSearchParams(location.search).get('lang');
+  applyLang((urlLang && LANGS[urlLang]) ? urlLang : 'en');
+})();
 initAuth();
 checkSharedTrip();
 // Show draft resume banner on landing page (after shared-trip check, since that sets isSharedView)
 setTimeout(checkDraftBanner, 80);
+
+/* ══ SERVICE WORKER — offline itinerary ══ */
+(function(){
+  if(!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.register('/sw.js').then(function(reg){
+    console.log('[via] SW registered', reg.scope);
+  }).catch(function(err){
+    console.warn('[via] SW registration failed', err);
+  });
+
+  // Listen for offline itinerary data pushed back from the SW
+  navigator.serviceWorker.addEventListener('message', function(e){
+    if(e.data && e.data.type === 'ITIN_DATA' && e.data.payload){
+      const saved = e.data.payload;
+      if(!itinData && saved.itinData){
+        itinData = saved.itinData;
+        if(saved.S) Object.assign(S, saved.S);
+        if(saved.lang) applyLang(saved.lang);
+        renderItin();
+        showPg('pg-itin');
+        showToast(t('offline_restored') || 'Showing saved itinerary (offline)');
+      }
+    }
+  });
+
+  // If offline and no itinerary loaded yet, ask SW for cached version
+  window.addEventListener('load', function(){
+    if(!navigator.onLine && !itinData){
+      navigator.serviceWorker.ready.then(function(reg){
+        reg.active && reg.active.postMessage({ type: 'LOAD_ITIN' });
+      });
+    }
+  });
+})();
+
+/* ══ Save itinerary to SW cache after generation ══ */
+function swSaveItin(){
+  if(!('serviceWorker' in navigator) || !navigator.serviceWorker.controller) return;
+  if(!itinData) return;
+  navigator.serviceWorker.controller.postMessage({
+    type: 'SAVE_ITIN',
+    payload: { itinData, S: { dest:S.dest, dateFrom:S.dateFrom, dateTo:S.dateTo, comp:S.comp, vibes:S.vibes, budget:S.budget, pace:S.pace }, lang: currentLang }
+  });
+}
 </script>
 
 
