@@ -5226,52 +5226,52 @@ select.budget-select:focus,
     </div>
 
     <div class="qstep" id="qs6">
-      <div class="qeye">Your pace</div>
-      <h2 class="qtitle">How do you like to explore?</h2>
-      <p class="qhint">A relaxed trip and a packed one to the same city feel completely different.</p>
+      <div class="qeye" data-t="pace_eye">Your pace</div>
+      <h2 class="qtitle" data-t="pace_title">How do you like to explore?</h2>
+      <p class="qhint" data-t="pace_hint">A relaxed trip and a packed one to the same city feel completely different.</p>
       <div class="pace-grid">
         <div class="pace-card" data-v="relaxed" onclick="pickPace(this)">
           <span class="pace-icon">☕</span>
-          <div class="pace-name">Relaxed</div>
-          <div class="pace-count">2–3 things / day</div>
-          <div class="pace-desc">Linger over lunch. Wander without a plan. Actually rest.</div>
+          <div class="pace-name" data-t="pace_relaxed">Relaxed</div>
+          <div class="pace-count" data-t="pace_relaxed_count">2–3 things / day</div>
+          <div class="pace-desc" data-t="pace_relaxed_desc">Linger over lunch. Wander without a plan. Actually rest.</div>
         </div>
         <div class="pace-card on" data-v="balanced" onclick="pickPace(this)">
           <span class="pace-icon">🌿</span>
-          <div class="pace-name">Balanced</div>
-          <div class="pace-count">3–4 things / day</div>
-          <div class="pace-desc">See the highlights and still have time to breathe. The sweet spot.</div>
+          <div class="pace-name" data-t="pace_balanced">Balanced</div>
+          <div class="pace-count" data-t="pace_balanced_count">3–4 things / day</div>
+          <div class="pace-desc" data-t="pace_balanced_desc">See the highlights and still have time to breathe. The sweet spot.</div>
         </div>
         <div class="pace-card" data-v="full" onclick="pickPace(this)">
           <span class="pace-icon">⚡</span>
-          <div class="pace-name">Full</div>
-          <div class="pace-count">5+ things / day</div>
-          <div class="pace-desc">Maximise every hour. You can sleep when you get home.</div>
+          <div class="pace-name" data-t="pace_full">Full</div>
+          <div class="pace-count" data-t="pace_full_count">5+ things / day</div>
+          <div class="pace-desc" data-t="pace_full_desc">Maximise every hour. You can sleep when you get home.</div>
         </div>
       </div>
 
       <div class="free-day-toggle" id="freeDayToggle" style="display:none">
         <div>
-          <div class="fdt-label">Leave one day unplanned</div>
-          <div class="fdt-desc">No schedule, nothing booked. Just a few loose suggestions. The best day often comes from getting lost on purpose.</div>
+          <div class="fdt-label" data-t="fdt_label">Leave one day unplanned</div>
+          <div class="fdt-desc" data-t="fdt_desc">No schedule, nothing booked. Just a few loose suggestions. The best day often comes from getting lost on purpose.</div>
         </div>
         <button class="fdt-switch" id="freeDaySwitch" onclick="toggleFreeDay()" aria-label="Toggle free day" aria-pressed="false"></button>
       </div>
     </div>
 
     <div class="qstep" id="qs7">
-      <div class="qeye">Plan together</div>
-      <h2 class="qtitle">Travelling with someone?</h2>
-      <p class="qhint">Add their email and they get a link to view and suggest swaps. Totally optional.</p>
+      <div class="qeye" data-t="collab_eye">Plan together</div>
+      <h2 class="qtitle" data-t="collab_title">Travelling with someone?</h2>
+      <p class="qhint" data-t="collab_hint">Add their email and they get a link to view and suggest swaps. Totally optional.</p>
       <div class="coplanner-wrap">
         <div class="coplanner-input-row">
-          <input class="coplanner-input" id="coplannerInput" type="email" placeholder="friend@email.com" onkeydown="if(event.key==='Enter')addCoplanner()">
-          <button class="coplanner-add-btn" onclick="addCoplanner()">Add person</button>
+          <input class="coplanner-input" id="coplannerInput" type="email" data-t-placeholder="collab_input_ph" placeholder="friend@email.com" onkeydown="if(event.key==='Enter')addCoplanner()">
+          <button class="coplanner-add-btn" data-t="collab_add" onclick="addCoplanner()">Add person</button>
         </div>
         <div class="coplanner-list" id="coplannerList"></div>
         <div class="coplanner-note">
           <span class="coplanner-note-icon">✓</span>
-          <span>Co-planners can see the full itinerary and suggest swaps. No account needed.</span>
+          <span data-t="collab_note">Co-planners can see the full itinerary and suggest swaps. No account needed.</span>
         </div>
       </div>
     </div>
@@ -5470,7 +5470,7 @@ select.budget-select:focus,
     <button class="main-tab" onclick="switchMain('stays-panel',this)" data-t="tab_stays">Where to stay</button>
     <button class="main-tab" onclick="switchMain('transport-panel',this)" data-t="tab_transport">Getting there</button>
     <button class="main-tab" onclick="switchMain('map-panel',this)" id="mapTabBtn">Map</button>
-    <button class="main-tab" onclick="switchMain('pack-panel',this)" id="packTabBtn">Packing list</button>
+    <button class="main-tab" onclick="switchMain('pack-panel',this)" id="packTabBtn" data-t="tab_pack">Packing list</button>
   </div>
 
   <div class="main-panel on" id="itin-panel">
@@ -5505,7 +5505,7 @@ select.budget-select:focus,
   <div class="main-panel" id="pack-panel">
     <div class="pack-panel" id="packContent">
       <div class="pack-header">
-        <div class="pack-title">Packing list</div>
+        <div class="pack-title" data-t="tab_pack">Packing list</div>
         <div class="pack-sub" id="packSub">Your personalised packing list will appear here.</div>
       </div>
       <div id="packBody"><div class="pack-generating" style="display:none" id="packGenerating"><div class="pack-spinner"></div><span id="packLoadLabel">Building your packing list…</span></div></div>
@@ -5563,6 +5563,21 @@ const LANGS = {
     trans_intro:'Your options for getting there. Compare price, time and comfort, then book direct.',
     morning:'Morning', afternoon:'Afternoon', evening:'Evening',
     pack_load:'Building your packing list…', step_label:'Step', day_label:'Day',
+    pace_eye:'Your pace', pace_title:'How do you like to explore?', pace_hint:'Pace makes the difference. A slow trip and a packed one feel completely different.',
+    pace_relaxed:'Relaxed', pace_relaxed_count:'2–3 things / day', pace_relaxed_desc:'Linger over lunch. Wander without a plan. Actually rest.',
+    pace_balanced:'Balanced', pace_balanced_count:'3–4 things / day', pace_balanced_desc:'See the highlights and still have time to breathe.',
+    pace_full:'Full', pace_full_count:'5+ things / day', pace_full_desc:'Maximise every hour. You can sleep when you get home.',
+    fdt_label:'Leave one day unplanned', fdt_desc:'No schedule, nothing booked. Just a few loose ideas. The best day often comes from wandering.',
+    collab_eye:'Plan together', collab_title:'Travelling with someone?', collab_hint:'Add their email and they get a link to view and suggest swaps. Totally optional.',
+    collab_add:'Add person', collab_input_ph:'friend@email.com', collab_note:'Co-planners can see the full itinerary and suggest swaps. No account needed.',
+    load_eyebrow:'Now building',
+    freeday_eyebrow:'Unplanned day', freeday_title:'This day is yours.',
+    hg_eyebrow:'What locals actually do',
+    tweak_ph:'Tweak this day… e.g. add a beach stop, make it more relaxed', tweak_btn:'↺ Rewrite', tweak_status:'Rewriting day…',
+    note_btn:'Note',
+    tab_pack:'Packing list',
+    trans_empty:'No transport options available for this route.', trans_per_person:'per person',
+    mood_title:'What are you in the mood for today?', mood_sub:"Tap a mood — we'll suggest activities for today.", mood_find:'Finding the best options…', mood_add:'Add to day', collab_role:'Can view and suggest swaps', collab_remove:'Remove',
   },
   sl: {
     code:'sl', label:'SL', name:'Slovenščina',
@@ -5617,6 +5632,19 @@ const LANGS = {
     shared_banner_cta:'Načrtuj moje potovanje →',
     alert_eye:'Opozorilo o ceni', alert_title:'Spremljaj cene za to potovanje',
     alert_submit:'Nastavi opozorilo →', alert_success_title:'Opozorilo aktivno.',
+    pace_relaxed:'Sproščeno', pace_relaxed_count:'2–3 stvari / dan', pace_relaxed_desc:'Dolgotrajno kosilo. Sprehod brez načrta. Pravi počitek.',
+    pace_balanced:'Uravnoteženo', pace_balanced_count:'3–4 stvari / dan', pace_balanced_desc:'Vidiš bistveno in imaš čas za dih.',
+    pace_full:'Polno', pace_full_count:'5+ stvari / dan', pace_full_desc:'Maksimalno izkoristi vsako uro. Spat boš doma.',
+    fdt_label:'Pusti en dan nenačrtovan', fdt_desc:'Brez urnika, nič rezerviranega. Samo nekaj prostih idej. Najboljši dan pogosto pride sam od sebe.',
+    collab_input_ph:'prijatelj@email.com',
+    load_eyebrow:'Gradimo tvoj načrt',
+    freeday_eyebrow:'Nenačrtovan dan', freeday_title:'Ta dan je tvoj.',
+    hg_eyebrow:'Kar domačini dejansko počnejo',
+    tweak_ph:'Prilagodi ta dan… npr. dodaj obisk plaže, naredi bolj sproščeno', tweak_btn:'↺ Prepiši', tweak_status:'Prepisujem dan…',
+    note_btn:'Opomba',
+    tab_pack:'Seznam za pakiranje',
+    trans_empty:'Za to pot ni razpoložljivih prevoznih možnosti.', trans_per_person:'na osebo',
+    mood_title:'Kaj ti je danes do tega?', mood_sub:'Izberi razpoloženje — predlagamo aktivnosti za ta dan.', mood_find:'Iščemo najboljše možnosti…', mood_add:'Dodaj na dan', collab_role:'Vidi načrt in predlaga spremembe', collab_remove:'Odstrani',
   },
   de: {
     code:'de', label:'DE', name:'Deutsch',
@@ -5673,6 +5701,19 @@ const LANGS = {
     shared_banner_cta:'Meine Reise planen →',
     alert_eye:'Preisalarm', alert_title:'Preise für diese Reise verfolgen',
     alert_submit:'Alarm setzen →', alert_success_title:'Alarm aktiv.',
+    pace_relaxed:'Entspannt', pace_relaxed_count:'2–3 Dinge / Tag', pace_relaxed_desc:'Lang beim Mittagessen sitzen. Ziellos schlendern. Wirklich ausruhen.',
+    pace_balanced:'Ausgewogen', pace_balanced_count:'3–4 Dinge / Tag', pace_balanced_desc:'Die Highlights sehen und trotzdem Zeit zum Durchatmen haben.',
+    pace_full:'Vollgas', pace_full_count:'5+ Dinge / Tag', pace_full_desc:'Jede Stunde ausnutzen. Schlafen kannst du wieder zu Hause.',
+    fdt_label:'Einen Tag frei lassen', fdt_desc:'Kein Plan, keine Buchungen. Nur ein paar lose Ideen. Der beste Tag entsteht oft aus dem Nichts.',
+    collab_input_ph:'freund@email.com',
+    load_eyebrow:'Wird erstellt',
+    freeday_eyebrow:'Ungeplanter Tag', freeday_title:'Dieser Tag gehört dir.',
+    hg_eyebrow:'Was Einheimische wirklich machen',
+    tweak_ph:'Diesen Tag anpassen… z.B. einen Strandbesuch hinzufügen, entspannter gestalten', tweak_btn:'↺ Neu schreiben', tweak_status:'Tag wird neu geschrieben…',
+    note_btn:'Notiz',
+    tab_pack:'Packliste',
+    trans_empty:'Keine Transportoptionen für diese Route verfügbar.', trans_per_person:'pro Person',
+    mood_title:'Wonach ist dir heute?', mood_sub:'Wähle deine Stimmung — wir schlagen passende Aktivitäten vor.', mood_find:'Suche die besten Optionen…', mood_add:'Zum Tag hinzufügen', collab_role:'Kann den Plan sehen und Änderungen vorschlagen', collab_remove:'Entfernen',
   },
   it: {
     code:'it', label:'IT', name:'Italiano',
@@ -5729,6 +5770,19 @@ const LANGS = {
     shared_banner_cta:'Pianifica il mio viaggio →',
     alert_eye:'Avviso prezzi', alert_title:'Monitora i prezzi per questo viaggio',
     alert_submit:'Imposta avviso →', alert_success_title:'Avviso attivo.',
+    pace_relaxed:'Rilassato', pace_relaxed_count:'2–3 cose / giorno', pace_relaxed_desc:'Pranzo lungo. Passeggiata senza meta. Riposo vero.',
+    pace_balanced:'Bilanciato', pace_balanced_count:'3–4 cose / giorno', pace_balanced_desc:'Vedi le cose principali e hai ancora tempo per respirare.',
+    pace_full:'Intenso', pace_full_count:'5+ cose / giorno', pace_full_desc:'Massimizza ogni ora. Dormirai quando torni a casa.',
+    fdt_label:'Lascia un giorno libero', fdt_desc:'Nessun programma, niente prenotazioni. Solo qualche idea vaga. Il giorno migliore arriva spesso da solo.',
+    collab_input_ph:'amico@email.com',
+    load_eyebrow:'Stiamo costruendo',
+    freeday_eyebrow:'Giorno libero', freeday_title:'Questa giornata è tua.',
+    hg_eyebrow:'Cosa fanno davvero i locali',
+    tweak_ph:'Modifica questa giornata… es. aggiungi una sosta in spiaggia, rendila più rilassata', tweak_btn:'↺ Riscrivi', tweak_status:'Riscrivendo la giornata…',
+    note_btn:'Nota',
+    tab_pack:'Lista bagagli',
+    trans_empty:'Nessuna opzione di trasporto disponibile per questo percorso.', trans_per_person:'a persona',
+    mood_title:'Che voglia hai oggi?', mood_sub:"Scegli un'atmosfera — suggeriremo attività per oggi.", mood_find:'Cercando le migliori opzioni…', mood_add:'Aggiungi alla giornata', collab_role:'Può vedere il piano e suggerire modifiche', collab_remove:'Rimuovi',
   },
   fr: {
     code:'fr', label:'FR', name:'Français',
@@ -5785,6 +5839,19 @@ const LANGS = {
     shared_banner_cta:'Planifier mon voyage →',
     alert_eye:'Alerte prix', alert_title:'Suivre les prix pour ce voyage',
     alert_submit:"Activer l'alerte →", alert_success_title:'Alerte activée.',
+    pace_relaxed:'Détendu', pace_relaxed_count:'2–3 activités / jour', pace_relaxed_desc:'Déjeuner sans se presser. Se balader sans but. Vraiment se reposer.',
+    pace_balanced:'Équilibré', pace_balanced_count:'3–4 activités / jour', pace_balanced_desc:'Voir les incontournables tout en gardant le temps de souffler.',
+    pace_full:'Intensif', pace_full_count:'5+ activités / jour', pace_full_desc:'Optimiser chaque heure. Vous dormirez chez vous.',
+    fdt_label:'Laisser une journée libre', fdt_desc:"Pas de programme, rien de réservé. Quelques idées en vrac. Les meilleures journées arrivent souvent à l'improviste.",
+    collab_input_ph:'ami@email.com',
+    load_eyebrow:'En cours de création',
+    freeday_eyebrow:'Journée libre', freeday_title:'Cette journée est à vous.',
+    hg_eyebrow:'Ce que font vraiment les locaux',
+    tweak_ph:'Modifier cette journée… ex. ajouter une étape à la plage, la rendre plus détendue', tweak_btn:'↺ Réécrire', tweak_status:'Réécriture en cours…',
+    note_btn:'Note',
+    tab_pack:'Liste de bagages',
+    trans_empty:"Pas d'options de transport disponibles pour cet itinéraire.", trans_per_person:'par personne',
+    mood_title:"Quelle humeur aujourd'hui?", mood_sub:"Choisissez une humeur — nous suggérerons des activités.", mood_find:'Recherche des meilleures options…', mood_add:'Ajouter à la journée', collab_role:'Peut voir le plan et suggérer des modifications', collab_remove:'Supprimer',
   },
   hr: {
     code:'hr', label:'HR', name:'Hrvatski',
@@ -5839,6 +5906,19 @@ const LANGS = {
     shared_banner_cta:'Planiraj moje putovanje →',
     alert_eye:'Upozorenje na cijenu', alert_title:'Prati cijene za ovo putovanje',
     alert_submit:'Postavi upozorenje →', alert_success_title:'Upozorenje aktivno.',
+    pace_relaxed:'Opušteno', pace_relaxed_count:'2–3 stvari / dan', pace_relaxed_desc:'Dugi ručak. Šetnja bez cilja. Pravi odmor.',
+    pace_balanced:'Uravnoteženo', pace_balanced_count:'3–4 stvari / dan', pace_balanced_desc:'Vidiš bitno i imaš vremena za dah.',
+    pace_full:'Nabijeno', pace_full_count:'5+ stvari / dan', pace_full_desc:'Iskoristi svaki sat. Spavat ćeš kod kuće.',
+    fdt_label:'Ostavi jedan dan slobodan', fdt_desc:'Bez rasporeda, ništa rezervirano. Samo par ideja. Najbolji dan često dođe sam od sebe.',
+    collab_input_ph:'prijatelj@email.com',
+    load_eyebrow:'Gradimo tvoj plan',
+    freeday_eyebrow:'Slobodan dan', freeday_title:'Ovaj dan je tvoj.',
+    hg_eyebrow:'Što lokalni zaista rade',
+    tweak_ph:'Prilagodi ovaj dan… npr. dodaj plažu, učini ga opuštenijim', tweak_btn:'↺ Prepiši', tweak_status:'Prepisujem dan…',
+    note_btn:'Bilješka',
+    tab_pack:'Lista pakovanja',
+    trans_empty:'Nema dostupnih opcija prijevoza za ovu rutu.', trans_per_person:'po osobi',
+    mood_title:'Kako se osjećate danas?', mood_sub:'Odaberi raspoloženje — predložit ćemo aktivnosti za danas.', mood_find:'Tražimo najbolje opcije…', mood_add:'Dodaj u dan', collab_role:'Vidi plan i može predlagati promjene', collab_remove:'Ukloni',
   },
   es: {
     code:'es', label:'ES', name:'Español',
@@ -5893,6 +5973,19 @@ const LANGS = {
     shared_banner_cta:'Planificar mi viaje →',
     alert_eye:'Alerta de precios', alert_title:'Seguir los precios para este viaje',
     alert_submit:'Activar alerta →', alert_success_title:'Alerta activada.',
+    pace_relaxed:'Relajado', pace_relaxed_count:'2–3 cosas / día', pace_relaxed_desc:'Un almuerzo largo. Caminar sin rumbo. Descansar de verdad.',
+    pace_balanced:'Equilibrado', pace_balanced_count:'3–4 cosas / día', pace_balanced_desc:'Ver lo imprescindible y aun así tener tiempo para respirar.',
+    pace_full:'Intenso', pace_full_count:'5+ cosas / día', pace_full_desc:'Aprovechar cada hora. Ya dormirás en casa.',
+    fdt_label:'Deja un día sin planificar', fdt_desc:'Sin agenda, nada reservado. Solo algunas ideas sueltas. El mejor día llega a menudo sin planificarlo.',
+    collab_input_ph:'amigo@email.com',
+    load_eyebrow:'Estamos construyendo',
+    freeday_eyebrow:'Día libre', freeday_title:'Este día es tuyo.',
+    hg_eyebrow:'Lo que hacen los locales de verdad',
+    tweak_ph:'Ajusta este día… ej. añade una parada en la playa, hazlo más relajado', tweak_btn:'↺ Reescribir', tweak_status:'Reescribiendo el día…',
+    note_btn:'Nota',
+    tab_pack:'Lista de equipaje',
+    trans_empty:'No hay opciones de transporte disponibles para esta ruta.', trans_per_person:'por persona',
+    mood_title:'¿Qué te apetece hoy?', mood_sub:'Elige un estado de ánimo — te sugeriremos actividades.', mood_find:'Buscando las mejores opciones…', mood_add:'Añadir al día', collab_role:'Puede ver el plan y sugerir cambios', collab_remove:'Eliminar',
   },
   sr: {
     code:'sr', label:'SR', name:'Srpski',
@@ -5947,6 +6040,19 @@ const LANGS = {
     shared_banner_cta:'Planiraj moj put →',
     alert_eye:'Obaveštenje o ceni', alert_title:'Prati cene za ovo putovanje',
     alert_submit:'Postavi obaveštenje →', alert_success_title:'Obaveštenje aktivno.',
+    pace_relaxed:'Opušteno', pace_relaxed_count:'2–3 stvari / dan', pace_relaxed_desc:'Dugi ručak. Šetnja bez cilja. Pravi odmor.',
+    pace_balanced:'Uravnoteženo', pace_balanced_count:'3–4 stvari / dan', pace_balanced_desc:'Vidiš bitno i imaš vremena za dah.',
+    pace_full:'Nabijeno', pace_full_count:'5+ stvari / dan', pace_full_desc:'Iskoristi svaki sat. Spavaćeš kod kuće.',
+    fdt_label:'Ostavi jedan dan slobodan', fdt_desc:'Bez rasporeda, ništa rezervisano. Samo par ideja. Najbolji dan često dođe sam od sebe.',
+    collab_input_ph:'drug@email.com',
+    load_eyebrow:'Pravimo tvoj plan',
+    freeday_eyebrow:'Slobodan dan', freeday_title:'Ovaj dan je tvoj.',
+    hg_eyebrow:'Šta lokaci zapravo rade',
+    tweak_ph:'Prilagodi ovaj dan… npr. dodaj plažu, učini ga opuštenijim', tweak_btn:'↺ Prepiši', tweak_status:'Prepisujem dan…',
+    note_btn:'Napomena',
+    tab_pack:'Lista za pakovanje',
+    trans_empty:'Nema dostupnih opcija prevoza za ovu rutu.', trans_per_person:'po osobi',
+    mood_title:'Kako si raspoložen danas?', mood_sub:'Izaberi raspoloženje — predlažemo aktivnosti za danas.', mood_find:'Tražimo najbolje opcije…', mood_add:'Dodaj u dan', collab_role:'Vidi plan i može da predlaže izmene', collab_remove:'Ukloni',
   },
 };
 
@@ -6170,9 +6276,9 @@ function renderCoplannerList(){
     return '<div class="coplanner-chip">' +
       '<div class="coplanner-chip-info">' +
         '<div class="coplanner-chip-email">'+email+'</div>' +
-        '<div class="coplanner-chip-role">Can view and suggest swaps</div>' +
+        '<div class="coplanner-chip-role">'+t('collab_role')+'</div>' +
       '</div>' +
-      '<button class="coplanner-chip-remove" onclick="removeCoplanner(this.dataset.email)" data-email="'+email+'">Remove</button>' +
+      '<button class="coplanner-chip-remove" onclick="removeCoplanner(this.dataset.email)" data-email="'+email+'">'+t('collab_remove')+'</button>' +
     '</div>';
   }).join('');
 }
@@ -6218,7 +6324,7 @@ function startLoad(){
   const destLabel = document.getElementById('skelDestLabel');
   const destTitle = document.getElementById('skelDestTitle');
   const destName = S.dest || 'your destination';
-  if(destLabel) destLabel.textContent = 'Now building';
+  if(destLabel) destLabel.textContent = t('load_eyebrow');
   if(destTitle) destTitle.textContent = destName;
 
   // Set step labels for current language
@@ -6745,7 +6851,7 @@ function renderDayPane(day, di){
   out += '<div class="day-pane'+(di===0?' on':'')+'" id="dpane'+di+'">';
   out += '<div class="day-hdr"><div class="day-num">0'+(di+1)+'</div>';
   out += '<div style="flex:1"><div class="day-lbl">'+t('day_label')+' '+(di+1)+'</div>';
-  out += '<div class="day-title">'+sanitiseAI(day.title||'')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' Note</button></div>';
+  out += '<div class="day-title">'+sanitiseAI(day.title||'')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' '+t('note_btn')+'</button></div>';
   out += '<div class="note-inline" id="ni_day'+di+'">'+renderNoteField('day'+di)+'</div>';
   out += '</div></div>';
   out += '<div class="tblock morning"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('morning')+'</span></div>';
@@ -6781,14 +6887,14 @@ function renderFreeDayPane(day, di){
   // Dark header bar matching normal day header
   out += '<div class="day-hdr"><div class="day-num" style="opacity:.5">0'+(di+1)+'</div>';
   out += '<div style="flex:1"><div class="day-lbl">'+t('day_label')+' '+(di+1)+'</div>';
-  out += '<div class="day-title">'+sanitiseAI(day.title||'No plans today.')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' Note</button></div>';
+  out += '<div class="day-title">'+sanitiseAI(day.title||'No plans today.')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' '+t('note_btn')+'</button></div>';
   out += '<div class="note-inline" id="ni_day'+di+'">'+renderNoteField('day'+di)+'</div>';
   out += '</div></div>';
 
   // Dark free-day card
   out += '<div class="freeday-pane">';
-  out += '<div class="freeday-eyebrow">Unplanned day</div>';
-  out += '<div class="freeday-heading">This day is yours.</div>';
+  out += '<div class="freeday-eyebrow">'+t('freeday_eyebrow')+'</div>';
+  out += '<div class="freeday-heading">'+t('freeday_title')+'</div>';
   if(day.free_day_intro){
     out += '<div class="freeday-intro">' + sanitiseAI(day.free_day_intro) + '</div>';
   }
@@ -6806,7 +6912,7 @@ function renderFreeDayPane(day, di){
 function renderHiddenGem(gem){
   if(!gem || !gem.title) return '';
   return '<div class="hidden-gem-panel">' +
-    '<div class="hg-eyebrow">What locals actually do</div>' +
+    '<div class="hg-eyebrow">'+t('hg_eyebrow')+'</div>' +
     '<div class="hg-title">' + sanitiseAI(gem.title) + '</div>' +
     '<div class="hg-desc">'  + sanitiseAI(gem.desc  || '') + '</div>' +
   '</div>';
@@ -6817,12 +6923,12 @@ function renderTweakBar(di){
   return '<div class="tweak-bar" id="tweak-bar-'+di+'">' +
     '<div class="tweak-inner">' +
       '<input class="tweak-input" id="tweak-input-'+di+'" type="text" ' +
-        'placeholder="Tweak this day… e.g. add a beach stop, make it more relaxed" ' +
+        'placeholder="'+t('tweak_ph')+'" ' +
         'onkeydown="if(event.key===\'Enter\')tweakDay('+di+')" />' +
-      '<button class="tweak-btn" onclick="tweakDay('+di+')">↺ Rewrite</button>' +
+      '<button class="tweak-btn" onclick="tweakDay('+di+')">'+t('tweak_btn')+'</button>' +
     '</div>' +
     '<div class="tweak-status" id="tweak-status-'+di+'" style="display:none">' +
-      '<span class="pack-spinner"></span><span id="tweak-status-text-'+di+'">Rewriting day…</span>' +
+      '<span class="pack-spinner"></span><span id="tweak-status-text-'+di+'">'+t('tweak_status')+'</span>' +
     '</div>' +
   '</div>';
 }
@@ -7228,7 +7334,7 @@ function renderTransport(data){
   if(!el) return;
 
   if(!opts.length){
-    el.innerHTML = '<div class="transport-panel"><p class="transport-intro-text">' + (t('trans_intro')||'Getting there') + '</p><div class="trans-empty">No transport options available for this route.</div></div>';
+    el.innerHTML = '<div class="transport-panel"><p class="transport-intro-text">' + (t('trans_intro')||'Getting there') + '</p><div class="trans-empty">'+t('trans_empty')+'</div></div>';
     return;
   }
 
@@ -7288,7 +7394,7 @@ function renderTransport(data){
         '</div>' +
         '<div class="trans-price-block">' +
           '<div class="trans-price">' + sanitiseAI(tr.price||'—') + '</div>' +
-          '<div class="trans-price-pp">per person</div>' +
+          '<div class="trans-price-pp">'+t('trans_per_person')+'</div>' +
         '</div>' +
       '</div>' +
       '<div class="trans-price-bar-wrap">' +
@@ -8747,7 +8853,7 @@ function saveNote(id, e){
   closeNote(id, e);
   // Update trigger icon
   const nt = document.getElementById('nt_'+id);
-  if(nt){ nt.innerHTML = (text ? '✏️' : '+') + ' Note'; nt.classList.toggle('has-note', !!text); }
+  if(nt){ nt.innerHTML = (text ? '✏️' : '+') + ' ' + t('note_btn'); nt.classList.toggle('has-note', !!text); }
 }
 
 /* ══════════════════════════════════════
@@ -8770,6 +8876,7 @@ function renderCostBreakdown(day, di){
     fr:{lunch:'Déjeuner',dinner:'Dîner',activity:'Activité',stay:'Hébergement',item:'Poste',pp:'Par personne',total:'Coût journalier estimé',note:'par chambre',tip:'Échangez une recommandation ci-dessus pour mettre à jour les coûts.'},
     hr:{lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smještaj',item:'Stavka',pp:'Po osobi',total:'Procijenjeni ukupni trošak dana',note:'po sobi',tip:'Zamijeni preporuku gore za ažuriranje troškova.'},
     es:{lunch:'Almuerzo',dinner:'Cena',activity:'Actividad',stay:'Alojamiento',item:'Concepto',pp:'Por persona',total:'Coste diario estimado',note:'por habitación',tip:'Cambia una recomendación arriba para actualizar los costes.'},
+    sr:{lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smeštaj',item:'Stavka',pp:'Po osobi',total:'Procenjeni dnevni trošak',note:'po sobi',tip:'Zameni preporuku iznad da ažuriraš troškove.'},
   };
   const L = labels[currentLang] || labels.en;
   const tierIcons = {budget:'🎒',mid:'🌿',comfortable:'✨',luxury:'👑'};
@@ -10905,16 +11012,8 @@ function renderMoodPanel(di, dayTitle){
     '</div>';
   }).join('');
 
-  const moodTitle = currentLang === 'sl' ? 'Kaj ti je danes do tega?' :
-                    currentLang === 'de' ? 'Wonach ist Ihnen heute?' :
-                    currentLang === 'it' ? 'Che voglia hai oggi?' :
-                    currentLang === 'fr' ? "Quelle humeur aujourd'hui?" :
-                    currentLang === 'hr' ? 'Kako se osjećate danas?' :
-                    currentLang === 'es' ? '¿Qué te apetece hoy?' :
-                    'What are you in the mood for today?';
-  const moodSub  = currentLang === 'sl' ? 'Izberi razpoloženje — predlagamo aktivnosti za ta dan.' :
-                    currentLang === 'de' ? 'Wähle deine Stimmung — wir schlagen passende Aktivitäten vor.' :
-                    "Tap a mood — we'll suggest activities for today.";
+  const moodTitle = t('mood_title');
+  const moodSub   = t('mood_sub');
 
   return '<div class="mood-panel" id="mood-panel-'+di+'">' +
     '<div class="mood-panel-head">' +
@@ -10934,7 +11033,7 @@ async function fetchMoodActivities(di, moodId, moodIcon){
   const resultsEl = document.getElementById('mood-results-'+di);
   if(!resultsEl) return;
   resultsEl.classList.add('on');
-  resultsEl.innerHTML = '<div class="mood-loading"><span class="mood-spinner"></span>Finding the best options…</div>';
+  resultsEl.innerHTML = '<div class="mood-loading"><span class="mood-spinner"></span>'+t('mood_find')+'</div>';
 
   const dest = itinData ? (itinData.destination_display || S.dest) : S.dest;
   const day = (itinData && itinData.days) ? itinData.days[di] : {};
@@ -10961,7 +11060,7 @@ async function fetchMoodActivities(di, moodId, moodIcon){
     const activities = JSON.parse(clean);
 
     const moodLabel = getMoodLabel(moodId);
-    const addLabel = currentLang==='sl'?'Dodaj na dan':currentLang==='de'?'Zum Tag hinzufügen':currentLang==='fr'?'Ajouter':'Add to day';
+    const addLabel = t('mood_add');
 
     resultsEl.innerHTML =
       '<div class="mood-results-eye">'+moodIcon+' '+moodLabel+'</div>' +
