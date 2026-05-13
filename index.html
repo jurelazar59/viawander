@@ -314,6 +314,7 @@ input,textarea,select{font-family:var(--body)}
 .pc3{width:240px;height:160px;top:180px;left:80px;transform:rotate(2.2deg);z-index:4}
 .pc4{width:185px;height:185px;top:150px;left:310px;transform:rotate(-2deg);z-index:1}
 .pc5{width:200px;height:130px;top:340px;left:30px;transform:rotate(-1deg);z-index:3}
+.pc6{width:175px;height:135px;top:345px;left:298px;transform:rotate(2.8deg);z-index:2}
 .tape{position:absolute;background:rgba(196,137,42,.22);border:1px solid rgba(196,137,42,.18);pointer-events:none;z-index:20}
 .t1{width:60px;height:20px;top:8px;left:80px;transform:rotate(-4deg)}
 .t2{width:50px;height:18px;top:-6px;left:200px;transform:rotate(3deg)}
@@ -441,188 +442,106 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 .btn-next:disabled{opacity:.3;cursor:not-allowed}
 
 /* ══ LOADING — skeleton screen ══ */
+/* ── FULL-SCREEN LOADING ── */
 #pg-load{
-  min-height:100svh;
-  background:var(--parch);
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-}
-
-/* Top bar — matches itin masthead */
-.skel-topbar{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
   background:var(--ink);
-  height:56px;
-  display:flex;
-  align-items:center;
-  padding:0 2.5rem;
-  gap:1rem;
-  flex-shrink:0;
-}
-.skel-logo{
-  font-family:var(--serif);font-size:1.6rem;font-weight:900;
-  letter-spacing:-.04em;color:var(--cr);margin-right:auto;
-  opacity:.9;
-}
-.skel-bar{
-  height:28px;border-radius:2px;
-  background:rgba(242,235,217,.08);
+  z-index:999;
+  overflow:hidden;
 }
 
-/* Hero area */
-.skel-hero{
-  height:320px;
-  background:var(--ink2);
-  position:relative;
-  overflow:hidden;
-  flex-shrink:0;
-}
-.skel-hero-img{
-  width:100%;height:100%;
-  object-fit:cover;
-  opacity:.35;
-  filter:saturate(.5);
-}
-.skel-hero-overlay{
+/* Blurred background photo */
+.load-bg{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(28,21,16,.85) 0%,rgba(28,21,16,.3) 60%,transparent 100%);
+  background-size:cover;background-position:center;
+  filter:blur(18px) saturate(.6);
+  transform:scale(1.08); /* prevent blur edge artifacts */
+  opacity:.45;
+  transition:opacity 1s ease;
 }
-.skel-hero-content{
-  position:absolute;
-  bottom:2rem;left:2.5rem;right:2.5rem;
-}
-.skel-dest-label{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,235,217,.55);margin-bottom:.5rem}
-.skel-dest-title{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:rgba(242,235,217,.92);line-height:1.15;letter-spacing:-.02em}
-
-/* Skeleton shimmer blocks */
-@keyframes shimmer{
-  0%{background-position:-600px 0}
-  100%{background-position:600px 0}
-}
-.skel-block{
-  border-radius:3px;
-  background:linear-gradient(90deg,
-    rgba(242,235,217,.06) 0%,
-    rgba(242,235,217,.14) 40%,
-    rgba(242,235,217,.06) 80%
+.load-bg-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(28,21,16,.55) 0%,
+    rgba(28,21,16,.72) 50%,
+    rgba(28,21,16,.92) 100%
   );
-  background-size:600px 100%;
-  animation:shimmer 1.6s ease-in-out infinite;
-}
-.skel-block-light{
-  border-radius:3px;
-  background:linear-gradient(90deg,
-    rgba(28,21,16,.05) 0%,
-    rgba(28,21,16,.1) 40%,
-    rgba(28,21,16,.05) 80%
-  );
-  background-size:600px 100%;
-  animation:shimmer 1.6s ease-in-out infinite;
 }
 
-/* Tabs */
-.skel-tabs{
-  display:flex;
-  gap:0;
-  border-bottom:1.5px solid var(--cr3);
-  padding:0 2.5rem;
-  background:var(--cr);
+/* Central content */
+.load-center{
+  position:relative;
+  text-align:center;
+  padding:0 2rem;
+  max-width:640px;
+  width:100%;
+  display:flex;flex-direction:column;align-items:center;
+  gap:.8rem;
 }
-.skel-tab{
-  height:48px;
-  display:flex;
-  align-items:center;
-  padding:0 1.2rem;
-  gap:.5rem;
+.load-brand-mark{
+  font-family:var(--serif);font-size:2rem;font-weight:900;
+  letter-spacing:-.04em;color:var(--gold);
+  opacity:.85;margin-bottom:.4rem;
 }
-.skel-tab.active{
-  border-bottom:2px solid var(--burg);
-  margin-bottom:-1.5px;
+.load-eyebrow{
+  font-family:var(--ui);font-size:.68rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(242,235,217,.45);
 }
-
-/* Content area */
-.skel-content{
-  display:grid;
-  grid-template-columns:1fr 280px;
-  gap:0;
-  flex:1;
-  background:var(--parch);
-  max-width:none;
+.load-dest-name{
+  font-family:var(--serif);
+  font-size:clamp(2.4rem,8vw,4.5rem);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-.03em;
+  color:rgba(242,235,217,.96);
 }
-.skel-main{
-  padding:2rem 2.5rem;
-  border-right:1px solid var(--cr3);
+.load-phrase-wrap{
+  min-height:1.6rem;
+  display:flex;align-items:center;
+  margin-top:.2rem;
 }
-.skel-aside{
-  padding:1.5rem;
-  background:var(--cr);
+.load-phrase-text{
+  font-family:var(--serif);font-size:1rem;font-style:italic;font-weight:300;
+  color:rgba(242,235,217,.55);
+  transition:opacity .35s;
 }
-
-/* Day blocks */
-.skel-day{
-  margin-bottom:2.5rem;
-  padding-bottom:2.5rem;
-  border-bottom:1px solid var(--cr3);
-}
-.skel-day:last-child{border-bottom:none}
-.skel-day-header{
-  display:flex;align-items:flex-end;gap:1rem;
-  margin-bottom:1.4rem;
-}
-
-/* Section pips */
-.skel-section{margin-bottom:1.2rem}
-.skel-pip-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
-.skel-pip{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--cr3);flex-shrink:0;
-}
-
-/* Step indicators */
-.skel-steps{display:flex;align-items:center;gap:0;padding:.9rem 2.5rem;background:var(--ink);border-bottom:1px solid rgba(242,235,217,.07)}
-.skel-step{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
-.skel-step-dot{width:8px;height:8px;border-radius:50%;background:rgba(242,235,217,.2);transition:background .4s,box-shadow .4s;flex-shrink:0}
-.skel-step.active .skel-step-dot{background:var(--gold);box-shadow:0 0 0 3px rgba(196,137,42,.2)}
-.skel-step.done .skel-step-dot{background:rgba(196,137,42,.5)}
-.skel-step-label{font-size:.72rem;letter-spacing:.04em;color:rgba(242,235,217,.3);transition:color .4s;white-space:nowrap}
-.skel-step.active .skel-step-label{color:rgba(242,235,217,.8)}
-.skel-step.done .skel-step-label{color:rgba(242,235,217,.45)}
-.skel-step-line{flex:1;height:1px;background:rgba(242,235,217,.1);min-width:16px;margin:0 .5rem}
-@media(max-width:480px){.skel-step-label{display:none}.skel-steps{padding:.9rem 1.25rem}}
-
-/* Status bar at bottom */
-.skel-status{
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--ink);
-  padding:.7rem 2.5rem;
-  display:flex;align-items:center;gap:1rem;
-  z-index:10;
-}
-.skel-status-text{
-  font-family:var(--ui);font-size:.72rem;font-weight:500;
-  letter-spacing:.04em;color:rgba(242,235,217,.55);
-  flex:1;
-}
-.skel-progress-track{
-  width:160px;height:3px;
+.load-prog-track{
+  width:min(280px,60vw);height:2px;
   background:rgba(242,235,217,.1);
-  border-radius:100px;flex-shrink:0;
+  border-radius:100px;margin-top:.6rem;
+  flex-shrink:0;
 }
-.skel-progress-fill{
+.load-prog-fill{
   height:100%;border-radius:100px;
   background:linear-gradient(to right,var(--burg),var(--gold));
   transition:width .4s ease;
 }
 
-@media(max-width:720px){
-  .skel-content{grid-template-columns:1fr}
-  .skel-aside{display:none}
-  .skel-hero{height:200px}
-  .skel-topbar{padding:0 1.25rem}
-  .skel-tabs{padding:0 1.25rem}
-  .skel-main{padding:1.5rem 1.25rem}
-  .skel-status{padding:.7rem 1.25rem}
-  .skel-progress-track{width:100px}
+/* Step indicators — pinned to bottom */
+.skel-steps{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;align-items:center;gap:0;
+  padding:1rem 2.5rem;
+  background:rgba(28,21,16,.7);
+  backdrop-filter:blur(6px);
+  border-top:1px solid rgba(242,235,217,.07);
+}
+.skel-step{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.skel-step-dot{width:8px;height:8px;border-radius:50%;background:rgba(242,235,217,.2);transition:background .4s,box-shadow .4s;flex-shrink:0}
+.skel-step.active .skel-step-dot{background:var(--gold);box-shadow:0 0 0 3px rgba(196,137,42,.25)}
+.skel-step.done .skel-step-dot{background:rgba(196,137,42,.5)}
+.skel-step-label{font-size:.7rem;letter-spacing:.05em;color:rgba(242,235,217,.3);transition:color .4s;white-space:nowrap}
+.skel-step.active .skel-step-label{color:rgba(242,235,217,.85)}
+.skel-step.done .skel-step-label{color:rgba(242,235,217,.45)}
+.skel-step-line{flex:1;height:1px;background:rgba(242,235,217,.1);min-width:16px;margin:0 .5rem}
+@media(max-width:480px){
+  .skel-step-label{display:none}
+  .skel-steps{padding:.9rem 1.25rem}
+  .load-dest-name{font-size:clamp(2rem,10vw,3rem)}
 }
 
 /* Compass (kept for fallback) */
@@ -1006,6 +925,14 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   /* ── TRANSPORT ── */
   .transport-panel{padding:1.5rem 1.25rem}
   .trans-intro{font-size:.9rem;margin-bottom:1.5rem}
+
+  /* ── COST BREAKDOWN TABLE ── */
+  .cb-table th,.cb-table td{padding:7px 10px;font-size:.8rem}
+  .cb-total-row td{padding:9px 10px!important;font-size:.62rem!important}
+  .cb-total-row td:last-child{font-size:1rem!important}
+
+  /* ── COST SUMMARY TABLE ── */
+  .tcs-table th,.tcs-table td{padding:7px 10px;font-size:.78rem}
 }
 
 /* ══ MODAL OVERLAYS ══ */
@@ -2725,6 +2652,50 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 }
 .shared-banner-cta:hover { background: var(--burg2); }
 
+/* ── Draft resume banner — fixed bottom bar ── */
+#draftBanner{
+  position:fixed;bottom:0;left:0;right:0;z-index:400;
+}
+.draft-banner{
+  background:var(--ink);
+  border-top:1px solid rgba(242,235,217,.12);
+  box-shadow:0 -4px 24px rgba(28,21,16,.35);
+  padding:.75rem 2rem;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+}
+.draft-banner-icon{
+  font-size:1rem;color:var(--gold);flex-shrink:0;
+  animation:alertPulse 3s ease-in-out infinite;
+}
+.draft-banner-body{flex:1;min-width:0}
+.draft-banner-title{
+  font-family:var(--serif);font-size:.9rem;font-weight:700;
+  color:var(--cr);margin-bottom:.1rem;
+}
+.draft-banner-sub{
+  font-family:var(--body);font-size:.78rem;color:rgba(242,235,217,.5);
+  font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.draft-banner-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.draft-banner-btn{
+  font-family:var(--ui);font-size:.65rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:var(--gold);color:var(--ink);
+  border:none;padding:.48rem 1.1rem;border-radius:2px;
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.draft-banner-btn:hover{background:#d4992f;transform:translateY(-1px)}
+.draft-banner-dismiss{
+  font-family:var(--ui);font-size:.7rem;font-weight:600;
+  color:rgba(242,235,217,.3);background:none;border:none;
+  cursor:pointer;padding:.3rem .45rem;transition:color .15s;
+}
+.draft-banner-dismiss:hover{color:rgba(242,235,217,.65)}
+@media(max-width:720px){
+  .draft-banner{padding:.65rem 1.25rem}
+  .draft-banner-sub{display:none}
+}
+
 /* ══════════════════════════════════════
    6. REGISTRATION SUCCESS ANIMATION
 ══════════════════════════════════════ */
@@ -3257,6 +3228,11 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 @media(max-width:720px){
   .pack-panel{padding:1.25rem}
   .pack-categories{grid-template-columns:1fr 1fr}
+  .pack-teaser{flex-direction:column;align-items:flex-start}
+  .pack-teaser-btn{width:100%;text-align:center}
+}
+@media(max-width:400px){
+  .pack-categories{grid-template-columns:1fr}
 }
 
 /* ══ COST BREAKDOWN — redesigned ══ */
@@ -3409,6 +3385,109 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 .pace-count{font-family:var(--ui);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--burg);margin-bottom:.35rem}
 .pace-desc{font-family:var(--body);font-size:.82rem;color:var(--ink3);font-style:italic;line-height:1.5}
 @media(max-width:600px){.pace-grid{grid-template-columns:1fr}}
+
+/* ── Free-day toggle ─────────────────────────────────────────────── */
+.free-day-toggle{
+  margin-top:1.2rem;
+  border:1.5px solid var(--cr3);
+  border-radius:4px;
+  padding:1rem 1.2rem;
+  background:var(--cr);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  transition:border-color .22s,background .22s;
+}
+.free-day-toggle.on{border-color:var(--forest);background:rgba(30,61,47,.04)}
+.fdt-label{font-family:var(--serif);font-size:.95rem;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:.2rem}
+.fdt-desc{font-family:var(--body);font-size:.82rem;color:var(--ink3);font-style:italic;line-height:1.4}
+.fdt-switch{
+  flex-shrink:0;
+  width:44px;height:24px;border-radius:100px;
+  background:var(--cr3);border:none;cursor:pointer;
+  position:relative;transition:background .25s;
+}
+.fdt-switch.on{background:var(--forest)}
+.fdt-switch::after{
+  content:'';position:absolute;top:3px;left:3px;
+  width:18px;height:18px;border-radius:50%;
+  background:#fff;transition:transform .25s;
+  box-shadow:0 1px 3px rgba(0,0,0,.25);
+}
+.fdt-switch.on::after{transform:translateX(20px)}
+
+/* ── Free-day pane ───────────────────────────────────────────────── */
+.freeday-pane{
+  background:var(--ink);
+  border-radius:4px;
+  padding:2rem 2.2rem;
+  margin-bottom:1.5rem;
+  position:relative;
+  overflow:hidden;
+}
+.freeday-pane::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    135deg,
+    rgba(242,235,217,.02) 0,rgba(242,235,217,.02) 1px,
+    transparent 1px,transparent 14px
+  );
+}
+.freeday-eyebrow{
+  font-family:var(--ui);font-size:.65rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.8rem;
+}
+.freeday-heading{
+  font-family:var(--serif);font-size:clamp(1.5rem,3.5vw,2rem);
+  font-weight:900;color:rgba(242,235,217,.95);
+  line-height:1.15;letter-spacing:-.025em;margin-bottom:1rem;
+}
+.freeday-intro{
+  font-family:var(--body);font-size:.95rem;line-height:1.7;
+  color:rgba(242,235,217,.65);font-style:italic;margin-bottom:1.6rem;
+  border-left:2px solid rgba(196,137,42,.4);padding-left:1rem;
+}
+.freeday-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:.75rem;
+}
+.freeday-list li{
+  display:flex;align-items:flex-start;gap:.75rem;
+  font-family:var(--body);font-size:.9rem;
+  color:rgba(242,235,217,.8);line-height:1.5;
+}
+.freeday-list li::before{
+  content:'○';
+  font-size:.7rem;color:var(--gold);
+  flex-shrink:0;margin-top:.22rem;
+}
+.freeday-list li strong{
+  color:rgba(242,235,217,.95);font-weight:600;
+}
+
+/* ── Hidden gems panel ───────────────────────────────────────────── */
+.hidden-gem-panel{
+  margin:1.5rem 0 .5rem;
+  border:1px solid rgba(30,61,47,.25);
+  border-left:3px solid var(--forest);
+  border-radius:0 3px 3px 0;
+  background:rgba(30,61,47,.05);
+  padding:1rem 1.2rem;
+}
+.hg-eyebrow{
+  font-family:var(--ui);font-size:.62rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--forest);margin-bottom:.45rem;
+  display:flex;align-items:center;gap:.4rem;
+}
+.hg-eyebrow::before{content:'◈';font-size:.7rem}
+.hg-title{
+  font-family:var(--serif);font-size:1rem;font-weight:700;
+  color:var(--ink);margin-bottom:.35rem;letter-spacing:-.01em;
+}
+.hg-desc{
+  font-family:var(--body);font-size:.87rem;color:var(--ink2);
+  line-height:1.6;
+}
 
 /* ══ CO-PLANNER STEP ══ */
 .coplanner-wrap{margin-top:.5rem}
@@ -4346,69 +4425,246 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 }
 
 @media(max-width:720px){
-  .transport-panel{padding:1.25rem}
+  .transport-panel{padding:1.25rem 1rem}
+  .trans-card-head{padding:12px 12px 8px;gap:10px}
+  .trans-mode-icon{width:38px;height:38px;border-radius:5px}
+  .trans-mode-icon svg{width:18px;height:18px}
+  .trans-name{font-size:.88rem}
+  .trans-detail-text{font-size:.75rem}
+  .trans-dur-block{min-width:44px}
+  .trans-duration{font-size:.82rem}
+  .trans-price{font-size:.95rem}
+  .trans-price-pp{display:none}
+  .trans-price-bar-wrap{padding:3px 12px 10px}
+  .trans-price-bar-track{width:70px}
+  .trans-details{padding:12px}
+  .trans-details-grid{grid-template-columns:1fr}
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE (≤480px)
+   Tweaks for iPhone SE, smaller Android
+══════════════════════════════════════ */
+@media(max-width:480px){
+  /* Transport card: use CSS Grid to place icon/name on row 1, dur/price on row 2 */
+  .trans-card-head{
+    display:grid;
+    grid-template-columns:36px 1fr 1fr;
+    grid-template-rows:auto auto;
+    gap:5px 10px;
+    padding:10px 10px 8px;
+    align-items:start;
+  }
+  .trans-mode-icon{grid-column:1;grid-row:1/3;align-self:start;width:36px;height:36px;margin-top:2px}
+  .trans-name-block{grid-column:2/4;grid-row:1;min-width:0}
+  .trans-dur-block{grid-column:2;grid-row:2;text-align:left;min-width:auto;max-width:none}
+  .trans-price-block{grid-column:3;grid-row:2;text-align:left;min-width:auto}
+  .trans-duration,.trans-price{font-size:.82rem}
+  .trans-dur-label{display:none}
+
+  /* Packing: 1 column on very small phones */
+  .pack-categories{grid-template-columns:1fr}
+
+  /* Mast buttons: shrink more to avoid overflow */
+  .mast-btn{font-size:.57rem;padding:.4rem .6rem;letter-spacing:.04em}
+  .mast-acts{gap:.3rem}
+
+  /* Day tabs: smaller on tiny */
+  .day-tab{font-size:.58rem;padding:.7rem .75rem}
+
+  /* Main tabs: even smaller */
+  .main-tab{font-size:.6rem;padding:.85rem .75rem}
+
+  /* Stays: price comparison bar label truncate */
+  .pc-plat{font-size:.56rem}
+  .pc-val{font-size:.85rem}
+
+  /* Aside cost numbers */
+  .aside-big{font-size:1.5rem}
+
+  /* Mood activity: stack info + right on tiny */
+  .mood-activity{flex-direction:column;gap:6px}
+  .mood-activity-right{flex-direction:row;align-items:center;justify-content:space-between;width:100%}
+}
+
+/* ══════════════════════════════════════
+   TWEAK THIS DAY
+══════════════════════════════════════ */
+.tweak-bar{
+  margin:1.5rem 0 .5rem;
+  border:1.5px solid var(--cr3);
+  border-radius:6px;
+  background:var(--cr);
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.tweak-bar:focus-within{border-color:var(--ink3)}
+.tweak-inner{display:flex;align-items:stretch}
+.tweak-input{
+  flex:1;
+  font-family:var(--body);font-size:.88rem;
+  color:var(--ink);background:transparent;
+  border:none;outline:none;
+  padding:.75rem 1rem;
+  line-height:1.4;
+  min-width:0;
+}
+.tweak-input::placeholder{color:var(--ink4);font-style:italic}
+.tweak-btn{
+  flex-shrink:0;
+  font-family:var(--ui);font-size:.62rem;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;
+  background:var(--ink);color:var(--parch);
+  border:none;padding:.6rem 1.1rem;
+  cursor:pointer;transition:background .15s;
+  white-space:nowrap;
+}
+.tweak-btn:hover{background:var(--burg)}
+.tweak-btn:disabled{opacity:.45;cursor:default}
+.tweak-status{
+  display:none;align-items:center;gap:.6rem;
+  padding:.55rem 1rem;
+  border-top:1px solid var(--cr3);
+  font-family:var(--body);font-size:.82rem;
+  color:var(--ink3);font-style:italic;
+}
+@media(max-width:720px){
+  .tweak-input{font-size:.82rem;padding:.65rem .85rem}
+  .tweak-btn{font-size:.58rem;padding:.55rem .85rem}
+}
+
+/* ══════════════════════════════════════
+   DAY DRAG-TO-REORDER
+══════════════════════════════════════ */
+.day-tab[draggable="true"]{cursor:grab}
+.day-tab[draggable="true"]:active{cursor:grabbing}
+.day-tab.dragging{opacity:.3;cursor:grabbing}
+.day-tab.drag-over{
+  background:var(--burg)!important;
+  color:var(--parch)!important;
+  border-bottom-color:var(--burg)!important;
 }
 
 /* ══ TRIP CARD MODAL ══ */
+/* ══════════════════════════════════════
+   TRIP CARD MODAL — redesigned
+══════════════════════════════════════ */
 .tripcard-modal-overlay{
   display:none;position:fixed;inset:0;
-  background:rgba(28,21,16,.82);z-index:1003;
+  background:rgba(10,7,4,.88);z-index:1003;
   align-items:center;justify-content:center;
-  backdrop-filter:blur(10px);padding:1.5rem;
-  overflow-y:auto;
+  backdrop-filter:blur(12px);
+  padding:1rem;overflow-y:auto;
 }
 .tripcard-modal-overlay.open{display:flex}
 .tripcard-modal{
-  background:var(--parch);border-radius:6px;
-  max-width:420px;width:100%;
-  padding:1.6rem;
-  box-shadow:0 24px 80px rgba(28,21,16,.4);
-  animation:authSlideIn .28s cubic-bezier(.4,0,.2,1) both;
-  position:relative;
+  background:var(--ink);border-radius:8px;
+  max-width:480px;width:100%;
+  box-shadow:0 32px 96px rgba(0,0,0,.6);
+  animation:authSlideIn .3s cubic-bezier(.4,0,.2,1) both;
+  position:relative;overflow:hidden;
 }
-.tcm-close{
-  position:absolute;top:.8rem;right:.9rem;
-  font-family:var(--ui);font-size:.65rem;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink4);background:none;border:1px solid var(--cr3);
-  border-radius:2px;padding:.28rem .55rem;cursor:pointer;
-  transition:all .15s;
+/* accent bar */
+.tripcard-modal::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(to right,var(--burg),var(--gold));
 }
-.tcm-close:hover{color:var(--ink);border-color:var(--ink3)}
+.tcm-header{
+  padding:1.4rem 1.5rem 1rem;
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:1rem;
+}
+.tcm-header-text{}
 .tcm-title{
-  font-family:var(--serif);font-size:1.25rem;font-weight:700;
-  color:var(--ink);margin-bottom:.25rem;letter-spacing:-.02em;
+  font-family:var(--serif);font-size:1.15rem;font-weight:700;
+  color:var(--cr);margin-bottom:.2rem;letter-spacing:-.02em;
 }
 .tcm-sub{
-  font-family:var(--body);font-size:.85rem;color:var(--ink3);
-  font-style:italic;margin-bottom:1.2rem;line-height:1.5;
+  font-family:var(--body);font-size:.8rem;color:rgba(242,235,217,.45);
+  font-style:italic;line-height:1.45;
 }
+.tcm-close{
+  flex-shrink:0;
+  font-family:var(--ui);font-size:.6rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(242,235,217,.3);background:none;
+  border:1px solid rgba(242,235,217,.12);
+  border-radius:2px;padding:.28rem .55rem;cursor:pointer;
+  transition:all .15s;margin-top:.1rem;
+}
+.tcm-close:hover{color:var(--cr);border-color:rgba(242,235,217,.3)}
+/* style picker */
+.tcm-styles{
+  display:flex;gap:.5rem;padding:0 1.5rem .9rem;
+}
+.tcm-style-btn{
+  flex:1;font-family:var(--ui);font-size:.58rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.45rem .3rem;border-radius:3px;cursor:pointer;
+  border:1.5px solid rgba(242,235,217,.12);
+  color:rgba(242,235,217,.4);background:transparent;
+  transition:all .18s;
+}
+.tcm-style-btn:hover{border-color:rgba(242,235,217,.3);color:rgba(242,235,217,.7)}
+.tcm-style-btn.on{border-color:var(--gold);color:var(--gold);background:rgba(196,137,42,.08)}
+.tcm-style-btn .tsb-dot{
+  display:block;width:18px;height:10px;border-radius:2px;
+  margin:0 auto .3rem;
+}
+/* canvas preview */
 .tripcard-preview{
-  border:1px solid var(--cr3);border-radius:4px;
-  overflow:hidden;margin-bottom:1rem;
-  max-height:480px;display:flex;align-items:center;justify-content:center;
+  margin:0 1.5rem .9rem;
+  border-radius:4px;overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  position:relative;
 }
 .tripcard-preview canvas{
   width:100%!important;height:auto!important;
   max-width:100%;display:block;
 }
-.tcm-actions{display:flex;gap:.6rem;margin-bottom:.6rem}
+/* action row */
+.tcm-actions{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:.5rem;padding:0 1.5rem;
+}
 .btn-dl-card{
-  flex:1;background:var(--ink);color:var(--parch);
-  font-family:var(--ui);font-size:.72rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;
-  padding:.75rem;border:none;border-radius:4px;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--ui);font-size:.68rem;font-weight:800;
+  letter-spacing:.09em;text-transform:uppercase;
+  padding:.8rem;border:none;border-radius:4px;
   cursor:pointer;transition:all .18s;
 }
-.btn-dl-card:hover{background:var(--burg);transform:translateY(-1px)}
-.btn-close-card{
-  font-family:var(--ui);font-size:.72rem;font-weight:600;
-  letter-spacing:.06em;text-transform:uppercase;
-  padding:.75rem 1.2rem;border:1.5px solid var(--cr3);
-  border-radius:4px;color:var(--ink3);background:none;cursor:pointer;transition:all .18s;
+.btn-dl-card:hover{background:#d4992f;transform:translateY(-1px);box-shadow:0 4px 12px rgba(196,137,42,.35)}
+.btn-copy-link{
+  font-family:var(--ui);font-size:.68rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.8rem;border:1.5px solid rgba(242,235,217,.18);
+  border-radius:4px;color:rgba(242,235,217,.65);
+  background:transparent;cursor:pointer;transition:all .18s;
 }
-.btn-close-card:hover{border-color:var(--ink3);color:var(--ink)}
-.tcm-wm-note{font-family:var(--ui);font-size:.65rem;color:var(--ink4);text-align:center;line-height:1.5}
+.btn-copy-link:hover{border-color:rgba(242,235,217,.4);color:var(--cr)}
+.btn-copy-link.copied{border-color:var(--forest);color:#5cb88a}
+/* share row */
+.tcm-share-row{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.7rem 1.5rem 1.3rem;
+}
+.tcm-share-label{
+  font-family:var(--ui);font-size:.6rem;color:rgba(242,235,217,.25);
+  letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;
+}
+.tcm-share-url{
+  flex:1;font-family:var(--ui);font-size:.62rem;
+  color:rgba(242,235,217,.35);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:rgba(242,235,217,.04);border:1px solid rgba(242,235,217,.08);
+  border-radius:2px;padding:.3rem .55rem;
+}
+@media(max-width:520px){
+  .tripcard-modal{border-radius:12px 12px 0 0}
+  .tripcard-modal-overlay{align-items:flex-end;padding:0}
+  .tcm-actions{grid-template-columns:1fr}
+}
 
 
 /* ══ SMART REC LINKS ══ */
@@ -4561,6 +4817,8 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 @media(max-width:720px){
   .map-places-sidebar{display:none}
   .map-wrap .map-controls{padding:8px 12px}
+  /* Override inline grid style so the full width goes to the map */
+  .map-wrap > div[style]{grid-template-columns:1fr!important;height:320px!important}
 }
 
 
@@ -4788,6 +5046,7 @@ select.budget-select:focus,
       <div class="pc pc3"><img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=75&auto=format&fit=crop" alt="Rome Italy"><div class="pc-cap">Rome · Italy</div></div>
       <div class="pc pc4"><img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=300&q=75&auto=format&fit=crop" alt="Barcelona Spain"><div class="pc-cap">Barcelona · Spain</div></div>
       <div class="pc pc5"><img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=350&q=75&auto=format&fit=crop" alt="Lofoten Norway"><div class="pc-cap">Lofoten · Norway</div></div>
+      <div class="pc pc6"><img src="https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?w=350&q=75&auto=format&fit=crop" alt="Lake Bled Slovenia"><div class="pc-cap">Lake Bled · Slovenia</div></div>
     </div>
   </div>
   <div class="hero-strip">
@@ -4902,7 +5161,7 @@ select.budget-select:focus,
       <h2 class="qtitle" data-t="q1_title">Where are you dreaming of?</h2>
       <p class="qhint" data-t="q1_hint">Pick a region, or type your own below.</p>
       <div class="dest-grid">
-        <div class="dest-card" data-v="Balkans & Adriatic" onclick="pickDest(this)"><img src="https://images.unsplash.com/photo-1555990793-da11153b2473?w=300&q=70&auto=format&fit=crop" alt=""><div class="dest-card-inner"><div class="dest-card-name">Balkans &amp; Adriatic</div><div class="dest-card-sub">Croatia · Slovenia · Montenegro</div></div><div class="dest-chk">✓</div></div>
+        <div class="dest-card" data-v="Slovenia" onclick="pickDest(this)"><img src="https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?w=300&q=70&auto=format&fit=crop" alt="Lake Bled, Slovenia"><div class="dest-card-inner"><div class="dest-card-name">Slovenia</div><div class="dest-card-sub">Bled · Ljubljana · Piran · Soča</div></div><div class="dest-chk">✓</div></div>
         <div class="dest-card" data-v="Italy" onclick="pickDest(this)"><img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=300&q=70&auto=format&fit=crop" alt=""><div class="dest-card-inner"><div class="dest-card-name">Italy</div><div class="dest-card-sub">Rome · Florence · Amalfi</div></div><div class="dest-chk">✓</div></div>
         <div class="dest-card" data-v="Greece & Islands" onclick="pickDest(this)"><img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=300&q=70&auto=format&fit=crop" alt=""><div class="dest-card-inner"><div class="dest-card-name">Greece &amp; Islands</div><div class="dest-card-sub">Athens · Santorini · Crete</div></div><div class="dest-chk">✓</div></div>
         <div class="dest-card" data-v="France & Spain" onclick="pickDest(this)"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=300&q=70&auto=format&fit=crop" alt=""><div class="dest-card-inner"><div class="dest-card-name">France &amp; Spain</div><div class="dest-card-sub">Paris · Barcelona · San Sebastián</div></div><div class="dest-chk">✓</div></div>
@@ -4990,6 +5249,14 @@ select.budget-select:focus,
           <div class="pace-desc">Maximise every hour. You can sleep when you get home.</div>
         </div>
       </div>
+
+      <div class="free-day-toggle" id="freeDayToggle" style="display:none">
+        <div>
+          <div class="fdt-label">Leave one day unplanned</div>
+          <div class="fdt-desc">No schedule, nothing booked. Just a few loose suggestions. The best day often comes from getting lost on purpose.</div>
+        </div>
+        <button class="fdt-switch" id="freeDaySwitch" onclick="toggleFreeDay()" aria-label="Toggle free day" aria-pressed="false"></button>
+      </div>
     </div>
 
     <div class="qstep" id="qs7">
@@ -5032,157 +5299,24 @@ select.budget-select:focus,
 <!-- ═══ LOADING ═══ -->
 <div id="pg-load">
 
-  <!-- Topbar skeleton -->
-  <div class="skel-topbar">
-    <div class="skel-logo">via.</div>
-    <div class="skel-bar" style="width:80px"></div>
-    <div class="skel-bar" style="width:60px"></div>
-    <div class="skel-bar" style="width:90px"></div>
-  </div>
+  <!-- Full-screen blurred background photo -->
+  <div class="load-bg" id="loadBg"></div>
+  <div class="load-bg-overlay"></div>
 
-  <!-- Hero skeleton — shows destination image blurred -->
-  <div class="skel-hero" id="skelHero">
-    <img class="skel-hero-img" id="skelHeroImg" src="" alt="">
-    <div class="skel-hero-overlay"></div>
-    <div class="skel-hero-content">
-      <div class="skel-dest-label" id="skelDestLabel"></div>
-      <div class="skel-dest-title" id="skelDestTitle">Building your itinerary…</div>
+  <!-- Centred content -->
+  <div class="load-center">
+    <div class="load-brand-mark">via.</div>
+    <div class="load-eyebrow" id="skelDestLabel">Now building</div>
+    <div class="load-dest-name" id="skelDestTitle">Your destination</div>
+    <div class="load-phrase-wrap">
+      <div class="load-phrase-text" id="loadPhrase">Planning your itinerary…</div>
+    </div>
+    <div class="load-prog-track">
+      <div class="load-prog-fill" id="loadFill" style="width:4%"></div>
     </div>
   </div>
 
-  <!-- Tabs skeleton -->
-  <div class="skel-tabs">
-    <div class="skel-tab active">
-      <div class="skel-block-light" style="height:11px;width:70px;border-radius:100px"></div>
-    </div>
-    <div class="skel-tab">
-      <div class="skel-block-light" style="height:11px;width:90px;border-radius:100px;opacity:.5"></div>
-    </div>
-    <div class="skel-tab">
-      <div class="skel-block-light" style="height:11px;width:80px;border-radius:100px;opacity:.5"></div>
-    </div>
-  </div>
-
-  <!-- Day sub-tabs -->
-  <div style="display:flex;gap:0;padding:.6rem 2.5rem;background:var(--cr2);border-bottom:1px solid var(--cr3);overflow:hidden">
-    <div class="skel-block-light" style="height:30px;width:56px;border-radius:2px;margin-right:4px"></div>
-    <div class="skel-block-light" style="height:30px;width:56px;border-radius:2px;margin-right:4px;opacity:.5"></div>
-    <div class="skel-block-light" style="height:30px;width:56px;border-radius:2px;margin-right:4px;opacity:.4"></div>
-    <div class="skel-block-light" style="height:30px;width:56px;border-radius:2px;opacity:.3"></div>
-  </div>
-
-  <!-- Main content + aside -->
-  <div class="skel-content">
-    <div class="skel-main">
-
-      <!-- Day 1 skeleton -->
-      <div class="skel-day">
-        <div class="skel-day-header">
-          <div class="skel-block-light" style="height:72px;width:48px;border-radius:3px"></div>
-          <div style="flex:1">
-            <div class="skel-block-light" style="height:11px;width:60px;margin-bottom:8px;border-radius:100px"></div>
-            <div class="skel-block-light" style="height:22px;width:280px;max-width:70%"></div>
-          </div>
-        </div>
-        <!-- Morning -->
-        <div class="skel-section">
-          <div class="skel-pip-row">
-            <div class="skel-pip" style="background:#E8A838"></div>
-            <div class="skel-block-light" style="height:10px;width:55px;border-radius:100px"></div>
-          </div>
-          <div class="skel-block-light" style="height:13px;width:95%;margin-bottom:6px"></div>
-          <div class="skel-block-light" style="height:13px;width:80%;margin-bottom:6px"></div>
-          <div class="skel-block-light" style="height:13px;width:60%"></div>
-        </div>
-        <!-- Lunch rec block -->
-        <div style="border:1px solid var(--cr3);border-left:3px solid rgba(196,137,42,.3);padding:12px 14px;margin:12px 0;border-radius:2px;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
-          <div style="flex:1">
-            <div class="skel-block-light" style="height:10px;width:40px;border-radius:100px;margin-bottom:7px"></div>
-            <div class="skel-block-light" style="height:16px;width:180px;margin-bottom:6px"></div>
-            <div class="skel-block-light" style="height:11px;width:240px;max-width:80%"></div>
-          </div>
-          <div class="skel-block-light" style="height:20px;width:45px;border-radius:2px;flex-shrink:0"></div>
-        </div>
-        <!-- Afternoon -->
-        <div class="skel-section" style="margin-top:16px">
-          <div class="skel-pip-row">
-            <div class="skel-pip" style="background:var(--burg)"></div>
-            <div class="skel-block-light" style="height:10px;width:65px;border-radius:100px"></div>
-          </div>
-          <div class="skel-block-light" style="height:13px;width:88%;margin-bottom:6px"></div>
-          <div class="skel-block-light" style="height:13px;width:72%"></div>
-        </div>
-        <!-- Dinner rec block -->
-        <div style="border:1px solid var(--cr3);border-left:3px solid rgba(30,61,47,.3);padding:12px 14px;margin:12px 0;border-radius:2px;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
-          <div style="flex:1">
-            <div class="skel-block-light" style="height:10px;width:40px;border-radius:100px;margin-bottom:7px"></div>
-            <div class="skel-block-light" style="height:16px;width:160px;margin-bottom:6px"></div>
-            <div class="skel-block-light" style="height:11px;width:200px;max-width:80%"></div>
-          </div>
-          <div class="skel-block-light" style="height:20px;width:45px;border-radius:2px;flex-shrink:0"></div>
-        </div>
-        <!-- Evening -->
-        <div class="skel-section" style="margin-top:16px">
-          <div class="skel-pip-row">
-            <div class="skel-pip" style="background:var(--forest)"></div>
-            <div class="skel-block-light" style="height:10px;width:55px;border-radius:100px"></div>
-          </div>
-          <div class="skel-block-light" style="height:13px;width:75%;margin-bottom:6px"></div>
-          <div class="skel-block-light" style="height:13px;width:55%"></div>
-        </div>
-      </div>
-
-      <!-- Day 2 skeleton (lighter — not fully loaded yet) -->
-      <div class="skel-day" style="opacity:.45">
-        <div class="skel-day-header">
-          <div class="skel-block-light" style="height:72px;width:48px;border-radius:3px"></div>
-          <div style="flex:1">
-            <div class="skel-block-light" style="height:11px;width:60px;margin-bottom:8px;border-radius:100px"></div>
-            <div class="skel-block-light" style="height:22px;width:240px;max-width:70%"></div>
-          </div>
-        </div>
-        <div class="skel-block-light" style="height:13px;width:90%;margin-bottom:6px"></div>
-        <div class="skel-block-light" style="height:13px;width:70%;margin-bottom:14px"></div>
-        <div class="skel-block-light" style="height:13px;width:80%"></div>
-      </div>
-
-      <!-- Day 3 skeleton (even lighter) -->
-      <div style="opacity:.2">
-        <div class="skel-block-light" style="height:72px;width:48px;border-radius:3px;margin-bottom:12px"></div>
-        <div class="skel-block-light" style="height:13px;width:85%;margin-bottom:6px"></div>
-        <div class="skel-block-light" style="height:13px;width:60%"></div>
-      </div>
-
-    </div>
-
-    <!-- Aside skeleton -->
-    <div class="skel-aside">
-      <div class="skel-block-light" style="height:14px;width:100px;margin-bottom:16px;border-radius:100px"></div>
-      <!-- Cost tile -->
-      <div style="background:var(--ink);border-radius:4px;padding:14px;margin-bottom:10px">
-        <div class="skel-block" style="height:10px;width:80px;margin-bottom:10px;border-radius:100px"></div>
-        <div class="skel-block" style="height:28px;width:100px;margin-bottom:6px"></div>
-        <div class="skel-block" style="height:10px;width:130px;border-radius:100px;opacity:.5"></div>
-      </div>
-      <!-- Accommodation card -->
-      <div style="border:1px solid var(--cr3);border-radius:4px;overflow:hidden;margin-bottom:10px">
-        <div class="skel-block-light" style="height:110px;width:100%;border-radius:0"></div>
-        <div style="padding:12px">
-          <div class="skel-block-light" style="height:14px;width:140px;margin-bottom:8px"></div>
-          <div class="skel-block-light" style="height:11px;width:100px;border-radius:100px"></div>
-        </div>
-      </div>
-      <!-- Tips tile -->
-      <div style="border:1px solid var(--cr3);border-left:3px solid rgba(196,137,42,.3);padding:12px;border-radius:2px">
-        <div class="skel-block-light" style="height:10px;width:70px;margin-bottom:10px;border-radius:100px"></div>
-        <div class="skel-block-light" style="height:12px;width:95%;margin-bottom:5px"></div>
-        <div class="skel-block-light" style="height:12px;width:80%;margin-bottom:5px"></div>
-        <div class="skel-block-light" style="height:12px;width:65%"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step indicators -->
+  <!-- Step indicators pinned to bottom -->
   <div class="skel-steps" id="skelSteps">
     <div class="skel-step active" id="sstep0">
       <div class="skel-step-dot"></div>
@@ -5204,20 +5338,6 @@ select.budget-select:focus,
       <span class="skel-step-label" data-en="Finishing up" data-sl="Dokončujem" data-de="Abschluss" data-it="Finalizando" data-fr="Finalisation" data-hr="Završavam" data-es="Finalizando"></span>
     </div>
   </div>
-
-  <!-- Status bar at bottom with progress -->
-  <div class="skel-status">
-    <div class="skel-status-text" id="loadPhrase">Planning your itinerary…</div>
-    <div class="skel-progress-track">
-      <div class="skel-progress-fill" id="loadFill" style="width:4%"></div>
-    </div>
-  </div>
-
-  <!-- Hidden legacy elements -->
-  <div class="load-logo" style="display:none">via<em>.</em></div>
-  <div class="load-compass" style="display:none"><div class="compass-needle"></div></div>
-  <div class="load-track" style="display:none"><div class="load-fill-legacy"></div></div>
-  <div class="load-cap" style="display:none" data-t="load_cap">Crafting your personalised itinerary</div>
 
 </div>
 
@@ -5315,6 +5435,7 @@ select.budget-select:focus,
               <button class="mast-btn more-btn" onclick="toggleMastMore(event)" aria-label="More actions">⋯</button>
               <div class="mast-more-menu" id="mastMoreMenu">
                 <button class="mmore-item" onclick="exportPDF();closeMastMore()" data-t="itin_pdf">↓&ensp;PDF export</button>
+                <button class="mmore-item" onclick="exportCalendar();closeMastMore()">📅&ensp;Add to calendar</button>
                 <button class="mmore-item" onclick="openTripCard();closeMastMore()">📸&ensp;Share card</button>
                 <button class="mmore-item" id="alertBtn" onclick="openAlertModal();closeMastMore()">🔔&ensp;Price alert</button>
                 <div class="mmore-divider"></div>
@@ -5831,7 +5952,7 @@ function buildLangBar(){
 /* ══════════════════════════════════════
    APP STATE
 ══════════════════════════════════════ */
-const S = {step:1, total:8, dest:'', dateFrom:'', dateTo:'', comp:'', vibes:[], budget:'mid', pace:'balanced', coplanners:[], name:'', email:'', notes:''};
+const S = {step:1, total:8, dest:'', dateFrom:'', dateTo:'', comp:'', vibes:[], budget:'mid', pace:'balanced', freeDay:false, coplanners:[], name:'', email:'', notes:''};
 let itinData = null, currentTier = 'mid';
 const userChoices = {};
 
@@ -5842,7 +5963,7 @@ document.getElementById('pg-land').style.display = 'block';
 
 function goQuiz(){ showPg('pg-quiz'); updateQ(); }
 function startOver(){
-  Object.assign(S,{step:1,dest:'',dateFrom:'',dateTo:'',comp:'',vibes:[],budget:'mid',pace:'balanced',coplanners:[],name:'',email:'',notes:''});
+  Object.assign(S,{step:1,dest:'',dateFrom:'',dateTo:'',comp:'',vibes:[],budget:'mid',pace:'balanced',freeDay:false,coplanners:[],name:'',email:'',notes:''});
   const cpList = document.getElementById('coplannerList'); if(cpList) cpList.innerHTML='';
   document.querySelectorAll('.pace-card').forEach(function(c){c.classList.remove('on')}); const defPace=document.querySelector('.pace-card[data-v="balanced"]'); if(defPace)defPace.classList.add('on');
   currentTier = 'mid';
@@ -5905,6 +6026,7 @@ function updateQ(){
   const qStep = (S.step===8?'qs8':'qs'+S.step); const sEl = document.getElementById(qStep); if(sEl) sEl.classList.add('on');
   const nb = document.getElementById('qNextBtn'); nb.disabled = !isValid();
   document.getElementById('qNextLbl').textContent = S.step===S.total ? t('q_build') : t('q_continue');
+  if(S.step === 6) _syncFreeDayToggle();
 }
 
 function isValid(){
@@ -5950,6 +6072,28 @@ function pickPace(el){
   el.classList.add('on');
   S.pace = el.dataset.v;
   /* pace selected — button always enabled */
+}
+
+function toggleFreeDay(){
+  S.freeDay = !S.freeDay;
+  const toggle = document.getElementById('freeDayToggle');
+  const sw     = document.getElementById('freeDaySwitch');
+  if(toggle) toggle.classList.toggle('on', S.freeDay);
+  if(sw){ sw.classList.toggle('on', S.freeDay); sw.setAttribute('aria-pressed', S.freeDay); }
+}
+
+function _syncFreeDayToggle(){
+  // Show toggle only for trips of 4+ nights; sync visual state
+  const nights = (S.dateFrom && S.dateTo)
+    ? Math.max(0, Math.round((new Date(S.dateTo) - new Date(S.dateFrom)) / 86400000))
+    : 0;
+  const toggle = document.getElementById('freeDayToggle');
+  const sw     = document.getElementById('freeDaySwitch');
+  if(!toggle) return;
+  toggle.style.display = (nights >= 4) ? 'flex' : 'none';
+  if(nights < 4){ S.freeDay = false; }
+  if(toggle) toggle.classList.toggle('on', S.freeDay);
+  if(sw){ sw.classList.toggle('on', S.freeDay); sw.setAttribute('aria-pressed', S.freeDay); }
 }
 
 function addCoplanner(){
@@ -6005,12 +6149,14 @@ function pickPill(el,type){ el.closest('.pill-row').querySelectorAll('.qpill').f
 function startLoad(){
   showPg('pg-load');
 
-  // Set hero image to destination photo
-  const heroImg = document.getElementById('skelHeroImg');
-  if(heroImg){
+  // Set fullscreen blurred background
+  const loadBg = document.getElementById('loadBg');
+  if(loadBg){
     const imgUrl = gHero();
-    heroImg.src = imgUrl;
-    heroImg.onerror = function(){ this.style.display='none'; };
+    if(imgUrl){
+      loadBg.style.backgroundImage = 'url(' + imgUrl + ')';
+      loadBg.style.opacity = '.45';
+    }
   }
 
   const destLabel = document.getElementById('skelDestLabel');
@@ -6024,7 +6170,7 @@ function startLoad(){
     el.textContent = el.getAttribute('data-'+currentLang) || el.getAttribute('data-en') || '';
   });
 
-  // Status bar phrases
+  // Phrase cycling
   const phrases = t('load_phrases');
   let pi = 0, prog = 0;
   const ph = document.getElementById('loadPhrase');
@@ -6117,7 +6263,7 @@ const heroImgs={
   'Zagreb':'https://images.unsplash.com/photo-1553288743-490ef9460769?w=900&q=80&auto=format&fit=crop',
   'Kotor':'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=900&q=80&auto=format&fit=crop',
   'Montenegro':'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=900&q=80&auto=format&fit=crop',
-  'Slovenia':'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
+  'Slovenia':'https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?w=900&q=80&auto=format&fit=crop',
   'Ljubljana':'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
   // Cities — Central Europe
   'Prague':'https://images.unsplash.com/photo-1541849546-216549ae216d?w=900&q=80&auto=format&fit=crop',
@@ -6229,7 +6375,19 @@ async function fetchItinerary(){
     ? 'a surprising lesser-known European city matching the traveller profile (reveal it in the title)'
     : S.dest;
 
-  const prompt = `You are Via, an expert travel planner. Return ONLY valid JSON — no markdown, no backticks.
+  // cacheParams — stable identifiers used as the KV key (no name/dates which vary)
+  const cacheParams = {
+    dest:    dest,
+    days:    days,
+    budget:  S.budget,
+    vibes:   S.vibes,
+    comp:    S.comp,
+    lang:    currentLang,
+    pace:    S.pace || 'balanced',
+    freeDay: S.freeDay && days >= 4,
+  };
+
+  const prompt = `Return ONLY valid JSON — no markdown, no backticks.
 
 ${langNote}
 OUTPUT LANGUAGE: ${lang}
@@ -6246,6 +6404,8 @@ PACE: The traveller chose "\${S.pace||'balanced'}" pace.
 Apply this pace strictly. Never pack a relaxed day with 5 things.
 
 TRAVELLER: Name: ${S.name||'Guest'}, Destination: ${dest}, Dates: ${S.dateFrom||'flexible'} → ${S.dateTo||'flexible'} (${days} days), Group: ${S.comp}, Style: ${S.vibes.join(', ')}, Budget: ${budgetLabel}, Pace: ${S.pace||'balanced'}, Notes: ${S.notes||'none'}
+
+${S.freeDay && days >= 4 ? `FREE DAY: The traveller wants one unplanned day. Choose the MIDDLE day of the trip (day ${Math.ceil(days/2)}) and mark it as free_day:true. For this day: write a warm, personal intro (free_day_intro) of 2–3 sentences framed around the freedom of having no plans. Then provide exactly 5 free_day_suggestions — each an object with "label" (short evocative name, 3–6 words) and "detail" (one specific, concrete sentence about it — a neighbourhood to wander, a market, a bar, a viewpoint, a local ritual). Do NOT include morning/afternoon/evening prose or meals for the free day. Set those fields to empty strings. Keep all other day objects fully planned as normal.` : ''}
 
 Return this exact JSON structure:
 {
@@ -6264,9 +6424,16 @@ Return this exact JSON structure:
   "days": [
     {
       "title": "evocative ${lang} day title",
+      "free_day": false,
+      "free_day_intro": "",
+      "free_day_suggestions": [],
       "morning": "prose in ${lang}",
       "afternoon": "prose in ${lang}",
       "evening": "prose in ${lang}",
+      "hidden_gem": {
+        "title": "short evocative name (3–6 words) in ${lang}",
+        "desc": "2 sentences — specific, non-obvious, local. Not a top-10 sight. Something a local would actually recommend. In ${lang}."
+      },
       "recommendations": {
         "lunch": {
           "budget": {"name":"Restaurant name","cuisine":"type","desc":"one sentence in ${lang}","price_pp":"€12","rating":"4.6","link":"https://www.google.com/maps/search/Restaurant+name+${encodeURIComponent(dest)}"},
@@ -6323,7 +6490,7 @@ IMPORTANT — LINKS: In every "link" field, replace "Restaurant name", "Activity
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       signal: controller.signal,
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt, cacheParams })
     });
     clearTimeout(timeoutId);
   } catch(fetchErr) {
@@ -6447,8 +6614,9 @@ function renderItin(data){
   updateShareableLink();
   // Check if alert already set for this destination
   setTimeout(checkExistingAlerts, 100);
-  // Day tab scroll indicator
+  // Day tab scroll indicator + drag-to-reorder
   setTimeout(initDayTabsScroll, 300);
+  setTimeout(initDayDrag, 350);
   // Onboarding tooltip for first-time users
   if(!isSharedView) setTimeout(showOnboardTooltip, 2000);
   setTimeout(function(){ addCollabButton(); showCollabBanner(); }, 100);
@@ -6497,6 +6665,11 @@ function safeUrl(url){
 }
 
 function renderDayPane(day, di){
+  // ── Free day — completely different layout ───────────────────────
+  if(day.free_day){
+    return renderFreeDayPane(day, di);
+  }
+
   const r = day.recommendations||{};
   const lunch  = r.lunch  ? (r.lunch[currentTier]  || r.lunch.mid  || {}) : {};
   const dinner = r.dinner ? (r.dinner[currentTier] || r.dinner.mid || {}) : {};
@@ -6528,10 +6701,212 @@ function renderDayPane(day, di){
   out += dinnerBlock;
   out += '<div class="tblock evening"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('evening')+'</span></div>';
   out += '<div class="prose-wrap">'+sanitiseAI(day.evening||'')+'</div></div>';
+  out += renderHiddenGem(day.hidden_gem);
   out += renderMoodPanel(di, day.title||'');
   out += renderCostBreakdown(day, di);
+  out += renderTweakBar(di);
   out += '</div>';
   return out;
+}
+
+/* ── Free-day pane renderer ──────────────────────────────────────── */
+function renderFreeDayPane(day, di){
+  const suggestions = Array.isArray(day.free_day_suggestions) ? day.free_day_suggestions : [];
+  const listItems = suggestions.map(function(s){
+    const label  = sanitiseAI(s.label  || s.name  || '');
+    const detail = sanitiseAI(s.detail || s.desc  || '');
+    return '<li>' + (label ? '<strong>' + label + '</strong>' + (detail ? ' — ' + detail : '') : detail) + '</li>';
+  }).join('');
+
+  var out = '';
+  out += '<div class="day-pane'+(di===0?' on':'')+'" id="dpane'+di+'">';
+
+  // Dark header bar matching normal day header
+  out += '<div class="day-hdr"><div class="day-num" style="opacity:.5">0'+(di+1)+'</div>';
+  out += '<div style="flex:1"><div class="day-lbl">'+t('day_label')+' '+(di+1)+'</div>';
+  out += '<div class="day-title">'+sanitiseAI(day.title||'No plans today.')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' Note</button></div>';
+  out += '<div class="note-inline" id="ni_day'+di+'">'+renderNoteField('day'+di)+'</div>';
+  out += '</div></div>';
+
+  // Dark free-day card
+  out += '<div class="freeday-pane">';
+  out += '<div class="freeday-eyebrow">Unplanned day</div>';
+  out += '<div class="freeday-heading">This day is yours.</div>';
+  if(day.free_day_intro){
+    out += '<div class="freeday-intro">' + sanitiseAI(day.free_day_intro) + '</div>';
+  }
+  if(listItems){
+    out += '<ul class="freeday-list">' + listItems + '</ul>';
+  }
+  out += '</div>';
+
+  out += renderTweakBar(di);
+  out += '</div>';
+  return out;
+}
+
+/* ── Hidden gems panel ───────────────────────────────────────────── */
+function renderHiddenGem(gem){
+  if(!gem || !gem.title) return '';
+  return '<div class="hidden-gem-panel">' +
+    '<div class="hg-eyebrow">What locals actually do</div>' +
+    '<div class="hg-title">' + sanitiseAI(gem.title) + '</div>' +
+    '<div class="hg-desc">'  + sanitiseAI(gem.desc  || '') + '</div>' +
+  '</div>';
+}
+
+/* ══ TWEAK THIS DAY ══ */
+function renderTweakBar(di){
+  return '<div class="tweak-bar" id="tweak-bar-'+di+'">' +
+    '<div class="tweak-inner">' +
+      '<input class="tweak-input" id="tweak-input-'+di+'" type="text" ' +
+        'placeholder="Tweak this day… e.g. add a beach stop, make it more relaxed" ' +
+        'onkeydown="if(event.key===\'Enter\')tweakDay('+di+')" />' +
+      '<button class="tweak-btn" onclick="tweakDay('+di+')">↺ Rewrite</button>' +
+    '</div>' +
+    '<div class="tweak-status" id="tweak-status-'+di+'" style="display:none">' +
+      '<span class="pack-spinner"></span><span id="tweak-status-text-'+di+'">Rewriting day…</span>' +
+    '</div>' +
+  '</div>';
+}
+
+async function tweakDay(di){
+  const input    = document.getElementById('tweak-input-'+di);
+  const bar      = document.getElementById('tweak-bar-'+di);
+  const status   = document.getElementById('tweak-status-'+di);
+  const statusTx = document.getElementById('tweak-status-text-'+di);
+  const request  = input ? input.value.trim() : '';
+  if(!request){ if(input) input.focus(); return; }
+
+  const day  = itinData.days[di];
+  const dest = itinData.destination_display || S.dest || 'the destination';
+  const langNote = currentLang !== 'en'
+    ? 'IMPORTANT: Keep ALL prose in the same language as the original day.'
+    : '';
+
+  // ── loading state ──
+  if(input)  input.disabled = true;
+  if(bar)    bar.querySelector('.tweak-btn').disabled = true;
+  if(status) status.style.display = 'flex';
+  if(statusTx) statusTx.textContent = 'Rewriting day '+(di+1)+'…';
+
+  const prompt = `Modify Day ${di+1} of a ${dest} itinerary based on this request: "${request}"
+
+${langNote}
+
+Current day (full JSON):
+${JSON.stringify(day, null, 2)}
+
+Return ONLY the modified day as valid JSON with the exact same structure and all the same fields. Only change what the traveller requested — keep everything else identical. Do not add any text outside the JSON.`;
+
+  try {
+    const res = await fetch('/api/tweak-day', {
+      method:  'POST',
+      headers: {'Content-Type':'application/json'},
+      body:    JSON.stringify({ prompt }),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+
+    const d    = await res.json();
+    const raw  = (d.content||[]).map(b=>b.text||'').join('');
+    const clean = raw.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,'').trim();
+    const newDay = JSON.parse(clean);
+
+    // Merge new data over original (keep any fields the AI might omit)
+    itinData.days[di] = Object.assign({}, day, newDay);
+
+    // Re-render just this pane
+    const pane = document.getElementById('dpane'+di);
+    if(pane){
+      const tmp = document.createElement('div');
+      tmp.innerHTML = renderDayPane(itinData.days[di], di);
+      const newPane = tmp.firstElementChild;
+      newPane.classList.add('on');
+      pane.replaceWith(newPane);
+    }
+
+    // Update tab title if it changed
+    const tab = document.getElementById('dtab'+di);
+    if(tab && newDay.title){
+      tab.innerHTML = t('day_label')+' '+(di+1)+' · '+sanitiseAI(newDay.title);
+    }
+
+    // Clear input (new pane has a fresh bar already)
+  } catch(err){
+    console.error('[via] tweakDay failed:', err);
+    // Restore bar
+    if(input)  { input.disabled = false; input.select(); }
+    if(bar)    bar.querySelector('.tweak-btn').disabled = false;
+    if(status) status.style.display = 'none';
+    if(statusTx) statusTx.textContent = 'Something went wrong — try again';
+    if(status) { status.style.display='flex'; setTimeout(()=>{ if(status) status.style.display='none'; }, 3000); }
+  }
+}
+
+/* ══ DAY DRAG-TO-REORDER ══ */
+function initDayDrag(){
+  const bar = document.getElementById('dayTabsBar');
+  if(!bar || !itinData || !itinData.days || itinData.days.length < 2) return;
+
+  let dragFrom = null;
+
+  bar.querySelectorAll('.day-tab').forEach(function(tab, idx){
+    tab.setAttribute('draggable','true');
+    tab.dataset.dayIdx = idx;
+
+    tab.addEventListener('dragstart', function(e){
+      dragFrom = idx;
+      e.dataTransfer.effectAllowed = 'move';
+      // Delay so the ghost image captures normal state
+      setTimeout(function(){ tab.classList.add('dragging'); }, 0);
+    });
+
+    tab.addEventListener('dragend', function(){
+      dragFrom = null;
+      bar.querySelectorAll('.day-tab').forEach(function(t){
+        t.classList.remove('dragging','drag-over');
+      });
+    });
+
+    tab.addEventListener('dragover', function(e){
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      if(dragFrom === null || dragFrom === idx) return;
+      bar.querySelectorAll('.day-tab').forEach(function(t){ t.classList.remove('drag-over'); });
+      tab.classList.add('drag-over');
+    });
+
+    tab.addEventListener('dragleave', function(){
+      tab.classList.remove('drag-over');
+    });
+
+    tab.addEventListener('drop', function(e){
+      e.preventDefault();
+      const to = parseInt(tab.dataset.dayIdx);
+      if(dragFrom === null || dragFrom === to) return;
+
+      // Reorder the data array
+      const moved = itinData.days.splice(dragFrom, 1)[0];
+      itinData.days.splice(to, 0, moved);
+
+      // Re-render tabs and panes only
+      bar.innerHTML = itinData.days.map(function(d, i){
+        return '<button class="day-tab" onclick="switchDay('+i+')" id="dtab'+i+'">'
+          + t('day_label')+' '+(i+1)+' · '+sanitiseAI(d.title)
+          +'</button>';
+      }).join('');
+
+      document.getElementById('itinMain').innerHTML = itinData.days.map(function(d,i){
+        return renderDayPane(d, i);
+      }).join('');
+
+      // Reveal the day that was just dragged
+      switchDay(to);
+      initDayDrag();       // rebind handlers on new elements
+      initDayTabsScroll(); // rebind scroll indicator
+      dragFrom = null;
+    });
+  });
 }
 
 function renderRecBlock(type, di, rec, alts, tierData){
@@ -7160,6 +7535,95 @@ function makeFallback(){
 // Track whether user has used their free PDF
 let pdfUsed = false;
 
+/* ══ CALENDAR EXPORT (.ics) ══════════════════════════════════════════ */
+function exportCalendar(){
+  if(!itinData){ showToast('Generate an itinerary first.'); return; }
+
+  const days  = itinData.days || [];
+  const dest  = S.dest || itinData.title || 'Trip';
+  // Base date: use S.dateFrom if present, otherwise today
+  const base  = S.dateFrom ? new Date(S.dateFrom + 'T12:00:00') : new Date();
+
+  // Format a Date as YYYYMMDD (iCal all-day format)
+  function ymd(d){
+    return d.getFullYear() +
+      String(d.getMonth()+1).padStart(2,'0') +
+      String(d.getDate()).padStart(2,'0');
+  }
+
+  // Escape iCal property text (RFC 5545 §3.3.11)
+  function esc(s){
+    if(!s) return '';
+    return s
+      .replace(/\\/g,'\\\\')
+      .replace(/;/g,'\\;')
+      .replace(/,/g,'\\,')
+      .replace(/\r?\n/g,'\\n');
+  }
+
+  // Fold long lines at 75 octets (RFC 5545 §3.1)
+  function fold(line){
+    const out = [];
+    while(line.length > 75){
+      out.push(line.slice(0,75));
+      line = ' ' + line.slice(75);
+    }
+    out.push(line);
+    return out.join('\r\n');
+  }
+
+  const NL = '\\n'; // iCal newline within a value
+
+  const cal = ['BEGIN:VCALENDAR','VERSION:2.0',
+    'PRODID:-//Via Travel Planner//viawander.co//EN',
+    'X-WR-CALNAME:Via – ' + dest,
+    'CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+
+  days.forEach(function(day, i){
+    const dtStart = new Date(base);
+    dtStart.setDate(base.getDate() + i);
+    const dtEnd = new Date(dtStart);
+    dtEnd.setDate(dtStart.getDate() + 1);
+
+    const tier   = currentTier || 'mid';
+    const lunch  = (day.meals && day.meals.lunch  && (day.meals.lunch[tier]  || day.meals.lunch.mid))  || {};
+    const dinner = (day.meals && day.meals.dinner && (day.meals.dinner[tier] || day.meals.dinner.mid)) || {};
+
+    // Build description parts
+    const parts = [];
+    if(day.morning)   parts.push('Morning' + NL + esc(day.morning));
+    if(lunch.name)    parts.push('Lunch: ' + esc(lunch.name) + (lunch.price_pp  ? ' · ' + esc(lunch.price_pp)  : ''));
+    if(day.afternoon) parts.push('Afternoon' + NL + esc(day.afternoon));
+    if(dinner.name)   parts.push('Dinner: ' + esc(dinner.name) + (dinner.price_pp ? ' · ' + esc(dinner.price_pp) : ''));
+    if(day.evening)   parts.push('Evening' + NL + esc(day.evening));
+    if(day.insider_tip) parts.push('Insider tip: ' + esc(day.insider_tip));
+    parts.push(NL + '— Via Travel Planner · viawander.co');
+
+    const uid = 'via-day' + (i+1) + '-' + Date.now() + '@viawander.co';
+
+    cal.push('BEGIN:VEVENT');
+    cal.push('UID:' + uid);
+    cal.push('DTSTART;VALUE=DATE:' + ymd(dtStart));
+    cal.push('DTEND;VALUE=DATE:'   + ymd(dtEnd));
+    cal.push(fold('SUMMARY:Day ' + (i+1) + ' – ' + esc(day.title || ('Day ' + (i+1)))));
+    cal.push(fold('DESCRIPTION:' + parts.join(NL + NL)));
+    cal.push('END:VEVENT');
+  });
+
+  cal.push('END:VCALENDAR');
+  const ics  = cal.join('\r\n') + '\r\n';
+  const blob = new Blob([ics], { type:'text/calendar;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'via-' + dest.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') + '.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+  showToast(days.length + ' day' + (days.length!==1?'s':'') + ' added to calendar file');
+}
+
 function exportPDF(){
   if(!itinData){ alert('Generate an itinerary first.'); return; }
 
@@ -7225,39 +7689,72 @@ function buildPrintLayer(){
     h += '<div class="pdf-day-badge"><div class="pdf-day-badge-eye">'+(t('day_label')||'Day')+'</div><div class="pdf-day-badge-num">0'+(di+1)+'</div></div>';
     h += '<div class="pdf-day-title-wrap"><div class="pdf-day-dest">'+dest.toUpperCase()+'</div><div class="pdf-day-title">'+(day.title||'')+'</div></div>';
     h += '</div>';
-    // Morning
-    h += '<div class="pdf-time-section">';
-    h += '<div class="pdf-time-hdr"><span class="pdf-time-pip pip-morning"></span><span class="pdf-time-lbl">'+(t('morning')||'Morning')+'</span></div>';
-    h += '<div class="pdf-prose">'+(day.morning||'')+'</div>';
-    h += '</div>';
-    // Lunch
-    if(lunch.name){
-      h += '<div class="pdf-section-label">Lunch · '+tierLabel+'</div>';
-      h += '<div class="pdf-rec-box"><div><div class="pdf-rec-name">'+lunch.name+'</div><div class="pdf-rec-meta">'+(lunch.cuisine||'')+'</div><div class="pdf-rec-desc">'+(lunch.desc||'')+'</div></div><div class="pdf-rec-price">'+(lunch.price_pp||'')+'</div></div>';
+
+    if(day.free_day){
+      // ── Free day — special layout ──────────────────────
+      h += '<div style="background:#1C1510;border-radius:4px;padding:1.4rem 1.6rem;margin:1rem 0;-webkit-print-color-adjust:exact;print-color-adjust:exact">';
+      h += '<div style="font-family:Karla,sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C4892A;margin-bottom:.6rem">Unplanned day</div>';
+      h += '<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:1.3rem;font-weight:900;color:rgba(242,235,217,.95);margin-bottom:.7rem">This day is yours.</div>';
+      if(day.free_day_intro){
+        h += '<div style="font-family:Georgia,serif;font-size:.85rem;color:rgba(242,235,217,.6);font-style:italic;line-height:1.6;border-left:2px solid rgba(196,137,42,.4);padding-left:.9rem;margin-bottom:1rem">'+day.free_day_intro+'</div>';
+      }
+      const sugs = Array.isArray(day.free_day_suggestions) ? day.free_day_suggestions : [];
+      if(sugs.length){
+        h += '<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.5rem">';
+        sugs.forEach(function(s){
+          h += '<li style="font-family:Karla,sans-serif;font-size:.82rem;color:rgba(242,235,217,.8);display:flex;gap:.6rem;align-items:flex-start">';
+          h += '<span style="color:#C4892A;flex-shrink:0;margin-top:1px">○</span>';
+          h += '<span>'+(s.label ? '<strong style="color:rgba(242,235,217,.95)">'+s.label+'</strong>'+(s.detail?' — '+s.detail:'') : (s.detail||''))+'</span>';
+          h += '</li>';
+        });
+        h += '</ul>';
+      }
+      h += '</div>';
+    } else {
+      // ── Normal day ─────────────────────────────────────
+      // Morning
+      h += '<div class="pdf-time-section">';
+      h += '<div class="pdf-time-hdr"><span class="pdf-time-pip pip-morning"></span><span class="pdf-time-lbl">'+(t('morning')||'Morning')+'</span></div>';
+      h += '<div class="pdf-prose">'+(day.morning||'')+'</div>';
+      h += '</div>';
+      // Lunch
+      if(lunch.name){
+        h += '<div class="pdf-section-label">Lunch · '+tierLabel+'</div>';
+        h += '<div class="pdf-rec-box"><div><div class="pdf-rec-name">'+lunch.name+'</div><div class="pdf-rec-meta">'+(lunch.cuisine||'')+'</div><div class="pdf-rec-desc">'+(lunch.desc||'')+'</div></div><div class="pdf-rec-price">'+(lunch.price_pp||'')+'</div></div>';
+      }
+      // Afternoon
+      h += '<div class="pdf-time-section">';
+      h += '<div class="pdf-time-hdr"><span class="pdf-time-pip pip-afternoon"></span><span class="pdf-time-lbl">'+(t('afternoon')||'Afternoon')+'</span></div>';
+      var afterText = '';
+      if(act.name) afterText = '<strong>'+act.name+'</strong> — '+(act.desc||'')+' ('+(act.price||'')+').  ';
+      afterText += (day.afternoon||'');
+      h += '<div class="pdf-prose">'+afterText+'</div>';
+      h += '</div>';
+      // Dinner
+      if(dinner.name){
+        h += '<div class="pdf-section-label">Dinner · '+tierLabel+'</div>';
+        h += '<div class="pdf-rec-box dinner-rec"><div><div class="pdf-rec-name">'+dinner.name+'</div><div class="pdf-rec-meta">'+(dinner.cuisine||'')+'</div><div class="pdf-rec-desc">'+(dinner.desc||'')+'</div></div><div class="pdf-rec-price">'+(dinner.price_pp||'')+'</div></div>';
+      }
+      // Evening
+      h += '<div class="pdf-time-section">';
+      h += '<div class="pdf-time-hdr"><span class="pdf-time-pip pip-evening"></span><span class="pdf-time-lbl">'+(t('evening')||'Evening')+'</span></div>';
+      h += '<div class="pdf-prose">'+(day.evening||'')+'</div>';
+      h += '</div>';
+      // Hidden gem
+      if(day.hidden_gem && day.hidden_gem.title){
+        h += '<div style="border-left:3px solid #1E3D2F;background:rgba(30,61,47,.06);padding:.7rem 1rem;margin:.8rem 0;border-radius:0 3px 3px 0;-webkit-print-color-adjust:exact;print-color-adjust:exact">';
+        h += '<div style="font-family:Karla,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#1E3D2F;margin-bottom:.35rem">What locals actually do</div>';
+        h += '<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:.88rem;font-weight:700;color:#1C1510;margin-bottom:.25rem">'+day.hidden_gem.title+'</div>';
+        h += '<div style="font-family:Georgia,serif;font-size:.8rem;color:#3D3228;line-height:1.55">'+(day.hidden_gem.desc||'')+'</div>';
+        h += '</div>';
+      }
+      // Stay
+      if(accom){
+        h += '<div class="pdf-section-label">Stay · Night '+(di+1)+'</div>';
+        h += '<div class="pdf-hotel-box"><div><div class="pdf-hotel-name">'+accom.name+'</div><div class="pdf-hotel-plat">'+(accom.platform||'')+' · '+(accom.type||'')+' · ★ '+(accom.rating||'')+'</div></div><div class="pdf-hotel-price">'+(accom.price_per_night||'')+'<span style="font-size:.55rem;font-family:Karla,sans-serif;color:rgba(242,235,217,.38)">/night</span></div></div>';
+      }
     }
-    // Afternoon
-    h += '<div class="pdf-time-section">';
-    h += '<div class="pdf-time-hdr"><span class="pdf-time-pip pip-afternoon"></span><span class="pdf-time-lbl">'+(t('afternoon')||'Afternoon')+'</span></div>';
-    var afterText = '';
-    if(act.name) afterText = '<strong>'+act.name+'</strong> — '+(act.desc||'')+' ('+(act.price||'')+').  ';
-    afterText += (day.afternoon||'');
-    h += '<div class="pdf-prose">'+afterText+'</div>';
-    h += '</div>';
-    // Dinner
-    if(dinner.name){
-      h += '<div class="pdf-section-label">Dinner · '+tierLabel+'</div>';
-      h += '<div class="pdf-rec-box dinner-rec"><div><div class="pdf-rec-name">'+dinner.name+'</div><div class="pdf-rec-meta">'+(dinner.cuisine||'')+'</div><div class="pdf-rec-desc">'+(dinner.desc||'')+'</div></div><div class="pdf-rec-price">'+(dinner.price_pp||'')+'</div></div>';
-    }
-    // Evening
-    h += '<div class="pdf-time-section">';
-    h += '<div class="pdf-time-hdr"><span class="pdf-time-pip pip-evening"></span><span class="pdf-time-lbl">'+(t('evening')||'Evening')+'</span></div>';
-    h += '<div class="pdf-prose">'+(day.evening||'')+'</div>';
-    h += '</div>';
-    // Stay
-    if(accom){
-      h += '<div class="pdf-section-label">Stay · Night '+(di+1)+'</div>';
-      h += '<div class="pdf-hotel-box"><div><div class="pdf-hotel-name">'+accom.name+'</div><div class="pdf-hotel-plat">'+(accom.platform||'')+' · '+(accom.type||'')+' · ★ '+(accom.rating||'')+'</div></div><div class="pdf-hotel-price">'+(accom.price_per_night||'')+'<span style="font-size:.55rem;font-family:Karla,sans-serif;color:rgba(242,235,217,.38)">/night</span></div></div>';
-    }
+
     h += '</div>';
   });
 
@@ -7589,6 +8086,59 @@ function getSaves(){ try{ return JSON.parse(localStorage.getItem(SAVES_KEY)||'{}
 function saveUsers(u){ try{ localStorage.setItem(USERS_KEY, JSON.stringify(u)); }catch(e){} }
 function saveSaves(s){ try{ localStorage.setItem(SAVES_KEY, JSON.stringify(s)); }catch(e){} }
 
+/* ── Save itinerary ────────────────────────────────────────────────── */
+function saveItinerary(){
+  if(!itinData) return;
+
+  // Not signed in → prompt registration then retry
+  if(!currentUser){
+    pendingSave = true;
+    openAuthModal('register');
+    return;
+  }
+
+  const saves = getSaves();
+  const userSaves = Object.values(saves).filter(s=>s.userEmail===currentUser.email);
+  const isPlusPlan = currentUser.plan === 'plus';
+
+  // Free plan: cap at 1 save
+  if(!isPlusPlan && userSaves.length >= 1){
+    // Check if there's already a save for this exact trip
+    const alreadySaved = userSaves.some(s=>s.destination===S.dest && (s.itinData&&s.itinData.title)===(itinData&&itinData.title));
+    if(!alreadySaved){
+      openUpgradeModal();
+      return;
+    }
+  }
+
+  const saveId = 'save_' + Date.now();
+  const entry = {
+    id: saveId,
+    userEmail: currentUser.email,
+    destination: S.dest || itinData.title || 'Unknown',
+    title: itinData.title || S.dest || 'My trip',
+    dates: (S.dateFrom && S.dateTo) ? (S.dateFrom + ' → ' + S.dateTo) : (S.dateFrom || ''),
+    group: S.comp || '',
+    budget: S.budget || 'mid',
+    savedAt: Date.now(),
+    lastOpened: Date.now(),
+    quizData: { dest:S.dest, days:S.days, budget:S.budget, vibes:S.vibes, comp:S.comp, pace:S.pace, dateFrom:S.dateFrom, dateTo:S.dateTo },
+    itinData: itinData,
+  };
+
+  saves[saveId] = entry;
+  saveSaves(saves);
+
+  // Update button state
+  const btn = document.getElementById('saveItinBtn');
+  if(btn){ btn.textContent = '♥ Saved'; btn.style.color='var(--burg)'; btn.style.borderColor='var(--burg)'; }
+
+  showToast('Itinerary saved to your profile.');
+  if(currentUser) renderProfilePage();
+}
+
+let pendingSave = false;
+
 function simpleHash(str){
   // Simple non-cryptographic hash — production would use Supabase Auth which bcrypts server-side
   let h = 0;
@@ -7800,6 +8350,7 @@ function renderProfilePage(){
   const destImgs = {
     'Italy':'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70',
     'Balkans':'https://images.unsplash.com/photo-1555990793-da11153b2473?w=400&q=70',
+    'Slovenia':'https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?w=400&q=70',
     'Greece':'https://images.unsplash.com/photo-1499678329028-101435549a4e?w=400&q=70',
     'France':'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&q=70',
     'Croatia':'https://images.unsplash.com/photo-1555990793-da11153b2473?w=400&q=70',
@@ -7831,6 +8382,7 @@ function renderProfilePage(){
         '<div class="sc-chips">'+chips.map(c=>'<span class="sc-chip">'+c+'</span>').join('')+'</div>' +
         '<div class="sc-actions">' +
           '<button class="sc-btn primary" onclick="loadSavedTrip(\''+save.id+'\')">Open →</button>' +
+          '<button class="sc-btn" onclick="planSimilarTrip(\''+save.id+'\')" title="Pre-fill quiz with same destination, vibes & budget">↗ Similar</button>' +
           '<button class="sc-btn" onclick="exportSavedPDF(\''+save.id+'\')">↓ PDF</button>' +
           '<button class="sc-btn danger" onclick="deleteSavedTrip(\''+save.id+'\')">Delete</button>' +
         '</div>' +
@@ -7852,6 +8404,82 @@ function deleteSavedTrip(saveId){
   delete saves[saveId];
   saveSaves(saves);
   renderProfilePage();
+}
+
+/* ── Plan a similar trip ─────────────────────────────────────────────
+   Pre-fills the quiz with destination / vibes / budget / comp / pace
+   from a saved trip, then jumps straight to step 2 (date picker) so
+   the user only needs to pick new dates.                             */
+function planSimilarTrip(saveId){
+  const saves = getSaves();
+  const save  = saves[saveId];
+  if(!save) return;
+  const q = save.quizData || {};
+
+  // Reset S, keeping prefilled values; land on step 2 (dates)
+  Object.assign(S, {
+    step:      2,
+    dest:      q.dest      || save.destination || '',
+    dateFrom:  '',
+    dateTo:    '',
+    comp:      q.comp      || '',
+    vibes:     Array.isArray(q.vibes) ? [...q.vibes] : [],
+    budget:    q.budget    || 'mid',
+    pace:      q.pace      || 'balanced',
+    freeDay:   false,
+    coplanners:[], name:'', email:'', notes:'',
+  });
+
+  // ── Clear all UI selection states ──────────────────────────────────
+  document.querySelectorAll('.dest-card,.comp-card,.vc').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.qpill').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.pace-card').forEach(e=>e.classList.remove('on'));
+  ['customDestInput','uName','uEmail','uNotes'].forEach(function(id){
+    const el = document.getElementById(id); if(el) el.value = '';
+  });
+  ['dateFrom','dateTo'].forEach(function(id){
+    const el = document.getElementById(id); if(el) el.value = '';
+  });
+
+  // ── Re-apply destination ──────────────────────────────────────────
+  const destCard = document.querySelector('.dest-card[data-v="' + CSS.escape(S.dest) + '"]');
+  if(destCard){
+    destCard.classList.add('on');
+  } else if(S.dest){
+    const ci = document.getElementById('customDestInput');
+    if(ci) ci.value = S.dest;
+  }
+
+  // ── Re-apply companion ────────────────────────────────────────────
+  if(S.comp){
+    const cc = document.querySelector('.comp-card[data-v="' + CSS.escape(S.comp) + '"]');
+    if(cc) cc.classList.add('on');
+  }
+
+  // ── Re-apply vibes ────────────────────────────────────────────────
+  S.vibes.forEach(function(v){
+    const vc = document.querySelector('.vc[data-v="' + CSS.escape(v) + '"]');
+    if(vc) vc.classList.add('on');
+  });
+
+  // ── Re-apply budget pill ──────────────────────────────────────────
+  if(S.budget){
+    const bp = document.querySelector('.qpill[data-v="' + CSS.escape(S.budget) + '"]');
+    if(bp) bp.classList.add('on');
+  }
+
+  // ── Re-apply pace ─────────────────────────────────────────────────
+  const pc = document.querySelector('.pace-card[data-v="' + CSS.escape(S.pace) + '"]');
+  if(pc) pc.classList.add('on');
+  else {
+    const def = document.querySelector('.pace-card[data-v="balanced"]');
+    if(def) def.classList.add('on');
+  }
+
+  // ── Navigate ──────────────────────────────────────────────────────
+  showPg('pg-quiz');
+  updateQ();
+  showToast('Destination & vibes from ' + (save.destination || 'your saved trip') + ' — just pick new dates ↓');
 }
 
 function exportSavedPDF(saveId){
@@ -8521,36 +9149,57 @@ function showMapPin(el){
 /* ══════════════════════════════════════
    SHAREABLE TRIP LINK
 ══════════════════════════════════════ */
+/* ══════════════════════════════════════
+   SHAREABLE LINK — all users, no gate
+══════════════════════════════════════ */
+const VIA_DRAFT_KEY = 'via_draft_v3';
+
+function buildSharePayload(){
+  if(!itinData) return null;
+  return {
+    itinData,
+    quizData:{ dest:S.dest, dateFrom:S.dateFrom, dateTo:S.dateTo, comp:S.comp, vibes:S.vibes, budget:S.budget, pace:S.pace },
+    lang: currentLang,
+    savedAt: new Date().toISOString(),
+  };
+}
+
+function buildShareUrl(payload){
+  try {
+    const json = JSON.stringify(payload || buildSharePayload());
+    const b64  = btoa(String.fromCharCode(...new TextEncoder().encode(json)));
+    return window.location.origin + window.location.pathname + '?trip=' + b64;
+  } catch(e){ return window.location.href; }
+}
+
 function updateShareableLink(){
-  // Build Base64 shareable URL if data exists
+  if(!itinData) return;
+  const payload = buildSharePayload();
+  // 1. Save draft to localStorage (silent, no friction)
+  try { localStorage.setItem(VIA_DRAFT_KEY, JSON.stringify(payload)); } catch(e){}
+  // 2. Stash the URL for the card modal / share button
+  try { window._shareUrl = buildShareUrl(payload); } catch(e){}
+  // 3. Populate the card modal URL preview if it's open
+  const urlEl = document.getElementById('tcmShareUrl');
+  if(urlEl && window._shareUrl){
+    const short = window._shareUrl.replace(/^https?:\/\/(www\.)?/,'').slice(0,55);
+    urlEl.textContent = short + (window._shareUrl.length > 58 ? '…' : '');
+  }
 }
 
 function shareItin(){
-  if(!itinData){ return; }
-  const isPlusPlan = currentUser && currentUser.plan === 'plus';
-
-  if(isPlusPlan){
-    // Build permanent shareable Base64 URL
-    try {
-      const payload = { itinData, quizData:{dest:S.dest,dateFrom:S.dateFrom,dateTo:S.dateTo,comp:S.comp,vibes:S.vibes,budget:S.budget}, lang:currentLang };
-      const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(payload))));
-      const shareUrl = window.location.origin + window.location.pathname + '?trip=' + b64;
-      if(navigator.share){
-        navigator.share({title: itinData.title||'My Via Trip', text:'Check out my travel plan made with Via', url: shareUrl});
-      } else {
-        navigator.clipboard.writeText(shareUrl).then(()=>{
-          showToast(tToast('linkCopied'));
-        });
-      }
-    } catch(e){ navigator.clipboard.writeText(window.location.href); }
+  if(!itinData) return;
+  const url = window._shareUrl || buildShareUrl();
+  if(navigator.share){
+    navigator.share({
+      title: itinData.title || 'My Via Trip',
+      text:  'Check out my travel plan made with Via — free AI trip planner',
+      url,
+    }).catch(()=>{});
   } else {
-    // Free users: share current URL + prompt to upgrade for persistent link
-    if(navigator.share){
-      navigator.share({title:'Via Travel Plan', url: window.location.href});
-    } else {
-      showToast(tToast('linkCopied'));
-      navigator.clipboard.writeText(window.location.href).catch(()=>{});
-    }
+    navigator.clipboard.writeText(url).then(()=>{
+      showToast('Link copied — paste it anywhere ✓');
+    }).catch(()=>{});
   }
 }
 
@@ -8562,160 +9211,387 @@ function showToast(msg){
   setTimeout(()=>t.remove(), 4000);
 }
 
+/* ══════════════════════════════════════
+   DRAFT SAVE / RESTORE (no account needed)
+══════════════════════════════════════ */
+function checkDraftBanner(){
+  // Don't show if we're already viewing a shared/loaded trip
+  if(isSharedView || itinData) return;
+  const raw = localStorage.getItem(VIA_DRAFT_KEY);
+  if(!raw) return;
+  try {
+    const draft = JSON.parse(raw);
+    if(!draft.itinData || !draft.quizData) return;
+    const dest  = draft.quizData.dest || '';
+    const saved = draft.savedAt ? new Date(draft.savedAt) : null;
+    const ago   = saved ? Math.round((Date.now()-saved)/60000) : null;
+    const agoStr = ago === null ? '' : ago < 60 ? ago+'m ago' : ago < 1440 ? Math.round(ago/60)+'h ago' : Math.round(ago/1440)+'d ago';
+
+    const titleEl = document.getElementById('draftBannerTitle');
+    const subEl   = document.getElementById('draftBannerSub');
+    if(titleEl) titleEl.textContent = 'Resume your ' + dest + ' trip';
+    if(subEl)   subEl.textContent   = (draft.itinData.title||'Your itinerary') + (agoStr ? ' · saved ' + agoStr : '');
+
+    const banner = document.getElementById('draftBanner');
+    if(banner) banner.style.display = 'block';
+  } catch(e){ localStorage.removeItem(VIA_DRAFT_KEY); }
+}
+
+function resumeDraft(){
+  const raw = localStorage.getItem(VIA_DRAFT_KEY);
+  if(!raw) return;
+  try {
+    const draft = JSON.parse(raw);
+    if(!draft.itinData || !draft.quizData) return;
+    const qd = draft.quizData;
+    itinData = draft.itinData;
+    S.dest     = String(qd.dest||'').slice(0,200);
+    S.dateFrom = typeof qd.dateFrom==='string' ? qd.dateFrom.slice(0,10) : '';
+    S.dateTo   = typeof qd.dateTo==='string'   ? qd.dateTo.slice(0,10)   : '';
+    S.comp     = typeof qd.comp==='string'     ? qd.comp.slice(0,100)    : '';
+    S.vibes    = Array.isArray(qd.vibes) ? qd.vibes.filter(v=>typeof v==='string').slice(0,10) : [];
+    S.budget   = ['budget','mid','comfortable','luxury'].includes(qd.budget) ? qd.budget : 'mid';
+    S.pace     = typeof qd.pace==='string' ? qd.pace.slice(0,50) : 'balanced';
+    currentTier = S.budget;
+    if(draft.lang) applyLang(draft.lang);
+    const banner = document.getElementById('draftBanner');
+    if(banner) banner.style.display = 'none';
+    renderItin(itinData);
+    showPg('pg-itin');
+  } catch(e){ console.warn('[via] resumeDraft failed:', e); }
+}
+
+function dismissDraft(){
+  localStorage.removeItem(VIA_DRAFT_KEY);
+  const banner = document.getElementById('draftBanner');
+  if(banner) banner.style.display = 'none';
+}
+
 // Removed: duplicate checkSharedTrip (overridden by the full version below)
 
 /* ══════════════════════════════════════
-   TRIP CARD (Instagram / WhatsApp)
+   TRIP CARD — beautiful Instagram story
 ══════════════════════════════════════ */
-function openTripCard(){
-  if(!itinData){ alert('Generate an itinerary first.'); return; }
-  document.getElementById('tripCardModal').classList.add('open');
-  const isPlusPlan = currentUser && currentUser.plan === 'plus';
-  document.getElementById('tcmWmNote').textContent = isPlusPlan ? '✓ Via Plus — watermark-free download' : 'Free version includes a small Via watermark · Upgrade for clean card';
-  drawTripCard(isPlusPlan);
+let _cardStyle = 'ink'; // 'ink' | 'parch' | 'night'
+
+// Style palettes
+const CARD_STYLES = {
+  ink: {
+    bg1:'#140E09', bg2:'#2A1810', bg3:'#140E09',
+    accent:'#6B2737', gold:'#C4892A',
+    logoCol:'#F2EBD9', destCol:'rgba(242,235,217,0.95)',
+    titleCol:'#F2EBD9', titleAlpha:.9,
+    chipBg:'rgba(107,39,55,0.85)', chipText:'#F2EBD9',
+    panelBg:'rgba(242,235,217,0.055)', panelBorder:'rgba(242,235,217,0.08)',
+    dayNum:'#6B2737', dayTitle:'#F2EBD9', daySub:'rgba(242,235,217,0.5)',
+    sep:'rgba(242,235,217,0.06)',
+    tipBg:'rgba(196,137,42,0.13)', tipLabel:'#C4892A', tipText:'rgba(242,235,217,0.78)',
+    footBg:'#6B2737', footText:'rgba(242,235,217,0.85)', footUrl:'#C4892A',
+    topStripe:'#C4892A',
+  },
+  parch: {
+    bg1:'#F2EBD9', bg2:'#EDE4CC', bg3:'#F2EBD9',
+    accent:'#6B2737', gold:'#C4892A',
+    logoCol:'#1C1510', destCol:'#1C1510',
+    titleCol:'#3D2318', titleAlpha:1,
+    chipBg:'rgba(107,39,55,0.9)', chipText:'#F2EBD9',
+    panelBg:'rgba(28,21,16,0.04)', panelBorder:'rgba(28,21,16,0.1)',
+    dayNum:'#6B2737', dayTitle:'#1C1510', daySub:'rgba(28,21,16,0.5)',
+    sep:'rgba(28,21,16,0.07)',
+    tipBg:'rgba(196,137,42,0.1)', tipLabel:'#8B5E10', tipText:'rgba(28,21,16,0.7)',
+    footBg:'#1C1510', footText:'rgba(242,235,217,0.8)', footUrl:'#C4892A',
+    topStripe:'#6B2737',
+  },
+  night: {
+    bg1:'#0A1520', bg2:'#0D1E14', bg3:'#0A1520',
+    accent:'#1E3D2F', gold:'#C4892A',
+    logoCol:'#E8F4EC', destCol:'rgba(232,244,236,0.95)',
+    titleCol:'#E8F4EC', titleAlpha:.88,
+    chipBg:'rgba(30,61,47,0.9)', chipText:'#E8F4EC',
+    panelBg:'rgba(232,244,236,0.05)', panelBorder:'rgba(232,244,236,0.08)',
+    dayNum:'#2D5C44', dayTitle:'#E8F4EC', daySub:'rgba(232,244,236,0.48)',
+    sep:'rgba(232,244,236,0.06)',
+    tipBg:'rgba(196,137,42,0.12)', tipLabel:'#C4892A', tipText:'rgba(232,244,236,0.72)',
+    footBg:'#1E3D2F', footText:'rgba(232,244,236,0.8)', footUrl:'#C4892A',
+    topStripe:'#2D5C44',
+  },
+};
+
+function setCardStyle(style, btn){
+  _cardStyle = style;
+  document.querySelectorAll('.tcm-style-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  drawTripCard();
 }
 
+function openTripCard(){
+  if(!itinData){ alert('Generate an itinerary first.'); return; }
+  _cardStyle = 'ink';
+  document.querySelectorAll('.tcm-style-btn').forEach(b=>b.classList.remove('on'));
+  const inkBtn = document.getElementById('tcmStyleInk');
+  if(inkBtn) inkBtn.classList.add('on');
+  document.getElementById('tripCardModal').classList.add('open');
+  // Populate URL preview
+  updateShareableLink();
+  const urlEl = document.getElementById('tcmShareUrl');
+  if(urlEl && window._shareUrl){
+    const short = window._shareUrl.replace(/^https?:\/\/(www\.)?/,'').slice(0,55);
+    urlEl.textContent = short + (window._shareUrl.length > 58 ? '…' : '');
+  }
+  drawTripCard();
+}
 function closeTripCard(){ document.getElementById('tripCardModal').classList.remove('open'); }
 
-function drawTripCard(isPlus){
+/* ── Helpers ── */
+function tcWrapText(ctx, text, x, y, maxW, lineH){
+  const words = text.split(' ');
+  let line = '', out = [];
+  for(const w of words){
+    const test = line ? line+' '+w : w;
+    if(ctx.measureText(test).width > maxW && line){ out.push(line); line = w; }
+    else line = test;
+  }
+  if(line) out.push(line);
+  out.forEach((l,i)=>ctx.fillText(l, x, y+i*lineH));
+  return out.length;
+}
+function tcRoundRect(ctx, x, y, w, h, r, fill){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y); ctx.arcTo(x+w,y,x+w,y+r,r);
+  ctx.lineTo(x+w,y+h-r); ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h); ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r); ctx.arcTo(x,y,x+r,y,r);
+  ctx.closePath();
+  if(fill){ ctx.fillStyle=fill; ctx.fill(); }
+}
+
+function drawTripCard(){
   const canvas = document.getElementById('tripCardCanvas');
   const ctx = canvas.getContext('2d');
-  canvas.width = 1080;
-  canvas.height = 1920;
-  const W = canvas.width, H = canvas.height;
+  const p = CARD_STYLES[_cardStyle] || CARD_STYLES.ink;
 
-  // Background gradient
+  // Fixed 9:16 canvas — rendered at 2× then displayed at 540×960
+  canvas.width  = 1080;
+  canvas.height = 1920;
+  const W = 1080, H = 1920;
+  const PAD = 88;
+
+  // ── Background ────────────────────────────────────────────────
   const grad = ctx.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0,'#1C1510');
-  grad.addColorStop(0.6,'#3D2318');
-  grad.addColorStop(1,'#1C1510');
+  grad.addColorStop(0,   p.bg1);
+  grad.addColorStop(0.5, p.bg2);
+  grad.addColorStop(1,   p.bg3);
   ctx.fillStyle = grad;
   ctx.fillRect(0,0,W,H);
 
-  // Grain texture overlay (simple dots pattern)
-  ctx.fillStyle = 'rgba(242,235,217,0.015)';
-  for(let i=0;i<8000;i++){
-    const x=Math.random()*W, y=Math.random()*H;
-    ctx.fillRect(x,y,1,1);
+  // Subtle noise (per-style opacity)
+  const noiseAlpha = _cardStyle==='parch' ? 0.008 : 0.018;
+  ctx.fillStyle = _cardStyle==='parch' ? `rgba(28,21,16,${noiseAlpha})` : `rgba(242,235,217,${noiseAlpha})`;
+  for(let i=0;i<6000;i++){ ctx.fillRect(Math.random()*W|0, Math.random()*H|0, 1+Math.random()|0, 1); }
+
+  // Diagonal decorative lines (subtle)
+  ctx.save();
+  ctx.strokeStyle = _cardStyle==='parch' ? 'rgba(28,21,16,0.04)' : 'rgba(242,235,217,0.03)';
+  ctx.lineWidth = 1;
+  for(let x=-H; x<W+H; x+=120){
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x+H,H); ctx.stroke();
+  }
+  ctx.restore();
+
+  // ── Top stripe ────────────────────────────────────────────────
+  ctx.fillStyle = p.topStripe;
+  ctx.fillRect(0, 0, W, 10);
+
+  // Right-side vertical accent strip
+  ctx.fillStyle = p.topStripe;
+  ctx.globalAlpha = 0.4;
+  ctx.fillRect(W-10, 0, 10, H);
+  ctx.globalAlpha = 1;
+
+  // ── Logo & tagline ────────────────────────────────────────────
+  ctx.fillStyle = p.logoCol;
+  ctx.font = '900 108px Georgia, serif';
+  ctx.fillText('via.', PAD, 195);
+
+  ctx.fillStyle = p.gold;
+  ctx.fillRect(PAD, 212, 160, 5);
+
+  ctx.fillStyle = _cardStyle==='parch' ? 'rgba(28,21,16,0.38)' : 'rgba(242,235,217,0.28)';
+  ctx.font = '600 26px "Karla", sans-serif';
+  ctx.fillText('TRAVEL PLANNED LIKE A FRIEND DID IT', PAD, 262);
+
+  // ── Destination ───────────────────────────────────────────────
+  const destRaw = (itinData.destination_display || S.dest || '').toUpperCase();
+  const destCity = destRaw.split(',')[0].trim(); // "PARIS" not "PARIS, FRANCE"
+
+  // Auto-size: 3-letter cities huge, longer ones smaller
+  const destFontSize = destCity.length <= 5 ? 220 : destCity.length <= 8 ? 172 : destCity.length <= 12 ? 140 : 110;
+  ctx.font = `900 ${destFontSize}px Georgia, serif`;
+  ctx.fillStyle = p.destCol;
+
+  // Letter-spacing effect by drawing char by char
+  let lx = PAD, totalDestW = 0;
+  const spacing = destFontSize * 0.04;
+  [...destCity].forEach(ch=>{ totalDestW += ctx.measureText(ch).width + spacing; });
+  // If too wide, scale back
+  if(totalDestW > W - PAD*2){
+    const scale = (W - PAD*2) / totalDestW;
+    ctx.font = `900 ${Math.floor(destFontSize*scale)}px Georgia, serif`;
+    [...destCity].forEach(ch=>{
+      ctx.fillText(ch, lx, 530); lx += ctx.measureText(ch).width + spacing*scale;
+    });
+  } else {
+    [...destCity].forEach(ch=>{
+      ctx.fillText(ch, lx, 530); lx += ctx.measureText(ch).width + spacing;
+    });
   }
 
-  // Top burg accent line
-  ctx.fillStyle = '#6B2737';
-  ctx.fillRect(0,0,W,8);
-
-  // Logo
-  ctx.fillStyle = '#F2EBD9';
-  ctx.font = '900 96px Georgia, serif';
-  ctx.fillText('via.', 90, 200);
-
-  // Gold divider
-  ctx.fillStyle = '#C4892A';
-  ctx.fillRect(90, 230, 120, 4);
-
-  // Destination
-  const dest = (itinData.destination_display || S.dest).toUpperCase();
-  ctx.fillStyle = 'rgba(242,235,217,0.5)';
-  ctx.font = '600 38px Karla, sans-serif';
-  ctx.letterSpacing = '6px';
-  ctx.fillText(dest, 90, 310);
-
-  // Trip title
-  ctx.fillStyle = '#F2EBD9';
-  ctx.font = 'italic 400 68px Georgia, serif';
-  const title = itinData.title || dest;
-  // Word wrap
-  const maxW = W - 180;
-  const words = title.split(' ');
-  let line = '', lines = [], y0 = 420;
-  for(const w of words){
-    const test = line + w + ' ';
-    if(ctx.measureText(test).width > maxW && line){ lines.push(line.trim()); line = w+' '; }
-    else line = test;
+  // Country (if present in destination_display)
+  if((itinData.destination_display||'').includes(',')){
+    const country = (itinData.destination_display||'').split(',').slice(1).join(',').trim().toUpperCase();
+    ctx.font = '600 34px "Karla", sans-serif';
+    ctx.fillStyle = _cardStyle==='parch' ? 'rgba(28,21,16,0.4)' : 'rgba(242,235,217,0.38)';
+    ctx.fillText(country, PAD, 580);
   }
-  if(line) lines.push(line.trim());
-  lines.slice(0,3).forEach((l,i)=>{ ctx.fillText(l, 90, y0+i*80); });
 
-  // Date chip
-  const dateStr = S.dateFrom ? fmtDate(S.dateFrom)+' – '+fmtDate(S.dateTo) : (itinData.days||[]).length + ' days';
-  ctx.fillStyle = 'rgba(107,39,55,0.8)';
-  ctx.fillRect(88, y0+lines.length*80+30, ctx.measureText(dateStr).width+40, 52);
-  ctx.fillStyle = '#F2EBD9';
-  ctx.font = '600 28px Karla, sans-serif';
-  ctx.fillText(dateStr, 110, y0+lines.length*80+65);
+  // ── Trip title ────────────────────────────────────────────────
+  const titleRaw = itinData.title || destRaw;
+  ctx.font = 'italic 400 66px Georgia, serif';
+  ctx.fillStyle = p.titleCol;
+  ctx.globalAlpha = p.titleAlpha;
+  const titleLines = tcWrapText(ctx, '"'+titleRaw+'"', PAD, 680, W-PAD*2, 80);
+  ctx.globalAlpha = 1;
 
-  // Day highlights
+  // ── Date/duration chip ────────────────────────────────────────
+  const dateStr = S.dateFrom
+    ? fmtDate(S.dateFrom) + ' – ' + fmtDate(S.dateTo)
+    : (itinData.days||[]).length + ' days';
+  const budgetLabel = { budget:'Backpacker', mid:'Mid-range', comfortable:'Comfortable', luxury:'Luxury' }[S.budget] || '';
+  const chipText  = dateStr + (budgetLabel ? '  ·  ' + budgetLabel : '');
+  ctx.font = '600 28px "Karla", sans-serif';
+  const chipW = ctx.measureText(chipText).width + 48;
+  const chipTop = 680 + titleLines*80 + 28;
+  tcRoundRect(ctx, PAD, chipTop, chipW, 54, 6, p.chipBg);
+  ctx.fillStyle = p.chipText;
+  ctx.fillText(chipText, PAD+24, chipTop+36);
+
+  // ── Days panel ────────────────────────────────────────────────
   const days = (itinData.days||[]).slice(0,5);
-  const startY = 820;
-  ctx.fillStyle = 'rgba(242,235,217,0.08)';
-  ctx.fillRect(88, startY-20, W-176, days.length*120+40);
-  ctx.fillStyle = 'rgba(242,235,217,0.3)';
-  ctx.font = '600 26px Karla, sans-serif';
-  ctx.fillText('YOUR ITINERARY', 108, startY+14);
-  ctx.fillStyle = '#C4892A';
-  ctx.fillRect(108, startY+24, 200, 2);
+  const panelTop  = chipTop + 54 + 52;
+  const rowHeight = 118;
+  const panelH    = days.length * rowHeight + 72;
+  tcRoundRect(ctx, PAD, panelTop, W-PAD*2, panelH, 12, p.panelBg);
 
-  days.forEach((day,i)=>{
-    const y = startY + 56 + i*115;
+  // Panel border
+  ctx.save();
+  ctx.strokeStyle = p.panelBorder;
+  ctx.lineWidth = 1.5;
+  tcRoundRect(ctx, PAD, panelTop, W-PAD*2, panelH, 12);
+  ctx.stroke();
+  ctx.restore();
+
+  // "YOUR DAYS" label
+  ctx.font = '700 24px "Karla", sans-serif';
+  ctx.fillStyle = p.gold;
+  ctx.fillText('YOUR DAYS', PAD+32, panelTop+42);
+  ctx.fillStyle = p.gold;
+  ctx.fillRect(PAD+32, panelTop+52, 110, 2);
+
+  days.forEach((day, i)=>{
+    const ry = panelTop + 68 + i*rowHeight;
+    const dayNumStr = String(i+1).padStart(2,'0');
+
     // Day number
-    ctx.fillStyle = '#6B2737';
-    ctx.font = '900 52px Georgia, serif';
-    ctx.fillText(`0${i+1}`, 108, y+52);
+    ctx.font = '900 64px Georgia, serif';
+    ctx.fillStyle = p.dayNum;
+    ctx.globalAlpha = 0.7;
+    ctx.fillText(dayNumStr, PAD+32, ry+62);
+    ctx.globalAlpha = 1;
+
     // Day title
-    ctx.fillStyle = '#F2EBD9';
-    ctx.font = '400 36px Georgia, serif';
-    const dt = day.title||'';
-    ctx.fillText(dt.length>32?dt.slice(0,30)+'…':dt, 180, y+30);
-    // Lunch recommendation
-    const lunch = (day.recommendations?.lunch)?.[currentTier]||(day.recommendations?.lunch)?.mid||{};
-    if(lunch.name){
-      ctx.fillStyle = 'rgba(242,235,217,0.45)';
-      ctx.font = '400 26px Karla, sans-serif';
-      ctx.fillText('Lunch · '+lunch.name, 180, y+68);
+    ctx.font = 'italic 400 38px Georgia, serif';
+    ctx.fillStyle = p.dayTitle;
+    const dtitle = (day.title||'').length > 30 ? (day.title||'').slice(0,29)+'…' : (day.title||'');
+    ctx.fillText(dtitle, PAD+120, ry+34);
+
+    // Sub — lunch or morning snippet
+    const lunch = (day.recommendations?.lunch)?.[currentTier] || (day.recommendations?.lunch)?.mid || {};
+    const sub = lunch.name ? 'Lunch · ' + lunch.name : (day.morning||'').split('.')[0].slice(0,48);
+    if(sub){
+      ctx.font = '400 26px "Karla", sans-serif';
+      ctx.fillStyle = p.daySub;
+      ctx.fillText(sub.length>46?sub.slice(0,45)+'…':sub, PAD+120, ry+72);
     }
-    // Separator
-    ctx.fillStyle = 'rgba(242,235,217,0.06)';
-    ctx.fillRect(108, y+90, W-216, 1);
+
+    // Row separator
+    if(i < days.length-1){
+      ctx.fillStyle = p.sep;
+      ctx.fillRect(PAD+32, ry+rowHeight-8, W-PAD*2-64, 1);
+    }
   });
 
-  // Insider tip
-  if(itinData.insider_tip){
-    const tipY = startY + 56 + days.length*115 + 40;
-    ctx.fillStyle = 'rgba(196,137,42,0.15)';
-    ctx.fillRect(88, tipY, W-176, 130);
-    ctx.fillStyle = '#C4892A';
-    ctx.font = '700 22px Karla, sans-serif';
-    ctx.fillText('LOCAL TIP', 108, tipY+36);
-    ctx.fillStyle = 'rgba(242,235,217,0.7)';
-    ctx.font = 'italic 400 28px Georgia, serif';
-    const tip = itinData.insider_tip||'';
-    const tipShort = tip.length>90?tip.slice(0,88)+'…':tip;
-    ctx.fillText(tipShort, 108, tipY+82);
+  // ── Insider tip ───────────────────────────────────────────────
+  const tipTop = panelTop + panelH + 44;
+  if(itinData.insider_tip && tipTop < H-280){
+    const tipText = '"' + (itinData.insider_tip||'') + '"';
+    ctx.font = 'italic 400 30px Georgia, serif';
+    // Measure wrapped height
+    const tipWords = tipText.split(' ');
+    let tl='', tipLines=[];
+    tipWords.forEach(w=>{ const t=tl?tl+' '+w:w; if(ctx.measureText(t).width>W-PAD*2-64&&tl){tipLines.push(tl);tl=w;}else tl=t; });
+    if(tl)tipLines.push(tl);
+    const tipLinesCount = Math.min(tipLines.length, 3);
+    const tipBoxH = tipLinesCount*42 + 72;
+    tcRoundRect(ctx, PAD, tipTop, W-PAD*2, tipBoxH, 8, p.tipBg);
+
+    ctx.font = '700 22px "Karla", sans-serif';
+    ctx.fillStyle = p.tipLabel;
+    ctx.fillText('LOCAL TIP', PAD+28, tipTop+32);
+
+    ctx.font = 'italic 400 30px Georgia, serif';
+    ctx.fillStyle = p.tipText;
+    tipLines.slice(0,3).forEach((l,i)=>ctx.fillText(l, PAD+28, tipTop+68+i*42));
   }
 
-  // Bottom section
-  ctx.fillStyle = '#6B2737';
-  ctx.fillRect(0, H-180, W, 180);
-  ctx.fillStyle = '#F2EBD9';
-  ctx.font = '400 italic 42px Georgia, serif';
-  ctx.fillText('"Travel planned like a friend did it."', 90, H-110);
-  ctx.fillStyle = '#C4892A';
-  ctx.font = '700 30px Karla, sans-serif';
-  ctx.fillText('viawander.co', 90, H-55);
+  // ── Bottom bar ────────────────────────────────────────────────
+  ctx.fillStyle = p.footBg;
+  ctx.fillRect(0, H-200, W, 200);
 
-  // Watermark for free users
-  if(!isPlus){
-    ctx.fillStyle = 'rgba(242,235,217,0.12)';
-    ctx.font = '600 22px Karla, sans-serif';
-    ctx.fillText('Made with viawander.co · Free plan', 90, H-18);
-  }
+  // Gold line on top of footer
+  ctx.fillStyle = p.gold;
+  ctx.fillRect(0, H-200, W, 3);
+
+  ctx.font = 'italic 400 38px Georgia, serif';
+  ctx.fillStyle = p.footText;
+  ctx.fillText('"Travel planned like a friend did it."', PAD, H-128);
+
+  ctx.font = '700 34px "Karla", sans-serif';
+  ctx.fillStyle = p.footUrl;
+  ctx.fillText('viawander.co', PAD, H-68);
+
+  // Free-plan attribution (subtle, inside footer — still visible)
+  ctx.font = '400 22px "Karla", sans-serif';
+  ctx.fillStyle = _cardStyle==='parch' ? 'rgba(242,235,217,0.28)' : 'rgba(242,235,217,0.22)';
+  ctx.fillText('Free trip planner · viawander.co', PAD, H-28);
 }
 
 function downloadTripCard(){
   const canvas = document.getElementById('tripCardCanvas');
   const a = document.createElement('a');
-  a.download = 'via-trip-card.png';
+  const dest = (itinData?.destination_display || S.dest || 'trip').toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-');
+  a.download = 'via-' + dest + '-' + _cardStyle + '.png';
   a.href = canvas.toDataURL('image/png');
   a.click();
+}
+
+function copyTripLink(){
+  const url = window._shareUrl || buildShareUrl();
+  const btn = document.getElementById('tcmCopyLinkBtn');
+  navigator.clipboard.writeText(url).then(()=>{
+    if(btn){ btn.textContent='✓ Copied!'; btn.classList.add('copied'); }
+    setTimeout(()=>{ if(btn){ btn.textContent='⇗ Copy link'; btn.classList.remove('copied'); } }, 2500);
+  }).catch(()=>{});
 }
 
 
@@ -9492,6 +10368,34 @@ const SEED_POSTS = [
     featured: false,
   },
   {
+    id: 'seed_5',
+    title: 'Postojnska jama: what to know before you go underground',
+    excerpt: 'Twenty-four kilometres of cave, a century-old train, and the only cave-dwelling vertebrate in the world. Everything you need to visit Slovenia\'s most extraordinary site.',
+    body: '<p>Postojnska jama is not a tourist trap dressed up as a natural wonder. It is the other way around — a genuine geological marvel that happens to draw a million visitors a year. The cave is 24 kilometres long, the largest karst cave in Europe open to the public, and it has been welcoming visitors since 1819. Napoleon\'s troops were among the first organised groups. The electric lighting went in before the Eiffel Tower was built.</p><h2>The logistics</h2><p>Entry includes a 4km round trip on the cave railway — one of the oldest underground railways in the world — followed by a 1.7km guided walk on foot. The whole visit takes about 90 minutes. Temperature inside is a steady 10°C year-round, which comes as a shock in August. Bring a light layer regardless of the season outside.</p><p>Book tickets online before you arrive. In summer the queues for walk-up tickets are long and departure slots fill by mid-morning. The official site is postojnska-jama.eu — do not buy from resellers at markup.</p><h2>Proteus anguinus</h2><p>The cave is home to Proteus anguinus, the olm: a blind, pale, cave-adapted salamander that can live for over a century and survive years without food. It is the only cave-dwelling vertebrate native to Europe. The Postojna breeding programme has produced hundreds of these animals. You will see them in the vivarium section of the walk — small, translucent, utterly strange. Nothing else looks like them.</p><blockquote>Slovenians call it the "human fish" — because its pale, almost translucent skin resembles human flesh. Once you see it, the name makes uncomfortable sense.</blockquote><h2>Predjamski grad</h2><p>Nine kilometres from Postojna, Predjama Castle is built directly into the mouth of a cliff cave, halfway up a 123-metre rock face. It looks fabricated. It is not. The current structure dates from the 16th century. The combination ticket covering both Postojna Cave and Predjama is good value and the two-site day is entirely manageable — the drive takes twelve minutes.</p><h2>Getting there</h2><p>Postojna is one hour from Ljubljana by car (54km on the A1 motorway). By bus, Nomago and FlixBus both run direct services from Ljubljana Bus Station, roughly 1h15. The cave entrance is a five-minute walk from the bus stop in Postojna town. There is no useful public transport to Predjama Castle — rent a car or book the castle as an add-on through the Postojna Cave booking system, which includes a shuttle.</p>',
+    category: 'destination',
+    sponsored: false,
+    sponsorName: '',
+    author: 'Via Editorial',
+    authorInitials: 'VE',
+    date: new Date(Date.now() - 86400000 * 2).toISOString(),
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80',
+    featured: true,
+  },
+  {
+    id: 'seed_6',
+    title: 'Prekmurje: the part of Slovenia nobody talks about',
+    excerpt: 'Flat, quiet, and stubborn about its own way of doing things. The northeast corner of Slovenia has thermal spas, a distinct cuisine, and a pace entirely unlike the rest of the country.',
+    body: '<p>Most people who visit Slovenia do the same loop: Ljubljana, Bled, Piran. It is a good loop. But there is a region in the northeast — bordered by Austria, Hungary, and Croatia — that operates at a completely different frequency. Prekmurje is the only part of Slovenia that lies across the Mura river, geographically and culturally cut off from the rest of the country for centuries. You can feel it immediately.</p><h2>The landscape</h2><p>Prekmurje is flat. The Julian Alps are not visible here. The terrain is agricultural — sunflowers, pumpkins, cornfields in long rows — interrupted by the Goričko hills in the north, which are gentle and wooded and almost entirely empty of tourists. This is a landscape that rewards slow movement: cycling between villages, stopping at farmsteads, losing an afternoon at a thermal spa without deciding anything.</p><h2>The food</h2><p>Prekmurje has a cuisine distinct enough that Slovenians from Ljubljana will tell you it is almost Hungarian. They are not wrong. Bograč is a meat stew slow-cooked with three types of meat and paprika — heavy, restorative, nothing like anything you will eat in Ljubljana. Gibanica is the region\'s layered pastry, filled with poppy seed, walnuts, cottage cheese, and apple, baked together in alternating strata. Order it everywhere.</p><blockquote>Prekmurska gibanica is protected by EU designation as a traditional speciality. It does not travel well. Eat it here.</blockquote><p>In Murska Sobota, the regional capital, the covered market on Saturday mornings sells pumpkin oil — pressed from roasted seeds, dark green, nutty — which you will want to take home in a bottle. It goes on everything.</p><h2>Terme Banovci & Terme 3000</h2><p>The thermal spas here are not luxury resorts. They are large, local, family-oriented places where Slovenians and Hungarians come to spend a weekend floating in warm mineral water with no particular agenda. Terme Banovci near Veržej has a quieter, more rural feel. Terme 3000 in Moravske Toplice is larger and more polished. Both cost well under €20 for a full day. Neither requires booking far in advance outside of peak summer.</p><h2>Getting there</h2><p>Murska Sobota is 190km from Ljubljana — about two hours by car on the A1 and A5 motorways. By train, the journey takes around 2h45 with a change at Pragersko, running three or four times a day. It is manageable but the car gives you more. Base yourself in or near Murska Sobota and treat Goričko and the thermal spas as day excursions. Two nights is enough to understand what the region is. Three nights is better.</p>',
+    category: 'destination',
+    sponsored: false,
+    sponsorName: '',
+    author: 'Via Editorial',
+    authorInitials: 'VE',
+    date: new Date(Date.now() - 86400000 * 1).toISOString(),
+    image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=900&q=80',
+    featured: false,
+  },
+  {
     id: 'seed_4',
     title: 'Why we recommend booking accommodation at least 6 weeks out',
     excerpt: 'Partner story: how early planning changes what is available to you — and why it matters more in shoulder season than peak.',
@@ -10225,23 +11129,50 @@ buildLangBar();
 applyLang('en');
 initAuth();
 checkSharedTrip();
+// Show draft resume banner on landing page (after shared-trip check, since that sets isSharedView)
+setTimeout(checkDraftBanner, 80);
 </script>
 
 
 <!-- ═══ TRIP CARD MODAL ═══ -->
 <div class="tripcard-modal-overlay" id="tripCardModal" onclick="if(event.target===this)closeTripCard()">
   <div class="tripcard-modal">
-    <button class="tcm-close" onclick="closeTripCard()">✕ Close</button>
-    <div class="tcm-title">Your Via trip card</div>
-    <div class="tcm-sub">Download and share on Instagram Stories, WhatsApp, or anywhere you like.</div>
+    <div class="tcm-header">
+      <div class="tcm-header-text">
+        <div class="tcm-title">Your trip card</div>
+        <div class="tcm-sub">Download for Instagram Stories, WhatsApp, or anywhere.</div>
+      </div>
+      <button class="tcm-close" onclick="closeTripCard()">✕ Close</button>
+    </div>
+    <!-- Style picker -->
+    <div class="tcm-styles">
+      <button class="tcm-style-btn on" id="tcmStyleInk" onclick="setCardStyle('ink',this)">
+        <span class="tsb-dot" style="background:linear-gradient(135deg,#1C1510,#6B2737)"></span>
+        Ink
+      </button>
+      <button class="tcm-style-btn" id="tcmStyleParch" onclick="setCardStyle('parch',this)">
+        <span class="tsb-dot" style="background:linear-gradient(135deg,#F2EBD9,#C4892A)"></span>
+        Parchment
+      </button>
+      <button class="tcm-style-btn" id="tcmStyleNight" onclick="setCardStyle('night',this)">
+        <span class="tsb-dot" style="background:linear-gradient(135deg,#0D1B2A,#1E3D2F)"></span>
+        Night
+      </button>
+    </div>
+    <!-- Canvas preview -->
     <div class="tripcard-preview">
       <canvas id="tripCardCanvas" width="540" height="960"></canvas>
     </div>
+    <!-- Actions -->
     <div class="tcm-actions">
-      <button class="btn-dl-card" onclick="downloadTripCard()">↓ Download card</button>
-      <button class="btn-close-card" onclick="closeTripCard()">Close</button>
+      <button class="btn-dl-card" onclick="downloadTripCard()">↓ Download image</button>
+      <button class="btn-copy-link" id="tcmCopyLinkBtn" onclick="copyTripLink()">⇗ Copy link</button>
     </div>
-    <div class="tcm-wm-note" id="tcmWmNote"></div>
+    <!-- Shareable URL preview -->
+    <div class="tcm-share-row">
+      <span class="tcm-share-label">Link</span>
+      <span class="tcm-share-url" id="tcmShareUrl">Building link…</span>
+    </div>
   </div>
 </div>
 
@@ -10279,6 +11210,21 @@ checkSharedTrip();
       <b>You're viewing a shared Via itinerary.</b> Plan your own trip for free in under 2 minutes.
     </div>
     <button class="shared-banner-cta" onclick="startOver();showPg('pg-land')">Plan my own trip →</button>
+  </div>
+</div>
+
+<!-- Draft resume banner — shown on landing page if a saved trip exists -->
+<div id="draftBanner" style="display:none">
+  <div class="draft-banner">
+    <div class="draft-banner-icon">✦</div>
+    <div class="draft-banner-body">
+      <div class="draft-banner-title" id="draftBannerTitle">Continue your last trip</div>
+      <div class="draft-banner-sub" id="draftBannerSub">Your itinerary was saved — pick up where you left off.</div>
+    </div>
+    <div class="draft-banner-actions">
+      <button class="draft-banner-btn" onclick="resumeDraft()">Resume →</button>
+      <button class="draft-banner-dismiss" onclick="dismissDraft()" title="Dismiss">✕</button>
+    </div>
   </div>
 </div>
 
