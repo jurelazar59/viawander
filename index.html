@@ -445,7 +445,7 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 /* ── FULL-SCREEN LOADING ── */
 #pg-load{
   position:fixed;inset:0;
-  display:flex;flex-direction:column;
+  flex-direction:column;
   align-items:center;justify-content:center;
   background:var(--ink);
   z-index:999;
@@ -6148,6 +6148,8 @@ function pickPill(el,type){ el.closest('.pill-row').querySelectorAll('.qpill').f
 /* ══ LOADING ══ */
 function startLoad(){
   showPg('pg-load');
+  // showPg sets display:block — override to flex so centering works
+  document.getElementById('pg-load').style.display = 'flex';
 
   // Set fullscreen blurred background
   const loadBg = document.getElementById('loadBg');
