@@ -3128,6 +3128,23 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   .map-footer{padding:6px 12px}
 }
 
+/* ══ SIMILAR TRIPS ══ */
+.similar-bar{padding:40px 0 36px;border-top:1px solid var(--cr2);margin-top:16px}
+.similar-bar-inner{max-width:900px;margin:0 auto;padding:0 28px}
+.similar-eye{font-family:var(--ui);font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--burg);margin-bottom:7px}
+.similar-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:18px;letter-spacing:-.02em}
+.similar-cards{display:flex;gap:11px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.similar-cards::-webkit-scrollbar{display:none}
+.similar-card{flex:0 0 160px;height:104px;position:relative;border-radius:4px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;border:1px solid rgba(28,21,16,.08)}
+.similar-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(28,21,16,.18)}
+.similar-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.8);transition:filter .35s,transform .35s}
+.similar-card:hover .similar-card-bg{filter:saturate(1.05);transform:scale(1.05)}
+.similar-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,21,16,.82) 0%,rgba(28,21,16,.12) 70%)}
+.similar-card-text{position:absolute;bottom:0;left:0;right:0;padding:9px 11px}
+.similar-card-name{font-family:var(--serif);font-size:.9rem;font-weight:700;color:#F2EBD9;line-height:1.25}
+.similar-card-cta{font-family:var(--ui);font-size:.55rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(242,235,217,.55);margin-top:3px}
+@media(max-width:640px){.similar-bar-inner{padding:0 16px}.similar-card{flex:0 0 140px;height:90px}}
+
 /* ══ PACKING LIST ══ */
 .pack-panel{padding:2rem 3rem}
 .pack-header{margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--cr3)}
@@ -5498,6 +5515,7 @@ select.budget-select:focus,
       <div class="itin-main" id="itinMain"></div>
       <div class="itin-aside" id="itinAside"></div>
     </div>
+    <div id="similarBar"></div>
   </div>
 
   <div class="main-panel" id="stays-panel">
@@ -5588,6 +5606,8 @@ function applyLang(lang){
   // Update pack spinner
   const packLabel = document.getElementById('packLoadLabel');
   if(packLabel) packLabel.textContent = t('pack_load') || 'Building your packing list…';
+  // Re-render similar trips bar with new language
+  if(document.getElementById('similarBar')?.children.length) renderSimilarTrips();
 }
 
 function buildLangBar(){
@@ -6284,6 +6304,146 @@ function renderItin(data){
       });
     });
   });
+
+  // Similar trips bar
+  renderSimilarTrips();
+}
+
+/* ══════════════════════════════════════
+   SIMILAR TRIPS
+══════════════════════════════════════ */
+// Each entry: regex to test against destination string → array of suggestion names
+// Names must match keys in heroImgs for photos to resolve
+const SIMILAR_MAP = [
+  // Adriatic & Balkans
+  { re:/croatia|dubrovnik|split|hvar|zagreb|dalmatia/i,       sug:['Montenegro','Slovenia','Greece & Islands'] },
+  { re:/montenegro|kotor/i,                                    sug:['Croatia','Slovenia','Albania'] },
+  { re:/slovenia|bled|ljubljana|piran|triglav|bohinj/i,        sug:['Croatia','Italy','Vienna'] },
+  { re:/balkans|adriatic/i,                                    sug:['Croatia','Montenegro','Slovenia'] },
+  // Italy
+  { re:/rome|roma/i,                                           sug:['Florence','Naples','Athens'] },
+  { re:/florence|tuscany/i,                                    sug:['Rome','Venice','Slovenia'] },
+  { re:/venice/i,                                              sug:['Florence','Croatia','Vienna'] },
+  { re:/amalfi|naples|campania/i,                              sug:['Sicily','Greece & Islands','Rome'] },
+  { re:/sicily/i,                                              sug:['Amalfi Coast','Tunisia','Malta'] },
+  { re:/milan/i,                                               sug:['Venice','Lyon','Vienna'] },
+  { re:/italy(?!\s*(riviera|lakes))|italia/i,                  sug:['Greece & Islands','Croatia','France & Spain'] },
+  // France
+  { re:/paris/i,                                               sug:['Amsterdam','Brussels','Lyon'] },
+  { re:/provence|nice|côte|cote d.azur/i,                      sug:['Barcelona','Florence','Monaco'] },
+  { re:/bordeaux/i,                                            sug:['Madrid','Paris','San Sebastian'] },
+  { re:/france(?! & spain)/i,                                  sug:['Spain','Italy','British Isles'] },
+  // Spain
+  { re:/barcelona/i,                                           sug:['Madrid','Lisbon','Marseille'] },
+  { re:/madrid/i,                                              sug:['Lisbon','Barcelona','Seville'] },
+  { re:/andalusia|seville|granada|malaga/i,                    sug:['Morocco','Lisbon','Valencia'] },
+  { re:/ibiza|mallorca|balearic/i,                             sug:['Hvar','Santorini','Valencia'] },
+  { re:/spain|espana|españa/i,                                 sug:['Portugal','France & Spain','Morocco'] },
+  // Portugal
+  { re:/lisbon|lisboa/i,                                       sug:['Porto','Madrid','Marrakech'] },
+  { re:/porto|algarve|portugal/i,                              sug:['Lisbon','Seville','Morocco'] },
+  // France & Spain (preset card)
+  { re:/france & spain/i,                                      sug:['Italy','Portugal','Morocco'] },
+  // Greece
+  { re:/santorini|mykonos|cyclades/i,                          sug:['Crete','Hvar','Dubrovnik'] },
+  { re:/crete/i,                                               sug:['Rhodes','Athens','Sicily'] },
+  { re:/athens/i,                                              sug:['Istanbul','Santorini','Rome'] },
+  { re:/greece|greek islands/i,                                sug:['Croatia','Italy','Istanbul'] },
+  { re:/greece & islands/i,                                    sug:['Croatia','Italy','Istanbul'] },
+  // Turkey / Middle East
+  { re:/istanbul|turkey/i,                                     sug:['Greece & Islands','Croatia','Morocco'] },
+  // Central Europe
+  { re:/prague/i,                                              sug:['Vienna','Budapest','Krakow'] },
+  { re:/vienna/i,                                              sug:['Prague','Budapest','Salzburg'] },
+  { re:/budapest/i,                                            sug:['Prague','Vienna','Krakow'] },
+  { re:/amsterdam/i,                                           sug:['Brussels','Copenhagen','Berlin'] },
+  { re:/berlin/i,                                              sug:['Prague','Amsterdam','Copenhagen'] },
+  { re:/central europe/i,                                      sug:['Scandinavia','British Isles','France & Spain'] },
+  // Scandinavia
+  { re:/copenhagen/i,                                          sug:['Stockholm','Amsterdam','Edinburgh'] },
+  { re:/stockholm/i,                                           sug:['Copenhagen','Helsinki','Oslo'] },
+  { re:/oslo|reykjavik|iceland/i,                              sug:['Stockholm','Edinburgh','Faroe Islands'] },
+  { re:/scandinavia|nordic/i,                                  sug:['British Isles','Central Europe','Iceland'] },
+  // British Isles
+  { re:/london/i,                                              sug:['Amsterdam','Paris','Edinburgh'] },
+  { re:/edinburgh|scotland/i,                                  sug:['Dublin','London','Reykjavik'] },
+  { re:/ireland|dublin/i,                                      sug:['Edinburgh','London','Amsterdam'] },
+  { re:/british isles/i,                                       sug:['France & Spain','Central Europe','Scandinavia'] },
+  // North Africa
+  { re:/morocco|marrakech|fez|casablanca/i,                    sug:['Portugal','Seville','Egypt'] },
+  // Japan
+  { re:/tokyo|japan/i,                                         sug:['Kyoto','Seoul','Bali'] },
+  { re:/kyoto/i,                                               sug:['Tokyo','Osaka','Thailand'] },
+  // SE Asia
+  { re:/bali|indonesia/i,                                      sug:['Thailand','Vietnam','Kyoto'] },
+  { re:/thailand/i,                                            sug:['Bali','Vietnam','Japan'] },
+];
+
+function getSimilarTrips(dest){
+  if(!dest) return [];
+  const str = dest.trim();
+  for(const entry of SIMILAR_MAP){
+    if(entry.re.test(str)){
+      // Filter to suggestions that have a hero photo, fall back to showing them anyway
+      return entry.sug.slice(0, 3);
+    }
+  }
+  // Generic fallback
+  return ['Italy', 'Greece & Islands', 'France & Spain'];
+}
+
+function renderSimilarTrips(){
+  const bar = document.getElementById('similarBar');
+  if(!bar) return;
+  const dest = (itinData && itinData.destination_display) || S.dest || '';
+  const suggestions = getSimilarTrips(dest);
+  if(!suggestions.length){ bar.innerHTML=''; return; }
+
+  let cards = suggestions.map(function(d){
+    const imgUrl = heroImgs[d] || '';
+    const bg = imgUrl ? imgUrl.replace(/w=\d+/, 'w=320').replace(/q=\d+/, 'q=65') : '';
+    const bgStyle = bg ? 'background-image:url('+bg+')' : 'background:#1C1510';
+    return '<div class="similar-card" onclick="planSimilar(\''+d.replace(/'/g,"\\'")+'\')">'
+      + '<div class="similar-card-bg" style="'+bgStyle+'"></div>'
+      + '<div class="similar-card-overlay"></div>'
+      + '<div class="similar-card-text">'
+      + '<div class="similar-card-name">'+d+'</div>'
+      + '<div class="similar-card-cta">'+t('similar_plan')+'</div>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  bar.innerHTML = '<div class="similar-bar">'
+    + '<div class="similar-bar-inner">'
+    + '<div class="similar-eye">'+t('similar_eye')+'</div>'
+    + '<div class="similar-title">'+t('similar_title')+'</div>'
+    + '<div class="similar-cards">'+cards+'</div>'
+    + '</div>'
+    + '</div>';
+}
+
+function planSimilar(dest){
+  // Reset state, pre-fill destination, skip to step 2
+  Object.assign(S,{step:2,dest:dest,dateFrom:'',dateTo:'',comp:'',vibes:[],budget:'mid',pace:'balanced',freeDay:false,coplanners:[],name:'',email:'',notes:''});
+  currentTier = 'mid';
+  document.querySelectorAll('.dest-card,.comp-card,.vc').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.qpill').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.pace-card').forEach(function(c){c.classList.remove('on')});
+  const defPace = document.querySelector('.pace-card[data-v="balanced"]');
+  if(defPace) defPace.classList.add('on');
+  ['customDestInput','uName','uEmail','uNotes'].forEach(function(id){ const e=document.getElementById(id); if(e) e.value=''; });
+  ['dateFrom','dateTo'].forEach(function(id){ const e=document.getElementById(id); if(e) e.value=''; });
+  // Pre-highlight the matching dest card if it exists, else populate custom input
+  const matchCard = document.querySelector('.dest-card[data-v="'+dest+'"]');
+  if(matchCard){
+    matchCard.classList.add('on');
+  } else {
+    const ci = document.getElementById('customDestInput');
+    if(ci) ci.value = dest;
+  }
+  itinData = null;
+  showPg('pg-quiz');
+  updateQ();
 }
 
 function switchMain(panelId,btn){

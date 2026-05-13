@@ -62,6 +62,7 @@ const LANGS = {
   blog_all:'All stories', blog_dest:'Destinations', blog_tips:'Travel tips', blog_partner:'Partner stories', blog_eye:'Via Journal', blog_hero_title_html:'Stories from the road.<br><em>Places worth knowing.</em>', blog_hero_sub:'Destination guides, travel tips, and partner stories.', blog_home:'← Home', blog_back:'← Back to stories', blog_read:'Read story', blog_cat_dest:'Destination', blog_cat_tips:'Travel tips', blog_cat_partner:'Partner story',
     page_title:'Via — Travel planned like a friend did it', meta_desc:'Full day-by-day itineraries with real restaurants, hotels and activities. Free. 7 languages. 2 minutes.',
     offline_restored:'Showing your saved itinerary — you\'re offline.',
+    similar_eye:'Similar trips', similar_title:'More places you\'d love', similar_plan:'Plan this →',
   },
   sl: {
     code:'sl', label:'SL', name:'Slovenščina',
@@ -132,6 +133,7 @@ const LANGS = {
   blog_all:'Vse zgodbe', blog_dest:'Destinacije', blog_tips:'Potovalni nasveti', blog_partner:'Partnerske zgodbe', blog_eye:'Via Journal', blog_hero_title_html:'Zgodbe s poti.<br><em>Kraji, ki jih je vredno poznati.</em>', blog_hero_sub:'Vodniki po destinacijah, potovalni nasveti in partnerske zgodbe.', blog_home:'← Domov', blog_back:'← Nazaj na zgodbe', blog_read:'Preberi zgodbo', blog_cat_dest:'Destinacija', blog_cat_tips:'Potovalni nasveti', blog_cat_partner:'Partnerska zgodba',
     page_title:'Via — Potovanje načrtovano kot pri prijatelju', meta_desc:'Celodnevni itineriji z resničnimi restavracijami, hoteli in aktivnostmi. Brezplačno. 7 jezikov. 2 minuti.',
     offline_restored:'Prikazujem shranjeni itinerar — nimate internetne povezave.',
+    similar_eye:'Podobna potovanja', similar_title:'Več krajev, ki bi ti bili všeč', similar_plan:'Načrtuj →',
   },
   de: {
     code:'de', label:'DE', name:'Deutsch',
@@ -204,6 +206,7 @@ const LANGS = {
   blog_all:'Alle Beiträge', blog_dest:'Reiseziele', blog_tips:'Reisetipps', blog_partner:'Partnergeschichten', blog_eye:'Via Journal', blog_hero_title_html:'Geschichten von unterwegs.<br><em>Orte, die es wert sind.</em>', blog_hero_sub:'Reisezielführer, Tipps und Partnergeschichten.', blog_home:'← Startseite', blog_back:'← Zurück zu den Beiträgen', blog_read:'Weiterlesen', blog_cat_dest:'Reiseziel', blog_cat_tips:'Reisetipps', blog_cat_partner:'Partnerbeitrag',
     page_title:'Via — Reisen geplant wie von einem Freund', meta_desc:'Vollständige Tagespläne mit echten Restaurants, Hotels und Aktivitäten. Kostenlos. 7 Sprachen. 2 Minuten.',
     offline_restored:'Gespeicherte Reise wird angezeigt — du bist offline.',
+    similar_eye:'Ähnliche Reisen', similar_title:'Weitere Orte, die dir gefallen würden', similar_plan:'Planen →',
   },
   it: {
     code:'it', label:'IT', name:'Italiano',
@@ -276,6 +279,7 @@ const LANGS = {
   blog_all:'Tutte le storie', blog_dest:'Destinazioni', blog_tips:'Consigli di viaggio', blog_partner:'Storie partner', blog_eye:'Via Journal', blog_hero_title_html:'Storie dalla strada.<br><em>Luoghi che vale la pena conoscere.</em>', blog_hero_sub:'Guide alle destinazioni, consigli di viaggio e storie dai partner.', blog_home:'← Home', blog_back:'← Torna alle storie', blog_read:'Leggi la storia', blog_cat_dest:'Destinazione', blog_cat_tips:'Consigli di viaggio', blog_cat_partner:'Storia partner',
     page_title:'Via — Viaggi pianificati come da un amico', meta_desc:'Itinerari completi giorno per giorno con ristoranti, hotel e attività reali. Gratis. 7 lingue. 2 minuti.',
     offline_restored:'Visualizzazione itinerario salvato — sei offline.',
+    similar_eye:'Viaggi simili', similar_title:'Altri posti che ameresti', similar_plan:'Pianifica →',
   },
   fr: {
     code:'fr', label:'FR', name:'Français',
@@ -348,6 +352,7 @@ const LANGS = {
   blog_all:'Toutes les histoires', blog_dest:'Destinations', blog_tips:'Conseils voyage', blog_partner:'Histoires partenaires', blog_eye:'Via Journal', blog_hero_title_html:'Des récits de voyage.<br><em>Des lieux qui valent le détour.</em>', blog_hero_sub:'Guides de destinations, conseils et histoires de nos partenaires.', blog_home:'← Accueil', blog_back:'← Retour aux récits', blog_read:'Lire le récit', blog_cat_dest:'Destination', blog_cat_tips:'Conseils voyage', blog_cat_partner:'Histoire partenaire',
     page_title:'Via — Voyages planifiés comme par un ami', meta_desc:'Itinéraires complets jour par jour avec vrais restaurants, hôtels et activités. Gratuit. 7 langues. 2 minutes.',
     offline_restored:'Affichage de l\'itinéraire enregistré — vous êtes hors ligne.',
+    similar_eye:'Voyages similaires', similar_title:'D\'autres endroits que vous adoreriez', similar_plan:'Planifier →',
   },
   hr: {
     code:'hr', label:'HR', name:'Hrvatski',
@@ -418,6 +423,7 @@ const LANGS = {
   blog_all:'Sve priče', blog_dest:'Destinacije', blog_tips:'Putni savjeti', blog_partner:'Partnerske priče', blog_eye:'Via Journal', blog_hero_title_html:'Priče s puta.<br><em>Mjesta vrijedna pozornosti.</em>', blog_hero_sub:'Vodiči, savjeti i partnerske priče o destinacijama.', blog_home:'← Početna', blog_back:'← Natrag na priče', blog_read:'Čitaj priču', blog_cat_dest:'Destinacija', blog_cat_tips:'Putni savjeti', blog_cat_partner:'Partnerska priča',
     page_title:'Via — Putovanje planirano kao od prijatelja', meta_desc:'Potpuni dnevni itinereri s pravim restoranima, hotelima i aktivnostima. Besplatno. 7 jezika. 2 minute.',
     offline_restored:'Prikazujem spremljeni itinerar — niste na mreži.',
+    similar_eye:'Slična putovanja', similar_title:'Još mjesta koja bi vam se svidjela', similar_plan:'Planiraj →',
   },
   es: {
     code:'es', label:'ES', name:'Español',
@@ -488,6 +494,7 @@ const LANGS = {
   blog_all:'Todas las historias', blog_dest:'Destinos', blog_tips:'Consejos de viaje', blog_partner:'Historias de socios', blog_eye:'Via Journal', blog_hero_title_html:'Historias del camino.<br><em>Lugares que merece la pena conocer.</em>', blog_hero_sub:'Guías de destinos, consejos de viaje e historias de socios.', blog_home:'← Inicio', blog_back:'← Volver a las historias', blog_read:'Leer historia', blog_cat_dest:'Destino', blog_cat_tips:'Consejos de viaje', blog_cat_partner:'Historia de socio',
     page_title:'Via — Viajes planificados como si lo hiciera un amigo', meta_desc:'Itinerarios completos día a día con restaurantes, hoteles y actividades reales. Gratis. 7 idiomas. 2 minutos.',
     offline_restored:'Mostrando itinerario guardado — estás sin conexión.',
+    similar_eye:'Viajes similares', similar_title:'Otros destinos que te encantarían', similar_plan:'Planificar →',
   },
   sr: {
     code:'sr', label:'SR', name:'Srpski',
@@ -558,5 +565,6 @@ const LANGS = {
   blog_all:'Sve priče', blog_dest:'Destinacije', blog_tips:'Putni saveti', blog_partner:'Partnerske priče', blog_eye:'Via Journal', blog_hero_title_html:'Priče s puta.<br><em>Mesta vredna pažnje.</em>', blog_hero_sub:'Vodiči, saveti i partnerske priče o destinacijama.', blog_home:'← Početna', blog_back:'← Nazad na priče', blog_read:'Čitaj priču', blog_cat_dest:'Destinacija', blog_cat_tips:'Putni saveti', blog_cat_partner:'Partnerska priča',
     page_title:'Via — Putovanje planirano kao od prijatelja', meta_desc:'Potpuni dnevni itinereri sa pravim restoranima, hotelima i aktivnostima. Besplatno. 7 jezika. 2 minuta.',
     offline_restored:'Prikazujem sačuvani itinerar — niste na mreži.',
+    similar_eye:'Slična putovanja', similar_title:'Još mesta koja bi vam se svidela', similar_plan:'Planiraj →',
   },
 };
