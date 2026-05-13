@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       </tr>`;
   }).join('');
 
-  const greetings = { sl:'Uživaj na potovanju', de:'Genieße deine Reise', it:'Buon viaggio', fr:'Bon voyage', hr:'Uživaj na putovanju', es:'¡Buen viaje' };
+  const greetings = { sl:'Uživaj na potovanju', de:'Genieße deine Reise', it:'Buon viaggio', fr:'Bon voyage', hr:'Uživaj na putovanju', es:'¡Buen viaje', sr:'Srećan put' };
   const farewell = greetings[lang] || 'Enjoy your trip';
 
   const html = `<!DOCTYPE html>

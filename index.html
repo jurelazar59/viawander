@@ -5320,22 +5320,22 @@ select.budget-select:focus,
   <div class="skel-steps" id="skelSteps">
     <div class="skel-step active" id="sstep0">
       <div class="skel-step-dot"></div>
-      <span class="skel-step-label" data-en="Researching" data-sl="Raziskujem" data-de="Recherchiere" data-it="Ricercando" data-fr="Recherche" data-hr="Istražujem" data-es="Investigando"></span>
+      <span class="skel-step-label" data-en="Researching" data-sl="Raziskujem" data-de="Recherchiere" data-it="Ricercando" data-fr="Recherche" data-hr="Istražujem" data-es="Investigando" data-sr="Istražujem"></span>
     </div>
     <div class="skel-step-line"></div>
     <div class="skel-step" id="sstep1">
       <div class="skel-step-dot"></div>
-      <span class="skel-step-label" data-en="Picking places" data-sl="Izbiram mesta" data-de="Orte auswählen" data-it="Scelgo luoghi" data-fr="Sélection" data-hr="Biram mjesta" data-es="Eligiendo"></span>
+      <span class="skel-step-label" data-en="Picking places" data-sl="Izbiram mesta" data-de="Orte auswählen" data-it="Scelgo luoghi" data-fr="Sélection" data-hr="Biram mjesta" data-es="Eligiendo" data-sr="Biram mesta"></span>
     </div>
     <div class="skel-step-line"></div>
     <div class="skel-step" id="sstep2">
       <div class="skel-step-dot"></div>
-      <span class="skel-step-label" data-en="Building route" data-sl="Gradim pot" data-de="Route planen" data-it="Costruisco" data-fr="Itinéraire" data-hr="Gradim rutu" data-es="Construyendo"></span>
+      <span class="skel-step-label" data-en="Building route" data-sl="Gradim pot" data-de="Route planen" data-it="Costruisco" data-fr="Itinéraire" data-hr="Gradim rutu" data-es="Construyendo" data-sr="Gradim rutu"></span>
     </div>
     <div class="skel-step-line"></div>
     <div class="skel-step" id="sstep3">
       <div class="skel-step-dot"></div>
-      <span class="skel-step-label" data-en="Finishing up" data-sl="Dokončujem" data-de="Abschluss" data-it="Finalizando" data-fr="Finalisation" data-hr="Završavam" data-es="Finalizando"></span>
+      <span class="skel-step-label" data-en="Finishing up" data-sl="Dokončujem" data-de="Abschluss" data-it="Finalizando" data-fr="Finalisation" data-hr="Završavam" data-es="Finalizando" data-sr="Završavam"></span>
     </div>
   </div>
 
@@ -5894,6 +5894,60 @@ const LANGS = {
     alert_eye:'Alerta de precios', alert_title:'Seguir los precios para este viaje',
     alert_submit:'Activar alerta →', alert_success_title:'Alerta activada.',
   },
+  sr: {
+    code:'sr', label:'SR', name:'Srpski',
+    stamp:'Tvoj sledeći put, već isplaniran.',
+    nav_how:'Kako radi', nav_stories:'Priče', nav_plan:'Planiraj put',
+    hero_title_html:'Put isplaniran<em>kao od dobrog druga.</em>',
+    hero_deck:'Ujutru kafa u proverenoj kafani, ručak gde jedu lokaci, hotel rezervisan u pravom kvartu. Nema guglanja. Sve je već složeno.',
+    hero_cta:'Napravi moj plan', hero_note:'Besplatno · bez registracije · gotovo za 2 minuta',
+    strip_trips:'Isplaniranih puteva', strip_rating:'Prosečna ocena', strip_int:'Integrisano', strip_int2:'Integrisano', strip_tiers:'3 budžetska nivoa', strip_rec:'Svaka preporuka',
+    how_eye:'Kako radi', how_title_html:'Plan, ne lista.<br><em>Spreman za rezervaciju.</em>',
+    feat1_title:'Reci nam kakvo putovanje hoćeš', feat1_body:'Destinacija, datumi, budžet, vibes — odgovoriš na par pitanja, mi složimo ostalo.',
+    feat2_title:'Dobijaš pravi itinerer', feat2_body:'Ne spisak atrakcija. Konkretan plan po danima: restoran, smeštaj, aktivnost, sve na jednom mestu.',
+    feat3_title:'Rezerviši direktno, bez gubljenja vremena', feat3_body:'Hoteli sa live cenama. Porediš Booking i Airbnb u sekundi. Klikneš, rezervišeš, gotovo.',
+    testi_eye:'Šta kažu putnici', testi_title_html:'Manje guglanja. <em>Više uživanja.</em>',
+    footer_tag:'Put isplaniran kao od dobrog druga.',
+    footer_product:'Produkt', footer_how:'Kako radi', footer_dest:'Destinacije', footer_partners:'Partneri za rezervacije',
+    footer_company:'Kompanija', footer_about:'O nama', footer_blog:'Blog', footer_press:'Za medije',
+    footer_legal:'Pravno', footer_privacy:'Privatnost', footer_terms:'Uslovi korišćenja', footer_made:'Za ljude koji zaista odlaze.',
+    q_back:'← Nazad', q_continue:'Nastavi', q_build:'Napravi moj itinerer',
+    q1_eye:'Kuda ideš', q1_title:'Gde ti je sledeća destinacija?', q1_hint:'Izaberi region ili ukucaj svoju destinaciju dole.', q1_custom_placeholder:"npr. 'Lisabon', 'Kjoto', 'Marakeš'…",
+    dest_surprise:'Iznenadi me', dest_surprise_sub:'Naći ćemo nešto dobro',
+    q2_eye:'Kad ideš', q2_title:'Koji su tvoji datumi putovanja?', q2_hint:'Tačni datumi pomažu nam da nađemo realne cene.', q2_depart:'Polazak', q2_return:'Povratak',
+    q3_eye:'S kim putuješ', q3_title:'Ko ide s tobom?', q3_hint:'Utiče na tempo, veličinu hotela i atmosferu.',
+    comp_solo:'Solo', comp_solo_desc:'Tvoj tempo, tvoja odluka', comp_couple:'Par', comp_couple_desc:'Dvoje je savršen broj', comp_family:'Porodica', comp_family_desc:'Deca idu s vama', comp_friends:'Ekipa', comp_friends_desc:'Najbolji haos na svetu', comp_honey:'Medeni mesec', comp_honey_desc:'Sve malo posebnije',
+    q4_eye:'Tvoj stil', q4_title:'Kako izgleda tvoj savršen dan na putu?', q4_hint:'Izaberi sve što ti odgovara.',
+    vibe_culture:'Kultura i istorija', vibe_food:'Hrana i vino', vibe_adventure:'Avantura i planinarenje', vibe_beach:'Plaža i opuštanje', vibe_night:'Noćni život', vibe_hidden:'Skriveni biseri', vibe_luxury:'Luksuz', vibe_budget:'Pametna štednja',
+    q5_eye:'Budžet', q6_eye:'Tvoj tempo', q7_eye:'Planiraj zajedno', q5_title:'Koliko planiraš da trošiš po osobi dnevno?', q5_hint:'Važi za sve preporuke. Menjaj kad god hoćeš.',
+    budget_back:'Bekpeker · ispod 50 €/dan', budget_mid:'Srednji · 50–150 €/dan', budget_comf:'Udobno · 150–300 €/dan', budget_lux:'Luksuz · 300+ €/dan',
+    budget_back_short:'Bekpeker', budget_mid_short:'Srednji', budget_comf_short:'Udobno', budget_lux_short:'Luksuz',
+    q6_eye:'Još malo', q6_title:'Jedna stvar pre nego što složimo plan.', q6_hint:'Plan je gotov za manje od minut.',
+    q6_name:'Ime', q6_name_ph:'Kako da te zovemo?', q6_email:'Imejl', q6_email_ph:'Šaljemo ti plan ovde', q6_spam:'Bez spama. Ikad.', q6_notes:'Nešto posebno? (opciono)', q6_notes_ph:'Ishrana, mesta koja moraš videti, pristupačnost, stvari koje mrziš…',
+    load_cap:'Pravimo tvoj personalizovani itinerer',
+    load_phrases:['Pitamo lokace gde se zapravo jede…','Tražimo hotel u pravom kvartu…','Slažemo plan po danima…','Biramo između restorana za tvoj budžet…','Proveravamo lokalne smeštaje…','Računamo sve do poslednjeg evra…','Još sekund, mora biti savršeno…'],
+    tab_itin:'Itinerer', tab_stays:'Gde spavaš', tab_transport:'Kako stižeš',
+    budget_label:'Nivo budžeta:',
+    itin_kicker:" — personalizovani plan · ", itin_share:'Podeli →', itin_regen:'Generiši ponovo ↺', itin_over:'Počni iznova', itin_pdf:'↓ PDF', itin_alert:'🔔 Obaveštenje o ceni',
+    itin_aside_cost:'Procenjeni dnevni trošak', itin_aside_cost_sub:'po osobi · sve uključeno', itin_aside_about:'O ovom putovanju', itin_aside_tip:'Savet od lokaca', itin_aside_sels:'Tvoj izbor', itin_aside_sels_empty:'Klikni na restoran, hotel ili aktivnost. Pojavljuje se ovde.', itin_aside_months:'Kad je najlepše ići', itin_aside_pack:'Savet za pakovanje',
+    rec_lunch:'Ručak', rec_dinner:'Večera', rec_activity:'Aktivnost', rec_swap:'Zameni →',
+    swap_title:'Zameni ili promeni nivo budžeta', swap_close:'Zatvori',
+    swap_tier_budget:'Ekonomično', swap_tier_mid:'Srednje', swap_tier_comf:'Udobno', swap_tier_lux:'Luksuz',
+    stays_intro:'Izaberi smeštaj za svaku noć. Live cene sa Airbnb, Booking.com i proverenih lokalnih adresa.',
+    stays_night:'Noć', stays_select:'Izaberi smeštaj',
+    stays_compare:'Poređenje cena · po noći', stays_best:'Najbolji',
+    trans_intro:'Opcije za dolazak do destinacije. Poredi cenu, vreme i udobnost pa rezerviši direktno.',
+    morning:'Jutro', afternoon:'Popodne', evening:'Veče',
+    pack_load:'Pravimo listu za pakovanje…', step_label:'Korak', day_label:'Dan',
+    pace_eye:'Tvoj ritam', pace_title:'Kako voliš da putuješ?', pace_hint:'Dobar plan ide uz tvoj ritam, ne protiv njega.',
+    collab_eye:'Planiraj zajedno', collab_title:'Putuješ s nekim?', collab_hint:'Dodaj imejl adresu. Dobijaju link da vide plan i predlože izmene.',
+    collab_add:'Dodaj', collab_note:'Saplaner vidi ceo plan i može da predlaže zamene. Poslednja reč je tvoja.',
+    toast_link:'Link kopiran.', toast_saved:'Putovanje sačuvano.', toast_unlocked:'Via Plus aktiviran.',
+    shared_banner:'Gledaš tuđe putovanje. Napravi svoje besplatno.',
+    shared_banner_cta:'Planiraj moj put →',
+    alert_eye:'Obaveštenje o ceni', alert_title:'Prati cene za ovo putovanje',
+    alert_submit:'Postavi obaveštenje →', alert_success_title:'Obaveštenje aktivno.',
+  },
 };
 
 let currentLang = 'en';
@@ -5942,7 +5996,7 @@ function applyLang(lang){
 
 function buildLangBar(){
   const bar = document.getElementById('langBar');
-  const flags = {en:'🇬🇧',sl:'🇸🇮',de:'🇩🇪',it:'🇮🇹',fr:'🇫🇷',hr:'🇭🇷',es:'🇪🇸'};
+  const flags = {en:'🇬🇧',sl:'🇸🇮',de:'🇩🇪',it:'🇮🇹',fr:'🇫🇷',hr:'🇭🇷',es:'🇪🇸',sr:'🇷🇸'};
   const opts = Object.values(LANGS).map(l =>
     `<option value="${l.code}"${l.code===currentLang?' selected':''}>${flags[l.code]||''} ${l.name}</option>`
   ).join('');
@@ -6366,13 +6420,14 @@ async function fetchItinerary(){
     fr:{ name:'French (Français)', note:'IMPORTANT: Write ALL prose, titles, descriptions in French. Use a warm, elegant tone — like a French travel writer giving advice to a friend. Restaurant names and proper nouns stay in their original language.', locale:'fr-FR' },
     hr:{ name:'Croatian (Hrvatski)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Croatian. Use a warm, local tone. Restaurant names and proper nouns stay in their original language.', locale:'hr-HR' },
     es:{ name:'Spanish (Español)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Spanish. Use a warm, vivid tone — like a knowledgeable Spanish friend. Restaurant names and proper nouns stay in their original language.', locale:'es-ES' },
+    sr:{ name:'Serbian (Srpski)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Serbian using Latin script. Use warm, direct tone like a well-traveled friend from Belgrade. Restaurant names and proper nouns stay in their original language.', locale:'sr-Latn-RS' },
   };
   const langCfg = langMap[currentLang] || langMap.en;
   const lang = langCfg.name;
   const langNote = langCfg.note;
 
   // Localise "Surprise me" label
-  const surpriseLabels = ['Surprise me','Preseneti me','Überrasch mich','Sorprendimi'];
+  const surpriseLabels = ['Surprise me','Preseneti me','Überrasch mich','Sorprendimi','Iznenadi me'];
   const dest = surpriseLabels.includes(S.dest)
     ? 'a surprising lesser-known European city matching the traveller profile (reveal it in the title)'
     : S.dest;
@@ -10039,6 +10094,22 @@ const authStrings = {
     regError:'Este correo ya está registrado.',
     regBenefits:['Primer itinerario guardado gratis','Accede a tus planes en cualquier dispositivo','Exportación PDF y alertas de precios','Guardados ilimitados desde 7 €'],
     divider:'tus datos',
+  },
+  sr:{
+    tabSignIn:'Prijavi se', tabRegister:'Registruj se',
+    siTitle:'Dobro došao nazad.', siSub:'Tvoja putovanja čekaju te.',
+    siEmail:'Imejl', siPass:'Lozinka', siPlaceholderEmail:'tvoj@imejl.com',
+    siPlaceholderPass:'Tvoja lozinka', siSubmit:'Prijavi se →',
+    siFooter:'Nemaš nalog?', siFooterLink:'Napravi besplatno',
+    siError:'Pogrešan imejl ili lozinka.',
+    regTitle:'Čuvaj sva svoja putovanja na jednom mestu.', regNameLabel:'Ime',
+    regNamePh:'Kako da te zovemo?', regEmailLabel:'Imejl',
+    regPassLabel:'Lozinka', regPassPh:'Minimum 8 karaktera',
+    regSubmit:'Napravi besplatan nalog →',
+    regFooter:'Već imaš nalog?', regFooterLink:'Prijavi se',
+    regError:'Ovaj imejl je već registrovan.',
+    regBenefits:['Sačuvaj koliko god planova hoćeš','Vrati se i uredi u bilo kom trenutku','Podeli plan s ekipom jednim klikom','Obaveštenja kad cene padnu'],
+    divider:'tvoji podaci',
   },
 };
 
