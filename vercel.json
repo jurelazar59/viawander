@@ -1,9 +1,15 @@
 {
   "functions": {
     "api/*.js": {
-      "maxDuration": 60
+      "maxDuration": 90
     }
   },
+  "crons": [
+    {
+      "path": "/api/check-alerts",
+      "schedule": "0 8 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/(langs|posts)\\.js",

@@ -3365,7 +3365,6 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   text-align:right;font-family:var(--serif);
   font-weight:600;white-space:nowrap;
 }
-.cb-row-icon{margin-right:6px;font-size:.95rem}
 .cb-row-name{font-weight:400;color:var(--ink)}
 .cb-row-cat{
   font-family:var(--ui);font-size:.57rem;font-weight:600;
@@ -3463,7 +3462,6 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 .pace-card{border:1.5px solid var(--cr3);border-radius:4px;padding:1.4rem 1.2rem;cursor:pointer;transition:all .22s;text-align:center;background:var(--cr)}
 .pace-card:hover{border-color:var(--ink3);background:var(--parch)}
 .pace-card.on{border-color:var(--burg);background:rgba(107,39,55,.04)}
-.pace-icon{font-size:1.8rem;margin-bottom:.6rem;display:block}
 .pace-name{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.25rem;letter-spacing:-.01em}
 .pace-count{font-family:var(--ui);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--burg);margin-bottom:.35rem}
 .pace-desc{font-family:var(--body);font-size:.82rem;color:var(--ink3);font-style:italic;line-height:1.5}
@@ -4797,7 +4795,6 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 }
 .mood-card:hover{border-color:var(--burg);background:rgba(107,39,55,.04);transform:translateY(-1px)}
 .mood-card.loading{border-color:var(--gold);background:rgba(196,137,42,.05);pointer-events:none}
-.mood-icon{font-size:1.4rem;line-height:1}
 .mood-label{font-family:var(--ui);font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);text-align:center}
 .mood-card:hover .mood-label,.mood-card.loading .mood-label{color:var(--burg)}
 
@@ -5322,19 +5319,16 @@ select.budget-select:focus,
       <p class="qhint" data-t="pace_hint">A relaxed trip and a packed one to the same city feel completely different.</p>
       <div class="pace-grid">
         <div class="pace-card" data-v="relaxed" onclick="pickPace(this)">
-          <span class="pace-icon">☕</span>
           <div class="pace-name" data-t="pace_relaxed">Relaxed</div>
           <div class="pace-count" data-t="pace_relaxed_count">2–3 things / day</div>
           <div class="pace-desc" data-t="pace_relaxed_desc">Linger over lunch. Wander without a plan. Actually rest.</div>
         </div>
         <div class="pace-card on" data-v="balanced" onclick="pickPace(this)">
-          <span class="pace-icon">🌿</span>
           <div class="pace-name" data-t="pace_balanced">Balanced</div>
           <div class="pace-count" data-t="pace_balanced_count">3–4 things / day</div>
           <div class="pace-desc" data-t="pace_balanced_desc">See the highlights and still have time to breathe. The sweet spot.</div>
         </div>
         <div class="pace-card" data-v="full" onclick="pickPace(this)">
-          <span class="pace-icon">⚡</span>
           <div class="pace-name" data-t="pace_full">Full</div>
           <div class="pace-count" data-t="pace_full_count">5+ things / day</div>
           <div class="pace-desc" data-t="pace_full_desc">Maximise every hour. You can sleep when you get home.</div>
@@ -5454,7 +5448,7 @@ select.budget-select:focus,
     <div class="alert-modal-body" id="alertModalBody">
 
       <div id="alertLimitWarn" class="alert-limit-warn" style="display:none">
-        You have used 3 of 3 free alerts. <span style="font-weight:600;cursor:pointer;text-decoration:underline" onclick="closeAlertModal();openUpgradeModal()">Upgrade to Via Plus</span> for unlimited alerts.
+        <span data-t="alert_limit">You have used 3 of 3 free alerts. </span><span style="font-weight:600;cursor:pointer;text-decoration:underline" data-t="alert_limit_upgrade" onclick="closeAlertModal();openUpgradeModal()">Upgrade to Via Plus</span>
       </div>
 
       <!-- Threshold -->
@@ -5526,9 +5520,9 @@ select.budget-select:focus,
               <button class="mast-btn more-btn" onclick="toggleMastMore(event)" aria-label="More actions">⋯</button>
               <div class="mast-more-menu" id="mastMoreMenu">
                 <button class="mmore-item" onclick="exportPDF();closeMastMore()" data-t="itin_pdf">↓&ensp;PDF export</button>
-                <button class="mmore-item" onclick="exportCalendar();closeMastMore()">📅&ensp;Add to calendar</button>
-                <button class="mmore-item" onclick="openTripCard();closeMastMore()">📸&ensp;Share card</button>
-                <button class="mmore-item" id="alertBtn" onclick="openAlertModal();closeMastMore()">🔔&ensp;Price alert</button>
+                <button class="mmore-item" onclick="exportCalendar();closeMastMore()" data-t="itin_cal">Add to calendar</button>
+                <button class="mmore-item" onclick="openTripCard();closeMastMore()" data-t="itin_card">Share card</button>
+                <button class="mmore-item" id="alertBtn" onclick="openAlertModal();closeMastMore()" data-t="itin_alert">Price alert</button>
                 <div class="mmore-divider"></div>
                 <button class="mmore-item mmore-danger" onclick="startOver()" data-t="itin_over">← &ensp;Start over</button>
               </div>
@@ -5620,6 +5614,7 @@ select.budget-select:focus,
     <div class="chat-history" id="chatHistory"></div>
     <div class="chat-input-row">
       <textarea class="chat-textarea" id="chatInput" rows="1"
+        data-t-placeholder="chat_ph"
         placeholder="Move dinner earlier, add a beach stop…"
         onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMsg()}"
         oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
@@ -5629,6 +5624,7 @@ select.budget-select:focus,
 </div>
 
 <!-- External data files (extracted for faster initial parse) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="/langs.js"></script>
 <script src="/posts.js"></script>
 <script>
@@ -5695,6 +5691,23 @@ function applyLang(lang){
   if(packLabel) packLabel.textContent = t('pack_load') || 'Building your packing list…';
   // Re-render similar trips bar with new language
   if(document.getElementById('similarBar')?.children.length) renderSimilarTrips();
+  // Update vibe card first letters to match translated name
+  document.querySelectorAll('.vc').forEach(function(card){
+    const nameEl = card.querySelector('[data-t]');
+    const letterEl = card.querySelector('.vletter');
+    if(nameEl && letterEl){
+      const translated = t(nameEl.getAttribute('data-t'));
+      if(translated) letterEl.textContent = translated.charAt(0).toUpperCase();
+    }
+  });
+  // Re-render profile JS content if profile page is visible
+  if(currentUser && document.getElementById('pg-profile') &&
+     document.getElementById('pg-profile').style.display !== 'none'){
+    renderProfilePage();
+    // Also re-render alerts tab if it's the active tab
+    const dnavAlerts = document.getElementById('dnavAlerts');
+    if(dnavAlerts && dnavAlerts.classList.contains('on')) renderAlertsTab();
+  }
 }
 
 function buildLangBar(){
@@ -5750,7 +5763,7 @@ function updateQ(){
       greetEl = document.createElement('div');
       greetEl.id = 'qs8AlreadySignedIn';
       greetEl.style.cssText = 'background:rgba(30,61,47,.07);border:1px solid rgba(30,61,47,.18);border-radius:3px;padding:.8rem 1rem;font-family:var(--body);font-size:.9rem;color:var(--ink2);line-height:1.55;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem';
-      greetEl.innerHTML = '<span style="color:var(--forest);font-weight:700;font-family:var(--ui);font-size:.85rem">✓</span> Planning as <strong style="color:var(--ink)">' + currentUser.name + '</strong>. Your itinerary will be saved to your account.';
+      greetEl.innerHTML = '<span style="color:var(--forest);font-weight:700;font-family:var(--ui);font-size:.85rem">✓</span> ' + t('planning_as').replace('{name}', '<strong style="color:var(--ink)">'+currentUser.name+'</strong>');
       const detForm = document.querySelector('#qs8 .det-form');
       if(detForm) detForm.insertBefore(greetEl, detForm.firstChild);
     }
@@ -5965,7 +5978,19 @@ function startLoad(){
     });
   }, 300);
 
-  return {pi_, bi_};
+  return {
+    pi_, bi_,
+    // Call between two-pass chunks: snap bar to pct and restart ramp from there
+    resetProgress: function(pct){
+      prog = pct;
+      if(fill){ fill.style.transition = 'width .5s ease'; fill.style.width = pct + '%'; }
+      // Reset step indicators so phase 2 runs through them again
+      [0,1,2,3].forEach(function(i){
+        const s = document.getElementById('sstep'+i);
+        if(s){ s.classList.remove('done'); s.classList.toggle('active', i === 0); }
+      });
+    },
+  };
 }
 
 function stopLoad(h){
@@ -6109,9 +6134,9 @@ const VOICE_GUIDE = `EDITORIAL VOICE:
 - Specific, concrete. No "vibrant", "stunning", "must-see", "hidden gem".
 - Keep all prose tight — brevity is quality here.`;
 
-async function fetchItinerary(){
+async function fetchItinerary(overrideDays){
   const nights = (S.dateFrom&&S.dateTo) ? Math.max(1,Math.round((new Date(S.dateTo)-new Date(S.dateFrom))/86400000)) : 4;
-  const days = Math.min(nights, 5);
+  const days = overrideDays != null ? overrideDays : Math.min(nights, 14);
   const budgetLabel = {budget:'backpacker (under €50/day)',mid:'mid-range (€50–150/day)',comfortable:'comfortable (€150–300/day)',luxury:'luxury (€300+/day)'}[S.budget]||'mid-range';
 
   // Language config for all 4 languages
@@ -6162,6 +6187,8 @@ PACE: The traveller chose "\${S.pace||'balanced'}" pace.
 - balanced: 3-4 activities per day. One morning anchor, one afternoon focus, optional evening. Light transitions between things.
 - full: 5+ things per day. Route geographically to cut travel time. Every hour counts. High energy throughout.
 Apply this pace strictly. Never pack a relaxed day with 5 things.
+
+${days >= 6 ? `BREVITY OVERRIDE: This is a ${days}-day itinerary — to stay within output limits, keep ALL prose fields (morning, afternoon, evening, hero_description, hidden_gem.desc) to 1 sentence maximum (≤15 words each). Restaurant and activity desc fields: ≤7 words each. insider_tip and packing_tip: ≤15 words each.` : ''}
 
 TRAVELLER: Name: ${S.name||'Guest'}, Destination: ${dest}, Dates: ${S.dateFrom||'flexible'} → ${S.dateTo||'flexible'} (${days} days), Group: ${S.comp}, Style: ${S.vibes.join(', ')}, Budget: ${budgetLabel}, Pace: ${S.pace||'balanced'}, Notes: ${S.notes||'none'}
 
@@ -6245,9 +6272,9 @@ Return this exact JSON structure:
 Make exactly ${days} day objects. Use authentic local restaurant and hotel names for ${dest}.
 IMPORTANT — LINKS: In every "link" field, replace "Restaurant name", "Activity name", "Property name" with the ACTUAL name of the place you are recommending, URL-encoded. Example: if you recommend "Konoba Matejuška", the link must be "https://www.google.com/maps/search/Konoba+Matejuška+Split". For accommodation, use the actual property name in the Booking.com search URL. Never use generic placeholder names in link fields. Budget default: "${S.budget}" tier.`;
 
-  // AbortController for timeout — 58 seconds max (Vercel limit is 60s)
+  // AbortController for timeout — 85 seconds (Vercel maxDuration is 90s)
   const controller = new AbortController();
-  const timeoutId = setTimeout(function(){ controller.abort(); }, 58000);
+  const timeoutId = setTimeout(function(){ controller.abort(); }, 85000);
 
   let apiResponse;
   try {
@@ -6290,12 +6317,174 @@ IMPORTANT — LINKS: In every "link" field, replace "Restaurant name", "Activity
   return parsed;
 }
 
+// ── Continuation call for trips > 7 days ──────────────────────────────────
+// Returns an array of day objects (no wrapper). Claude is told it is generating
+// days (dayOffset+1) through (dayOffset+chunkDays) of an ongoing trip.
+async function fetchItineraryChunk(chunkDays, dayOffset, totalDays){
+  const budgetLabel = {budget:'backpacker (under €50/day)',mid:'mid-range (€50–150/day)',comfortable:'comfortable (€150–300/day)',luxury:'luxury (€300+/day)'}[S.budget]||'mid-range';
+  const langMap = {
+    en:{ name:'English', note:'' },
+    sl:{ name:'Slovenian (slovensko)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Slovenian. Restaurant names and proper nouns stay in their original language.' },
+    de:{ name:'German (Deutsch)', note:'IMPORTANT: Write ALL prose, titles, descriptions in German. Warm personal Reiseprofi tone. Restaurant names and proper nouns stay in their original language.' },
+    it:{ name:'Italian (Italiano)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Italian. Warm personal tone. Restaurant names and proper nouns stay in their original language.' },
+    fr:{ name:'French (Français)', note:'IMPORTANT: Write ALL prose, titles, descriptions in French. Use a warm, elegant tone. Restaurant names and proper nouns stay in their original language.' },
+    hr:{ name:'Croatian (Hrvatski)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Croatian. Use a warm, local tone. Restaurant names and proper nouns stay in their original language.' },
+    es:{ name:'Spanish (Español)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Spanish. Use a warm, vivid tone. Restaurant names and proper nouns stay in their original language.' },
+    sr:{ name:'Serbian (Srpski)', note:'IMPORTANT: Write ALL prose, titles, descriptions in Serbian using Latin script. Use warm, direct tone. Restaurant names and proper nouns stay in their original language.' },
+  };
+  const langCfg = langMap[currentLang] || langMap.en;
+  const lang = langCfg.name;
+  const langNote = langCfg.note;
+  const surpriseLabels = ['Surprise me','Preseneti me','Überrasch mich','Sorprendimi','Iznenadi me'];
+  const dest = surpriseLabels.includes(S.dest) ? 'a surprising lesser-known European city' : S.dest;
+
+  const cacheParams = {
+    dest, days: chunkDays, budget: S.budget, vibes: S.vibes,
+    comp: S.comp, lang: currentLang, pace: S.pace||'balanced',
+    freeDay: false, chunkMode: true,
+  };
+
+  const prompt = `Return ONLY valid JSON — a raw array, no wrapper object, no markdown fences, nothing else.
+
+${langNote}
+OUTPUT LANGUAGE: ${lang}
+
+You are continuing a ${totalDays}-day trip to ${dest}. Generate days ${dayOffset+1} through ${dayOffset+chunkDays} ONLY.
+Traveller: ${S.name||'Guest'}, Group: ${S.comp}, Style: ${S.vibes.join(', ')}, Budget: ${budgetLabel}, Pace: ${S.pace||'balanced'}
+
+BREVITY OVERRIDE: Keep ALL prose to 1 sentence maximum (≤15 words). Restaurant and activity desc: ≤7 words each.
+PACE — ${S.pace||'balanced'}: ${S.pace==='relaxed'?'Max 2-3 activities per day, intentional downtime.':S.pace==='full'?'5+ things per day, route geographically.':'3-4 activities per day, one morning anchor, one afternoon focus.'}
+
+Return EXACTLY ${chunkDays} day objects as a JSON array:
+[
+  {
+    "title": "evocative ${lang} day title",
+    "free_day": false,
+    "free_day_intro": "",
+    "free_day_suggestions": [],
+    "morning": "prose in ${lang}",
+    "afternoon": "prose in ${lang}",
+    "evening": "prose in ${lang}",
+    "transit_notes": {
+      "morning_to_lunch": "~10 min walk",
+      "lunch_to_afternoon": "~5 min",
+      "afternoon_to_dinner": "~15 min metro"
+    },
+    "hidden_gem": {
+      "title": "short name in ${lang}",
+      "desc": "one specific local sentence in ${lang}"
+    },
+    "recommendations": {
+      "lunch": {
+        "budget": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€12","rating":"4.5","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "mid": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€28","rating":"4.7","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "comfortable": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€48","rating":"4.8","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "luxury": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€80","rating":"4.9","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"}
+      },
+      "dinner": {
+        "budget": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€15","rating":"4.5","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "mid": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€38","rating":"4.7","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "comfortable": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€58","rating":"4.8","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "luxury": {"name":"Name","cuisine":"type","desc":"short in ${lang}","price_pp":"€110","rating":"4.9","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"}
+      },
+      "activity": {
+        "budget": {"name":"Name","desc":"short in ${lang}","price":"Free–€10","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "mid": {"name":"Name","desc":"short in ${lang}","price":"€15–30","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "comfortable": {"name":"Name","desc":"short in ${lang}","price":"€35–60","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"},
+        "luxury": {"name":"Name","desc":"short in ${lang}","price":"€80+","link":"https://www.google.com/maps/search/Name+${encodeURIComponent(dest)}"}
+      },
+      "accommodation": [
+        {"name":"Name","platform":"Airbnb","type":"Entire apartment","desc":"short in ${lang}","price_per_night":"€88","rating":"4.92","link":"https://www.airbnb.com/s/${encodeURIComponent(dest)}/homes?query=Name"},
+        {"name":"Name","platform":"Booking.com","type":"Boutique hotel","desc":"short in ${lang}","price_per_night":"€115","rating":"8.8","link":"https://www.booking.com/search.html?ss=Name+${encodeURIComponent(dest)}"},
+        {"name":"Name","platform":"Local","type":"Guest house","desc":"short in ${lang}","price_per_night":"€68","rating":"9.4","link":"https://www.booking.com/search.html?ss=Name+${encodeURIComponent(dest)}"}
+      ]
+    },
+    "swap_options": {
+      "lunch": [{"name":"Alt","cuisine":"type","desc":"short","price_pp":"€22","rating":"4.7"},{"name":"Alt","cuisine":"type","desc":"short","price_pp":"€18","rating":"4.5"}],
+      "dinner": [{"name":"Alt","cuisine":"type","desc":"short","price_pp":"€35","rating":"4.8"},{"name":"Alt","cuisine":"type","desc":"short","price_pp":"€28","rating":"4.6"}],
+      "activity": [{"name":"Alt","desc":"short","price":"€15"},{"name":"Alt","desc":"short","price":"Free"}]
+    }
+  }
+]
+
+Make EXACTLY ${chunkDays} day objects. Use authentic local names for ${dest}. URL-encode actual place names in all link fields. ${budgetLabel.split('(')[0].trim()} tier pricing.`;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(function(){ controller.abort(); }, 80000);
+
+  let apiResponse;
+  try {
+    apiResponse = await fetch('/api/itinerary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({ prompt, cacheParams }),
+    });
+    clearTimeout(timeoutId);
+  } catch(fetchErr) {
+    clearTimeout(timeoutId);
+    throw fetchErr;
+  }
+
+  if(!apiResponse || !apiResponse.ok){
+    const errText = apiResponse ? await apiResponse.text().catch(function(){ return ''; }) : '';
+    throw new Error('Chunk API ' + (apiResponse ? apiResponse.status : 0) + ': ' + errText.slice(0,200));
+  }
+
+  const d = await apiResponse.json();
+  if(!d || !d.content || !Array.isArray(d.content)){
+    throw new Error('Unexpected chunk response: ' + JSON.stringify(d).slice(0,200));
+  }
+
+  const raw = d.content.map(function(b){ return b.text || ''; }).join('');
+  const clean = raw.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '').trim();
+
+  let parsed;
+  try {
+    parsed = JSON.parse(clean);
+  } catch(e) {
+    throw new SyntaxError('Chunk JSON parse failed. Got: ' + clean.slice(0,200));
+  }
+
+  // Claude should return a bare array, but handle the case it wraps in {days:[...]}
+  if(Array.isArray(parsed)) return parsed;
+  if(parsed && Array.isArray(parsed.days)) return parsed.days;
+  throw new Error('Chunk response was not an array: ' + JSON.stringify(parsed).slice(0,200));
+}
+
+// Update the loading phrase to show which days are being planned (two-pass trips)
+function setChunkLoadLabel(fromDay, toDay){
+  const ph = document.getElementById('loadPhrase');
+  if(!ph) return;
+  const label = t('load_week').replace('{from}', fromDay).replace('{to}', toDay);
+  ph.style.opacity = '0';
+  setTimeout(function(){
+    if(ph){ ph.textContent = label; ph.style.opacity = '1'; }
+  }, 300);
+}
+
 /* ══ SUBMIT ══ */
 async function doSubmit(){
   currentTier = S.budget || 'mid';
+  const nights = (S.dateFrom&&S.dateTo) ? Math.max(1,Math.round((new Date(S.dateTo)-new Date(S.dateFrom))/86400000)) : 4;
+  const totalDays = Math.min(nights, 14);
+  const isTwoPass = totalDays > 7;
+
   const h = startLoad();
   try {
-    itinData = await fetchItinerary();
+    if(isTwoPass){
+      // ── Phase 1: days 1–7 ──
+      setChunkLoadLabel(1, 7);
+      const week1 = await fetchItinerary(7);
+      // ── Phase 2: days 8–totalDays ──
+      h.resetProgress(50);
+      setChunkLoadLabel(8, totalDays);
+      const extraDays = await fetchItineraryChunk(totalDays - 7, 7, totalDays);
+      itinData = week1;
+      itinData.days = week1.days.concat(extraDays);
+    } else {
+      itinData = await fetchItinerary(totalDays);
+    }
   } catch(e) {
     console.error(e);
     itinData = makeFallback();
@@ -6499,31 +6688,12 @@ async function sendChatMsg(){
     ? 'Keep ALL prose in the same language as the original day.'
     : '';
 
-  // Build messages array: system context as first user turn, then conversation history
+  // Build a single user message: current day state (already has all prior tweaks applied)
+  // + the current request. Single-message avoids the Anthropic "roles must alternate" error
+  // that would occur if we tried to send multiple consecutive user messages.
   const contextMsg = `You are editing Day ${di+1} of a ${dest} itinerary. ${langNote}\n\nCurrent day JSON:\n${JSON.stringify(day, null, 2)}\n\nApply each traveller request to this day. Return ONLY the modified day as valid JSON, preserving all fields exactly.`;
 
-  const apiMessages = [
-    { role: 'user',      content: contextMsg },
-    { role: 'assistant', content: '{"title":' },   // prime the pump with valid JSON start
-  ];
-
-  // Inject conversation history (skip the first system context and last thinking bubble)
-  const history = dayChats[di].slice(0, -1);  // exclude the thinking bubble
-  if(history.length > 1){
-    // Flatten prior turns: user turns become requests, assistant turns become acknowledgements
-    history.slice(1).forEach(function(m){
-      if(m.role === 'user') apiMessages.push({ role:'user', content: m.text });
-    });
-    // Re-append current request
-  }
-
-  // Actually build it clean: system context + all prior user messages + current one
-  const cleanMessages = [{ role:'user', content: contextMsg + '\n\nFirst request: ' + history[0].text }];
-  for(let i = 1; i < history.length; i++){
-    if(history[i].role === 'user'){
-      cleanMessages.push({ role:'user', content: 'Next request: ' + history[i].text });
-    }
-  }
+  const cleanMessages = [{ role:'user', content: contextMsg + '\n\nRequest: ' + request }];
 
   try {
     const res = await fetch('/api/tweak-day', {
@@ -6648,16 +6818,16 @@ function renderSponsoredDests(){
    WEATHER OVERLAY (Open-Meteo)
 ══════════════════════════════════════ */
 const WMO_ICON = {
-  0:'☀️',1:'🌤',2:'⛅',3:'☁️',
-  45:'🌫',48:'🌫',
-  51:'🌦',53:'🌦',55:'🌦',56:'🌦',57:'🌦',
-  61:'🌧',63:'🌧',65:'🌧',66:'🌧',67:'🌧',
-  71:'🌨',73:'🌨',75:'🌨',77:'🌨',
-  80:'🌧',81:'🌧',82:'🌧',
-  85:'🌨',86:'🌨',
-  95:'⛈',96:'⛈',99:'⛈',
+  0:'Sun',1:'Mostly sunny',2:'Part cloudy',3:'Overcast',
+  45:'Fog',48:'Fog',
+  51:'Drizzle',53:'Drizzle',55:'Drizzle',56:'Drizzle',57:'Drizzle',
+  61:'Rain',63:'Rain',65:'Rain',66:'Rain',67:'Rain',
+  71:'Snow',73:'Snow',75:'Snow',77:'Snow',
+  80:'Showers',81:'Showers',82:'Showers',
+  85:'Snow',86:'Snow',
+  95:'Storm',96:'Storm',99:'Storm',
 };
-function wmoIcon(code){ return WMO_ICON[code] || '🌤'; }
+function wmoIcon(code){ return WMO_ICON[code] || 'Cloud'; }
 
 async function fetchWeatherOverlay(){
   if(!S.dateFrom || !itinData) return;
@@ -6710,7 +6880,7 @@ async function fetchWeatherOverlay(){
       weatherDays = (clData.daily?.time || []).map(function(date, i){
         return {
           date,
-          icon: '🌤',   // no weather code from climate API
+          icon: '',   // no weather code from climate API
           temp: Math.round((clData.daily?.temperature_2m_max || [])[i] || 0),
         };
       });
@@ -6727,7 +6897,7 @@ async function fetchWeatherOverlay(){
         if(!tab.querySelector('.day-tab-weather')){
           const chip = document.createElement('span');
           chip.className = 'day-tab-weather';
-          chip.textContent = w.icon + ' ' + w.temp + '°';
+          chip.textContent = (w.icon ? w.icon + ' ' : '') + w.temp + '°';
           tab.appendChild(chip);
         }
       });
@@ -6784,8 +6954,12 @@ function renderVisaBar(){
   const type  = (isEU ? matched._EU : matched._DEFAULT) || 'check';
   const label = matched._LABEL || '';
   const link  = matched._LINK  || 'https://iatatravelcentre.com/';
-  const icons = { free:'✅', 'on-arrival':'🟡', required:'🔴', check:'ℹ️' };
-  const icon  = icons[type] || 'ℹ️';
+  const iconColors = { free:'#2a7a4b', 'on-arrival':'#b07d00', required:'#c0392b', check:'#4a6fa5' };
+  const iconLabels = { free:'✓', 'on-arrival':'~', required:'✕', check:'i' };
+  const icon = '<span style="display:inline-flex;align-items:center;justify-content:center;width:1.3rem;height:1.3rem;border-radius:50%;background:'+
+    (iconColors[type]||'#4a6fa5')+'10;border:1.5px solid '+(iconColors[type]||'#4a6fa5')+
+    ';font-family:var(--ui);font-size:.7rem;font-weight:700;color:'+(iconColors[type]||'#4a6fa5')+
+    ';line-height:1;flex-shrink:0">'+(iconLabels[type]||'i')+'</span>';
 
   // Origin selector options
   const opts = Object.entries(ORIGIN_LABELS).map(function([code,flag]){
@@ -6793,7 +6967,7 @@ function renderVisaBar(){
   }).join('');
 
   bar.style.display = 'flex';
-  bar.innerHTML = '<span class="visa-bar-icon">'+icon+'</span>'
+  bar.innerHTML = icon
     + '<span class="visa-bar-text">'+label+' — <a class="visa-bar-link" href="'+link+'" target="_blank" rel="noopener">'+t('visa_details')+'</a></span>'
     + '<span class="visa-bar-origin"><span style="font-size:.7rem;opacity:.7">'+t('visa_origin')+'</span>'
     + '<select class="visa-origin-select" id="visaOriginSelect" onchange="renderVisaBar()">'+opts+'</select></span>';
@@ -6932,6 +7106,9 @@ function planSimilar(dest){
 }
 
 function switchMain(panelId,btn){
+  // Close any floating overlays left open from another tab
+  closeAllSwaps();
+  closeDayChat();
   document.querySelectorAll('.main-tab').forEach(b=>b.classList.remove('on'));
   document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('on'));
   btn.classList.add('on');
@@ -7092,7 +7269,7 @@ async function tweakDay(di){
   if(input)  input.disabled = true;
   if(bar)    bar.querySelector('.tweak-btn').disabled = true;
   if(status) status.style.display = 'flex';
-  if(statusTx) statusTx.textContent = 'Rewriting day '+(di+1)+'…';
+  if(statusTx) statusTx.textContent = t('tweak_status');
 
   const prompt = `Modify Day ${di+1} of a ${dest} itinerary based on this request: "${request}"
 
@@ -7142,7 +7319,7 @@ Return ONLY the modified day as valid JSON with the exact same structure and all
     if(input)  { input.disabled = false; input.select(); }
     if(bar)    bar.querySelector('.tweak-btn').disabled = false;
     if(status) status.style.display = 'none';
-    if(statusTx) statusTx.textContent = 'Something went wrong — try again';
+    if(statusTx) statusTx.textContent = t('chat_err');
     if(status) { status.style.display='flex'; setTimeout(()=>{ if(status) status.style.display='none'; }, 3000); }
   }
 }
@@ -7593,7 +7770,7 @@ function toggleTransCard(i, name, price){
   if(badgeWrap){
     const cb = document.createElement('span');
     cb.className = 'trans-badge tb-chosen';
-    cb.textContent = 'Selected';
+    cb.textContent = t('trans_selected');
     badgeWrap.appendChild(cb);
   }
   userChoices['transport'] = {type:'Transport', name:name, price:price};
@@ -7609,16 +7786,29 @@ function closeMastMore(){ const m=document.getElementById('mastMoreMenu'); if(m)
 document.addEventListener('click', closeMastMore);
 async function regenItin(){
   const savedChoices = Object.assign({}, userChoices);
-  Object.keys(userChoices).forEach(k=>delete userChoices[k]);
-  const h=startLoad();
-  try{
-    itinData=await fetchItinerary();
+  Object.keys(userChoices).forEach(function(k){ delete userChoices[k]; });
+  const nights = (S.dateFrom&&S.dateTo) ? Math.max(1,Math.round((new Date(S.dateTo)-new Date(S.dateFrom))/86400000)) : 4;
+  const totalDays = Math.min(nights, 14);
+  const isTwoPass = totalDays > 7;
+  const h = startLoad();
+  try {
+    if(isTwoPass){
+      setChunkLoadLabel(1, 7);
+      const week1 = await fetchItinerary(7);
+      h.resetProgress(50);
+      setChunkLoadLabel(8, totalDays);
+      const extraDays = await fetchItineraryChunk(totalDays - 7, 7, totalDays);
+      itinData = week1;
+      itinData.days = week1.days.concat(extraDays);
+    } else {
+      itinData = await fetchItinerary(totalDays);
+    }
   } catch(e){
     Object.assign(userChoices, savedChoices);
-    itinData=makeFallback();
+    itinData = makeFallback();
   }
   stopLoad(h);
-  setTimeout(()=>{ renderItin(itinData); showPg('pg-itin'); },500);
+  setTimeout(function(){ renderItin(itinData); showPg('pg-itin'); }, 500);
 }
 
 /* ══ FALLBACK (bilingual) ══ */
@@ -8329,6 +8519,13 @@ function submitAlert(){
   activeAlerts.push(newAlert);
   try { localStorage.setItem('via_alerts', JSON.stringify(activeAlerts)); } catch(e){}
 
+  // Persist to backend (fire-and-forget — localStorage is source of truth for UI)
+  fetch('/api/register-alert', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'create', alert: newAlert }),
+  }).catch(function(){});
+
   // Show success state
   document.getElementById('alertModalBody').style.display = 'none';
   document.getElementById('alertModalFooter').style.display = 'none';
@@ -8364,7 +8561,7 @@ function extractBaselinePrices(){
 function updateAlertButton(dest){
   const btn = document.getElementById('alertBtn');
   if(!btn) return;
-  btn.innerHTML = `🔔 Alert active <span class="alert-active-badge"><span class="alert-dot"></span>live</span>`;
+  btn.innerHTML = `Alert active <span class="alert-active-badge"><span class="alert-dot"></span>live</span>`;
   btn.style.borderColor = 'var(--forest)';
   btn.style.color = 'var(--forest)';
 }
@@ -8378,23 +8575,93 @@ function checkExistingAlerts(){
 }
 
 /* ══════════════════════════════════════
-   PROFILE / AUTH / SAVE SYSTEM
-   MVP: localStorage-based auth simulation
-   Production: replace with Supabase Auth
+   PROFILE / AUTH / SAVE SYSTEM — Supabase
 ══════════════════════════════════════ */
 
-// ── State ──────────────────────────────
-let currentUser = null; // { name, email, password(hashed), plan:'free'|'plus', savedCount:0 }
-const USERS_KEY   = 'via_users_v1';
-const SESSION_KEY = 'via_session_v1';
-const SAVES_KEY   = 'via_saves_v1';
-const PLUS_PRICE  = 7; // €
+// ── Supabase config (public anon key — safe client-side) ──────────────────
+// Replace these two values with your project's URL and anon key from:
+// Supabase dashboard → Settings → API
+const SUPABASE_URL  = 'https://ondtqkpgctvgmhastpxi.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_hZdUSt8cbUaf1Xe1_nfA_Q_LyaWKDop';
+const _supa = window.supabase
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+  : null;   // _supa is null in local dev until you fill in the values
 
-// ── Helpers ────────────────────────────
-function getUsers(){ try{ return JSON.parse(localStorage.getItem(USERS_KEY)||'{}'); }catch(e){return {};} }
-function getSaves(){ try{ return JSON.parse(localStorage.getItem(SAVES_KEY)||'{}'); }catch(e){return {};} }
-function saveUsers(u){ try{ localStorage.setItem(USERS_KEY, JSON.stringify(u)); }catch(e){} }
-function saveSaves(s){ try{ localStorage.setItem(SAVES_KEY, JSON.stringify(s)); }catch(e){} }
+// ── State ─────────────────────────────
+let currentUser = null; // { id, name, email, plan:'free'|'plus', avatarUrl? }
+const PLUS_PRICE  = 7;
+
+// In-memory saves cache — populated from Supabase on login, kept in sync on mutations
+let _viaSaves = [];
+
+// ── Supabase auth state listener ──────
+if(_supa){
+  _supa.auth.onAuthStateChange(async function(event, session){
+    if(session?.user){
+      const u = session.user;
+      currentUser = {
+        id:        u.id,
+        name:      u.user_metadata?.name || u.email.split('@')[0],
+        email:     u.email,
+        plan:      u.user_metadata?.plan || 'free',
+        avatarUrl: u.user_metadata?.avatarUrl || null,
+      };
+      await _loadSaves();
+      await checkPendingPlus();
+      // Re-open upgrade flow if user just registered to complete a pending upgrade
+      if(_pendingUpgrade){
+        _pendingUpgrade = false;
+        setTimeout(openUpgradeModal, 300);
+      }
+    } else {
+      currentUser = null;
+      _viaSaves   = [];
+    }
+    updateAuthUI();
+    if(currentUser && document.getElementById('pg-profile')?.style.display !== 'none'){
+      renderProfilePage();
+    }
+  });
+  // Restore existing session on page load
+  _supa.auth.getSession().then(function(){ /* onAuthStateChange fires */ });
+}
+
+// ── Saves loader ──────────────────────
+async function _loadSaves(){
+  if(!_supa || !currentUser) return;
+  try {
+    const { data } = await _supa
+      .from('saved_itineraries')
+      .select('*')
+      .order('saved_at', { ascending: false });
+    _viaSaves = data || [];
+  } catch(e){ _viaSaves = []; }
+}
+
+// ── getSaves() — backward-compat wrapper returning keyed object ──────────
+function getSaves(){
+  const obj = {};
+  _viaSaves.forEach(function(s){
+    obj[s.id] = {
+      id:          s.id,
+      userEmail:   currentUser?.email || '',
+      destination: s.destination || '',
+      title:       s.title || s.destination || '',
+      dates:       (s.date_from && s.date_to) ? s.date_from + ' → ' + s.date_to : (s.date_from || ''),
+      group:       s.group_type || '',
+      budget:      s.budget_tier || 'mid',
+      savedAt:     new Date(s.saved_at).getTime(),
+      lastOpened:  s.last_opened ? new Date(s.last_opened).getTime() : null,
+      quizData:    s.quiz_data  || {},
+      itinData:    s.itin_data  || null,
+    };
+  });
+  return obj;
+}
+
+// No-op stubs kept so any remaining callsites don't throw
+function getUsers(){ return {}; }
+function saveUsers(){}
 
 /* ── Save itinerary ────────────────────────────────────────────────── */
 function saveItinerary(){
@@ -8407,66 +8674,48 @@ function saveItinerary(){
     return;
   }
 
-  const saves = getSaves();
-  const userSaves = Object.values(saves).filter(s=>s.userEmail===currentUser.email);
+  if(!_supa){ showToast('Auth not configured.'); return; }
+
   const isPlusPlan = currentUser.plan === 'plus';
 
   // Free plan: cap at 1 save
-  if(!isPlusPlan && userSaves.length >= 1){
-    // Check if there's already a save for this exact trip
-    const alreadySaved = userSaves.some(s=>s.destination===S.dest && (s.itinData&&s.itinData.title)===(itinData&&itinData.title));
-    if(!alreadySaved){
-      openUpgradeModal();
-      return;
-    }
+  if(!isPlusPlan && _viaSaves.length >= 1){
+    const alreadySaved = _viaSaves.some(function(s){
+      return s.destination === (S.dest || itinData.destination_display) &&
+             (s.itin_data?.title) === itinData?.title;
+    });
+    if(!alreadySaved){ openUpgradeModal(); return; }
   }
 
-  const saveId = 'save_' + Date.now();
-  const entry = {
-    id: saveId,
-    userEmail: currentUser.email,
-    destination: S.dest || itinData.title || 'Unknown',
-    title: itinData.title || S.dest || 'My trip',
-    dates: (S.dateFrom && S.dateTo) ? (S.dateFrom + ' → ' + S.dateTo) : (S.dateFrom || ''),
-    group: S.comp || '',
-    budget: S.budget || 'mid',
-    savedAt: Date.now(),
-    lastOpened: Date.now(),
-    quizData: { dest:S.dest, days:S.days, budget:S.budget, vibes:S.vibes, comp:S.comp, pace:S.pace, dateFrom:S.dateFrom, dateTo:S.dateTo },
-    itinData: itinData,
+  const saveRow = {
+    user_id:     currentUser.id,
+    itin_data:   itinData,
+    quiz_data:   { dest:S.dest, budget:S.budget, vibes:S.vibes, comp:S.comp, pace:S.pace, dateFrom:S.dateFrom, dateTo:S.dateTo },
+    title:       itinData.title || S.dest || 'My trip',
+    destination: S.dest || itinData.destination_display || 'Unknown',
+    date_from:   S.dateFrom || null,
+    date_to:     S.dateTo   || null,
+    group_type:  S.comp     || '',
+    budget_tier: currentTier || S.budget || 'mid',
   };
 
-  saves[saveId] = entry;
-  saveSaves(saves);
+  const { data, error } = await _supa.from('saved_itineraries').insert(saveRow).select().single();
+  if(error){ showToast('Could not save trip — ' + error.message); return; }
 
-  // Update button state
+  _viaSaves.unshift(data);
+
   const btn = document.getElementById('saveItinBtn');
-  if(btn){ btn.textContent = '♥ Saved'; btn.style.color='var(--burg)'; btn.style.borderColor='var(--burg)'; }
+  if(btn){ btn.textContent = t('save_saved'); btn.style.color='var(--burg)'; btn.style.borderColor='var(--burg)'; }
 
   showToast('Itinerary saved to your profile.');
-  if(currentUser) renderProfilePage();
+  renderProfilePage();
 }
 
 let pendingSave = false;
 
-function simpleHash(str){
-  // Simple non-cryptographic hash — production would use Supabase Auth which bcrypts server-side
-  let h = 0;
-  for(let i=0;i<str.length;i++){ h = Math.imul(31, h) + str.charCodeAt(i) | 0; }
-  return h.toString(36);
-}
-
 function initAuth(){
-  try{
-    const session = JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
-    if(session && session.email){
-      const users = getUsers();
-      if(users[session.email]){
-        currentUser = users[session.email];
-        updateAuthUI();
-      }
-    }
-  }catch(e){}
+  // Session restore is handled by _supa.auth.onAuthStateChange above.
+  // This stub is kept for any callsites that invoke initAuth() explicitly.
 }
 
 function updateAuthUI(){
@@ -8480,7 +8729,7 @@ function updateAuthUI(){
     if(heroAvatar){ heroAvatar.style.display='flex'; heroAvatar.textContent=initials; }
     if(heroBtn) heroBtn.classList.add('signed-in');
   } else {
-    if(heroLabel) heroLabel.textContent = 'Sign in';
+    if(heroLabel) heroLabel.textContent = (authStrings[currentLang]||authStrings.en).tabSignIn;
     if(heroAvatar) heroAvatar.style.display='none';
     if(heroBtn) heroBtn.classList.remove('signed-in');
   }
@@ -8508,53 +8757,63 @@ function switchAuthTab(tab){
   document.getElementById('authRegForm').style.display = tab==='register'?'block':'none';
 }
 
-function doRegister(){
+async function doRegister(){
   const name  = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim().toLowerCase();
   const pass  = document.getElementById('regPass').value;
   const errEl = document.getElementById('regError');
+  const as    = authStrings[currentLang]||authStrings.en;
 
-  if(!name||!email.includes('@')||pass.length<8){
-    errEl.textContent = 'Please fill all fields. Password must be at least 8 characters.';
+  if(!name || !email.includes('@') || pass.length < 8){
+    errEl.textContent = as.regValidation; errEl.style.display='block'; return;
+  }
+  if(!_supa){ errEl.textContent='Auth not configured.'; errEl.style.display='block'; return; }
+
+  const btn = document.getElementById('regSubmitBtn');
+  if(btn){ btn.disabled=true; btn.textContent='…'; }
+
+  const { data, error } = await _supa.auth.signUp({
+    email, password: pass,
+    options: { data: { name, plan:'free' } },
+  });
+
+  if(btn){ btn.disabled=false; btn.textContent=as.regSubmit||as.siSubmit||'Register →'; }
+
+  if(error){
+    errEl.textContent = error.message.toLowerCase().includes('already') ? as.regError : error.message;
     errEl.style.display='block'; return;
   }
-  const users = getUsers();
-  if(users[email]){ errEl.textContent='An account with this email already exists.'; errEl.style.display='block'; return; }
 
-  const user = { name, email, passHash: simpleHash(pass), plan:'free', savedCount:0, createdAt: Date.now() };
-  users[email] = user;
-  saveUsers(users);
-  currentUser = user;
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ email }));
-  updateAuthUI();
+  // onAuthStateChange fires and sets currentUser
   closeAuthModal();
-  showWelcome(user.name);
-
-  // If they were saving an itinerary, proceed
+  showWelcome(name);
   if(pendingSave){ pendingSave=false; saveItinerary(); }
 }
 
-function doSignIn(){
+async function doSignIn(){
   const email = document.getElementById('siEmail').value.trim().toLowerCase();
   const pass  = document.getElementById('siPass').value;
   const errEl = document.getElementById('siError');
-  const users = getUsers();
-  const user  = users[email];
+  if(!_supa){ errEl.style.display='block'; return; }
 
-  if(!user || user.passHash !== simpleHash(pass)){
-    errEl.style.display='block'; return;
-  }
-  currentUser = user;
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ email }));
-  updateAuthUI();
-  checkPendingPlus(); // Grant Plus if paid on another device
+  const btn = document.getElementById('siSubmitBtn');
+  if(btn){ btn.disabled=true; btn.textContent='…'; }
+
+  const { data, error } = await _supa.auth.signInWithPassword({ email, password: pass });
+
+  if(btn){ btn.disabled=false; btn.textContent=(authStrings[currentLang]||authStrings.en).siSubmit; }
+
+  if(error){ errEl.style.display='block'; return; }
+
+  // onAuthStateChange fires → currentUser set → saves loaded
   closeAuthModal();
   if(pendingSave){ pendingSave=false; saveItinerary(); }
 }
 
-function doSignOut(){
+async function doSignOut(){
+  if(_supa) await _supa.auth.signOut();
   currentUser = null;
-  localStorage.removeItem(SESSION_KEY);
+  _viaSaves   = [];
   updateAuthUI();
   showPg('pg-land');
 }
@@ -8588,8 +8847,11 @@ function renderProfilePage(){
 
   const isPlusPlan = currentUser.plan === 'plus';
   const badge = document.getElementById('profilePlanBadge');
-  badge.textContent = isPlusPlan ? '★ Plus' : 'Free';
+  badge.textContent = isPlusPlan ? t('profile_plus_member') : 'Free';
   badge.className = 'profile-plan-badge ' + (isPlusPlan ? 'plan-plus' : 'plan-free');
+  // Show/hide sidebar upgrade CTA
+  const ducEl = document.getElementById('dashUpgradeCta');
+  if(ducEl) ducEl.style.display = isPlusPlan ? 'none' : '';
 
   // Stats
   const saves = getSaves();
@@ -8606,8 +8868,8 @@ function renderProfilePage(){
   const actionsEl = document.getElementById('profileHeroActions');
   if(actionsEl){
     actionsEl.innerHTML = isPlusPlan
-      ? '<span style="font-family:var(--ui);font-size:.62rem;color:var(--forest);font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--forest);padding:.3rem .8rem;border-radius:100px">★ Plus member</span>'
-      : '<button class="btn-pcc-upgrade" onclick="openUpgradeModal()" style="font-size:.68rem;padding:.6rem 1.2rem">Upgrade to Plus</button>';
+      ? '<span style="font-family:var(--ui);font-size:.62rem;color:var(--forest);font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--forest);padding:.3rem .8rem;border-radius:100px">'+t('profile_plus_member')+'</span>'
+      : '<button class="btn-pcc-upgrade" onclick="openUpgradeModal()" style="font-size:.68rem;padding:.6rem 1.2rem">'+t('profile_upgrade_btn')+'</button>';
   }
 
   // Premium CTA card inside trips tab
@@ -8617,20 +8879,20 @@ function renderProfilePage(){
       ? '<div class="premium-cta-card">' +
           '<div class="pcc-left">' +
             '<div class="pcc-eye">Via Plus</div>' +
-            '<div class="pcc-title">Save every trip you plan.</div>' +
-            '<div class="pcc-body">Your first itinerary is always saved free. Unlock everything else for less than a coffee.</div>' +
+            '<div class="pcc-title">'+t('pcc_title')+'</div>' +
+            '<div class="pcc-body">'+t('pcc_body')+'</div>' +
             '<div class="pcc-feats">' +
-              '<span class="pcc-feat">Unlimited saves</span>' +
-              '<span class="pcc-feat">Unlimited PDFs</span>' +
-              '<span class="pcc-feat">Price alerts</span>' +
-              '<span class="pcc-feat">Map view</span>' +
-              '<span class="pcc-feat">Full packing list</span>' +
+              '<span class="pcc-feat">'+t('pcc_feat1')+'</span>' +
+              '<span class="pcc-feat">'+t('pcc_feat2')+'</span>' +
+              '<span class="pcc-feat">'+t('pcc_feat3')+'</span>' +
+              '<span class="pcc-feat">'+t('pcc_feat4')+'</span>' +
+              '<span class="pcc-feat">'+t('pcc_feat5')+'</span>' +
             '</div>' +
           '</div>' +
           '<div class="pcc-right">' +
             '<div class="pcc-price">€7</div>' +
-            '<div class="pcc-price-sub">one-time, forever</div>' +
-            '<button class="btn-pcc-upgrade" onclick="openUpgradeModal()">Unlock Via Plus →</button>' +
+            '<div class="pcc-price-sub">'+t('pcc_price_sub')+'</div>' +
+            '<button class="btn-pcc-upgrade" onclick="openUpgradeModal()">'+t('pcc_cta')+'</button>' +
           '</div>' +
         '</div>'
       : '';
@@ -8638,9 +8900,15 @@ function renderProfilePage(){
 
   // Saved count label
   const countLabel = document.getElementById('savedCountLabel');
-  if(countLabel) countLabel.textContent = userSaves.length === 0
-    ? 'Plan your first trip and save it here — it\'s always free.'
-    : userSaves.length + ' saved trip' + (userSaves.length>1?'s':'');
+  if(countLabel){
+    const n = userSaves.length;
+    countLabel.removeAttribute('data-t');
+    countLabel.textContent = n === 0
+      ? t('prof_count_zero')
+      : n === 1
+        ? t('prof_count_one')
+        : t('prof_count_many').replace('{n}', n);
+  }
 
   // Saved trips grid
   const grid = document.getElementById('savedGrid');
@@ -8649,9 +8917,9 @@ function renderProfilePage(){
   if(userSaves.length === 0){
     grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">' +
       '<div class="es-icon">✈</div>' +
-      '<div class="es-title">No saved trips yet.</div>' +
-      '<div class="es-sub">Plan your first itinerary and save it here — always free.</div>' +
-      '<button class="btn-plan-now" onclick="showPg(\'pg-land\');goQuiz()">Plan a trip ' +
+      '<div class="es-title">'+t('prof_empty_title')+'</div>' +
+      '<div class="es-sub">'+t('prof_empty_sub')+'</div>' +
+      '<button class="btn-plan-now" onclick="showPg(\'pg-land\');goQuiz()">'+t('prof_plan_btn')+' ' +
         '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
       '</button></div>';
     return;
@@ -8675,12 +8943,10 @@ function renderProfilePage(){
     return destImgs.default;
   }
 
+  const dateLocale = currentLang === 'en' ? 'en-GB' : currentLang === 'sr' ? 'sr-Latn' : currentLang;
   const cardsHtml = userSaves.map(save=>{
     const d = new Date(save.savedAt);
-    const dateStr = d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-    const lastOpenedStr = save.lastOpened
-      ? 'Opened ' + new Date(save.lastOpened).toLocaleDateString('en-GB',{day:'numeric',month:'short'})
-      : 'Saved ' + dateStr;
+    const dateStr = d.toLocaleDateString(dateLocale,{day:'numeric',month:'short',year:'numeric'});
     const img = getDestImg(save.destination);
     const chips = [save.dates,save.group,save.budget].filter(Boolean);
     return '<div class="saved-card">' +
@@ -8688,13 +8954,13 @@ function renderProfilePage(){
       '<div class="saved-card-overlay"></div>' +
       '<div class="saved-card-body">' +
         '<div class="sc-title">'+(save.title||save.destination)+'</div>' +
-        '<div class="sc-meta">'+save.destination+' · Saved '+dateStr+'</div>' +
+        '<div class="sc-meta">'+save.destination+' · '+t('sc_saved_on')+' '+dateStr+'</div>' +
         '<div class="sc-chips">'+chips.map(c=>'<span class="sc-chip">'+c+'</span>').join('')+'</div>' +
         '<div class="sc-actions">' +
-          '<button class="sc-btn primary" onclick="loadSavedTrip(\''+save.id+'\')">Open →</button>' +
-          '<button class="sc-btn" onclick="planSimilarTrip(\''+save.id+'\')" title="Pre-fill quiz with same destination, vibes & budget">↗ Similar</button>' +
-          '<button class="sc-btn" onclick="exportSavedPDF(\''+save.id+'\')">↓ PDF</button>' +
-          '<button class="sc-btn danger" onclick="deleteSavedTrip(\''+save.id+'\')">Delete</button>' +
+          '<button class="sc-btn primary" onclick="loadSavedTrip(\''+save.id+'\')">'+t('sc_open_btn')+'</button>' +
+          '<button class="sc-btn" onclick="planSimilarTrip(\''+save.id+'\')" title="Pre-fill quiz with same destination, vibes & budget">'+t('sc_similar_btn')+'</button>' +
+          '<button class="sc-btn" onclick="exportSavedPDF(\''+save.id+'\')">'+t('sc_pdf_btn')+'</button>' +
+          '<button class="sc-btn danger" onclick="deleteSavedTrip(\''+save.id+'\')">'+t('sc_delete_btn')+'</button>' +
         '</div>' +
       '</div></div>';
   });
@@ -8702,17 +8968,19 @@ function renderProfilePage(){
   if(!isPlusPlan){
     cardsHtml.push('<div class="locked-card" onclick="openUpgradeModal()">' +
       '<div class="locked-icon">+</div>' +
-      '<div class="locked-title">Save more trips</div>' +
-      '<div class="locked-sub">Unlock unlimited saves for €7, once.</div>' +
+      '<div class="locked-title">'+t('locked_title')+'</div>' +
+      '<div class="locked-sub">'+t('locked_sub')+'</div>' +
       '<div class="locked-price">€7 →</div></div>');
   }
   grid.innerHTML = cardsHtml.join('');
 }
-function deleteSavedTrip(saveId){
-  if(!confirm('Delete this saved trip? This cannot be undone.')) return;
-  const saves = getSaves();
-  delete saves[saveId];
-  saveSaves(saves);
+async function deleteSavedTrip(saveId){
+  if(!confirm(t('sc_delete_confirm'))) return;
+  if(_supa){
+    const { error } = await _supa.from('saved_itineraries').delete().eq('id', saveId);
+    if(error){ showToast('Could not delete — ' + error.message); return; }
+    _viaSaves = _viaSaves.filter(function(s){ return s.id !== saveId; });
+  }
   renderProfilePage();
 }
 
@@ -8805,32 +9073,28 @@ function exportSavedPDF(saveId){
 
 // ── Upgrade / paywall ──────────────────
 function openUpgradeModal(){
-  const uT = {
-    en:{title:'Save unlimited itineraries.',sub:'Your first trip is always saved free. Unlock more for less than a coffee.',btn:'Get Via Plus · €7 →',later:'Not now'},
-    sl:{title:'Shranite neomejeno potovanj.',sub:'Prvo potovanje je vedno brezplačno. Odklenite več za manj kot kava.',btn:'Odkleni Via Plus — 7 € →',later:'Mogoče kasneje'},
-    de:{title:'Unbegrenzt Reisepläne speichern.',sub:'Erste Reise immer kostenlos. Mehr für weniger als ein Kaffee freischalten.',btn:'Via Plus freischalten — 7 € →',later:'Vielleicht später'},
-    it:{title:'Salva itinerari illimitati.',sub:'Il primo viaggio è sempre gratuito. Sblocca di più per meno di un caffè.',btn:'Sblocca Via Plus — 7 € →',later:'Forse dopo'},
-    fr:{title:'Enregistrez des itinéraires illimités.',sub:'Le premier voyage est toujours gratuit. Débloquez plus pour moins qu\'un café.',btn:'Débloquer Via Plus — 7 € →',later:'Peut-être plus tard'},
-    hr:{title:'Spremite neograničene itinerare.',sub:'Prvo putovanje je uvijek besplatno. Otključajte više za manje od kave.',btn:'Otključaj Via Plus — 7 € →',later:'Možda kasnije'},
-    es:{title:'Guarda itinerarios ilimitados.',sub:'El primer viaje siempre es gratuito. Desbloquea más por menos que un café.',btn:'Desbloquear Via Plus — 7 € →',later:'Quizás más tarde'},
-    sr:{title:'Sačuvaj neograničen broj putovanja.',sub:'Prvo putovanje uvek ostaje besplatno. Otključaj više za manje od kafe.',btn:'Aktiviraj Via Plus — 7 € →',later:'Možda kasnije'},
-  };
-  const u = uT[currentLang]||uT.en;
   const titleEl = document.getElementById('upgradeTitleEl');
-  if(titleEl) titleEl.textContent = u.title;
+  if(titleEl) titleEl.textContent = t('pcc_title');
   const subEl = document.querySelector('.upgrade-sub');
-  if(subEl) subEl.textContent = u.sub;
+  if(subEl) subEl.textContent = t('pcc_body');
   const btnEl = document.querySelector('.btn-upgrade');
-  if(btnEl) btnEl.textContent = u.btn;
+  if(btnEl) btnEl.textContent = t('upgrade_btn_default');
   const laterEl = document.querySelector('.btn-upgrade-secondary');
-  if(laterEl) laterEl.textContent = u.later;
+  if(laterEl) laterEl.textContent = t('upgrade_not_now');
+  // Update features list
+  const feats = document.querySelectorAll('.uf-list li');
+  const featKeys = ['upgrade_feat1','upgrade_feat2','upgrade_feat3','upgrade_feat4','upgrade_feat5','upgrade_feat6','upgrade_feat7'];
+  feats.forEach(function(li, i){ if(featKeys[i]) li.textContent = t(featKeys[i]); });
   document.getElementById('upgradeModal').classList.add('open');
 }
 function closeUpgradeModal(){ document.getElementById('upgradeModal').classList.remove('open'); }
 
+let _pendingUpgrade = false;
+
 async function doUpgrade(){
   // Require sign-in before payment
   if(!currentUser){
+    _pendingUpgrade = true;
     closeUpgradeModal();
     openAuthModal('register');
     return;
@@ -8838,7 +9102,7 @@ async function doUpgrade(){
 
   // Show loading state on the button
   const btn = document.querySelector('.btn-upgrade');
-  if(btn){ btn.textContent = 'Redirecting to checkout…'; btn.disabled = true; }
+  if(btn){ btn.textContent = t('upgrade_redirecting'); btn.disabled = true; }
 
   try {
     const res = await fetch('/api/checkout', {
@@ -8857,8 +9121,8 @@ async function doUpgrade(){
 
   } catch(err) {
     console.error('Upgrade error:', err);
-    if(btn){ btn.textContent = 'Get Via Plus · €7 →'; btn.disabled = false; }
-    showToast('Payment could not be started. Please try again.');
+    if(btn){ btn.textContent = t('upgrade_btn_default'); btn.disabled = false; }
+    showToast(t('upgrade_error'));
   }
 }
 
@@ -8871,7 +9135,7 @@ async function handleUpgradeReturn(){
   if(status === 'cancelled'){
     // Clean URL, show gentle message
     window.history.replaceState({}, '', window.location.pathname);
-    showToast('Payment cancelled — no charge was made.');
+    showToast(t('upgrade_cancelled_msg'));
     return;
   }
 
@@ -8894,16 +9158,11 @@ async function handleUpgradeReturn(){
       return;
     }
 
-    // Grant Plus in localStorage
-    const users = getUsers();
+    // Grant Plus via Supabase user metadata
     const emailKey = data.email || (currentUser && currentUser.email);
-    if(emailKey && users[emailKey]){
-      users[emailKey].plan = 'plus';
-      users[emailKey].upgradedAt = new Date().toISOString();
-      saveUsers(users);
-      if(currentUser && currentUser.email === emailKey){
-        currentUser = users[emailKey];
-      }
+    if(_supa && currentUser){
+      await _supa.auth.updateUser({ data: { plan: 'plus', upgradedAt: new Date().toISOString() } });
+      currentUser.plan = 'plus';
     } else if(emailKey) {
       // User paid but is not signed in on this device — store for when they sign in
       try {
@@ -8929,15 +9188,13 @@ async function handleUpgradeReturn(){
 }
 
 // Check for pending Plus grant when user signs in (paid on another device / session)
-function checkPendingPlus(){
-  if(!currentUser) return;
+async function checkPendingPlus(){
+  if(!currentUser || !_supa) return;
   try {
     const pending = JSON.parse(localStorage.getItem('via_pending_plus') || '{}');
     if(pending[currentUser.email]){
-      const users = getUsers();
-      users[currentUser.email].plan = 'plus';
-      saveUsers(users);
-      currentUser = users[currentUser.email];
+      await _supa.auth.updateUser({ data: { plan: 'plus', upgradedAt: new Date().toISOString() } });
+      currentUser.plan = 'plus';
       delete pending[currentUser.email];
       localStorage.setItem('via_pending_plus', JSON.stringify(pending));
       updateAuthUI();
@@ -8952,7 +9209,7 @@ function checkPendingPlus(){
 ══════════════════════════════════════ */
 const tripNotes = {}; // { noteId: 'text' }
 
-function getNoteIcon(id){ try{ return tripNotes[id] ? '✏️' : '+'; }catch(e){return '+';} }
+function getNoteIcon(id){ try{ return tripNotes[id] ? '✎' : '+'; }catch(e){return '+';} }
 
 function renderNoteField(id){
   try {
@@ -8960,13 +9217,13 @@ function renderNoteField(id){
     const existing = tripNotes[id] || '';
     if(!isPlusPlan){
       return `<div class="note-plus-gate" onclick="openUpgradeModal()">
-        <span style="color:var(--gold)">★</span> Notes save across sessions with Via Plus — <span style="text-decoration:underline;color:var(--gold)">Unlock for €7</span>
+        <span style="color:var(--gold)">★</span> ${t('note_plus_gate')} — <span style="text-decoration:underline;color:var(--gold)">${t('note_plus_unlock')}</span>
       </div>`;
     }
     return `<textarea class="note-textarea" id="nta_${id}" placeholder="Add your note… (e.g. 'Book ahead', 'Ask for the terrace table')">${existing}</textarea>
       <div class="note-actions">
-        <button class="note-cancel-btn" onclick="closeNote('${id}',event)">Cancel</button>
-        <button class="note-save-btn" onclick="saveNote('${id}',event)">Save note</button>
+        <button class="note-cancel-btn" onclick="closeNote('${id}',event)">${t('settings_cancel')}</button>
+        <button class="note-save-btn" onclick="saveNote('${id}',event)">${t('settings_save')}</button>
       </div>`;
   } catch(e) { return ''; }
 }
@@ -9001,7 +9258,7 @@ function saveNote(id, e){
   closeNote(id, e);
   // Update trigger icon
   const nt = document.getElementById('nt_'+id);
-  if(nt){ nt.innerHTML = (text ? '✏️' : '+') + ' ' + t('note_btn'); nt.classList.toggle('has-note', !!text); }
+  if(nt){ nt.innerHTML = (text ? '✎' : '+') + ' ' + t('note_btn'); nt.classList.toggle('has-note', !!text); }
 }
 
 /* ══════════════════════════════════════
@@ -9027,14 +9284,11 @@ function renderCostBreakdown(day, di){
     sr:{lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smeštaj',item:'Stavka',pp:'Po osobi',total:'Procenjeni dnevni trošak',note:'po sobi',tip:'Zameni preporuku iznad da ažuriraš troškove.'},
   };
   const L = labels[currentLang] || labels.en;
-  const tierIcons = {budget:'🎒',mid:'🌿',comfortable:'✨',luxury:'👑'};
-  const tierIcon = tierIcons[currentTier]||'🌿';
-
   const rows = [
-    {icon:'🍽', cat:L.lunch,    name:lunch.name||'—',   pp:lunch.price_pp||'—',         pv:parseP(lunch.price_pp)},
-    {icon:'🍷', cat:L.dinner,   name:dinner.name||'—',  pp:dinner.price_pp||'—',        pv:parseP(dinner.price_pp)},
-    {icon:'🎯', cat:L.activity, name:act.name||'—',     pp:act.price||'—',              pv:parseP(act.price)},
-    {icon:'🏨', cat:L.stay,     name:accom.name||'—',   pp:(accom.price_per_night||'—'), pv:0, note: accom.price_per_night ? L.note : ''},
+    {cat:L.lunch,    name:lunch.name||'—',   pp:lunch.price_pp||'—',         pv:parseP(lunch.price_pp)},
+    {cat:L.dinner,   name:dinner.name||'—',  pp:dinner.price_pp||'—',        pv:parseP(dinner.price_pp)},
+    {cat:L.activity, name:act.name||'—',     pp:act.price||'—',              pv:parseP(act.price)},
+    {cat:L.stay,     name:accom.name||'—',   pp:(accom.price_per_night||'—'), pv:0, note: accom.price_per_night ? L.note : ''},
   ];
 
   const foodTotal = [parseP(lunch.price_pp),parseP(dinner.price_pp)].filter(v=>v>0).reduce((a,b)=>a+b,0);
@@ -9054,7 +9308,6 @@ function renderCostBreakdown(day, di){
     return '<tr>' +
       '<td>' +
         '<span class="cb-row-cat">' + row.cat + '</span>' +
-        '<span class="cb-row-icon">' + row.icon + '</span>' +
         '<span class="cb-row-name">' + sanitiseAI(row.name) + '</span>' +
       '</td>' +
       '<td>' + ppCell + '</td>' +
@@ -9064,14 +9317,13 @@ function renderCostBreakdown(day, di){
   return '<div class="cost-breakdown">' +
     '<div class="cb-wrap" data-tier="' + currentTier + '">' +
       '<div class="cb-head">' +
-        '<div class="cb-title">' + tierIcon + ' ' + t('day_label') + ' ' + (di+1) + ' · ' + tierLabel + '</div>' +
+        '<div class="cb-title">' + t('day_label') + ' ' + (di+1) + ' · ' + tierLabel + '</div>' +
         '<div class="cb-sub">' + L.item + ' · ' + L.pp + '</div>' +
       '</div>' +
       '<table class="cb-table">' +
         '<tbody>' + rows2Html + totalHtml + '</tbody>' +
       '</table>' +
       '<div class="cb-footer">' +
-        '<span class="cb-footer-icon">💡</span>' +
         '<span class="cb-footer-text">' + L.tip + '</span>' +
       '</div>' +
     '</div>' +
@@ -9248,6 +9500,9 @@ function renderMap(data){
     es:{title:'La vista de mapa es Via Plus',sub:'Todas las recomendaciones en un mapa real.',price:'7 € una vez',btn:'Desbloquear Via Plus →',
         lunch:'Almuerzo',dinner:'Cena',activity:'Actividad',stay:'Alojamiento',allDays:'Todos los días',
         noKey:'Añade tu clave de API de Google Maps para ver el mapa en vivo.',noKeyLink:'Obtener clave gratuita →'},
+    sr:{title:'Prikaz mape je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj mapi.',price:'7 € jednom, tvoje zauvek',btn:'Aktiviraj Via Plus →',
+        lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smeštaj',allDays:'Svi dani',
+        noKey:'Dodaj Google Maps API ključ za live mapu.',noKeyLink:'Uzmi besplatni ključ →'},
   };
   const mT = mapT[currentLang] || mapT.en;
 
@@ -9259,13 +9514,13 @@ function renderMap(data){
     el.innerHTML =
       '<div class="map-locked-wrap" style="position:relative;overflow:hidden;border-radius:4px">' +
         // Static Google Maps image as background (no API key needed for static preview)
-        '<img src="https://maps.googleapis.com/maps/api/staticmap?center='+encodeURIComponent(dest)+'&zoom=12&size=800x440&style=feature:all|element:labels|visibility:off&style=feature:water|color:0xb8d4e8&style=feature:landscape|color:0xeae2cc&style=feature:road|color:0xd4c8b4&key=YOUR_MAPS_KEY" ' +
+        '<img src="https://maps.googleapis.com/maps/api/staticmap?center='+encodeURIComponent(dest)+'&zoom=12&size=800x440&style=feature:all|element:labels|visibility:off&style=feature:water|color:0xb8d4e8&style=feature:landscape|color:0xeae2cc&style=feature:road|color:0xd4c8b4&key=AIzaSyCtSndBzH_mpX3vB80bbvsuAJ7YAH_Gy-w" ' +
         'onerror="this.style.display=\'none\'" ' +
         'style="width:100%;height:320px;object-fit:cover;filter:blur(3px) brightness(.7);display:block" alt="">' +
         '<div class="map-locked-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(28,21,16,.5);backdrop-filter:blur(2px)">' +
           '<div class="map-locked-card" style="background:var(--ink);border-radius:6px;padding:1.8rem 2rem;text-align:center;max-width:320px;width:90%;box-shadow:0 16px 48px rgba(28,21,16,.4);position:relative">' +
             '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--burg),var(--gold));border-radius:6px 6px 0 0"></div>' +
-            '<div style="font-size:1.8rem;margin-bottom:.7rem">🗺</div>' +
+            '<div style="font-size:1.8rem;margin-bottom:.7rem">✦</div>' +
             '<div class="map-locked-title" style="font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--cr);margin-bottom:.35rem">'+mT.title+'</div>' +
             '<div class="map-locked-sub" style="font-family:var(--body);font-size:.85rem;color:rgba(242,235,217,.5);font-style:italic;line-height:1.6;margin-bottom:.8rem">'+mT.sub+'</div>' +
             '<div style="font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:1rem">'+mT.price+'</div>' +
@@ -9924,14 +10179,12 @@ function handleAvatarUpload(input){
   const file = input.files[0];
   if(!file) return;
   const reader = new FileReader();
-  reader.onload = e => {
+  reader.onload = async function(e){
     const dataUrl = e.target.result;
-    // Store in user object
-    const users = getUsers();
-    if(users[currentUser.email]){
-      users[currentUser.email].avatarUrl = dataUrl;
-      saveUsers(users);
-      currentUser = users[currentUser.email];
+    // Persist in Supabase user metadata
+    if(_supa && currentUser){
+      await _supa.auth.updateUser({ data: { avatarUrl: dataUrl } });
+      currentUser.avatarUrl = dataUrl;
     }
     // Show image
     const img = document.getElementById('profileAvatarImg');
@@ -10042,6 +10295,21 @@ function switchDashTab(tab, el){
   if(el) el.classList.add('on');
   if(tab==='social') setTimeout(renderSocialFeed, 50);
   if(tab==='alerts') setTimeout(renderAlertsTab, 50);
+  if(tab==='settings' && currentUser){
+    const snEl = document.getElementById('settingsName');
+    if(snEl) snEl.textContent = currentUser.name;
+    const seEl = document.getElementById('settingsEmail');
+    if(seEl) seEl.textContent = currentUser.email;
+    const spEl = document.getElementById('settingsPlanBadge');
+    if(spEl){
+      spEl.textContent = currentUser.plan === 'plus' ? t('profile_plus_member') : 'Free';
+      spEl.className = 'profile-plan-badge ' + (currentUser.plan === 'plus' ? 'plan-plus' : 'plan-free');
+    }
+    const surEl = document.getElementById('settingsUpgradeRow');
+    if(surEl) surEl.style.display = currentUser.plan === 'plus' ? 'none' : '';
+    const ducEl = document.getElementById('dashUpgradeCta');
+    if(ducEl) ducEl.style.display = currentUser.plan === 'plus' ? 'none' : '';
+  }
 }
 
 /* ── Social feed ── */
@@ -10251,6 +10519,7 @@ const authStrings = {
     regSubmit:'Create free account →',
     regFooter:'Already have an account?', regFooterLink:'Sign in',
     regError:'This email is already registered.',
+    regValidation:'Please fill all fields. Password must be at least 8 characters.',
     regBenefits:['First itinerary saved free, always','Access your plans on any device','PDF export and price alerts included','Unlimited saves from €7'],
     divider:'your details',
   },
@@ -10267,6 +10536,7 @@ const authStrings = {
     regSubmit:'Ustvari brezplačen račun →',
     regFooter:'Že imaš račun?', regFooterLink:'Prijavi se',
     regError:'Ta e-poštni naslov je že registriran.',
+    regValidation:'Izpolni vsa polja. Geslo mora imeti vsaj 8 znakov.',
     regBenefits:['Prvo potovanje shranjeno brezplačno','Dostop do načrtov na vseh napravah','PDF izvoz in opozorila o cenah','Neomejeno shranjevanje od 7 €'],
     divider:'tvoji podatki',
   },
@@ -10283,6 +10553,7 @@ const authStrings = {
     regSubmit:'Kostenloses Konto erstellen →',
     regFooter:'Bereits ein Konto?', regFooterLink:'Anmelden',
     regError:'Diese E-Mail ist bereits registriert.',
+    regValidation:'Bitte alle Felder ausfüllen. Passwort muss mindestens 8 Zeichen haben.',
     regBenefits:['Erste Reise kostenlos gespeichert','Pläne auf allen Geräten','PDF-Export und Preisalarme inklusive','Unbegrenzte Speicherung ab 7 €'],
     divider:'deine Daten',
   },
@@ -10299,6 +10570,7 @@ const authStrings = {
     regSubmit:'Crea account gratuito →',
     regFooter:'Hai già un account?', regFooterLink:'Accedi',
     regError:'Questa email è già registrata.',
+    regValidation:'Compila tutti i campi. La password deve avere almeno 8 caratteri.',
     regBenefits:['Primo itinerario salvato gratis','Accesso ai piani su qualsiasi dispositivo','Esportazione PDF e avvisi prezzi inclusi','Salvataggi illimitati da 7 €'],
     divider:'i tuoi dati',
   },
@@ -10315,6 +10587,7 @@ const authStrings = {
     regSubmit:'Créer un compte gratuit →',
     regFooter:'Déjà un compte ?', regFooterLink:'Se connecter',
     regError:'Cet e-mail est déjà enregistré.',
+    regValidation:'Remplis tous les champs. Le mot de passe doit contenir au moins 8 caractères.',
     regBenefits:['Premier itinéraire sauvegardé gratuitement','Accès aux plans sur tous vos appareils','Export PDF et alertes prix inclus','Sauvegardes illimitées à partir de 7 €'],
     divider:'vos coordonnées',
   },
@@ -10331,6 +10604,7 @@ const authStrings = {
     regSubmit:'Stvori besplatan račun →',
     regFooter:'Već imaš račun?', regFooterLink:'Prijavi se',
     regError:'Ovaj e-mail je već registriran.',
+    regValidation:'Ispuni sva polja. Lozinka mora imati najmanje 8 znakova.',
     regBenefits:['Prvo putovanje spremljeno besplatno','Pristup planovima na svim uređajima','PDF izvoz i upozorenja o cijenama','Neograničeno spremanje od 7 €'],
     divider:'tvoji podaci',
   },
@@ -10347,6 +10621,7 @@ const authStrings = {
     regSubmit:'Crear cuenta gratuita →',
     regFooter:'¿Ya tienes cuenta?', regFooterLink:'Iniciar sesión',
     regError:'Este correo ya está registrado.',
+    regValidation:'Completa todos los campos. La contraseña debe tener al menos 8 caracteres.',
     regBenefits:['Primer itinerario guardado gratis','Accede a tus planes en cualquier dispositivo','Exportación PDF y alertas de precios','Guardados ilimitados desde 7 €'],
     divider:'tus datos',
   },
@@ -10363,6 +10638,7 @@ const authStrings = {
     regSubmit:'Napravi besplatan nalog →',
     regFooter:'Već imaš nalog?', regFooterLink:'Prijavi se',
     regError:'Ovaj imejl je već registrovan.',
+    regValidation:'Popuni sva polja. Lozinka mora imati najmanje 8 karaktera.',
     regBenefits:['Sačuvaj koliko god planova hoćeš','Vrati se i uredi u bilo kom trenutku','Podeli plan s ekipom jednim klikom','Obaveštenja kad cene padnu'],
     divider:'tvoji podaci',
   },
@@ -10441,12 +10717,13 @@ function tToast(key){ return (toastStrings[key]||{})[currentLang] || (toastStrin
 /* ══════════════════════════════════════
    SAVED CARD — last opened timestamp
 ══════════════════════════════════════ */
-function markTripOpened(saveId){
-  const saves = getSaves();
-  if(saves[saveId]){
-    saves[saveId].lastOpened = Date.now();
-    saveSaves(saves);
-  }
+async function markTripOpened(saveId){
+  if(!_supa || !currentUser) return;
+  try {
+    await _supa.from('saved_itineraries').update({ last_opened: new Date().toISOString() }).eq('id', saveId);
+    const rec = _viaSaves.find(function(s){ return s.id === saveId; });
+    if(rec) rec.last_opened = new Date().toISOString();
+  } catch(e){}
 }
 
 /* ══════════════════════════════════════
@@ -10456,28 +10733,27 @@ function showNameEdit(){
   const row = document.getElementById('settingsNameRow');
   if(!row) return;
   const current = currentUser ? currentUser.name : '';
-  row.innerHTML = '<span class="settings-label">Name</span>' +
+  row.innerHTML = '<span class="settings-label">'+t('settings_name')+'</span>' +
     '<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">' +
       '<div class="settings-edit-form">' +
         '<input class="settings-edit-input" id="nameEditInput" value="' + current + '" placeholder="Your name">' +
-        '<button class="settings-save-btn" onclick="saveName()">Save</button>' +
+        '<button class="settings-save-btn" onclick="saveName()">'+t('settings_save')+'</button>' +
       '</div>' +
-      '<button class="settings-edit-trigger" onclick="cancelNameEdit()">Cancel</button>' +
+      '<button class="settings-edit-trigger" onclick="cancelNameEdit()">'+t('settings_cancel')+'</button>' +
     '</div>';
   const input = document.getElementById('nameEditInput');
   if(input){ input.focus(); input.select(); }
 }
 
-function saveName(){
+async function saveName(){
   const input = document.getElementById('nameEditInput');
   if(!input || !currentUser) return;
   const newName = input.value.trim();
   if(!newName) return;
-  const users = getUsers();
-  if(users[currentUser.email]){
-    users[currentUser.email].name = newName;
-    saveUsers(users);
-    currentUser = users[currentUser.email];
+  if(_supa){
+    const { error } = await _supa.auth.updateUser({ data: { name: newName } });
+    if(error){ showToast('Could not update name — ' + error.message); return; }
+    currentUser.name = newName;
   }
   updateAuthUI();
   renderProfilePage();
@@ -10514,7 +10790,6 @@ function renderTripCostSummary(data){
     es:{title:'Estimación de costes totales',sub:'Todos los días, por persona, en tu nivel de presupuesto.',food:'Comida',act:'Actividades',stay:'Alojamiento',perDay:'Por día',total:'Total viaje',note:'Estimación por persona. Alojamiento por habitación.',disclaimer:'Precios estimados por IA según el presupuesto elegido.'},
   };
   const loc = L[currentLang] || L.en;
-  const tierIcons = {budget:'🎒',mid:'🌿',comfortable:'✨',luxury:'👑'};
   const tierLabel = t('budget_' + tier + '_short') || tier;
 
   let grandFoodTotal = 0, grandActTotal = 0, grandStayTotal = 0;
@@ -10548,7 +10823,7 @@ function renderTripCostSummary(data){
   const grandTotal = grandDailyTotal; // stay shown separately
 
   const summaryHtml = '<div id="tripCostSummaryBlock" class="trip-cost-summary">' +
-    '<div class="tcs-title">' + tierIcons[tier] + ' ' + loc.title + '</div>' +
+    '<div class="tcs-title">' + loc.title + '</div>' +
     '<div class="tcs-sub">' + loc.sub + '</div>' +
     '<table class="tcs-table">' +
       '<thead><tr>' +
@@ -10621,7 +10896,7 @@ function addCollabButton(){
   btn.className = 'mast-btn';
   btn.id = 'collabMastBtn';
   btn.style.cssText = 'border-color:var(--forest);color:var(--forest)';
-  btn.innerHTML = '👥 Share';
+  btn.innerHTML = 'Share';
   btn.onclick = openCollabModal;
   acts.insertBefore(btn, acts.firstChild);
 }
@@ -10828,7 +11103,7 @@ function renderAdminList(){
 }
 
 function confirmDeletePost(id){
-  if(!confirm('Delete this post? This cannot be undone.')) return;
+  if(!confirm(t('delete_post_confirm'))) return;
   deleteBlogPost(id);
   renderAdminList();
 }
@@ -10925,18 +11200,22 @@ function renderAlertsTab(){
   const active = all.filter(function(a){ return a.active !== false; });
 
   if(countLabel){
-    countLabel.textContent = all.length
-      ? all.length + ' alert' + (all.length > 1 ? 's' : '') + ' · ' + active.length + ' active'
-      : 'No alerts set yet';
+    if(!all.length){
+      countLabel.textContent = t('alert_count_zero');
+    } else if(all.length === 1){
+      countLabel.textContent = t('alert_count_one').replace('{a}', active.length);
+    } else {
+      countLabel.textContent = t('alert_count_many').replace('{n}', all.length).replace('{a}', active.length);
+    }
   }
 
   if(!all.length){
     container.innerHTML =
       '<div class="alerts-empty">' +
-        '<span class="alerts-empty-icon">🔔</span>' +
-        '<div class="alerts-empty-title">No price alerts yet.</div>' +
-        '<div class="alerts-empty-sub">Generate an itinerary and tap the alert button to track prices for any destination.</div>' +
-        '<button class="btn-plan-now" onclick="showPg(\'pg-land\');goQuiz()">Plan a trip ' +
+        '<span class="alerts-empty-icon">—</span>' +
+        '<div class="alerts-empty-title">'+t('alerts_empty_title')+'</div>' +
+        '<div class="alerts-empty-sub">'+t('alerts_empty_sub')+'</div>' +
+        '<button class="btn-plan-now" onclick="showPg(\'pg-land\');goQuiz()">'+t('alerts_plan_btn')+' ' +
           '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
         '</button>' +
       '</div>';
@@ -10948,11 +11227,11 @@ function renderAlertsTab(){
   if(!isPlusPlan){
     limitBarHtml =
       '<div class="alerts-limit-bar">' +
-        '<div class="alb-text">Free plan includes 3 price alerts. Upgrade to track as many destinations as you want.</div>' +
+        '<div class="alb-text">'+t('alerts_free_limit')+'</div>' +
         '<div style="text-align:right;flex-shrink:0">' +
           '<div class="alb-used">' + all.length + ' / ' + FREE_LIMIT + '</div>' +
-          '<div class="alb-label">alerts used</div>' +
-          (all.length >= FREE_LIMIT ? '<button class="duc-btn" style="margin-top:8px;padding:6px 14px;font-size:.62rem" onclick="openUpgradeModal()">Unlock unlimited →</button>' : '') +
+          '<div class="alb-label">'+t('alerts_used')+'</div>' +
+          (all.length >= FREE_LIMIT ? '<button class="duc-btn" style="margin-top:8px;padding:6px 14px;font-size:.62rem" onclick="openUpgradeModal()">'+t('alerts_unlock_btn')+'</button>' : '') +
         '</div>' +
       '</div>';
   }
@@ -10960,16 +11239,16 @@ function renderAlertsTab(){
   // Type labels
   function typeLabel(a){
     const types = a.types || (a.type === 'both' ? ['accommodation','flights'] : [a.type]);
-    const labels = types.map(function(t){
-      return t === 'accommodation' ? 'Hotels' : t === 'flights' ? 'Flights' : 'Activities';
+    const labels = types.map(function(tp){
+      return tp === 'accommodation' ? t('alert_type_hotels') : tp === 'flights' ? t('alert_type_flights') : t('alert_type_activities');
     });
     return labels.join(' + ');
   }
 
   // Threshold label
-  function threshLabel(t){
-    if(t === 'any') return 'Any drop';
-    return t + '%+ drop';
+  function threshLabel(thresh){
+    if(thresh === 'any') return t('alert_thresh_any');
+    return thresh + t('alert_thresh_pct');
   }
 
   const cardsHtml = all.map(function(a){
@@ -10981,16 +11260,16 @@ function renderAlertsTab(){
       '<div class="alert-card-body">' +
         '<div class="alert-card-dest">' + a.destination + '</div>' +
         '<div class="alert-card-meta">' +
-          '<span class="alert-card-chip' + (isActive ? ' green' : '') + '">' + (isActive ? 'Active' : 'Paused') + '</span>' +
+          '<span class="alert-card-chip' + (isActive ? ' green' : '') + '">' + (isActive ? t('alert_status_active') : t('alert_status_paused')) + '</span>' +
           '<span class="alert-card-chip gold">' + threshLabel(a.threshold || a.threshold) + '</span>' +
           '<span class="alert-card-chip">' + typeLabel(a) + '</span>' +
         '</div>' +
         (dateRange ? '<div class="alert-card-date">' + dateRange + '</div>' : '') +
-        '<div class="alert-card-email">' + a.email + ' · Created ' + d + '</div>' +
+        '<div class="alert-card-email">' + a.email + ' · ' + t('alert_created') + ' ' + d + '</div>' +
       '</div>' +
       '<div class="alert-card-actions">' +
-        '<button class="alert-action-btn pause-btn' + (isActive ? '' : ' paused') + '" onclick="toggleAlertPause(\'' + a.id + '\')">' + (isActive ? 'Pause' : 'Resume') + '</button>' +
-        '<button class="alert-action-btn danger" onclick="deleteAlert(\'' + a.id + '\'">Delete</button>' +
+        '<button class="alert-action-btn pause-btn' + (isActive ? '' : ' paused') + '" onclick="toggleAlertPause(\'' + a.id + '\')">' + (isActive ? t('alert_pause_btn') : t('alert_resume_btn')) + '</button>' +
+        '<button class="alert-action-btn danger" onclick="deleteAlert(\'' + a.id + '\'">'+t('alert_delete_btn')+'</button>' +
       '</div>' +
     '</div>';
   }).join('');
@@ -11007,16 +11286,28 @@ function toggleAlertPause(id){
   // Update in-memory
   const idx = activeAlerts.findIndex(function(x){ return x.id == id; });
   if(idx > -1) activeAlerts[idx].active = a.active;
+  // Sync to backend
+  fetch('/api/register-alert', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'update', alert: { id: a.id, active: a.active } }),
+  }).catch(function(){});
   renderAlertsTab();
 }
 
 function deleteAlert(id){
-  if(!window.confirm('Delete this price alert?')) return;
+  if(!window.confirm(t('delete_alert_confirm'))) return;
   let alerts = JSON.parse(localStorage.getItem('via_alerts') || '[]');
   alerts = alerts.filter(function(x){ return x.id != id; });
   localStorage.setItem('via_alerts', JSON.stringify(alerts));
   const idx = activeAlerts.findIndex(function(x){ return x.id == id; });
   if(idx > -1) activeAlerts.splice(idx,1);
+  // Sync to backend
+  fetch('/api/register-alert', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'delete', alert: { id } }),
+  }).catch(function(){});
   renderAlertsTab();
 }
 
@@ -11046,11 +11337,11 @@ document.addEventListener('keydown', function(e){
    MOOD-BASED ACTIVITY DISCOVERY
 ══════════════════════════════════════ */
 const MOODS = [
-  {id:'slow',   icon:'☕', label:'Slow & easy'},
-  {id:'culture',icon:'🏛', label:'Culture'},
-  {id:'active', icon:'🧗', label:'Active'},
-  {id:'food',   icon:'🍷', label:'Food & wine'},
-  {id:'outdoor',icon:'🌊', label:'Outdoors'},
+  {id:'slow',    label:'Slow & easy'},
+  {id:'culture', label:'Culture'},
+  {id:'active',  label:'Active'},
+  {id:'food',    label:'Food & wine'},
+  {id:'outdoor', label:'Outdoors'},
 ];
 
 const MOOD_LABELS_SL = {slow:'Sproščeno',culture:'Kultura',active:'Aktiven dan',food:'Hrana in vino',outdoor:'Narava'};
@@ -11059,17 +11350,17 @@ const MOOD_LABELS_IT = {slow:'Relax',culture:'Cultura',active:'Avventura',food:'
 const MOOD_LABELS_FR = {slow:'Détente',culture:'Culture',active:'Actif',food:'Cuisine',outdoor:'Nature'};
 const MOOD_LABELS_HR = {slow:'Opušteno',culture:'Kultura',active:'Aktivno',food:'Hrana i vino',outdoor:'Priroda'};
 const MOOD_LABELS_ES = {slow:'Relajado',culture:'Cultura',active:'Activo',food:'Gastronomía',outdoor:'Naturaleza'};
+const MOOD_LABELS_SR = {slow:'Opušteno',culture:'Kultura',active:'Aktivno',food:'Hrana i vino',outdoor:'Priroda'};
 
 function getMoodLabel(id){
-  const maps = {sl:MOOD_LABELS_SL,de:MOOD_LABELS_DE,it:MOOD_LABELS_IT,fr:MOOD_LABELS_FR,hr:MOOD_LABELS_HR,es:MOOD_LABELS_ES};
+  const maps = {sl:MOOD_LABELS_SL,de:MOOD_LABELS_DE,it:MOOD_LABELS_IT,fr:MOOD_LABELS_FR,hr:MOOD_LABELS_HR,es:MOOD_LABELS_ES,sr:MOOD_LABELS_SR};
   return (maps[currentLang]||{})[id] || MOODS.find(function(m){return m.id===id;}).label;
 }
 
 function renderMoodPanel(di, dayTitle){
   const dest = itinData ? (itinData.destination_display || S.dest) : S.dest;
   const moodCards = MOODS.map(function(m){
-    return '<div class="mood-card" id="mood-'+di+'-'+m.id+'" onclick="fetchMoodActivities('+di+',\''+m.id+'\',\''+m.icon+'\')">'+
-      '<span class="mood-icon">'+m.icon+'</span>'+
+    return '<div class="mood-card" id="mood-'+di+'-'+m.id+'" onclick="fetchMoodActivities('+di+',\''+m.id+'\')">'+
       '<span class="mood-label">'+getMoodLabel(m.id)+'</span>'+
     '</div>';
   }).join('');
@@ -11086,7 +11377,7 @@ function renderMoodPanel(di, dayTitle){
   '</div>';
 }
 
-async function fetchMoodActivities(di, moodId, moodIcon){
+async function fetchMoodActivities(di, moodId){
   // Mark card as loading
   document.querySelectorAll('#mood-panel-'+di+' .mood-card').forEach(function(c){ c.classList.remove('loading'); });
   const activeCard = document.getElementById('mood-'+di+'-'+moodId);
@@ -11125,7 +11416,7 @@ async function fetchMoodActivities(di, moodId, moodIcon){
     const addLabel = t('mood_add');
 
     resultsEl.innerHTML =
-      '<div class="mood-results-eye">'+moodIcon+' '+moodLabel+'</div>' +
+      '<div class="mood-results-eye">'+moodLabel+'</div>' +
       '<div class="mood-activity-cards">' +
         activities.map(function(act, i){
           return '<div class="mood-activity">'+
@@ -11182,7 +11473,7 @@ function addMoodActivity(di, actIdx, e){
 // ── Google Maps API Key ──
 // Get your free key at: console.cloud.google.com → Maps Embed API (free: 28,000 loads/month)
 // Replace 'YOUR_MAPS_KEY' with your actual key and the real map will appear for Plus users
-const GOOGLE_MAPS_KEY = 'YOUR_MAPS_KEY';
+const GOOGLE_MAPS_KEY = 'AIzaSyCtSndBzH_mpX3vB80bbvsuAJ7YAH_Gy-w';
 
 
 /* ══ ERROR STRINGS ══ */
@@ -11277,6 +11568,19 @@ const GEN_ERRORS = {
     back:'Cambiar mis respuestas',
     slow:'Todavía trabajando… los itinerarios complejos toman un momento.',
     slowLong:'Casi listo. Un momento más.',
+  },
+  sr:{
+    eye:'Nešto je pošlo naopako',
+    title:'Plan putovanja nije mogao biti napravljen.',
+    network:'Nema internet konekcije. Proveri vezu i pokušaj ponovo.',
+    timeout:'Ovo je trajalo duže od očekivanog. Pokušaj za trenutak.',
+    api:'Usluga planiranja je privremeno nedostupna.',
+    parse:'Dobili smo odgovor ali ga nismo mogli pročitati. Pokušaj ponovo.',
+    unknown:'Došlo je do neočekivane greške.',
+    retry:'Pokušaj ponovo',
+    back:'Promeni odgovore',
+    slow:'Još radimo na tome… složeni planovi zahtevaju trenutak.',
+    slowLong:'Skoro je gotovo. Samo još malo.',
   },
 };
 function ge(){ return GEN_ERRORS[currentLang] || GEN_ERRORS.en; }
@@ -11388,7 +11692,7 @@ setTimeout(checkDraftBanner, 80);
         itinData = saved.itinData;
         if(saved.S) Object.assign(S, saved.S);
         if(saved.lang) applyLang(saved.lang);
-        renderItin();
+        renderItin(itinData);
         showPg('pg-itin');
         showToast(t('offline_restored') || 'Showing saved itinerary (offline)');
       }
@@ -11604,7 +11908,7 @@ function swSaveItin(){
 
       <div class="auth-error" id="siError">Incorrect email or password.</div>
 
-      <button class="auth-submit" onclick="doSignIn()">Sign in →</button>
+      <button class="auth-submit" id="siSubmitBtn" onclick="doSignIn()">Sign in →</button>
 
       <div class="auth-footer-note">
         No account yet?
@@ -11640,7 +11944,7 @@ function swSaveItin(){
 
       <div class="auth-error" id="regError">This email is already registered.</div>
 
-      <button class="auth-submit" onclick="doRegister()">Create free account →</button>
+      <button class="auth-submit" id="regSubmitBtn" onclick="doRegister()">Create free account →</button>
 
       <div class="auth-footer-note">
         Already have an account?
@@ -11657,21 +11961,21 @@ function swSaveItin(){
   <div class="welcome-card">
     <div class="welcome-icon">✓</div>
     <div class="welcome-title" id="welcomeName">Welcome!</div>
-    <div class="welcome-sub">Your account is ready. First itinerary always free.</div>
+    <div class="welcome-sub" data-t="welcome_sub">Your account is ready. First itinerary always free.</div>
     <div class="welcome-feats">
-      <div class="welcome-feat">Save your first itinerary for free</div>
-      <div class="welcome-feat">Generate plans in 7 languages</div>
-      <div class="welcome-feat">Set price alerts for accommodation</div>
-      <div class="welcome-feat">Download your plan as a PDF</div>
+      <div class="welcome-feat" data-t="welcome_feat1">Save your first itinerary for free</div>
+      <div class="welcome-feat" data-t="welcome_feat2">Generate plans in 7 languages</div>
+      <div class="welcome-feat" data-t="welcome_feat3">Set price alerts for accommodation</div>
+      <div class="welcome-feat" data-t="welcome_feat4">Download your plan as a PDF</div>
     </div>
-    <button class="welcome-btn" onclick="closeWelcome()">Start exploring →</button>
+    <button class="welcome-btn" data-t="welcome_btn" onclick="closeWelcome()">Start exploring →</button>
   </div>
 </div>
 
 <!-- ═══ UPGRADE MODAL ═══ -->
 <div class="upgrade-overlay" id="upgradeModal" onclick="if(event.target===this)closeUpgradeModal()">
   <div class="upgrade-modal">
-    <button class="upgrade-close" onclick="closeUpgradeModal()">✕ Close</button>
+    <button class="upgrade-close" data-t="upgrade_close" onclick="closeUpgradeModal()">✕ Close</button>
 
     <div class="upgrade-head">
       <div class="upgrade-eye">Via Plus</div>
@@ -11679,26 +11983,26 @@ function swSaveItin(){
       <div class="upgrade-sub">Your first itinerary is always free. Everything else for less than one restaurant meal.</div>
       <div class="upgrade-price-row">
         <div class="upgrade-price">€7</div>
-        <div class="upgrade-price-sub">one-time payment<br>unlimited saves, forever</div>
+        <div class="upgrade-price-sub" data-t="upgrade_price_sub">one-time payment · unlimited saves, forever</div>
       </div>
     </div>
 
     <div class="upgrade-features">
       <ul class="uf-list">
-        <li>Save as many trips as you want</li>
-        <li>Unlimited PDF exports and downloads</li>
-        <li>Unlimited price alerts for flights and hotels</li>
-        <li>Full packing list for every destination</li>
-        <li>Map view with all recommendations pinned</li>
-        <li>Shareable trip links that stay live forever</li>
-        <li>Your plans are yours — no expiry</li>
+        <li data-t="upgrade_feat1">Save as many trips as you want</li>
+        <li data-t="upgrade_feat2">Unlimited PDF exports and downloads</li>
+        <li data-t="upgrade_feat3">Unlimited price alerts for flights and hotels</li>
+        <li data-t="upgrade_feat4">Full packing list for every destination</li>
+        <li data-t="upgrade_feat5">Map view with all recommendations pinned</li>
+        <li data-t="upgrade_feat6">Shareable trip links that stay live forever</li>
+        <li data-t="upgrade_feat7">Your plans are yours — no expiry</li>
       </ul>
     </div>
 
     <div class="upgrade-cta-wrap">
-      <button class="btn-upgrade" onclick="doUpgrade()">Get Via Plus · €7 →</button>
-      <div class="btn-upgrade-secondary" onclick="closeUpgradeModal()">Not now</div>
-      <div class="upgrade-free-note">Secure payment · No subscription · Pay once, keep forever</div>
+      <button class="btn-upgrade" data-t="upgrade_btn_default" onclick="doUpgrade()">Get Via Plus · €7 →</button>
+      <div class="btn-upgrade-secondary" data-t="upgrade_not_now" onclick="closeUpgradeModal()">Not now</div>
+      <div class="upgrade-free-note" data-t="upgrade_secure">Secure payment · No subscription · Pay once, keep forever</div>
     </div>
   </div>
 </div>
@@ -11710,8 +12014,8 @@ function swSaveItin(){
   <div class="profile-topbar">
     <div class="logo" onclick="showPg('pg-land')" style="cursor:pointer">via<sup>™</sup></div>
     <div class="profile-topbar-actions">
-      <button class="ptb-btn primary" onclick="showPg('pg-land');goQuiz()">+ Plan new trip</button>
-      <button class="ptb-btn" onclick="doSignOut()">Sign out</button>
+      <button class="ptb-btn primary" data-t="prof_plan_trip" onclick="showPg('pg-land');goQuiz()">+ Plan new trip</button>
+      <button class="ptb-btn" data-t="prof_sign_out" onclick="doSignOut()">Sign out</button>
     </div>
   </div>
 
@@ -11738,29 +12042,29 @@ function swSaveItin(){
       <div class="dash-nav">
         <div class="dash-nav-item on" onclick="switchDashTab('trips',this)" id="dnavTrips">
           <svg class="dash-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M5 3V2m6 1V2M2 7h12"/></svg>
-          Saved trips
+          <span data-t="prof_nav_trips">Saved trips</span>
         </div>
         <div class="dash-nav-item" onclick="switchDashTab('social',this);renderSocialFeed()" id="dnavSocial">
           <svg class="dash-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 5c0 3.314-2.686 6-6 6a5.97 5.97 0 0 1-2.5-.544L2 11.5l1.044-3.5A5.97 5.97 0 0 1 2 5c0-3.314 2.686-6 6-6s6 2.686 6 6z" transform="translate(0 2)"/></svg>
-          Community
+          <span data-t="prof_nav_community">Community</span>
         </div>
         <div class="dash-nav-item" onclick="switchDashTab('alerts',this);renderAlertsTab()" id="dnavAlerts">
           <svg class="dash-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 1a5 5 0 0 1 5 5c0 2.5.5 3.5 1 4.5H2c.5-1 1-2 1-4.5a5 5 0 0 1 5-5z"/><path d="M6.5 13.5a1.5 1.5 0 0 0 3 0"/></svg>
-          Price alerts
+          <span data-t="prof_nav_alerts">Price alerts</span>
         </div>
         <div class="dash-nav-item" onclick="switchDashTab('settings',this)" id="dnavSettings">
           <svg class="dash-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M2.929 2.929l1.06 1.06M12.01 12.01l1.06 1.06M13.07 2.929l-1.06 1.06M3.989 12.01l-1.06 1.06"/></svg>
-          Settings
+          <span data-t="prof_nav_settings">Settings</span>
         </div>
       </div>
 
       <!-- Upgrade CTA (free users only) -->
       <div class="dash-upgrade-cta" id="dashUpgradeCta" style="display:none">
         <div class="duc-eye">Via Plus</div>
-        <div class="duc-title">Save unlimited trips.</div>
+        <div class="duc-title" data-t="duc_title">Save unlimited trips.</div>
         <div class="duc-price">€7</div>
-        <div class="duc-sub">Pay once. Keep your plans forever.</div>
-        <button class="duc-btn" onclick="openUpgradeModal()">Unlock Via Plus →</button>
+        <div class="duc-sub" data-t="duc_sub">Pay once. Keep your plans forever.</div>
+        <button class="duc-btn" data-t="duc_btn" onclick="openUpgradeModal()">Unlock Via Plus →</button>
       </div>
 
     </div>
@@ -11771,8 +12075,8 @@ function swSaveItin(){
       <!-- TRIPS TAB -->
       <div class="dash-tab-content on" id="dtab-trips">
         <div class="trips-header">
-          <div class="trips-title">Your saved trips</div>
-          <div class="trips-count" id="savedCountLabel">Loading…</div>
+          <div class="trips-title" data-t="prof_trips_title">Your saved trips</div>
+          <div class="trips-count" id="savedCountLabel" data-t="prof_loading">Loading…</div>
         </div>
         <div id="profileUpsellBar"></div>
         <div class="saved-grid" id="savedGrid"></div>
@@ -11781,8 +12085,8 @@ function swSaveItin(){
       <!-- SOCIAL TAB -->
       <div class="dash-tab-content" id="dtab-social">
         <div class="trips-header">
-          <div class="trips-title">Community</div>
-          <div class="trips-count">Share ideas, tips and inspiration with other Via travellers</div>
+          <div class="trips-title" data-t="community_title">Community</div>
+          <div class="trips-count" data-t="community_sub">Share ideas, tips and inspiration with other Via travellers</div>
         </div>
         <div class="social-feed" id="socialFeed">
 
@@ -11790,12 +12094,12 @@ function swSaveItin(){
           <div class="social-compose">
             <div class="social-compose-hdr">
               <div class="sc-composer-avatar" id="composerAvatar">?</div>
-              <span style="font-family:var(--ui);font-size:.7rem;font-weight:600;color:var(--ink3);letter-spacing:.04em">Share a travel tip, destination idea or itinerary highlight</span>
+              <span data-t="community_compose_hint" style="font-family:var(--ui);font-size:.7rem;font-weight:600;color:var(--ink3);letter-spacing:.04em">Share a travel tip, destination idea or itinerary highlight</span>
             </div>
-            <textarea id="socialPostText" placeholder="e.g. Just back from Dubrovnik — book Old Town restaurants at least 3 days ahead in August…" rows="3"></textarea>
+            <textarea id="socialPostText" data-t-placeholder="community_ph" placeholder="e.g. Just back from Dubrovnik — book Old Town restaurants at least 3 days ahead in August…" rows="3"></textarea>
             <div class="social-compose-footer">
               <span class="soc-hint" id="socialDestChip"></span>
-              <button class="soc-post-btn" onclick="postSocialUpdate()">Post →</button>
+              <button class="soc-post-btn" data-t="community_post_btn" onclick="postSocialUpdate()">Post →</button>
             </div>
           </div>
 
@@ -11808,8 +12112,8 @@ function swSaveItin(){
       <!-- ALERTS TAB -->
       <div class="dash-tab-content" id="dtab-alerts">
         <div class="trips-header">
-          <div class="trips-title">Price alerts</div>
-          <div class="trips-count" id="alertsCountLabel">Loading…</div>
+          <div class="trips-title" data-t="prof_nav_alerts">Price alerts</div>
+          <div class="trips-count" id="alertsCountLabel" data-t="alerts_loading">Loading…</div>
         </div>
         <div id="alertsTabContent"></div>
       </div>
@@ -11817,44 +12121,44 @@ function swSaveItin(){
       <!-- SETTINGS TAB -->
       <div class="dash-tab-content" id="dtab-settings">
         <div class="trips-header">
-          <div class="trips-title">Settings</div>
+          <div class="trips-title" data-t="settings_title">Settings</div>
         </div>
         <div class="settings-grid">
           <div class="settings-card">
-            <div class="settings-card-head">Profile</div>
+            <div class="settings-card-head" data-t="settings_profile">Profile</div>
             <div class="settings-card-body">
               <div class="settings-row" id="settingsNameRow">
-                <span class="settings-label">Name</span>
+                <span class="settings-label" data-t="settings_name">Name</span>
                 <div style="display:flex;align-items:center;gap:8px">
                   <span class="settings-value" id="settingsName">—</span>
-                  <button class="settings-edit-trigger" onclick="showNameEdit()">Edit</button>
+                  <button class="settings-edit-trigger" data-t="settings_edit" onclick="showNameEdit()">Edit</button>
                 </div>
               </div>
               <div class="settings-row">
-                <span class="settings-label">Email</span>
+                <span class="settings-label" data-t="settings_email_label">Email</span>
                 <span class="settings-value" id="settingsEmail">—</span>
               </div>
             </div>
           </div>
           <div class="settings-card">
-            <div class="settings-card-head">Plan</div>
+            <div class="settings-card-head" data-t="settings_plan">Plan</div>
             <div class="settings-card-body">
               <div class="settings-row">
-                <span class="settings-label">Current plan</span>
+                <span class="settings-label" data-t="settings_current_plan">Current plan</span>
                 <span class="profile-plan-badge" id="settingsPlanBadge">Free</span>
               </div>
               <div class="settings-row" id="settingsUpgradeRow" style="display:none">
-                <span class="settings-label">Unlock unlimited trips, PDFs and alerts</span>
-                <button class="btn-pcc-upgrade" onclick="openUpgradeModal()" style="font-size:.65rem;padding:7px 14px">Upgrade — €7 →</button>
+                <span class="settings-label" data-t="settings_upgrade_label">Unlock unlimited trips, PDFs and alerts</span>
+                <button class="btn-pcc-upgrade" data-t="settings_upgrade_btn" onclick="openUpgradeModal()" style="font-size:.65rem;padding:7px 14px">Upgrade — €7 →</button>
               </div>
             </div>
           </div>
           <div class="settings-card">
-            <div class="settings-card-head">Account</div>
+            <div class="settings-card-head" data-t="settings_account">Account</div>
             <div class="settings-card-body">
               <div class="settings-row">
-                <span class="settings-label">Sign out of Via on this device</span>
-                <button class="settings-danger-btn" onclick="doSignOut()">Sign out</button>
+                <span class="settings-label" data-t="settings_signout_label">Sign out of Via on this device</span>
+                <button class="settings-danger-btn" data-t="settings_signout_btn" onclick="doSignOut()">Sign out</button>
               </div>
             </div>
           </div>
