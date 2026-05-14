@@ -3,11 +3,17 @@ const SYSTEM = `You are Via — an AI travel planner. You receive an existing si
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end('Method Not Allowed');
 
-  const { prompt } = req.body || {};
-  if (!prompt) return res.status(400).end('Missing prompt');
+  // Support both legacy single-prompt and new messages-array format
+  const { prompt, messages } = req.body || {};
+  if (!prompt && !messages) return res.status(400).end('Missing prompt or messages');
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).end('API not configured');
+
+  // Build the messages array
+  const msgs = messages
+    ? messages                                // new chat-style: [{role, content}]
+    : [{ role: 'user', content: prompt }];    // legacy single-prompt
 
   const upstream = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -20,7 +26,7 @@ export default async function handler(req, res) {
       model:      'claude-haiku-4-5',
       max_tokens:  2500,
       system:      SYSTEM,
-      messages: [{ role: 'user', content: prompt }],
+      messages:    msgs,
     }),
   });
 

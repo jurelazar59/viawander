@@ -3128,6 +3128,62 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   .map-footer{padding:6px 12px}
 }
 
+/* ══ INSPIRATION INPUT (landing page) ══ */
+.inspire-row{display:flex;align-items:center;gap:.6rem;margin-top:1.4rem;flex-wrap:wrap}
+.inspire-input{flex:1;min-width:220px;max-width:380px;border:1.5px solid var(--cr3);background:var(--parch);border-radius:3px;padding:.62rem 1rem;font-family:var(--ui);font-size:.82rem;color:var(--ink);outline:none;transition:border-color .15s}
+.inspire-input:focus{border-color:var(--burg)}
+.inspire-input::placeholder{color:var(--ink4)}
+.inspire-btn{background:var(--ink);color:var(--cr);border:none;border-radius:3px;padding:.62rem 1.1rem;font-family:var(--ui);font-size:.78rem;font-weight:700;letter-spacing:.07em;cursor:pointer;white-space:nowrap;transition:background .15s}
+.inspire-btn:hover{background:var(--burg)}
+.inspire-btn:disabled{opacity:.45;cursor:default}
+.inspire-status{font-family:var(--ui);font-size:.72rem;color:var(--ink3);margin-top:.4rem;width:100%;display:none}
+.inspire-status.show{display:block}
+/* ══ FEATURED DESTINATION (sponsorship) ══ */
+.dest-featured{margin-bottom:14px}
+.dest-card.featured{border-color:var(--gold)!important;box-shadow:0 0 0 1px var(--gold)}
+.dest-card-badge{position:absolute;top:8px;right:8px;background:var(--gold);color:#1C1510;font-family:var(--ui);font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;border-radius:2px;z-index:2}
+/* ══ DAY CHAT DRAWER ══ */
+.day-chat-btn{width:100%;margin-top:18px;padding:.7rem 1.2rem;background:var(--ink);color:var(--cr);border:none;border-radius:3px;font-family:var(--ui);font-size:.8rem;font-weight:700;letter-spacing:.06em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .15s}
+.day-chat-btn:hover{background:var(--burg)}
+.day-chat-overlay{position:fixed;inset:0;background:rgba(28,21,16,.4);z-index:800;display:none;backdrop-filter:blur(2px)}
+.day-chat-overlay.open{display:block}
+.day-chat-drawer{position:fixed;top:0;right:0;bottom:0;width:360px;background:var(--parch);z-index:801;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-6px 0 40px rgba(28,21,16,.18)}
+.day-chat-drawer.open{transform:translateX(0)}
+.chat-header{padding:1rem 1.25rem .8rem;border-bottom:1px solid var(--cr2);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--ink)}
+.chat-header-title{font-family:var(--serif);font-size:.95rem;font-weight:700;color:var(--cr);letter-spacing:-.01em}
+.chat-header-day{font-family:var(--ui);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,235,217,.5);margin-top:2px}
+.chat-close{background:none;border:none;color:rgba(242,235,217,.6);cursor:pointer;font-size:1.2rem;padding:.2rem;transition:color .15s}
+.chat-close:hover{color:var(--cr)}
+.chat-history{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.65rem;scrollbar-width:thin;scrollbar-color:var(--cr3) transparent}
+.chat-bubble{max-width:88%;padding:.65rem .9rem;border-radius:3px;font-size:.85rem;line-height:1.6;font-family:var(--body)}
+.chat-bubble.user{align-self:flex-end;background:var(--burg);color:var(--cr);border-radius:3px 3px 0 3px}
+.chat-bubble.ai{align-self:flex-start;background:var(--cr2);color:var(--ink);border-radius:3px 3px 3px 0}
+.chat-bubble.ai.thinking{opacity:.6;font-style:italic}
+.chat-empty{padding:1.5rem 1rem;text-align:center;font-family:var(--ui);font-size:.8rem;color:var(--ink3);line-height:1.6}
+.chat-empty strong{display:block;font-family:var(--serif);font-size:1rem;color:var(--ink);margin-bottom:.5rem;font-style:italic}
+.chat-input-row{padding:.85rem 1rem;border-top:1px solid var(--cr2);display:flex;gap:.5rem;align-items:flex-end}
+.chat-textarea{flex:1;border:1.5px solid var(--cr3);border-radius:3px;padding:.55rem .8rem;font-family:var(--ui);font-size:.83rem;color:var(--ink);background:var(--parch);resize:none;min-height:38px;max-height:100px;outline:none;transition:border-color .15s;line-height:1.45}
+.chat-textarea:focus{border-color:var(--burg)}
+.chat-send-btn{background:var(--burg);color:var(--cr);border:none;border-radius:3px;padding:.55rem .9rem;font-family:var(--ui);font-size:.82rem;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0}
+.chat-send-btn:hover{background:var(--burg2)}
+.chat-send-btn:disabled{opacity:.4;cursor:default}
+@media(max-width:600px){.day-chat-drawer{width:100%}}
+/* ══ WEATHER CHIPS ══ */
+.day-tab-weather{font-size:.65rem;margin-left:.4rem;opacity:.85;font-style:normal}
+.weather-bar{background:var(--cr2);border-top:1px solid var(--cr3);padding:.55rem 1.25rem;display:flex;align-items:center;gap:.5rem;font-family:var(--ui);font-size:.72rem;color:var(--ink3);flex-wrap:wrap}
+.weather-bar-item{display:flex;align-items:center;gap:.25rem}
+/* ══ VISA NOTICE ══ */
+.visa-bar{background:rgba(30,61,47,.07);border-bottom:2px solid rgba(30,61,47,.14);padding:.6rem 1.4rem;display:flex;align-items:center;gap:.75rem;font-family:var(--ui);font-size:.75rem;color:var(--forest);flex-wrap:wrap}
+.visa-bar-icon{font-size:1rem;flex-shrink:0}
+.visa-bar-text{flex:1;line-height:1.5}
+.visa-bar-link{color:var(--forest);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.visa-bar-origin{margin-left:auto;display:flex;align-items:center;gap:.35rem}
+.visa-origin-select{border:1px solid rgba(30,61,47,.25);border-radius:2px;padding:.2rem .4rem;font-family:var(--ui);font-size:.72rem;background:transparent;color:var(--forest);cursor:pointer}
+/* ══ TRANSIT TIME CHIPS ══ */
+.transit-chip{display:inline-flex;align-items:center;gap:.3rem;background:var(--cr2);border:1px solid var(--cr3);border-radius:100px;padding:.22rem .65rem;font-family:var(--ui);font-size:.58rem;font-weight:600;letter-spacing:.04em;color:var(--ink3);margin:6px 0 4px;user-select:none}
+.transit-chip svg{opacity:.7}
+/* ══ DRAG HINT ══ */
+.drag-hint{font-family:var(--ui);font-size:.6rem;color:var(--ink4);letter-spacing:.05em;padding:.3rem .8rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:.4rem;opacity:.8}
 /* ══ SIMILAR TRIPS ══ */
 .similar-bar{padding:40px 0 36px;border-top:1px solid var(--cr2);margin-top:16px}
 .similar-bar-inner{max-width:900px;margin:0 auto;padding:0 28px}
@@ -5065,6 +5121,12 @@ select.budget-select:focus,
         </button>
         <span class="hero-note" data-t="hero_note">Free · No account needed · 2 minutes</span>
       </div>
+      <!-- Build from inspiration -->
+      <div class="inspire-row">
+        <input class="inspire-input" id="inspireInput" type="url" data-t-placeholder="inspire_ph" placeholder="Paste a TikTok, reel or blog link…" onkeydown="if(event.key==='Enter')buildFromInspiration()">
+        <button class="inspire-btn" id="inspireBtn" onclick="buildFromInspiration()" data-t="inspire_btn">Extract destination →</button>
+      </div>
+      <div class="inspire-status" id="inspireStatus"></div>
     </div>
     <div class="hero-r">
       <div class="tape t1"></div><div class="tape t2"></div><div class="tape t3"></div>
@@ -5187,6 +5249,8 @@ select.budget-select:focus,
       <div class="qeye" data-t="q1_eye">Where in the world</div>
       <h2 class="qtitle" data-t="q1_title">Where are you dreaming of?</h2>
       <p class="qhint" data-t="q1_hint">Pick a region, or type your own below.</p>
+      <!-- Sponsored destination slot — rendered by JS if SPONSORED_DESTS is active -->
+      <div id="featuredDestSlot"></div>
       <div class="dest-grid">
         <div class="dest-card" data-v="Slovenia" onclick="pickDest(this)"><img src="https://images.unsplash.com/photo-1635882371534-80ed01d6636f?w=300&q=70&auto=format&fit=crop" alt="Lake Bled, Slovenia"><div class="dest-card-inner"><div class="dest-card-name">Slovenia</div><div class="dest-card-sub">Bled · Ljubljana · Piran · Soča</div></div><div class="dest-chk">✓</div></div>
         <div class="dest-card" data-v="Italy" onclick="pickDest(this)"><img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=300&q=70&auto=format&fit=crop" alt=""><div class="dest-card-inner"><div class="dest-card-name">Italy</div><div class="dest-card-sub">Rome · Florence · Amalfi</div></div><div class="dest-chk">✓</div></div>
@@ -5481,6 +5545,9 @@ select.budget-select:focus,
     </div>
   </div>
 
+  <!-- Visa notice bar (populated by JS after itinerary loads) -->
+  <div id="visaBar" style="display:none"></div>
+
   <div id="fallbackNotice">
     <div class="fn-msg">
       <span class="fn-icon">⚠</span>
@@ -5537,6 +5604,26 @@ select.budget-select:focus,
         <div class="pack-sub" id="packSub">Your personalised packing list will appear here.</div>
       </div>
       <div id="packBody"><div class="pack-generating" style="display:none" id="packGenerating"><div class="pack-spinner"></div><span id="packLoadLabel">Building your packing list…</span></div></div>
+    </div>
+  </div>
+
+  <!-- Day chat drawer -->
+  <div class="day-chat-overlay" id="dayChatOverlay" onclick="closeDayChat()"></div>
+  <div class="day-chat-drawer" id="dayChatDrawer">
+    <div class="chat-header">
+      <div>
+        <div class="chat-header-title">Chat with Via ✦</div>
+        <div class="chat-header-day" id="chatHeaderDay">Day 1</div>
+      </div>
+      <button class="chat-close" onclick="closeDayChat()">✕</button>
+    </div>
+    <div class="chat-history" id="chatHistory"></div>
+    <div class="chat-input-row">
+      <textarea class="chat-textarea" id="chatInput" rows="1"
+        placeholder="Move dinner earlier, add a beach stop…"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMsg()}"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+      <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMsg()">↑</button>
     </div>
   </div>
 </div>
@@ -6103,6 +6190,11 @@ Return this exact JSON structure:
       "morning": "prose in ${lang}",
       "afternoon": "prose in ${lang}",
       "evening": "prose in ${lang}",
+      "transit_notes": {
+        "morning_to_lunch": "~8 min walk",
+        "lunch_to_afternoon": "~3 min, same street",
+        "afternoon_to_dinner": "~12 min metro"
+      },
       "hidden_gem": {
         "title": "short evocative name (3–6 words) in ${lang}",
         "desc": "2 sentences — specific, non-obvious, local. Not a top-10 sight. Something a local would actually recommend. In ${lang}."
@@ -6307,6 +6399,25 @@ function renderItin(data){
 
   // Similar trips bar
   renderSimilarTrips();
+
+  // Weather overlay (async — fires after render, non-blocking)
+  setTimeout(fetchWeatherOverlay, 400);
+
+  // Visa notice bar
+  setTimeout(renderVisaBar, 200);
+
+  // Drag-to-reorder hint
+  setTimeout(function(){
+    const bar = document.getElementById('dayTabsBar');
+    if(bar && !bar.dataset.hintShown && (itinData?.days||[]).length > 1){
+      bar.dataset.hintShown = '1';
+      const hint = document.createElement('div');
+      hint.className = 'drag-hint';
+      hint.innerHTML = '⇄ '+t('drag_hint');
+      bar.parentNode.insertBefore(hint, bar.nextSibling);
+      setTimeout(function(){ hint.style.transition='opacity .5s'; hint.style.opacity='0'; setTimeout(function(){ hint.remove(); },500); }, 4000);
+    }
+  }, 600);
 }
 
 /* ══════════════════════════════════════
@@ -6314,6 +6425,380 @@ function renderItin(data){
 ══════════════════════════════════════ */
 // Each entry: regex to test against destination string → array of suggestion names
 // Names must match keys in heroImgs for photos to resolve
+/* ══════════════════════════════════════
+   TRANSIT CHIPS
+══════════════════════════════════════ */
+function renderTransitChip(note){
+  if(!note) return '';
+  return '<div><span class="transit-chip">'
+    + '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2L12 22M5 15l7 7 7-7"/></svg>'
+    + sanitiseAI(note)
+    + '</span></div>';
+}
+
+/* ══════════════════════════════════════
+   DAY CHAT DRAWER
+══════════════════════════════════════ */
+let activeChatDay = null;
+const dayChats = {};   // dayChats[di] = [{role:'user'|'assistant', text:'...'}]
+
+function openDayChat(di){
+  activeChatDay = di;
+  const overlay = document.getElementById('dayChatOverlay');
+  const drawer  = document.getElementById('dayChatDrawer');
+  const hdrDay  = document.getElementById('chatHeaderDay');
+  if(hdrDay) hdrDay.textContent = t('day_label') + ' ' + (di+1) + (itinData?.days?.[di]?.title ? ' · ' + itinData.days[di].title : '');
+  overlay?.classList.add('open');
+  drawer?.classList.add('open');
+  renderChatHistory();
+  setTimeout(function(){ document.getElementById('chatInput')?.focus(); }, 300);
+}
+
+function closeDayChat(){
+  document.getElementById('dayChatOverlay')?.classList.remove('open');
+  document.getElementById('dayChatDrawer')?.classList.remove('open');
+  activeChatDay = null;
+}
+
+function renderChatHistory(){
+  const el = document.getElementById('chatHistory');
+  if(!el) return;
+  const di = activeChatDay;
+  const msgs = (di !== null && dayChats[di]) ? dayChats[di] : [];
+  if(!msgs.length){
+    el.innerHTML = '<div class="chat-empty"><strong>'+t('chat_empty_title')+'</strong>'+t('chat_empty_sub')+'</div>';
+    return;
+  }
+  el.innerHTML = msgs.map(function(m){
+    return '<div class="chat-bubble '+m.role+'">'+m.text.replace(/</g,'&lt;')+'</div>';
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+async function sendChatMsg(){
+  const di = activeChatDay;
+  if(di === null || !itinData?.days?.[di]) return;
+  const textarea = document.getElementById('chatInput');
+  const sendBtn  = document.getElementById('chatSendBtn');
+  const request  = textarea ? textarea.value.trim() : '';
+  if(!request) return;
+
+  if(!dayChats[di]) dayChats[di] = [];
+  dayChats[di].push({ role:'user', text: request });
+  textarea.value = '';
+  textarea.style.height = 'auto';
+  sendBtn.disabled = true;
+
+  // Show thinking bubble
+  dayChats[di].push({ role:'assistant', text: t('chat_thinking') || 'Rewriting…' });
+  renderChatHistory();
+
+  const day  = itinData.days[di];
+  const dest = itinData.destination_display || S.dest || 'the destination';
+  const langNote = currentLang !== 'en'
+    ? 'Keep ALL prose in the same language as the original day.'
+    : '';
+
+  // Build messages array: system context as first user turn, then conversation history
+  const contextMsg = `You are editing Day ${di+1} of a ${dest} itinerary. ${langNote}\n\nCurrent day JSON:\n${JSON.stringify(day, null, 2)}\n\nApply each traveller request to this day. Return ONLY the modified day as valid JSON, preserving all fields exactly.`;
+
+  const apiMessages = [
+    { role: 'user',      content: contextMsg },
+    { role: 'assistant', content: '{"title":' },   // prime the pump with valid JSON start
+  ];
+
+  // Inject conversation history (skip the first system context and last thinking bubble)
+  const history = dayChats[di].slice(0, -1);  // exclude the thinking bubble
+  if(history.length > 1){
+    // Flatten prior turns: user turns become requests, assistant turns become acknowledgements
+    history.slice(1).forEach(function(m){
+      if(m.role === 'user') apiMessages.push({ role:'user', content: m.text });
+    });
+    // Re-append current request
+  }
+
+  // Actually build it clean: system context + all prior user messages + current one
+  const cleanMessages = [{ role:'user', content: contextMsg + '\n\nFirst request: ' + history[0].text }];
+  for(let i = 1; i < history.length; i++){
+    if(history[i].role === 'user'){
+      cleanMessages.push({ role:'user', content: 'Next request: ' + history[i].text });
+    }
+  }
+
+  try {
+    const res = await fetch('/api/tweak-day', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: cleanMessages }),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const d    = await res.json();
+    const raw  = (d.content||[]).map(function(b){ return b.text||''; }).join('');
+    const clean = raw.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,'').trim();
+    const newDay = JSON.parse(clean);
+    itinData.days[di] = Object.assign({}, day, newDay);
+
+    // Remove thinking bubble, add success
+    dayChats[di].pop();
+    dayChats[di].push({ role:'assistant', text: t('chat_done') || '✓ Day updated' });
+    renderChatHistory();
+
+    // Re-render pane
+    const pane = document.getElementById('dpane'+di);
+    if(pane){
+      const tmp = document.createElement('div');
+      tmp.innerHTML = renderDayPane(itinData.days[di], di);
+      const newPane = tmp.firstElementChild;
+      newPane.classList.add('on');
+      pane.replaceWith(newPane);
+    }
+    // Update tab title
+    const tab = document.getElementById('dtab'+di);
+    if(tab && newDay.title) tab.innerHTML = t('day_label')+' '+(di+1)+' · '+sanitiseAI(newDay.title);
+    // Re-save to SW
+    setTimeout(swSaveItin, 200);
+  } catch(err){
+    console.error('[via] chat tweak failed:', err);
+    dayChats[di].pop();
+    dayChats[di].push({ role:'assistant', text: t('chat_err') || 'Something went wrong — try again.' });
+    renderChatHistory();
+  } finally {
+    sendBtn.disabled = false;
+  }
+}
+
+/* ══════════════════════════════════════
+   BUILD FROM INSPIRATION (URL → dest)
+══════════════════════════════════════ */
+async function buildFromInspiration(){
+  const input  = document.getElementById('inspireInput');
+  const btn    = document.getElementById('inspireBtn');
+  const status = document.getElementById('inspireStatus');
+  const url    = input ? input.value.trim() : '';
+  if(!url){ input?.focus(); return; }
+
+  btn.disabled = true;
+  status.textContent = t('inspire_loading') || 'Extracting destination…';
+  status.classList.add('show');
+
+  try {
+    const res  = await fetch('/api/inspire', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
+    });
+    const data = await res.json();
+
+    if(!data.dest || data.confidence === 'none'){
+      status.textContent = t('inspire_fail') || 'Couldn\'t find a destination in that link — try a travel blog or reel about a specific place.';
+      btn.disabled = false;
+      return;
+    }
+
+    status.textContent = (t('inspire_found') || 'Found:') + ' ' + (data.dest_display || data.dest);
+    setTimeout(function(){
+      btn.disabled = false;
+      status.classList.remove('show');
+      planSimilar(data.dest_display || data.dest);
+    }, 900);
+  } catch(err){
+    console.error('[via] inspire error:', err);
+    status.textContent = t('inspire_fail') || 'Couldn\'t extract a destination — try again.';
+    btn.disabled = false;
+  }
+}
+
+/* ══════════════════════════════════════
+   SPONSORED / FEATURED DESTINATIONS
+══════════════════════════════════════ */
+// To activate: set active:true and fill in the fields.
+// Multiple entries supported — shown before the regular grid.
+const SPONSORED_DESTS = [
+  {
+    active:  false,   // flip to true to activate
+    dest:    'Slovenia',
+    img:     'https://images.unsplash.com/photo-1635882371534-80ed01d6636f?w=600&q=75&auto=format&fit=crop',
+    sub:     'Bled · Ljubljana · Soča · Piran',
+    badge:   '✦ Featured',
+    sponsor: 'Slovenian Tourist Board',
+  },
+];
+
+function renderSponsoredDests(){
+  const slot = document.getElementById('featuredDestSlot');
+  if(!slot) return;
+  const active = SPONSORED_DESTS.filter(function(d){ return d.active; });
+  if(!active.length){ slot.innerHTML=''; return; }
+  slot.innerHTML = '<div class="dest-featured">'
+    + active.map(function(d){
+        return '<div class="dest-card featured" data-v="'+d.dest+'" onclick="pickDest(this)" style="max-width:320px;display:inline-block;width:100%">'
+          + '<div class="dest-card-badge">'+d.badge+'</div>'
+          + '<img src="'+d.img+'" alt="'+d.dest+'" loading="lazy">'
+          + '<div class="dest-card-inner">'
+            + '<div class="dest-card-name">'+d.dest+'</div>'
+            + '<div class="dest-card-sub">'+d.sub+'</div>'
+          + '</div>'
+          + '<div class="dest-chk">✓</div>'
+        + '</div>';
+      }).join('')
+    + '</div>';
+}
+
+/* ══════════════════════════════════════
+   WEATHER OVERLAY (Open-Meteo)
+══════════════════════════════════════ */
+const WMO_ICON = {
+  0:'☀️',1:'🌤',2:'⛅',3:'☁️',
+  45:'🌫',48:'🌫',
+  51:'🌦',53:'🌦',55:'🌦',56:'🌦',57:'🌦',
+  61:'🌧',63:'🌧',65:'🌧',66:'🌧',67:'🌧',
+  71:'🌨',73:'🌨',75:'🌨',77:'🌨',
+  80:'🌧',81:'🌧',82:'🌧',
+  85:'🌨',86:'🌨',
+  95:'⛈',96:'⛈',99:'⛈',
+};
+function wmoIcon(code){ return WMO_ICON[code] || '🌤'; }
+
+async function fetchWeatherOverlay(){
+  if(!S.dateFrom || !itinData) return;
+  const dest = itinData.destination_display || S.dest;
+  if(!dest) return;
+
+  try {
+    // 1. Geocode
+    const geoRes = await fetch(
+      'https://geocoding-api.open-meteo.com/v1/search?name='
+      + encodeURIComponent(dest.split(',')[0].trim())
+      + '&count=1&language=en&format=json'
+    );
+    const geo = await geoRes.json();
+    if(!geo.results?.length) return;
+    const { latitude: lat, longitude: lng } = geo.results[0];
+
+    // 2. Forecast or historical normals
+    const from  = new Date(S.dateFrom + 'T12:00:00');
+    const today = new Date();
+    const daysUntil = Math.round((from - today) / 86400000);
+    const days  = (itinData.days || []).length;
+
+    let weatherDays = [];
+    if(daysUntil <= 15){
+      // Real forecast
+      const fRes = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}`
+        + `&daily=temperature_2m_max,weathercode&forecast_days=16&timezone=auto`
+      );
+      const fData = await fRes.json();
+      const startIdx = Math.max(0, daysUntil);
+      weatherDays = (fData.daily?.time || []).slice(startIdx, startIdx + days).map(function(date, i){
+        return {
+          date,
+          icon: wmoIcon((fData.daily.weathercode || [])[startIdx + i]),
+          temp: Math.round((fData.daily.temperature_2m_max || [])[startIdx + i] || 0),
+        };
+      });
+    } else {
+      // Climate normals — approximate from historical averages (no real API call needed, use fixed offset)
+      // Open-Meteo climate API — monthly averages
+      const endDate = S.dateTo || S.dateFrom;
+      const clRes = await fetch(
+        `https://climate-api.open-meteo.com/v1/climate?latitude=${lat}&longitude=${lng}`
+        + `&start_date=${S.dateFrom}&end_date=${endDate}`
+        + `&daily=temperature_2m_max&models=EC_Earth3P_HR`
+      );
+      const clData = await clRes.json();
+      weatherDays = (clData.daily?.time || []).map(function(date, i){
+        return {
+          date,
+          icon: '🌤',   // no weather code from climate API
+          temp: Math.round((clData.daily?.temperature_2m_max || [])[i] || 0),
+        };
+      });
+    }
+
+    if(!weatherDays.length) return;
+
+    // 3. Inject chips into day tabs
+    const tabsEl = document.getElementById('dayTabsBar');
+    if(tabsEl){
+      tabsEl.querySelectorAll('.day-tab').forEach(function(tab, i){
+        const w = weatherDays[i];
+        if(!w) return;
+        if(!tab.querySelector('.day-tab-weather')){
+          const chip = document.createElement('span');
+          chip.className = 'day-tab-weather';
+          chip.textContent = w.icon + ' ' + w.temp + '°';
+          tab.appendChild(chip);
+        }
+      });
+    }
+  } catch(e){
+    console.warn('[via] weather fetch failed:', e.message);
+  }
+}
+
+/* ══════════════════════════════════════
+   VISA REQUIREMENTS WIDGET
+══════════════════════════════════════ */
+// Compact: EU_FREE means free within EU/Schengen; entries are [type, note?, link?]
+const VISA_RULES = {
+  // EU/Schengen origin → all EU/Schengen: always free
+  _EU_SCHENGEN: ['at','be','ch','cz','de','dk','ee','es','fi','fr','gr','hr','hu','ie','is','it','lt','lu','lv','mt','nl','no','pl','pt','ro','se','si','sk'],
+  // [dest_keyword] : { origin_code : [type, label] }
+  'turkey|türkiye': { _EU:'on-arrival', _DEFAULT:'required',  _LABEL:'e-Visa required (€60)', _LINK:'https://www.evisa.gov.tr/' },
+  'morocco|marrakech':{ _EU:'free', _DEFAULT:'required', _LABEL:'Visa-free for most EU citizens', _LINK:'https://www.diplomatie.ma/' },
+  'egypt':          { _EU:'on-arrival', _DEFAULT:'required', _LABEL:'Visa on arrival or e-Visa ($25)', _LINK:'https://visa2egypt.gov.eg/' },
+  'japan|tokyo|kyoto':{ _EU:'free', _DEFAULT:'required', _LABEL:'Visa-free for EU/US/AU up to 90 days', _LINK:'https://www.mofa.go.jp/j_info/visit/visa/' },
+  'thailand|bangkok':{ _EU:'free', _DEFAULT:'on-arrival', _LABEL:'Visa-free for most EU passports 60 days', _LINK:'https://www.thaiembassy.com/' },
+  'bali|indonesia': { _EU:'free', _DEFAULT:'on-arrival', _LABEL:'Visa-free 30 days or e-VOA available', _LINK:'https://molina.imigrasi.go.id/' },
+  'usa|new york':   { _EU:'free', _DEFAULT:'required', _LABEL:'ESTA required (waiver, $21)', _LINK:'https://esta.cbp.dhs.gov/' },
+  'serbia|belgrade':{ _EU:'free', _SR:'free', _DEFAULT:'free', _LABEL:'Visa-free for most European passports', _LINK:'https://www.mfa.gov.rs/' },
+  'uk|london|edinburgh|scotland|ireland|dublin': { _DEFAULT:'free', _LABEL:'No visa for EU/Schengen — but passport needed (not ID)', _LINK:'https://www.gov.uk/visit-uk/' },
+};
+
+const ORIGIN_LABELS = { si:'🇸🇮 SI', hr:'🇭🇷 HR', de:'🇩🇪 DE', it:'🇮🇹 IT', fr:'🇫🇷 FR', es:'🇪🇸 ES', sr:'🇷🇸 RS', en:'🇬🇧 GB', at:'🇦🇹 AT', nl:'🇳🇱 NL', pl:'🇵🇱 PL', pt:'🇵🇹 PT', cz:'🇨🇿 CZ', hu:'🇭🇺 HU', ro:'🇷🇴 RO', be:'🇧🇪 BE' };
+const LANG_TO_ORIGIN = { sl:'si', hr:'hr', de:'de', it:'it', fr:'fr', es:'es', sr:'sr', en:'gb' };
+
+function detectOrigin(){ return LANG_TO_ORIGIN[currentLang] || 'gb'; }
+
+function renderVisaBar(){
+  const bar = document.getElementById('visaBar');
+  if(!bar || !itinData) return;
+  const dest = (itinData.destination_display || S.dest || '').toLowerCase();
+  const origin = (document.getElementById('visaOriginSelect')?.value) || detectOrigin();
+  const isEU = VISA_RULES._EU_SCHENGEN.includes(origin);
+
+  let matched = null;
+  for(const pattern of Object.keys(VISA_RULES)){
+    if(pattern.startsWith('_')) continue;
+    if(new RegExp(pattern, 'i').test(dest)){
+      matched = VISA_RULES[pattern]; break;
+    }
+  }
+
+  if(!matched){
+    // Within EU/Schengen — no notice needed (or unknown destination)
+    bar.style.display = 'none'; return;
+  }
+
+  const type  = (isEU ? matched._EU : matched._DEFAULT) || 'check';
+  const label = matched._LABEL || '';
+  const link  = matched._LINK  || 'https://iatatravelcentre.com/';
+  const icons = { free:'✅', 'on-arrival':'🟡', required:'🔴', check:'ℹ️' };
+  const icon  = icons[type] || 'ℹ️';
+
+  // Origin selector options
+  const opts = Object.entries(ORIGIN_LABELS).map(function([code,flag]){
+    return '<option value="'+code+'"'+(code===origin?' selected':'')+'>'+flag+'</option>';
+  }).join('');
+
+  bar.style.display = 'flex';
+  bar.innerHTML = '<span class="visa-bar-icon">'+icon+'</span>'
+    + '<span class="visa-bar-text">'+label+' — <a class="visa-bar-link" href="'+link+'" target="_blank" rel="noopener">'+t('visa_details')+'</a></span>'
+    + '<span class="visa-bar-origin"><span style="font-size:.7rem;opacity:.7">'+t('visa_origin')+'</span>'
+    + '<select class="visa-origin-select" id="visaOriginSelect" onchange="renderVisaBar()">'+opts+'</select></span>';
+}
+
 const SIMILAR_MAP = [
   // Adriatic & Balkans
   { re:/croatia|dubrovnik|split|hvar|zagreb|dalmatia/i,       sug:['Montenegro','Slovenia','Greece & Islands'] },
@@ -6506,20 +6991,24 @@ function renderDayPane(day, di){
   out += '<div class="day-title">'+sanitiseAI(day.title||'')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' '+t('note_btn')+'</button></div>';
   out += '<div class="note-inline" id="ni_day'+di+'">'+renderNoteField('day'+di)+'</div>';
   out += '</div></div>';
+  const tn = day.transit_notes || {};
   out += '<div class="tblock morning"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('morning')+'</span></div>';
   out += '<div class="prose-wrap">'+sanitiseAI(day.morning||'')+'</div></div>';
+  if(tn.morning_to_lunch) out += renderTransitChip(tn.morning_to_lunch);
   out += lunchBlock;
+  if(tn.lunch_to_afternoon) out += renderTransitChip(tn.lunch_to_afternoon);
   out += '<div class="tblock afternoon"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('afternoon')+'</span></div>';
   out += '<div class="prose-wrap">'+afterProse+'</div>';
   out += (act.name ? renderSwapPanel(uid_act,'activity',swaps.activity||[],r.activity,di) : '');
   out += '</div>';
+  if(tn.afternoon_to_dinner) out += renderTransitChip(tn.afternoon_to_dinner);
   out += dinnerBlock;
   out += '<div class="tblock evening"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('evening')+'</span></div>';
   out += '<div class="prose-wrap">'+sanitiseAI(day.evening||'')+'</div></div>';
   out += renderHiddenGem(day.hidden_gem);
   out += renderMoodPanel(di, day.title||'');
   out += renderCostBreakdown(day, di);
-  out += renderTweakBar(di);
+  out += '<button class="day-chat-btn" onclick="openDayChat('+di+')">✦ '+t('chat_open_btn')+'</button>';
   out += '</div>';
   return out;
 }
@@ -10871,6 +11360,7 @@ function showTimeoutBar(msg){
 /* ══ INIT ══ */
 handleUpgradeReturn(); // Check for Stripe redirect on page load
 buildLangBar();
+renderSponsoredDests();
 // Read ?lang= URL param for localised direct links (hreflang SEO)
 (function(){
   const urlLang = new URLSearchParams(location.search).get('lang');
