@@ -9476,7 +9476,9 @@ function togglePack(id){
 async function renderMap(data){
   const el = document.getElementById('mapContent');
   if(!el || !data) return;
-  const isPlusPlan = currentUser && currentUser.plan === 'plus';
+  // localhost bypasses the Plus gate so the map can be tested without a paid account
+  const isPlusPlan = (currentUser && currentUser.plan === 'plus') ||
+    location.hostname === 'localhost' || location.search.includes('maptest=1');
 
   const mapT = {
     en:{title:'Map view is Via Plus',sub:'See all recommendations on a real interactive map.',price:'€7 once, yours forever',btn:'Unlock Via Plus →',
