@@ -8664,7 +8664,7 @@ function getUsers(){ return {}; }
 function saveUsers(){}
 
 /* ── Save itinerary ────────────────────────────────────────────────── */
-function saveItinerary(){
+async function saveItinerary(){
   if(!itinData) return;
 
   // Not signed in → prompt registration then retry
