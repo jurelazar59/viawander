@@ -1,6 +1,7 @@
 // Via service worker — app shell + itinerary offline caching
-const SHELL_CACHE  = 'via-shell-v1';
-const ITIN_CACHE   = 'via-itin-v1';
+// ── Bump these strings on every production deploy to invalidate stale caches ──
+const SHELL_CACHE  = 'via-shell-v2';
+const ITIN_CACHE   = 'via-itin-v2';
 
 const SHELL_ASSETS = [
   '/',

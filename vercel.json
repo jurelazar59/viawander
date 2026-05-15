@@ -1,23 +1,49 @@
 {
   "functions": {
-    "api/*.js": {
-      "maxDuration": 90
-    }
+    "api/itinerary.js":      { "maxDuration": 90 },
+    "api/check-alerts.js":   { "maxDuration": 60 },
+    "api/tweak-day.js":      { "maxDuration": 30 },
+    "api/inspire.js":        { "maxDuration": 15 },
+    "api/send-email.js":     { "maxDuration": 15 },
+    "api/register-alert.js": { "maxDuration": 15 },
+    "api/checkout.js":       { "maxDuration": 15 },
+    "api/unsubscribe-alert.js": { "maxDuration": 15 },
+    "api/verify-session.js": { "maxDuration": 10 },
+    "api/mood.js":           { "maxDuration": 10 },
+    "api/packing.js":        { "maxDuration": 10 }
   },
   "crons": [
-    {
-      "path": "/api/check-alerts",
-      "schedule": "0 8 * * *"
-    }
+    { "path": "/api/check-alerts", "schedule": "0 8 * * *" }
   ],
   "headers": [
     {
       "source": "/(langs|posts)\\.js",
       "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=3600" }
+      ]
+    },
+    {
+      "source": "/index.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=300" }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=3600"
-        }
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://*.unsplash.com data: blob:; frame-src https://www.openstreetmap.org https://www.google.com; connect-src 'self' https://nominatim.openstreetmap.org https://*.supabase.co https://api.anthropic.com"
+        },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options",         "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy",          "value": "strict-origin-when-cross-origin" }
       ]
     }
   ]

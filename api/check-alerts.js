@@ -10,6 +10,13 @@ const RESEND_URL  = 'https://api.resend.com/emails';
 const CHECK_HOURS = 20;
 const NOTIFY_DAYS = 7;
 
+// ── Structured logger — output is JSON so Vercel log drain can filter by event ──
+function log(level, event, data = {}) {
+  const entry = { ts: new Date().toISOString(), level, event, ...data };
+  // eslint-disable-next-line no-console
+  console[level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'](JSON.stringify(entry));
+}
+
 function getSupabase() {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_KEY;
@@ -65,7 +72,13 @@ Rules: negative = cheaper, positive = more expensive. Set notable_change:true on
   const d     = await r.json();
   const raw   = ((d.content || []).map(b => b.text || '').join('')).trim();
   const clean = raw.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '').trim();
-  return JSON.parse(clean);
+  try {
+    return JSON.parse(clean);
+  } catch {
+    log('error', 'assess_prices_parse_failed', { alertId: alert.id, raw: clean.slice(0, 200) });
+    // Return a safe no-op assessment rather than crashing the whole cron run
+    return { notable_change: false, accommodation_change_pct: 0, flights_change_pct: 0, summary: 'Unable to assess prices at this time.', confidence: 'low' };
+  }
 }
 
 // ── Threshold check ───────────────────────────────────────────────────────────
@@ -168,7 +181,7 @@ async function sendAlertEmail(alert, assessment, resendKey) {
 </body>
 </html>`;
 
-  await fetch(RESEND_URL, {
+  const emailRes = await fetch(RESEND_URL, {
     method: 'POST',
     headers: {
       'Content-Type':  'application/json',
@@ -181,6 +194,12 @@ async function sendAlertEmail(alert, assessment, resendKey) {
       html,
     }),
   });
+
+  if (!emailRes.ok) {
+    const errBody = await emailRes.json().catch(() => ({}));
+    // Throw so the caller can skip marking last_notified and retry tomorrow
+    throw new Error(`Resend ${emailRes.status}: ${errBody.message || JSON.stringify(errBody)}`);
+  }
 }
 
 function fmt(iso) {
@@ -248,7 +267,7 @@ export default async function handler(req, res) {
       results.push({ id: alert.id, dest: alert.destination, shouldNotify, assessment });
 
     } catch (err) {
-      console.error('[via] check-alerts error for', alert.id, err.message);
+      log('error', 'check_alert_failed', { alertId: alert.id, dest: alert.destination, error: err.message });
       results.push({ id: alert.id, error: err.message });
     }
   }

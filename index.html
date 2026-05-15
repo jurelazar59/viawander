@@ -5625,8 +5625,8 @@ select.budget-select:focus,
 
 <!-- External data files (extracted for faster initial parse) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/langs.js"></script>
-<script src="/posts.js"></script>
+<script src="/langs.js" defer></script>
+<script src="/posts.js" defer></script>
 <script>
 /* ══════════════════════════════════════
    TRANSLATIONS  (see /langs.js)
@@ -6486,24 +6486,39 @@ async function doSubmit(){
       itinData = await fetchItinerary(totalDays);
     }
   } catch(e) {
-    console.error(e);
+    console.error('[via] doSubmit error:', e);
+    stopLoad(h);
+    // Timeout — user waited 85 s, give a specific message
+    if(e && e.name === 'AbortError'){
+      showFallbackNotice('timeout');
+    } else {
+      showFallbackNotice('error');
+    }
     itinData = makeFallback();
+    setTimeout(function(){
+      try { renderItin(itinData); } catch(e2){ console.error('[via] renderItin fallback error:', e2); }
+      showPg('pg-itin');
+    }, 400);
+    return;
   }
   stopLoad(h);
   setTimeout(function(){
     try {
       renderItin(itinData);
     } catch(e){
-      console.error('renderItin failed:', e);
+      console.error('[via] renderItin failed:', e);
       itinData = makeFallback();
-      try { renderItin(itinData); } catch(e2){ console.error(e2); }
+      showFallbackNotice('error');
+      try { renderItin(itinData); } catch(e2){ console.error('[via] renderItin retry error:', e2); }
     }
     showPg('pg-itin');
     // Save to SW cache for offline access
     setTimeout(swSaveItin, 200);
     // Fire-and-forget email — only if we have a real itinerary and a real email
     if(S.email && !itinData._isFallback){
-      sendItineraryEmail(itinData).catch(function(e){ console.warn('Email send failed:', e.message); });
+      sendItineraryEmail(itinData)
+        .then(function(){ showToast('✓ Itinerary sent to ' + S.email); })
+        .catch(function(e){ console.warn('[via] email send failed:', e.message); });
     }
   }, 400);
 }
@@ -7113,6 +7128,15 @@ function switchMain(panelId,btn){
   document.querySelectorAll('.main-panel').forEach(p=>p.classList.remove('on'));
   btn.classList.add('on');
   document.getElementById(panelId).classList.add('on');
+
+  // Show a spinner in the map panel while renderMap is geocoding
+  if(panelId === 'map-panel'){
+    const mc = document.getElementById('mapContent');
+    if(mc && !mc.firstElementChild){
+      mc.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:320px"><div class="pack-spinner"></div></div>';
+    }
+    if(itinData) renderMap(itinData).catch(function(){});
+  }
 }
 
 function switchDay(i){
@@ -7461,7 +7485,7 @@ function buildSwapOpts(type, tier, alts, tierData, di, uid){
     return '<div class="swap-opt'+(i===0?' active':'')+'" '
       +'data-name="'+oName+'" data-price="'+oPriceEsc+'" data-uid="'+uid+'" '
       +'onclick="selectSwap(this.dataset.uid,this,this.dataset.name,this.dataset.price)">'
-      +'<img src="'+img+'" alt="">'
+      +'<img src="'+img+'" alt="" loading="lazy">'
       +'<div>'
         +'<div class="so-name">'+sanitiseAI(o.name||'')+'</div>'
         +'<div class="so-sub">'+sanitiseAI(o.cuisine||o.price||'')+'</div>'
@@ -7785,6 +7809,9 @@ function toggleMastMore(e){ e.stopPropagation(); document.getElementById('mastMo
 function closeMastMore(){ const m=document.getElementById('mastMoreMenu'); if(m) m.classList.remove('open'); }
 document.addEventListener('click', closeMastMore);
 async function regenItin(){
+  // Confirm before discarding the current itinerary
+  const msg = t('regen_confirm') || 'Regenerate this itinerary? Your current plan will be replaced.';
+  if(!window.confirm(msg)) return;
   const savedChoices = Object.assign({}, userChoices);
   Object.keys(userChoices).forEach(function(k){ delete userChoices[k]; });
   const nights = (S.dateFrom&&S.dateTo) ? Math.max(1,Math.round((new Date(S.dateTo)-new Date(S.dateFrom))/86400000)) : 4;
@@ -7804,7 +7831,9 @@ async function regenItin(){
       itinData = await fetchItinerary(totalDays);
     }
   } catch(e){
-    Object.assign(userChoices, savedChoices);
+    console.error('[via] regenItin error:', e);
+    Object.assign(userChoices, savedChoices); // restore manual swaps
+    showFallbackNotice(e && e.name === 'AbortError' ? 'timeout' : 'error');
     itinData = makeFallback();
   }
   stopLoad(h);
@@ -8005,9 +8034,11 @@ function makeFallback(){
       }
     }
   ];
+  // Stamp the user's actual destination so the header makes sense
+  const userDest = S.dest || (isSl ? 'Vaše potovanje' : 'Your trip');
   return{
-    title: isSl?'Pet zlatih dni na Dalmatisnki obali':'Five golden days on the Dalmatian Coast',
-    destination_display: isSl?'Split in Dubrovnik, Hrvaška':'Split & Dubrovnik, Croatia',
+    title: isSl ? ('Vzorčni načrt — ' + userDest) : ('Sample plan — ' + userDest),
+    destination_display: userDest,
     estimated_daily_cost:'€95–145',
     hero_description: isSl?'Dalmatinska obala je eno redkih mest, ki resnično presegajo fotografije — rimske ruševine, turkizne zalivčke in vino iz steklenic brez nalepk, ki ga točijo ljudje, ki si želijo spoznati vaše ime. Nagrajuje počasnost.':'The Dalmatian coast is one of those rare places that exceeds the photographs. Roman ruins, turquoise coves, and wine from unlabelled bottles poured by people who want to know your name.',
     insider_tip: isSl?'Vzemite katamaran ob 6. uri zjutraj iz Splita na Hvar ob delavnikih — pred turističnimi čolni ste za tri ure in boste imeli pristanišče skoraj zase.':'Take the 6am catamaran from Split to Hvar on weekdays — you beat the tourist boats by three hours and have the harbour almost to yourself.',
@@ -9802,12 +9833,27 @@ function shareItin(){
   }
 }
 
-function showToast(msg){
-  const t = document.createElement('div');
-  t.style.cssText = 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--parch);font-family:var(--ui);font-size:.78rem;font-weight:500;padding:.75rem 1.5rem;z-index:3000;box-shadow:0 4px 20px rgba(28,21,16,.3);border-radius:2px;max-width:90%;text-align:center;animation:modalIn .2s ease both';
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(), 4000);
+function showToast(msg, type){
+  const el = document.createElement('div');
+  const bg = type === 'warn' ? '#8B3347' : 'var(--ink)';
+  el.style.cssText = 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:'+bg+';color:var(--parch);font-family:var(--ui);font-size:.78rem;font-weight:500;padding:.75rem 1.5rem;z-index:3000;box-shadow:0 4px 20px rgba(28,21,16,.3);border-radius:2px;max-width:90%;text-align:center;animation:modalIn .2s ease both';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 4000);
+}
+
+function showFallbackNotice(type){
+  const notice = document.getElementById('fallbackNotice');
+  const msgEl  = notice && notice.querySelector('.fn-msg');
+  if(!notice) return;
+  if(msgEl){
+    if(type === 'timeout'){
+      msgEl.innerHTML = '<span class="fn-icon">⏱</span> Our servers took too long. Showing a sample — your destination was <strong>' + (S.dest||'not saved') + '</strong>.';
+    } else {
+      msgEl.innerHTML = '<span class="fn-icon">⚠</span> Couldn\'t reach our servers. Showing a sample — your destination was <strong>' + (S.dest||'not saved') + '</strong>.';
+    }
+  }
+  notice.classList.add('show');
 }
 
 /* ══════════════════════════════════════
@@ -11066,7 +11112,7 @@ function openBlogArticle(id){
       '<div class="article-avatar">' + post.authorInitials + '</div>' +
       '<div><div class="article-author">' + post.author + '</div><div class="article-date">' + fmtDate + '</div></div>' +
     '</div>' +
-    '<img class="article-hero-img" src="' + post.image + '" alt="' + post.title + '">' +
+    '<img class="article-hero-img" src="' + post.image + '" alt="' + post.title + '" loading="lazy">' +
     '<div class="article-body">' + body + '</div>' +
     '<div class="article-cta">' +
       '<div><div class="article-cta-text">Plan your own trip with Via.</div><div class="article-cta-sub">Full itinerary in under 2 minutes, free.</div></div>' +
@@ -11301,7 +11347,7 @@ function renderAlertsTab(){
       '</div>' +
       '<div class="alert-card-actions">' +
         '<button class="alert-action-btn pause-btn' + (isActive ? '' : ' paused') + '" onclick="toggleAlertPause(\'' + a.id + '\')">' + (isActive ? t('alert_pause_btn') : t('alert_resume_btn')) + '</button>' +
-        '<button class="alert-action-btn danger" onclick="deleteAlert(\'' + a.id + '\'">'+t('alert_delete_btn')+'</button>' +
+        '<button class="alert-action-btn danger" onclick="deleteAlert(\'' + a.id + '\')">'+t('alert_delete_btn')+'</button>' +
       '</div>' +
     '</div>';
   }).join('');

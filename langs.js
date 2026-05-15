@@ -176,6 +176,7 @@ const LANGS = {
     alert_delete_btn:'Delete',
     delete_alert_confirm:'Delete this price alert?',
     delete_post_confirm:'Delete this post? This cannot be undone.',
+    regen_confirm:'Regenerate this itinerary? Your current plan will be replaced.',
     load_week:'Planning days {from}–{to} of your trip…',
   },
   sl: {
@@ -361,6 +362,7 @@ const LANGS = {
     alert_delete_btn:'Izbriši',
     delete_alert_confirm:'Izbrisati to opozorilo o cenah?',
     delete_post_confirm:'Izbrisati ta zapis? To dejanje je nepopravljivo.',
+    regen_confirm:'Regeneriraj načrt? Trenutni bo zamenjan z novim.',
     load_week:'Načrtujem dneve {from}–{to} tvojega potovanja…',
   },
   de: {
@@ -548,6 +550,7 @@ const LANGS = {
     alert_delete_btn:'Löschen',
     delete_alert_confirm:'Diesen Preisalarm löschen?',
     delete_post_confirm:'Diesen Beitrag löschen? Dies kann nicht rückgängig gemacht werden.',
+    regen_confirm:'Reiseplan neu generieren? Der aktuelle Plan wird ersetzt.',
     load_week:'Plane Tage {from}–{to} deiner Reise…',
   },
   it: {
@@ -735,6 +738,7 @@ const LANGS = {
     alert_delete_btn:'Elimina',
     delete_alert_confirm:'Eliminare questo avviso prezzi?',
     delete_post_confirm:'Eliminare questo post? Questa azione non può essere annullata.',
+    regen_confirm:'Rigenerare l\'itinerario? Il piano attuale verrà sostituito.',
     load_week:'Pianificando giorni {from}–{to} del tuo viaggio…',
   },
   fr: {
@@ -922,6 +926,7 @@ const LANGS = {
     alert_delete_btn:'Supprimer',
     delete_alert_confirm:'Supprimer cette alerte prix ?',
     delete_post_confirm:'Supprimer ce post ? Cette action est irréversible.',
+    regen_confirm:'Régénérer cet itinéraire ? Votre plan actuel sera remplacé.',
     load_week:'Planification des jours {from}–{to} de votre voyage…',
   },
   hr: {
@@ -1107,6 +1112,7 @@ const LANGS = {
     alert_delete_btn:'Izbriši',
     delete_alert_confirm:'Izbrisati ovo upozorenje o cijenama?',
     delete_post_confirm:'Izbrisati ovaj post? Ova radnja ne može biti poništena.',
+    regen_confirm:'Regenerirati plan? Trenutni itinerar bit će zamijenjen.',
     load_week:'Planiram dane {from}–{to} tvojeg putovanja…',
   },
   es: {
@@ -1292,6 +1298,7 @@ const LANGS = {
     alert_delete_btn:'Eliminar',
     delete_alert_confirm:'¿Eliminar esta alerta de precios?',
     delete_post_confirm:'¿Eliminar este post? Esta acción no se puede deshacer.',
+    regen_confirm:'¿Regenerar el itinerario? Tu plan actual será reemplazado.',
     load_week:'Planificando días {from}–{to} de tu viaje…',
   },
   sr: {
@@ -1477,6 +1484,7 @@ const LANGS = {
     alert_delete_btn:'Obriši',
     delete_alert_confirm:'Obrisati ovo obaveštenje o cenama?',
     delete_post_confirm:'Obrisati ovaj post? Ova radnja ne može biti poništena.',
+    regen_confirm:'Regenerisati plan? Trenutni itinerar biće zamenjen.',
     load_week:'Planiram dane {from}–{to} tvojeg putovanja…',
   },
 };

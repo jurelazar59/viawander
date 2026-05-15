@@ -1,9 +1,36 @@
 // Extracts a travel destination from any URL (TikTok, Instagram, blogs, etc.)
+
+// ── SSRF guard — block private/internal addresses ─────────────────────────
+function isSafeUrl(raw) {
+  let u;
+  try { u = new URL(raw); } catch { return false; }
+  if (!['http:', 'https:'].includes(u.protocol)) return false;
+  const h = u.hostname.toLowerCase();
+  // Block loopback, link-local, RFC-1918, and AWS metadata endpoint
+  if (
+    h === 'localhost' ||
+    /^127\./.test(h)  ||
+    /^10\./.test(h)   ||
+    /^192\.168\./.test(h) ||
+    /^172\.(1[6-9]|2\d|3[01])\./.test(h) ||
+    /^169\.254\./.test(h) ||
+    /^::1$/.test(h)   ||
+    /^fc00:/i.test(h) ||
+    h === '0.0.0.0'
+  ) return false;
+  return true;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end('Method Not Allowed');
 
   const { url } = req.body || {};
   if (!url) return res.status(400).end('Missing url');
+
+  // Reject internal/private URLs before ever making a network request
+  if (!isSafeUrl(url)) {
+    return res.status(400).end('Invalid URL');
+  }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).end('API not configured');

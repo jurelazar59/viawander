@@ -17,10 +17,13 @@ export default async function handler(req, res) {
   };
 
   // Build day summaries for email
+  // The itinerary schema nests recommendations under d.recommendations.{lunch,dinner,activity}
   const dayRows = days.map((d, i) => {
-    const lunch    = d.meals?.lunch?.[d.budget_default || 'mid'] || d.meals?.lunch?.mid || {};
-    const dinner   = d.meals?.dinner?.[d.budget_default || 'mid'] || d.meals?.dinner?.mid || {};
-    const activity = d.activities?.[d.budget_default || 'mid'] || d.activities?.mid || {};
+    const tier     = 'mid';
+    const rec      = d.recommendations || {};
+    const lunch    = rec.lunch?.[tier]    || rec.lunch?.mid    || {};
+    const dinner   = rec.dinner?.[tier]   || rec.dinner?.mid   || {};
+    const activity = rec.activity?.[tier] || rec.activity?.mid || {};
     return `
       <tr>
         <td style="padding:18px 0 10px;border-top:1px solid #E8DEC8">

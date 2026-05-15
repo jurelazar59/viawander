@@ -1,6 +1,11 @@
 // ── System prompt (stable across all requests) ─────────────────────────────
 const SYSTEM = `You are Via — a sophisticated AI travel planner with deep local knowledge. You always respond with a single valid JSON object and absolutely nothing else. No markdown fences, no backticks, no prose before or after the JSON. Every field in the schema must be present. Restaurant, hotel, and activity names must be authentic and specific to the destination — never generic placeholders. Your prose is warm, personal, and concrete — like advice from a well-travelled friend who knows the city, not a brochure.`;
 
+function log(level, event, data = {}) {
+  const entry = { ts: new Date().toISOString(), level, event, ...data };
+  console[level === 'error' ? 'error' : 'log'](JSON.stringify(entry));
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end('Method Not Allowed');
 
@@ -35,6 +40,9 @@ export default async function handler(req, res) {
   });
 
   const rawBody = await upstream.text();
+  if (!upstream.ok) {
+    log('error', 'anthropic_error', { status: upstream.status, days, model, body: rawBody.slice(0, 300) });
+  }
   res.setHeader('X-Via-Cache', 'MISS');
   res.setHeader('X-Via-Model', model);
   res.status(upstream.status).setHeader('Content-Type', 'application/json').send(rawBody);
