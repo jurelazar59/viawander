@@ -626,8 +626,9 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 /* Itin layout */
 .itin-layout{display:grid;grid-template-columns:1fr 320px}
 .itin-main{padding:3rem 4rem;border-right:1px solid var(--cr3)}
-.day-pane{display:none}
-.day-pane.on{display:block}
+.day-pane{display:block;opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
+.day-pane.revealed{opacity:1;transform:none}
+.day-pane+.day-pane,.day-save-nudge+.day-pane{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--cr3)}
 
 .day-hdr{display:flex;align-items:flex-end;gap:1.5rem;padding-bottom:1.5rem;border-bottom:2px solid var(--cr3);margin-bottom:2.5rem}
 .day-num{font-family:var(--serif);font-size:6rem;font-weight:900;line-height:.85;color:var(--cr3);letter-spacing:-.05em;flex-shrink:0}
@@ -3557,6 +3558,28 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 .freeday-list li strong{
   color:rgba(242,235,217,.95);font-weight:600;
 }
+
+/* ── Day save-nudge card (free users, between Day 1 and Day 2) ─── */
+.day-save-nudge{
+  margin:2.5rem 0;padding:1.75rem 2rem;
+  background:linear-gradient(135deg,var(--ink) 0%,#2a1a10 100%);
+  border-radius:6px;border:1px solid rgba(107,39,55,.35);
+  text-align:center;position:relative;overflow:hidden;
+}
+.day-save-nudge::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(135deg,rgba(242,235,217,.015) 0,rgba(242,235,217,.015) 1px,transparent 1px,transparent 16px);
+  pointer-events:none;
+}
+.dsn-icon{font-size:1.4rem;margin-bottom:.6rem;opacity:.65}
+.dsn-title{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--cr);margin-bottom:.4rem}
+.dsn-sub{font-family:var(--body);font-size:.82rem;color:rgba(242,235,217,.45);font-style:italic;margin-bottom:1rem;line-height:1.6}
+.dsn-btn{
+  font-family:var(--ui);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cr);background:transparent;border:1.5px solid var(--burg);border-radius:3px;
+  padding:.65rem 1.5rem;cursor:pointer;transition:background .2s,color .2s;position:relative;
+}
+.dsn-btn:hover{background:var(--burg);color:var(--cr)}
 
 /* ── Hidden gems panel ───────────────────────────────────────────── */
 .hidden-gem-panel{
@@ -6602,6 +6625,7 @@ function renderItin(data){
   }).join('');
 
   document.getElementById('itinMain').innerHTML=(data.days||[]).map((day,di)=>renderDayPane(day,di)).join('');
+  initDayReveal();
   const notice = document.getElementById('fallbackNotice');
   if(notice) notice.classList.toggle('show', !!data._isFallback);
   renderAside(data);
@@ -6762,7 +6786,7 @@ async function sendChatMsg(){
       const tmp = document.createElement('div');
       tmp.innerHTML = renderDayPane(itinData.days[di], di);
       const newPane = tmp.firstElementChild;
-      newPane.classList.add('on');
+      newPane.classList.add('revealed');   // already visible — skip entrance animation
       pane.replaceWith(newPane);
     }
     // Update tab title
@@ -7168,19 +7192,103 @@ function switchMain(panelId,btn){
 }
 
 function switchDay(i){
-  document.querySelectorAll('.day-tab').forEach((t,j)=>t.classList.toggle('on',j===i));
-  document.querySelectorAll('.day-pane').forEach((p,j)=>p.classList.toggle('on',j===i));
+  document.querySelectorAll('.day-tab').forEach(function(t,j){ t.classList.toggle('on',j===i); });
+  var pane = document.getElementById('dpane'+i);
+  if(pane){
+    // Instantly reveal if not yet visible (e.g. user jumped ahead via tab)
+    pane.classList.add('revealed');
+    pane.scrollIntoView({behavior:'smooth', block:'start'});
+  }
 }
 
 function switchTier(tier,btn){
   currentTier = tier;
   document.querySelectorAll('.btog-pill').forEach(p=>p.classList.toggle('on',p.dataset.tier===tier));
-  if(!itinData)return;
-  // remember active day
-  const activeTab = document.querySelector('.day-tab.on');
-  const activeDay = activeTab ? parseInt(activeTab.id.replace('dtab','')) : 0;
+  if(!itinData) return;
+  // Preserve which days were already revealed so they don't re-animate
+  var revealedSet = new Set();
+  document.querySelectorAll('.day-pane').forEach(function(p,j){ if(p.classList.contains('revealed')) revealedSet.add(j); });
   document.getElementById('itinMain').innerHTML = (itinData.days||[]).map((day,di)=>renderDayPane(day,di)).join('');
-  document.querySelectorAll('.day-pane').forEach((p,j)=>p.classList.toggle('on',j===activeDay));
+  initDayReveal();
+  // Instantly restore previously visible days (no re-animation)
+  document.querySelectorAll('.day-pane').forEach(function(p,j){
+    if(revealedSet.has(j)){ p.classList.add('revealed'); }
+  });
+}
+
+// ── Progressive day reveal ────────────────────────────────────────────────────
+var _dayRevealObs = null;
+var _dayTabObs    = null;
+
+function initDayReveal(){
+  // Tear down previous observers
+  if(_dayRevealObs){ _dayRevealObs.disconnect(); _dayRevealObs = null; }
+  if(_dayTabObs)   { _dayTabObs.disconnect();    _dayTabObs    = null; }
+
+  var panes = Array.from(document.querySelectorAll('#itinMain .day-pane'));
+  if(!panes.length) return;
+
+  // Day 0 reveals immediately
+  panes[0].classList.add('revealed');
+
+  // Free users: inject a save-nudge card between Day 1 and Day 2
+  if(!isPlusPlan && panes.length > 1 && !document.getElementById('daySaveNudge')){
+    var nudgeT = {
+      en:{title:'Love this trip?',sub:'Save it forever with Via Plus — one-time payment.'},
+      sl:{title:'Všeč ti je ta pot?',sub:'Shrani jo za vedno z Via Plus — enkratno plačilo.'},
+      de:{title:'Gefällt dir diese Reise?',sub:'Speichere sie mit Via Plus — einmalige Zahlung.'},
+      it:{title:'Ti piace questo viaggio?',sub:'Salvalo per sempre con Via Plus — pagamento unico.'},
+      fr:{title:'Ce voyage vous plaît?',sub:'Sauvegardez-le pour toujours avec Via Plus — paiement unique.'},
+      hr:{title:'Sviđa ti se ovo putovanje?',sub:'Spremi ga zauvijek s Via Plus — jednokratna uplata.'},
+      es:{title:'¿Te gusta este viaje?',sub:'Guárdalo para siempre con Via Plus — pago único.'},
+      sr:{title:'Sviđa ti se ovo putovanje?',sub:'Sačuvaj ga zauvek uz Via Plus — jednokratna uplata.'},
+    };
+    var nT = nudgeT[currentLang] || nudgeT.en;
+    var nudge = document.createElement('div');
+    nudge.id = 'daySaveNudge';
+    nudge.className = 'day-save-nudge';
+    nudge.innerHTML =
+      '<div class="dsn-icon">✦</div>' +
+      '<div class="dsn-title">' + nT.title + '</div>' +
+      '<div class="dsn-sub">' + (t('upgrade_price_sub') || nT.sub) + '</div>' +
+      '<button class="dsn-btn" onclick="openUpgradeModal()">' + (t('profile_upgrade_btn') || 'Upgrade to Plus') + '</button>';
+    panes[0].insertAdjacentElement('afterend', nudge);
+  }
+
+  // ── Observer 1: entrance animations for days 1+ ──────────────────────────
+  _dayRevealObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('revealed');
+        _dayRevealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin:'0px 0px -30px 0px' });
+
+  panes.slice(1).forEach(function(p){ _dayRevealObs.observe(p); });
+
+  // ── Observer 2: update active day tab as user scrolls ────────────────────
+  _dayTabObs = new IntersectionObserver(function(entries){
+    // Pick the topmost intersecting pane
+    var topEntry = null;
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        if(!topEntry || e.boundingClientRect.top < topEntry.boundingClientRect.top){
+          topEntry = e;
+        }
+      }
+    });
+    if(topEntry){
+      var di = parseInt(topEntry.target.id.replace('dpane',''));
+      if(!isNaN(di)){
+        document.querySelectorAll('.day-tab').forEach(function(t,j){ t.classList.toggle('on',j===di); });
+        var activeTab = document.getElementById('dtab'+di);
+        if(activeTab) activeTab.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+      }
+    }
+  }, { threshold: 0.35 });
+
+  panes.forEach(function(p){ _dayTabObs.observe(p); });
 }
 
 function sanitiseAI(str){
@@ -7214,7 +7322,7 @@ function renderDayPane(day, di){
     : sanitiseAI(day.afternoon||'');
 
   var out = '';
-  out += '<div class="day-pane'+(di===0?' on':'')+'" id="dpane'+di+'">';
+  out += '<div class="day-pane" id="dpane'+di+'">';
   out += '<div class="day-hdr"><div class="day-num">0'+(di+1)+'</div>';
   out += '<div style="flex:1"><div class="day-lbl">'+t('day_label')+' '+(di+1)+'</div>';
   out += '<div class="day-title">'+sanitiseAI(day.title||'')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' '+t('note_btn')+'</button></div>';
@@ -7252,7 +7360,7 @@ function renderFreeDayPane(day, di){
   }).join('');
 
   var out = '';
-  out += '<div class="day-pane'+(di===0?' on':'')+'" id="dpane'+di+'">';
+  out += '<div class="day-pane" id="dpane'+di+'">';
 
   // Dark header bar matching normal day header
   out += '<div class="day-hdr"><div class="day-num" style="opacity:.5">0'+(di+1)+'</div>';
@@ -7354,7 +7462,7 @@ Return ONLY the modified day as valid JSON with the exact same structure and all
       const tmp = document.createElement('div');
       tmp.innerHTML = renderDayPane(itinData.days[di], di);
       const newPane = tmp.firstElementChild;
-      newPane.classList.add('on');
+      newPane.classList.add('revealed');   // already visible — skip entrance animation
       pane.replaceWith(newPane);
     }
 
@@ -7432,8 +7540,11 @@ function initDayDrag(){
       document.getElementById('itinMain').innerHTML = itinData.days.map(function(d,i){
         return renderDayPane(d, i);
       }).join('');
+      initDayReveal();
+      // Instantly reveal all days (user has already seen them via drag)
+      document.querySelectorAll('#itinMain .day-pane').forEach(function(p){ p.classList.add('revealed'); });
 
-      // Reveal the day that was just dragged
+      // Scroll to the day that was just dragged
       switchDay(to);
       initDayDrag();       // rebind handlers on new elements
       initDayTabsScroll(); // rebind scroll indicator
@@ -9572,12 +9683,41 @@ async function renderMap(data){
 
   // ── LOCKED (free users) ─────────────────────────────
   if(!isPlusPlan){
+    // Geocode destination via Nominatim so we can show a real blurred map preview
+    var freeOsmSrc = '';
+    try {
+      var freeGeo = await fetch(
+        'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(dest) +
+        '&format=json&limit=1',
+        { headers: { 'Accept-Language': currentLang || 'en' } }
+      );
+      var freeGeoData = await freeGeo.json();
+      if(freeGeoData && freeGeoData[0]){
+        var fLat = parseFloat(freeGeoData[0].lat);
+        var fLng = parseFloat(freeGeoData[0].lon);
+        var fPad = 0.06;
+        freeOsmSrc =
+          'https://www.openstreetmap.org/export/embed.html' +
+          '?bbox=' + (fLng-fPad) + ',' + (fLat-fPad) + ',' + (fLng+fPad) + ',' + (fLat+fPad) +
+          '&layer=mapnik&marker=' + fLat + ',' + fLng;
+      }
+    } catch(e) { /* Nominatim unreachable — fall back to hero image */ }
+
+    // Real blurred map if geocoding succeeded, else blurred destination photo
+    var lockedBg = freeOsmSrc
+      ? '<div style="position:relative;width:100%;height:320px;overflow:hidden">' +
+          '<iframe src="' + freeOsmSrc + '" width="100%" height="320" frameborder="0" scrolling="no" ' +
+            'style="border:0;display:block;width:100%;height:100%;pointer-events:none;' +
+                   'filter:blur(5px) brightness(.82);transform:scale(1.08);transform-origin:center">' +
+          '</iframe>' +
+        '</div>'
+      : '<img src="' + gHero() + '" ' +
+          'style="width:100%;height:320px;object-fit:cover;filter:blur(3px) brightness(.7);display:block" alt="">';
+
     el.innerHTML =
       '<div class="map-locked-wrap" style="position:relative;overflow:hidden;border-radius:4px">' +
-        // Hero destination image — always available, no API key needed
-        '<img src="' + gHero() + '" ' +
-        'style="width:100%;height:320px;object-fit:cover;filter:blur(3px) brightness(.7);display:block" alt="">' +
-        '<div class="map-locked-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(28,21,16,.5);backdrop-filter:blur(2px)">' +
+        lockedBg +
+        '<div class="map-locked-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(28,21,16,.45);backdrop-filter:blur(2px)">' +
           '<div class="map-locked-card" style="background:var(--ink);border-radius:6px;padding:1.8rem 2rem;text-align:center;max-width:320px;width:90%;box-shadow:0 16px 48px rgba(28,21,16,.4);position:relative">' +
             '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--burg),var(--gold));border-radius:6px 6px 0 0"></div>' +
             '<div style="font-size:1.8rem;margin-bottom:.7rem">✦</div>' +
