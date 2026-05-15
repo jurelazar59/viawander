@@ -6564,7 +6564,7 @@ function renderItin(data){
   renderAside(data);
   renderStays(data);
   renderTransport(data);
-  renderMap(data);
+  renderMap(data).catch(function(){});
   renderPackingPanel(data);
   renderTripCostSummary(data);
   updateShareableLink();
@@ -9473,7 +9473,7 @@ function togglePack(id){
 /* ══════════════════════════════════════
    MAP VIEW (Plus only)
 ══════════════════════════════════════ */
-function renderMap(data){
+async function renderMap(data){
   const el = document.getElementById('mapContent');
   if(!el || !data) return;
   const isPlusPlan = currentUser && currentUser.plan === 'plus';
@@ -9513,9 +9513,8 @@ function renderMap(data){
   if(!isPlusPlan){
     el.innerHTML =
       '<div class="map-locked-wrap" style="position:relative;overflow:hidden;border-radius:4px">' +
-        // Static Google Maps image as background (no API key needed for static preview)
-        '<img src="https://maps.googleapis.com/maps/api/staticmap?center='+encodeURIComponent(dest)+'&zoom=12&size=800x440&style=feature:all|element:labels|visibility:off&style=feature:water|color:0xb8d4e8&style=feature:landscape|color:0xeae2cc&style=feature:road|color:0xd4c8b4&key=AIzaSyCtSndBzH_mpX3vB80bbvsuAJ7YAH_Gy-w" ' +
-        'onerror="this.style.display=\'none\'" ' +
+        // Hero destination image — always available, no API key needed
+        '<img src="' + gHero() + '" ' +
         'style="width:100%;height:320px;object-fit:cover;filter:blur(3px) brightness(.7);display:block" alt="">' +
         '<div class="map-locked-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(28,21,16,.5);backdrop-filter:blur(2px)">' +
           '<div class="map-locked-card" style="background:var(--ink);border-radius:6px;padding:1.8rem 2rem;text-align:center;max-width:320px;width:90%;box-shadow:0 16px 48px rgba(28,21,16,.4);position:relative">' +
@@ -9588,7 +9587,7 @@ function renderMap(data){
   var mapContent = '';
 
   if(MAPS_KEY){
-    // Real Google Maps Embed
+    // Real Google Maps Embed (if key is configured)
     var searchQuery = encodeURIComponent(dest);
     mapContent =
       '<iframe ' +
@@ -9598,8 +9597,30 @@ function renderMap(data){
         'id="mapIframe">' +
       '</iframe>';
   } else {
-    // No API key — show styled SVG placeholder + instructions
-    mapContent = buildFallbackSVG(dest, allPlaces, typeColors, dayColors);
+    // Free OpenStreetMap embed via Nominatim geocoding — no API key needed
+    try {
+      var geoRes = await fetch(
+        'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(dest) +
+        '&format=json&limit=1',
+        { headers: { 'Accept-Language': currentLang || 'en' } }
+      );
+      var geoData = await geoRes.json();
+      if(geoData && geoData[0]){
+        var lat = parseFloat(geoData[0].lat);
+        var lng = parseFloat(geoData[0].lon);
+        var pad = 0.06;
+        mapContent =
+          '<iframe ' +
+            'width="100%" height="380" frameborder="0" scrolling="no" ' +
+            'src="https://www.openstreetmap.org/export/embed.html' +
+              '?bbox='+(lng-pad)+','+(lat-pad)+','+(lng+pad)+','+(lat+pad)+
+              '&layer=mapnik&marker='+lat+','+lng+'" ' +
+            'style="border:0;display:block" id="mapIframe">' +
+          '</iframe>';
+      }
+    } catch(e) { /* fall through to SVG */ }
+    // Fallback: styled SVG if geocoding fails
+    if(!mapContent) mapContent = buildFallbackSVG(dest, allPlaces, typeColors, dayColors);
   }
 
   el.innerHTML =
@@ -9612,12 +9633,6 @@ function renderMap(data){
         '<div class="map-container" style="position:relative;overflow:hidden">'+mapContent+'</div>' +
         '<div class="map-places-sidebar" id="mapPlacesSidebar">'+placesHtml+'</div>' +
       '</div>' +
-      (MAPS_KEY ? '' :
-        '<div class="map-api-notice">'+
-          '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="8" cy="8" r="7"/><path d="M8 5v3M8 11v.5"/></svg>'+
-          mT.noKey+' <a href="https://console.cloud.google.com/google/maps-apis/credentials" target="_blank" rel="noopener" class="map-api-link">'+mT.noKeyLink+'</a>'+
-        '</div>'
-      ) +
     '</div>';
 
   // Store places for filtering
