@@ -9586,41 +9586,56 @@ async function renderMap(data){
   // Build map HTML
   var mapContent = '';
 
+  // ── Always geocode first so OSM is ready immediately ───────────────────────
+  var osmIframe = '';
+  try {
+    var geoRes = await fetch(
+      'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(dest) +
+      '&format=json&limit=1',
+      { headers: { 'Accept-Language': currentLang || 'en' } }
+    );
+    var geoData = await geoRes.json();
+    if(geoData && geoData[0]){
+      var lat  = parseFloat(geoData[0].lat);
+      var lng  = parseFloat(geoData[0].lon);
+      var pad  = 0.06;
+      osmIframe =
+        '<iframe id="osmIframe" ' +
+          'width="100%" height="380" frameborder="0" scrolling="no" ' +
+          'src="https://www.openstreetmap.org/export/embed.html' +
+            '?bbox='+(lng-pad)+','+(lat-pad)+','+(lng+pad)+','+(lat+pad)+
+            '&layer=mapnik&marker='+lat+','+lng+'" ' +
+          'style="border:0;display:block;position:absolute;inset:0;width:100%;height:100%">' +
+        '</iframe>';
+    }
+  } catch(e) { /* Nominatim unreachable — SVG will show */ }
+
   if(MAPS_KEY){
-    // Real Google Maps Embed (if key is configured)
-    var searchQuery = encodeURIComponent(dest);
+    // Render OSM underneath immediately; Google Maps iframe loads on top.
+    // When Google Maps fires its load event we fade it in — if it fails
+    // (billing off, Maps Embed API not enabled, bad key) OSM stays visible.
+    var gSearchQuery = encodeURIComponent(dest);
     mapContent =
-      '<iframe ' +
-        'src="https://www.google.com/maps/embed/v1/search?key='+MAPS_KEY+'&q='+searchQuery+'" ' +
-        'width="100%" height="380" style="border:0;display:block" ' +
-        'allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" ' +
-        'id="mapIframe">' +
-      '</iframe>';
+      '<div style="position:relative;width:100%;height:380px">' +
+        // OSM layer — always visible until Google Maps confirmed working
+        (osmIframe || buildFallbackSVG(dest, allPlaces, typeColors, dayColors)) +
+        // Google Maps on top — starts hidden, fades in on successful load
+        '<iframe id="mapIframe" ' +
+          'src="https://www.google.com/maps/embed/v1/search?key='+MAPS_KEY+'&q='+gSearchQuery+'" ' +
+          'width="100%" height="100%" ' +
+          'style="border:0;position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .6s" ' +
+          'allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" ' +
+          'onload="(function(f){' +
+            // Cross-origin iframes: contentDocument is null on success (good),
+            // accessible on same-origin error page (bad). If null → Google Maps loaded.
+            'try{ var d=f.contentDocument; if(d===null){ f.style.opacity=1; } }' +
+            'catch(e){ f.style.opacity=1; }' +          // SecurityError = cross-origin = success
+          '})(this)">' +
+        '</iframe>' +
+      '</div>';
   } else {
-    // Free OpenStreetMap embed via Nominatim geocoding — no API key needed
-    try {
-      var geoRes = await fetch(
-        'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(dest) +
-        '&format=json&limit=1',
-        { headers: { 'Accept-Language': currentLang || 'en' } }
-      );
-      var geoData = await geoRes.json();
-      if(geoData && geoData[0]){
-        var lat = parseFloat(geoData[0].lat);
-        var lng = parseFloat(geoData[0].lon);
-        var pad = 0.06;
-        mapContent =
-          '<iframe ' +
-            'width="100%" height="380" frameborder="0" scrolling="no" ' +
-            'src="https://www.openstreetmap.org/export/embed.html' +
-              '?bbox='+(lng-pad)+','+(lat-pad)+','+(lng+pad)+','+(lat+pad)+
-              '&layer=mapnik&marker='+lat+','+lng+'" ' +
-            'style="border:0;display:block" id="mapIframe">' +
-          '</iframe>';
-      }
-    } catch(e) { /* fall through to SVG */ }
-    // Fallback: styled SVG if geocoding fails
-    if(!mapContent) mapContent = buildFallbackSVG(dest, allPlaces, typeColors, dayColors);
+    // No Google Maps key — OSM only
+    mapContent = osmIframe || buildFallbackSVG(dest, allPlaces, typeColors, dayColors);
   }
 
   el.innerHTML =
