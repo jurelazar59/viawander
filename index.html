@@ -811,9 +811,9 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   .f-bot{flex-direction:column;gap:.3rem;font-size:.65rem}
 
   /* ── QUIZ ── */
-  .qbar{padding:.9rem 1.25rem;gap:1rem}
+  .qbar{padding:.9rem 1.25rem;gap:.8rem}
   .qbar-logo{font-size:1.3rem}
-  .qprog-lbl{font-size:.58rem}
+  .qprog-lbl{font-size:.58rem;max-width:140px}
   .qstage{padding:2rem 1.25rem}
   .qtitle{font-size:1.6rem;margin-bottom:.35rem}
   .qhint{font-size:.9rem;margin-bottom:1.8rem}
@@ -2489,58 +2489,71 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 /* ══════════════════════════════════════
    1. QUIZ PROGRESS BAR — enhanced
 ══════════════════════════════════════ */
-.qprog { flex: 1 }
+.qprog { flex: 1; min-width: 0 }
 .qprog-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 .qprog-lbl {
   font-family: var(--ui);
-  font-size: .62rem;
+  font-size: .65rem;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--ink3);
+  color: var(--ink2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
 }
 .qprog-pct {
   font-family: var(--ui);
-  font-size: .6rem;
+  font-size: .62rem;
   font-weight: 700;
   color: var(--burg);
-  letter-spacing: .05em;
+  letter-spacing: .04em;
+  flex-shrink: 0;
+  margin-left: 10px;
 }
 .qprog-track {
-  height: 4px;
+  height: 5px;
   background: var(--cr3);
   border-radius: 100px;
   overflow: hidden;
 }
 .qprog-fill {
-  height: 4px;
+  height: 5px;
   background: linear-gradient(to right, var(--burg), var(--gold));
   border-radius: 100px;
   transition: width .5s cubic-bezier(.4,0,.2,1);
 }
-/* Step dots */
+/* Step dots — 6 meaningful steps */
 .qprog-dots {
   display: flex;
-  gap: 4px;
-  margin-top: 6px;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
 }
 .qprog-dot {
-  width: 6px; height: 6px;
+  width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--cr3);
-  transition: all .3s;
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+  flex-shrink: 0;
 }
-.qprog-dot.done { background: var(--burg); }
+.qprog-dot.done {
+  background: var(--burg);
+  opacity: .55;
+}
 .qprog-dot.current {
   background: var(--burg);
-  box-shadow: 0 0 0 2px rgba(107,39,55,.2);
-  transform: scale(1.3);
+  box-shadow: 0 0 0 3px rgba(107,39,55,.18);
+  transform: scale(1.25);
 }
+/* Hide dots on very small screens — bar + counter is enough */
+@media(max-width:480px) { .qprog-dots { display: none; } }
 
 /* ══════════════════════════════════════
    2. BUDGET TOGGLE — mobile sticky at top of itin
@@ -5232,10 +5245,10 @@ select.budget-select:focus,
     <div class="qbar-logo" onclick="showPg('pg-land')" style="cursor:pointer">via<sup>™</sup></div>
     <div class="qprog">
       <div class="qprog-top">
-        <div class="qprog-lbl" id="qLbl">Step 1 of 6</div>
-        <div class="qprog-pct" id="qPct">16%</div>
+        <div class="qprog-lbl" id="qLbl"></div>
+        <div class="qprog-pct" id="qPct">1 ⁄ 6</div>
       </div>
-      <div class="qprog-track"><div class="qprog-fill" id="qFill" style="width:16%"></div></div>
+      <div class="qprog-track"><div class="qprog-fill" id="qFill" style="width:0%"></div></div>
       <div class="qprog-dots" id="qDots"></div>
     </div>
     <button class="qback" id="qBackBtn" onclick="prevQ()" data-t="q_back">← Back</button>
@@ -5776,21 +5789,36 @@ function updateQ(){
     const greetEl = document.getElementById('qs8AlreadySignedIn');
     if(greetEl) greetEl.remove();
   }
-  // Build step dots
+  // ── Visual progress: 6 meaningful steps (internal steps 7–8 are "finishing" steps) ──
+  // Step 1=Destination, 2=Dates, 3=Group, 4=Style, 5=Budget, 6=Pace
+  // Steps 7 (co-planners) and 8 (details) stay pinned at step 6 visually
+  const STEP_EYE_KEYS = ['q1_eye','q2_eye','q3_eye','q4_eye','q5_eye','pace_eye'];
+  const VIS_TOTAL = 6;
+  const visStep   = Math.min(S.step, VIS_TOTAL);
+  const pct       = (visStep / VIS_TOTAL) * 100;
+
+  // Fill bar to visual step position
+  document.getElementById('qFill').style.width = pct + '%';
+
+  // Counter: "1 / 6" (not percentage)
+  const pctEl = document.getElementById('qPct');
+  if(pctEl) pctEl.textContent = visStep + ' ⁄ ' + VIS_TOTAL;
+
+  // Step label: current step's context name, or "Almost there" for finishing steps
+  const eyeKey   = STEP_EYE_KEYS[visStep - 1];
+  const stepName = (S.step > VIS_TOTAL)
+    ? (t('q6_eye') || 'Almost there')
+    : (t(eyeKey)   || ((t('step_label') || 'Step') + ' ' + visStep));
+  document.getElementById('qLbl').textContent = stepName;
+
+  // Dots: always exactly 6 (not 8 internal steps)
   const dotsEl = document.getElementById('qDots');
   if(dotsEl){
-    dotsEl.innerHTML = Array.from({length:S.total},(_,i)=>{
-      const cls = i+1 < S.step ? 'done' : i+1 === S.step ? 'current' : '';
-      return '<div class="qprog-dot'+' '+cls+'"></div>';
+    dotsEl.innerHTML = Array.from({length:VIS_TOTAL},(_,i)=>{
+      const cls = i+1 < visStep ? 'done' : i+1 === visStep ? 'current' : '';
+      return '<div class="qprog-dot' + (cls ? ' '+cls : '') + '"></div>';
     }).join('');
   }
-  // Update % label
-  const progPct = Math.round((S.step/S.total)*100);
-  const pctEl = document.getElementById('qPct');
-  if(pctEl) pctEl.textContent = progPct+'%';
-  const pct = (S.step/S.total)*100;
-  document.getElementById('qFill').style.width = pct+'%';
-  document.getElementById('qLbl').textContent = `${t('step_label')||'Step'} ${S.step} / ${S.total}`;
   document.getElementById('qBackBtn').classList.toggle('vis', S.step > 1);
   document.querySelectorAll('.qstep').forEach(e=>e.classList.remove('on'));
   const qStep = (S.step===8?'qs8':'qs'+S.step); const sEl = document.getElementById(qStep); if(sEl) sEl.classList.add('on');
