@@ -1,4 +1,4 @@
-// Creates a Stripe Checkout Session for the Via Plus one-time payment (€7).
+// Creates a Stripe Checkout Session for the Via Plus one-time payment (€9).
 // Returns { url } — the frontend redirects the browser there.
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end('Method Not Allowed');
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   params.append('payment_method_types[]',                           'card');
   params.append('customer_email',                                    email);
   params.append('line_items[0][price_data][currency]',              'eur');
-  params.append('line_items[0][price_data][unit_amount]',           '700');   // €7.00
+  params.append('line_items[0][price_data][unit_amount]',           '900');   // €9.00
   params.append('line_items[0][price_data][product_data][name]',   'Via Plus');
   params.append('line_items[0][price_data][product_data][description]',
     'Unlimited saves · PDF export · Priority generation — pay once, keep forever.');

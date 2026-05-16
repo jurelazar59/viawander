@@ -6527,6 +6527,7 @@ function setChunkLoadLabel(fromDay, toDay){
 
 /* ══ SUBMIT ══ */
 async function doSubmit(){
+  if(!checkPlusGenLimit()) return;
   currentTier = S.budget || 'mid';
   const nights = (S.dateFrom&&S.dateTo) ? Math.max(1,Math.round((new Date(S.dateTo)-new Date(S.dateFrom))/86400000)) : 4;
   const totalDays = Math.min(nights, 14);
@@ -6601,6 +6602,30 @@ function fmtDate(s){ if(!s)return''; const d=new Date(s+'T12:00:00'); const loca
 function parseP(s){ return parseInt((s||'0').replace(/[^0-9]/g,''))||0; }
 function esc(s){ return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"'); }
 
+/* ══ PLUS GENERATION LIMIT (silent — no counter shown in UI) ══ */
+const PLUS_GEN_LIMIT = 15;
+function _plusGenKey(){ return 'via_plus_gen_' + (currentUser && currentUser.id ? currentUser.id : 'anon'); }
+function getPlusGenCount(){ return parseInt(localStorage.getItem(_plusGenKey()) || '0', 10); }
+function incrementPlusGenCount(){ localStorage.setItem(_plusGenKey(), String(getPlusGenCount() + 1)); }
+function checkPlusGenLimit(){
+  const isPlus = currentUser && currentUser.plan === 'plus';
+  if(!isPlus) return true; // free users are not affected by this cap
+  if(getPlusGenCount() < PLUS_GEN_LIMIT) return true;
+  // Limit reached — show a short message and prompt to contact support
+  const limitMsg = {
+    en:'You\'ve reached your plan\'s generation limit. Contact us at hello@viawander.co to continue.',
+    sl:'Dosegel/a si omejitev ustvarjanja. Za nadaljevanje nas kontaktiraj na hello@viawander.co.',
+    de:'Du hast dein Generierungslimit erreicht. Kontaktiere uns unter hello@viawander.co.',
+    it:'Hai raggiunto il limite di generazione. Contattaci a hello@viawander.co.',
+    fr:'Vous avez atteint votre limite de génération. Contactez-nous à hello@viawander.co.',
+    hr:'Dostigao/la si limit generiranja. Kontaktiraj nas na hello@viawander.co.',
+    es:'Has alcanzado tu límite de generación. Contáctanos en hello@viawander.co.',
+    sr:'Dostigao/la si limit generisanja. Kontaktiraj nas na hello@viawander.co.',
+  };
+  showToast(limitMsg[currentLang] || limitMsg.en);
+  return false;
+}
+
 /* ══ RENDER ══ */
 function renderItin(data){
   // Guard — if critical elements are missing, throw a clear error
@@ -6615,6 +6640,9 @@ function renderItin(data){
       .filter(function(id){ return !document.getElementById(id); });
     throw new Error('Missing DOM elements: ' + missing.join(', ') + '. Is #pg-itin in the HTML?');
   }
+
+  // Track generation count for Plus users (silent limit)
+  if(!data._isFallback && currentUser && currentUser.plan === 'plus') incrementPlusGenCount();
 
   heroImg.src = gHero();
   kickerEl.textContent = (S.name ? S.name + t('itin_kicker') : '') + (data.destination_display||S.dest);
@@ -7960,6 +7988,7 @@ function toggleMastMore(e){ e.stopPropagation(); document.getElementById('mastMo
 function closeMastMore(){ const m=document.getElementById('mastMoreMenu'); if(m) m.classList.remove('open'); }
 document.addEventListener('click', closeMastMore);
 async function regenItin(){
+  if(!checkPlusGenLimit()) return;
   // Confirm before discarding the current itinerary
   const msg = t('regen_confirm') || 'Regenerate this itinerary? Your current plan will be replaced.';
   if(!window.confirm(msg)) return;
@@ -9072,7 +9101,7 @@ function renderProfilePage(){
             '</div>' +
           '</div>' +
           '<div class="pcc-right">' +
-            '<div class="pcc-price">€7</div>' +
+            '<div class="pcc-price">€9</div>' +
             '<div class="pcc-price-sub">'+t('pcc_price_sub')+'</div>' +
             '<button class="btn-pcc-upgrade" onclick="openUpgradeModal()">'+t('pcc_cta')+'</button>' +
           '</div>' +
@@ -9152,7 +9181,7 @@ function renderProfilePage(){
       '<div class="locked-icon">+</div>' +
       '<div class="locked-title">'+t('locked_title')+'</div>' +
       '<div class="locked-sub">'+t('locked_sub')+'</div>' +
-      '<div class="locked-price">€7 →</div></div>');
+      '<div class="locked-price">€9 →</div></div>');
   }
   grid.innerHTML = cardsHtml.join('');
 }
@@ -9586,7 +9615,7 @@ function packTeaserText(shown, total){
   return (tmpl[currentLang]||tmpl.en).replace('${shown}',shown).replace('${total}',total);
 }
 function packUnlockText(){
-  const t = {en:'Unlock all — €7 →',sl:'Odkleni vse — 7 € →',de:'Alles freischalten — 7 € →',it:'Sblocca tutto — 7 € →',fr:'Tout débloquer — 7 € →',hr:'Otključaj sve — 7 € →',es:'Desbloquear todo — 7 € →'};
+  const t = {en:'Unlock all — €9 →',sl:'Odkleni vse — 9 € →',de:'Alles freischalten — 9 € →',it:'Sblocca tutto — 9 € →',fr:'Tout débloquer — 9 € →',hr:'Otključaj sve — 9 € →',es:'Desbloquear todo — 9 € →'};
   return t[currentLang]||t.en;
 }
 function inferSeason(dateStr){
@@ -9663,28 +9692,28 @@ async function renderMap(data){
     location.hostname === 'localhost' || location.search.includes('maptest=1');
 
   const mapT = {
-    en:{title:'Map view is Via Plus',sub:'See all recommendations on a real interactive map.',price:'€7 once, yours forever',btn:'Unlock Via Plus →',
+    en:{title:'Map view is Via Plus',sub:'See all recommendations on a real interactive map.',price:'€9 once, yours forever',btn:'Unlock Via Plus →',
         lunch:'Lunch',dinner:'Dinner',activity:'Activity',stay:'Stay',allDays:'All days',
         noKey:'Add your Google Maps API key to see the live map.',noKeyLink:'Get a free key →'},
-    sl:{title:'Pogled na zemljevidu je Via Plus',sub:'Vsa priporočila na interaktivnem zemljevidu.',price:'7 € enkrat, za vedno',btn:'Odkleni Via Plus →',
+    sl:{title:'Pogled na zemljevidu je Via Plus',sub:'Vsa priporočila na interaktivnem zemljevidu.',price:'9 € enkrat, za vedno',btn:'Odkleni Via Plus →',
         lunch:'Kosilo',dinner:'Večerja',activity:'Aktivnost',stay:'Nastanitev',allDays:'Vsi dnevi',
         noKey:'Dodaj Google Maps API ključ za živi zemljevid.',noKeyLink:'Pridobi brezplačen ključ →'},
-    de:{title:'Kartenansicht ist Via Plus',sub:'Alle Empfehlungen auf einer echten Karte.',price:'7 € einmalig',btn:'Via Plus freischalten →',
+    de:{title:'Kartenansicht ist Via Plus',sub:'Alle Empfehlungen auf einer echten Karte.',price:'9 € einmalig',btn:'Via Plus freischalten →',
         lunch:'Mittagessen',dinner:'Abendessen',activity:'Aktivität',stay:'Unterkunft',allDays:'Alle Tage',
         noKey:'Google Maps API-Schlüssel hinzufügen für die Live-Karte.',noKeyLink:'Kostenlosen Schlüssel holen →'},
-    it:{title:'La mappa è Via Plus',sub:'Tutti i consigli su una vera mappa interattiva.',price:'€7 una volta',btn:'Sblocca Via Plus →',
+    it:{title:'La mappa è Via Plus',sub:'Tutti i consigli su una vera mappa interattiva.',price:'€9 una volta',btn:'Sblocca Via Plus →',
         lunch:'Pranzo',dinner:'Cena',activity:'Attività',stay:'Alloggio',allDays:'Tutti i giorni',
         noKey:'Aggiungi la chiave API di Google Maps per la mappa live.',noKeyLink:'Ottieni chiave gratuita →'},
-    fr:{title:'La vue carte est Via Plus',sub:'Toutes vos recommandations sur une vraie carte.',price:'7 € une fois',btn:'Débloquer Via Plus →',
+    fr:{title:'La vue carte est Via Plus',sub:'Toutes vos recommandations sur une vraie carte.',price:'9 € une fois',btn:'Débloquer Via Plus →',
         lunch:'Déjeuner',dinner:'Dîner',activity:'Activité',stay:'Hébergement',allDays:'Tous les jours',
         noKey:'Ajoutez votre clé API Google Maps pour la carte en direct.',noKeyLink:'Obtenir une clé gratuite →'},
-    hr:{title:'Prikaz karte je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj karti.',price:'7 € jednom',btn:'Otključaj Via Plus →',
+    hr:{title:'Prikaz karte je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj karti.',price:'9 € jednom',btn:'Otključaj Via Plus →',
         lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smještaj',allDays:'Svi dani',
         noKey:'Dodaj Google Maps API ključ za live kartu.',noKeyLink:'Uzmi besplatni ključ →'},
-    es:{title:'La vista de mapa es Via Plus',sub:'Todas las recomendaciones en un mapa real.',price:'7 € una vez',btn:'Desbloquear Via Plus →',
+    es:{title:'La vista de mapa es Via Plus',sub:'Todas las recomendaciones en un mapa real.',price:'9 € una vez',btn:'Desbloquear Via Plus →',
         lunch:'Almuerzo',dinner:'Cena',activity:'Actividad',stay:'Alojamiento',allDays:'Todos los días',
         noKey:'Añade tu clave de API de Google Maps para ver el mapa en vivo.',noKeyLink:'Obtener clave gratuita →'},
-    sr:{title:'Prikaz mape je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj mapi.',price:'7 € jednom, tvoje zauvek',btn:'Aktiviraj Via Plus →',
+    sr:{title:'Prikaz mape je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj mapi.',price:'9 € jednom, tvoje zauvek',btn:'Aktiviraj Via Plus →',
         lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smeštaj',allDays:'Svi dani',
         noKey:'Dodaj Google Maps API ključ za live mapu.',noKeyLink:'Uzmi besplatni ključ →'},
   };
@@ -10778,7 +10807,7 @@ const authStrings = {
     regFooter:'Already have an account?', regFooterLink:'Sign in',
     regError:'This email is already registered.',
     regValidation:'Please fill all fields. Password must be at least 8 characters.',
-    regBenefits:['First itinerary saved free, always','Access your plans on any device','PDF export and price alerts included','Unlimited saves from €7'],
+    regBenefits:['First itinerary saved free, always','Access your plans on any device','PDF export and price alerts included','Unlimited saves from €9'],
     divider:'your details',
   },
   sl:{
@@ -12182,7 +12211,7 @@ function swSaveItin(){
         <li>First itinerary saved free, always</li>
         <li>Access your plans on any device</li>
         <li>PDF export and price alerts included</li>
-        <li>Unlimited saves from €7</li>
+        <li>Unlimited saves from €9</li>
       </ul>
 
       <div class="auth-divider">your details</div>
@@ -12240,7 +12269,7 @@ function swSaveItin(){
       <div class="upgrade-title" id="upgradeTitleEl">Save every trip you plan.</div>
       <div class="upgrade-sub">Your first itinerary is always free. Everything else for less than one restaurant meal.</div>
       <div class="upgrade-price-row">
-        <div class="upgrade-price">€7</div>
+        <div class="upgrade-price">€9</div>
         <div class="upgrade-price-sub" data-t="upgrade_price_sub">one-time payment · unlimited saves, forever</div>
       </div>
     </div>
@@ -12258,7 +12287,7 @@ function swSaveItin(){
     </div>
 
     <div class="upgrade-cta-wrap">
-      <button class="btn-upgrade" data-t="upgrade_btn_default" onclick="doUpgrade()">Get Via Plus · €7 →</button>
+      <button class="btn-upgrade" data-t="upgrade_btn_default" onclick="doUpgrade()">Get Via Plus · €9 →</button>
       <div class="btn-upgrade-secondary" data-t="upgrade_not_now" onclick="closeUpgradeModal()">Not now</div>
       <div class="upgrade-free-note" data-t="upgrade_secure">Secure payment · No subscription · Pay once, keep forever</div>
     </div>
@@ -12320,7 +12349,7 @@ function swSaveItin(){
       <div class="dash-upgrade-cta" id="dashUpgradeCta" style="display:none">
         <div class="duc-eye">Via Plus</div>
         <div class="duc-title" data-t="duc_title">Save unlimited trips.</div>
-        <div class="duc-price">€7</div>
+        <div class="duc-price">€9</div>
         <div class="duc-sub" data-t="duc_sub">Pay once. Keep your plans forever.</div>
         <button class="duc-btn" data-t="duc_btn" onclick="openUpgradeModal()">Unlock Via Plus →</button>
       </div>
@@ -12407,7 +12436,7 @@ function swSaveItin(){
               </div>
               <div class="settings-row" id="settingsUpgradeRow" style="display:none">
                 <span class="settings-label" data-t="settings_upgrade_label">Unlock unlimited trips, PDFs and alerts</span>
-                <button class="btn-pcc-upgrade" data-t="settings_upgrade_btn" onclick="openUpgradeModal()" style="font-size:.65rem;padding:7px 14px">Upgrade — €7 →</button>
+                <button class="btn-pcc-upgrade" data-t="settings_upgrade_btn" onclick="openUpgradeModal()" style="font-size:.65rem;padding:7px 14px">Upgrade — €9 →</button>
               </div>
             </div>
           </div>
