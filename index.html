@@ -584,6 +584,7 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 .mast-btn.gold:hover{background:var(--gold);color:var(--ink)}
 .mast-btn.primary{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:700}
 .mast-btn.primary:hover{background:#d4992f;border-color:#d4992f;color:var(--ink)}
+.mast-btn.regen-plus-gate::after{content:'✦';font-size:.55rem;vertical-align:super;margin-left:.3em;opacity:.7}
 .mast-btn.more-btn{padding:.5rem .85rem;letter-spacing:0;font-size:.85rem;color:rgba(242,235,217,.45)}
 .mast-btn.more-btn:hover{color:var(--cr);border-color:rgba(242,235,217,.35)}
 .mast-more{position:relative}
@@ -5553,7 +5554,7 @@ select.budget-select:focus,
             <button class="mast-btn save-itin-btn" id="saveItinBtn" onclick="saveItinerary()">♡ Save</button>
             <div class="mast-sep"></div>
             <button class="mast-btn" onclick="shareItin()" data-t="itin_share">Share →</button>
-            <button class="mast-btn primary" onclick="regenItin()" data-t="itin_regen">Regenerate ↺</button>
+            <button class="mast-btn primary" id="regenBtn" onclick="regenItin()" data-t="itin_regen">Regenerate ↺</button>
             <div class="mast-more">
               <button class="mast-btn more-btn" onclick="toggleMastMore(event)" aria-label="More actions">⋯</button>
               <div class="mast-more-menu" id="mastMoreMenu">
@@ -7988,6 +7989,8 @@ function toggleMastMore(e){ e.stopPropagation(); document.getElementById('mastMo
 function closeMastMore(){ const m=document.getElementById('mastMoreMenu'); if(m) m.classList.remove('open'); }
 document.addEventListener('click', closeMastMore);
 async function regenItin(){
+  // Regeneration is a Plus-only feature
+  if(!(currentUser && currentUser.plan === 'plus')){ openUpgradeModal(); return; }
   if(!checkPlusGenLimit()) return;
   // Confirm before discarding the current itinerary
   const msg = t('regen_confirm') || 'Regenerate this itinerary? Your current plan will be replaced.';
@@ -8943,6 +8946,13 @@ function updateAuthUI(){
     if(heroLabel) heroLabel.textContent = (authStrings[currentLang]||authStrings.en).tabSignIn;
     if(heroAvatar) heroAvatar.style.display='none';
     if(heroBtn) heroBtn.classList.remove('signed-in');
+  }
+
+  // Regenerate button: show Plus badge for free users so they know it's gated
+  const regenBtn = document.getElementById('regenBtn');
+  if(regenBtn){
+    const isPlus = currentUser && currentUser.plan === 'plus';
+    regenBtn.classList.toggle('regen-plus-gate', !isPlus);
   }
 }
 
