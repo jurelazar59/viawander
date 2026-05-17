@@ -1469,25 +1469,6 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
   letter-spacing: -.025em;
   line-height: 1;
 }
-.profile-plan-badge {
-  font-family: var(--ui);
-  font-size: .58rem;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 100px;
-  vertical-align: middle;
-}
-.plan-free {
-  background: rgba(28,21,16,.06);
-  color: var(--ink3);
-  border: 1px solid var(--cr3);
-}
-.plan-plus {
-  background: var(--gold);
-  color: var(--ink);
-}
 .profile-email {
   font-family: var(--ui);
   font-size: .75rem;
@@ -1684,229 +1665,6 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 }
 .btn-pcc-upgrade:active { transform: translateY(0); }
 .btn-pcc-upgrade:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-
-/* ── Saved trip cards ───────────────────────────────────── */
-.saved-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-.saved-card {
-  background: var(--parch);
-  border: 1px solid var(--cr3);
-  border-radius: 6px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all .22s cubic-bezier(.4,0,.2,1);
-  position: relative;
-}
-.saved-card:hover {
-  box-shadow: 0 8px 32px rgba(28,21,16,.12);
-  transform: translateY(-2px);
-  border-color: rgba(28,21,16,.18);
-}
-.saved-card:active { transform: translateY(0); }
-.saved-card:focus-within {
-  outline: 2px solid var(--burg);
-  outline-offset: 2px;
-}
-.saved-card-img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  display: block;
-  filter: saturate(.85);
-  transition: filter .22s, transform .4s;
-}
-.saved-card:hover .saved-card-img {
-  filter: saturate(1);
-  transform: scale(1.02);
-}
-.saved-card-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 140px;
-  background: linear-gradient(to bottom, transparent 50%, rgba(28,21,16,.45));
-  pointer-events: none;
-}
-.saved-card-body { padding: 16px; }
-.sc-title {
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 4px;
-  line-height: 1.2;
-}
-.sc-meta {
-  font-family: var(--ui);
-  font-size: .62rem;
-  letter-spacing: .04em;
-  color: var(--ink4);
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-.sc-chips {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-.sc-chip {
-  font-family: var(--ui);
-  font-size: .58rem;
-  font-weight: 500;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  background: var(--cr2);
-  border: 1px solid var(--cr3);
-  padding: 2px 8px;
-  border-radius: 100px;
-}
-.sc-actions {
-  display: flex;
-  gap: 6px;
-  padding-top: 12px;
-  border-top: 1px solid var(--cr3);
-}
-.sc-btn {
-  font-family: var(--ui);
-  font-size: .62rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: 4px;
-  border: 1.5px solid var(--cr3);
-  color: var(--ink3);
-  background: transparent;
-  cursor: pointer;
-  transition: all .18s;
-  line-height: 1;
-  height: 30px;
-  display: inline-flex;
-  align-items: center;
-}
-.sc-btn:hover { border-color: var(--ink3); color: var(--ink); background: var(--cr2); }
-.sc-btn:active { transform: scale(.96); }
-.sc-btn:focus-visible { outline: 2px solid var(--burg); outline-offset: 2px; }
-.sc-btn.primary { border-color: var(--forest); color: var(--forest); }
-.sc-btn.primary:hover { background: var(--forest); color: var(--parch); border-color: var(--forest); }
-.sc-btn.danger:hover { border-color: #A32D2D; color: #A32D2D; }
-
-/* Locked card */
-.locked-card {
-  border: 1.5px dashed var(--cr3);
-  background: rgba(242,235,217,.4);
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
-  min-height: 220px;
-  cursor: pointer;
-  transition: all .22s;
-  text-align: center;
-}
-.locked-card:hover {
-  border-color: var(--gold);
-  background: rgba(196,137,42,.05);
-  box-shadow: 0 4px 20px rgba(196,137,42,.1);
-}
-.locked-icon {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--cr3);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--ink3);
-  margin-bottom: 12px;
-  transition: all .22s;
-}
-.locked-card:hover .locked-icon {
-  background: var(--gold);
-  color: var(--ink);
-}
-.locked-title {
-  font-family: var(--serif);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 6px;
-}
-.locked-sub {
-  font-family: var(--body);
-  font-size: .83rem;
-  color: var(--ink3);
-  font-style: italic;
-  line-height: 1.55;
-  margin-bottom: 12px;
-}
-.locked-price {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-/* Empty state */
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 80px 40px;
-  border: 1px dashed var(--cr3);
-  border-radius: 6px;
-  background: rgba(242,235,217,.4);
-}
-.es-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  display: block;
-  opacity: .35;
-}
-.es-title {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-.es-sub {
-  font-family: var(--body);
-  font-size: .9rem;
-  color: var(--ink3);
-  font-style: italic;
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-.btn-plan-now {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--ink);
-  color: var(--parch);
-  font-family: var(--ui);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all .2s;
-}
-.btn-plan-now:hover {
-  background: var(--burg);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(107,39,55,.25);
-}
-.btn-plan-now:active { transform: translateY(0); }
-.btn-plan-now:focus-visible { outline: 2px solid var(--burg); outline-offset: 3px; }
 
 /* ── Mobile ─────────────────────────────────────────────── */
 @media(max-width:900px) {
@@ -3160,6 +2918,14 @@ footer{background:var(--ink2);padding:4rem 3.5rem 2rem;display:grid;grid-templat
 /* ══ DAY CHAT DRAWER ══ */
 .day-chat-btn{width:100%;margin-top:18px;padding:.7rem 1.2rem;background:var(--ink);color:var(--cr);border:none;border-radius:3px;font-family:var(--ui);font-size:.8rem;font-weight:700;letter-spacing:.06em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .15s}
 .day-chat-btn:hover{background:var(--burg)}
+.day-copy-btn{font-family:var(--ui);font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);background:none;border:1px solid var(--cr3);border-radius:2px;padding:.28rem .65rem;cursor:pointer;transition:all .15s;margin-top:.4rem}
+.day-copy-btn:hover{color:var(--ink2);border-color:var(--ink3)}
+.itin-action-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--ink);padding:.6rem 1rem env(safe-area-inset-bottom,.4rem);gap:.5rem;justify-content:space-around;align-items:center;box-shadow:0 -4px 24px rgba(28,21,16,.18)}
+.iab-btn{display:flex;flex-direction:column;align-items:center;gap:.2rem;font-family:var(--ui);font-size:.5rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(242,235,217,.65);background:none;border:none;cursor:pointer;padding:.3rem .5rem;transition:color .15s;min-width:52px}
+.iab-btn:hover,.iab-btn:active{color:var(--parch)}
+.iab-btn-icon{font-size:1.1rem;line-height:1}
+@media(max-width:759px){.itin-action-bar{display:flex}}
+@media(min-width:760px){.itin-action-bar{display:none!important}}
 .day-chat-overlay{position:fixed;inset:0;background:rgba(28,21,16,.4);z-index:800;display:none;backdrop-filter:blur(2px)}
 .day-chat-overlay.open{display:block}
 .day-chat-drawer{position:fixed;top:0;right:0;bottom:0;width:360px;background:var(--parch);z-index:801;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-6px 0 40px rgba(28,21,16,.18)}
@@ -5340,14 +5106,40 @@ select.budget-select:focus,
     </div>
 
     <div class="qstep" id="qs5">
-      <div class="qeye" data-t="q5_eye">Your budget</div>
-      <h2 class="qtitle" data-t="q5_title">What's your daily budget per person?</h2>
-      <p class="qhint" data-t="q5_hint">Default for all recommendations. Switch any time.</p>
+      <div class="qeye" data-t="q5_eye">Your travel style</div>
+      <h2 class="qtitle">Budget &amp; pace</h2>
+      <p class="qhint" data-t="q5_hint">Both can be adjusted any time from the itinerary.</p>
+      <div style="font-family:var(--ui);font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);margin-bottom:.6rem">Daily budget</div>
       <div class="pill-row">
         <div class="qpill" data-v="budget" onclick="pickPill(this,'budget')" data-t="budget_back">Backpacker · under €50/day</div>
-        <div class="qpill" data-v="mid" onclick="pickPill(this,'budget')" data-t="budget_mid">Mid-range · €50–150/day</div>
+        <div class="qpill on" data-v="mid" onclick="pickPill(this,'budget')" data-t="budget_mid">Mid-range · €50–150/day</div>
         <div class="qpill" data-v="comfortable" onclick="pickPill(this,'budget')" data-t="budget_comf">Comfortable · €150–300/day</div>
         <div class="qpill" data-v="luxury" onclick="pickPill(this,'budget')" data-t="budget_lux">Luxury · €300+/day</div>
+      </div>
+      <div style="font-family:var(--ui);font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);margin:1.1rem 0 .6rem">Pace</div>
+      <div class="pace-grid">
+        <div class="pace-card" data-v="relaxed" onclick="pickPace(this)">
+          <div class="pace-name" data-t="pace_relaxed">Relaxed</div>
+          <div class="pace-count" data-t="pace_relaxed_count">2–3 things / day</div>
+          <div class="pace-desc" data-t="pace_relaxed_desc">Linger over lunch. Wander without a plan. Actually rest.</div>
+        </div>
+        <div class="pace-card on" data-v="balanced" onclick="pickPace(this)">
+          <div class="pace-name" data-t="pace_balanced">Balanced</div>
+          <div class="pace-count" data-t="pace_balanced_count">3–4 things / day</div>
+          <div class="pace-desc" data-t="pace_balanced_desc">See the highlights and still have time to breathe. The sweet spot.</div>
+        </div>
+        <div class="pace-card" data-v="full" onclick="pickPace(this)">
+          <div class="pace-name" data-t="pace_full">Full</div>
+          <div class="pace-count" data-t="pace_full_count">5+ things / day</div>
+          <div class="pace-desc" data-t="pace_full_desc">Maximise every hour. You can sleep when you get home.</div>
+        </div>
+      </div>
+      <div class="free-day-toggle" id="freeDayToggle" style="display:none">
+        <div>
+          <div class="fdt-label" data-t="fdt_label">Leave one day unplanned</div>
+          <div class="fdt-desc" data-t="fdt_desc">No schedule, nothing booked. Just a few loose suggestions. The best day often comes from getting lost on purpose.</div>
+        </div>
+        <button class="fdt-switch" id="freeDaySwitch" onclick="toggleFreeDay()" aria-label="Toggle free day" aria-pressed="false"></button>
       </div>
     </div>
 
@@ -5553,7 +5345,7 @@ select.budget-select:focus,
           <div class="mast-acts">
             <button class="mast-btn save-itin-btn" id="saveItinBtn" onclick="saveItinerary()">♡ Save</button>
             <div class="mast-sep"></div>
-            <button class="mast-btn" onclick="shareItin()" data-t="itin_share">Share →</button>
+            <button class="mast-btn" id="mastShareBtn" onclick="openCollabModal()" data-t="itin_share">Share →</button>
             <button class="mast-btn primary" id="regenBtn" onclick="regenItin()" data-t="itin_regen">Regenerate ↺</button>
             <div class="mast-more">
               <button class="mast-btn more-btn" onclick="toggleMastMore(event)" aria-label="More actions">⋯</button>
@@ -5596,7 +5388,7 @@ select.budget-select:focus,
     <button class="main-tab on" onclick="switchMain('itin-panel',this)" data-t="tab_itin">Itinerary</button>
     <button class="main-tab" onclick="switchMain('stays-panel',this)" data-t="tab_stays">Where to stay</button>
     <button class="main-tab" onclick="switchMain('transport-panel',this)" data-t="tab_transport">Getting there</button>
-    <button class="main-tab" onclick="switchMain('map-panel',this)" id="mapTabBtn">Map</button>
+    <button class="main-tab" onclick="switchMain('map-panel',this)" id="mapTabBtn" data-t="tab_map">Map</button>
     <button class="main-tab" onclick="switchMain('pack-panel',this)" id="packTabBtn" data-t="tab_pack">Packing list</button>
   </div>
 
@@ -5659,6 +5451,14 @@ select.budget-select:focus,
         oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
       <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMsg()">↑</button>
     </div>
+  </div>
+
+  <!-- Mobile floating action bar -->
+  <div class="itin-action-bar" id="itinActionBar" style="display:none">
+    <button class="iab-btn" onclick="saveItinerary()"><span class="iab-btn-icon">♡</span>Save</button>
+    <button class="iab-btn" onclick="openCollabModal()"><span class="iab-btn-icon">↗</span>Share</button>
+    <button class="iab-btn" onclick="exportPDF()"><span class="iab-btn-icon">↓</span>PDF</button>
+    <button class="iab-btn" onclick="openAlertModal()"><span class="iab-btn-icon">🔔</span>Alert</button>
   </div>
 </div>
 
@@ -5770,17 +5570,18 @@ function buildLangBar(){
 /* ══════════════════════════════════════
    APP STATE
 ══════════════════════════════════════ */
-const S = {step:1, total:8, dest:'', dateFrom:'', dateTo:'', comp:'', vibes:[], budget:'mid', pace:'balanced', freeDay:false, coplanners:[], name:'', email:'', notes:''};
+const S = {step:1, total:6, dest:'', dateFrom:'', dateTo:'', comp:'', vibes:[], budget:'mid', pace:'balanced', freeDay:false, coplanners:[], name:'', email:'', notes:''};
 let itinData = null, currentTier = 'mid';
 const userChoices = {};
 
 /* ══ PAGES ══ */
 const pgs = ['pg-land','pg-quiz','pg-load','pg-itin','pg-profile','pg-404','pg-blog'];
-function showPg(id){ pgs.forEach(p=>document.getElementById(p).style.display='none'); document.getElementById(id).style.display='block'; window.scrollTo(0,0); }
+function showPg(id){ pgs.forEach(p=>document.getElementById(p).style.display='none'); document.getElementById(id).style.display='block'; window.scrollTo(0,0); if(id !== 'pg-itin'){ const ab = document.getElementById('itinActionBar'); if(ab) ab.style.display = 'none'; } }
 document.getElementById('pg-land').style.display = 'block';
 
 function goQuiz(){ showPg('pg-quiz'); updateQ(); }
 function startOver(){
+  if(!confirm(t('start_over_confirm') || 'Start over? Your current itinerary will be cleared.')) return;
   Object.assign(S,{step:1,dest:'',dateFrom:'',dateTo:'',comp:'',vibes:[],budget:'mid',pace:'balanced',freeDay:false,coplanners:[],name:'',email:'',notes:''});
   const cpList = document.getElementById('coplannerList'); if(cpList) cpList.innerHTML='';
   document.querySelectorAll('.pace-card').forEach(function(c){c.classList.remove('on')}); const defPace=document.querySelector('.pace-card[data-v="balanced"]'); if(defPace)defPace.classList.add('on');
@@ -5790,13 +5591,14 @@ function startOver(){
   ['customDestInput','uName','uEmail','uNotes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   ['dateFrom','dateTo'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   Object.keys(userChoices).forEach(k=>delete userChoices[k]);
+  const ab = document.getElementById('itinActionBar'); if(ab) ab.style.display = 'none';
   showPg('pg-land');
 }
 
 /* ══ QUIZ ══ */
 function updateQ(){
-  // If signed in, pre-fill and hide name/email on step 8
-  if(S.step === 8 && currentUser){
+  // If signed in, pre-fill and hide name/email on step 6 (final step = qs8)
+  if(S.step === 6 && currentUser){
     const nameInput = document.getElementById('uName');
     const emailInput = document.getElementById('uEmail');
     const nameRow = nameInput && nameInput.closest('.frow');
@@ -5815,7 +5617,7 @@ function updateQ(){
       const detForm = document.querySelector('#qs8 .det-form');
       if(detForm) detForm.insertBefore(greetEl, detForm.firstChild);
     }
-  } else if(S.step === 8 && !currentUser){
+  } else if(S.step === 6 && !currentUser){
     // Reset visibility if not signed in
     const nameInput = document.getElementById('uName');
     const emailInput = document.getElementById('uEmail');
@@ -5827,17 +5629,18 @@ function updateQ(){
   // ── Visual progress: 6 meaningful steps (internal steps 7–8 are "finishing" steps) ──
   // Step 1=Destination, 2=Dates, 3=Group, 4=Style, 5=Budget, 6=Pace
   // Steps 7 (co-planners) and 8 (details) stay pinned at step 6 visually
-  const STEP_EYE_KEYS = ['q1_eye','q2_eye','q3_eye','q4_eye','q5_eye','pace_eye'];
-  const VIS_TOTAL = 6;
+  const STEP_EYE_KEYS = ['q1_eye','q2_eye','q3_eye','q4_eye','q5_eye'];
+  const VIS_TOTAL = 5;
   const visStep   = Math.min(S.step, VIS_TOTAL);
   const pct       = (visStep / VIS_TOTAL) * 100;
 
-  // Fill bar to visual step position
-  document.getElementById('qFill').style.width = pct + '%';
+  // Fill bar — for finishing steps (7+) keep bar at 100% to signal "almost done"
+  const barPct = S.step > VIS_TOTAL ? 100 : pct;
+  document.getElementById('qFill').style.width = barPct + '%';
 
-  // Counter: "1 / 6" (not percentage)
+  // Counter: hide fraction for finishing steps, show "✓" instead
   const pctEl = document.getElementById('qPct');
-  if(pctEl) pctEl.textContent = visStep + ' ⁄ ' + VIS_TOTAL;
+  if(pctEl) pctEl.textContent = S.step > VIS_TOTAL ? '✓' : (visStep + ' ⁄ ' + VIS_TOTAL);
 
   // Step label: current step's context name, or "Almost there" for finishing steps
   const eyeKey   = STEP_EYE_KEYS[visStep - 1];
@@ -5856,10 +5659,10 @@ function updateQ(){
   }
   document.getElementById('qBackBtn').classList.toggle('vis', S.step > 1);
   document.querySelectorAll('.qstep').forEach(e=>e.classList.remove('on'));
-  const qStep = (S.step===8?'qs8':'qs'+S.step); const sEl = document.getElementById(qStep); if(sEl) sEl.classList.add('on');
+  const qStep = S.step === 6 ? 'qs8' : 'qs' + S.step; const sEl = document.getElementById(qStep); if(sEl) sEl.classList.add('on');
   const nb = document.getElementById('qNextBtn'); nb.disabled = !isValid();
   document.getElementById('qNextLbl').textContent = S.step===S.total ? t('q_build') : t('q_continue');
-  if(S.step === 6) _syncFreeDayToggle();
+  if(S.step === 5) _syncFreeDayToggle();
 }
 
 function isValid(){
@@ -5868,10 +5671,8 @@ function isValid(){
     case 2: return !!(S.dateFrom && S.dateTo && new Date(S.dateTo) > new Date(S.dateFrom));
     case 3: return S.comp.length > 0;
     case 4: return S.vibes.length > 0;
-    case 5: return S.budget.length > 0;
-    case 6: return S.pace.length > 0; // pace always has default 'balanced'
-    case 7: return true;              // co-planners optional
-    case 8: {
+    case 5: return S.budget.length > 0 && S.pace.length > 0;
+    case 6: {
       // If signed in — always valid, name/email come from currentUser
       if(currentUser) return true;
       const n = (document.getElementById('uName')||{}).value||'';
@@ -5932,7 +5733,7 @@ function _syncFreeDayToggle(){
 function addCoplanner(){
   const input = document.getElementById('coplannerInput');
   const email = input ? input.value.trim().toLowerCase() : '';
-  if(!email || !email.includes('@')) return;
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return;
   if(S.coplanners.includes(email)) return;
   S.coplanners.push(email);
   input.value = '';
@@ -5965,9 +5766,9 @@ function dateChg(){
   const fb = document.getElementById('dateFb');
   if(S.dateFrom&&S.dateTo){
     const diff=Math.round((new Date(S.dateTo)-new Date(S.dateFrom))/86400000);
-    const nightWord = {en:diff===1?'night':'nights', sl:diff===1?'noč':'noči', de:diff===1?'Nacht':'Nächte', it:diff===1?'notte':'notti'}[currentLang]||'nights';
-    const lovelyWord = {en:'lovely.', sl:'odlično.', de:'wunderbar.', it:'perfetto.'}[currentLang]||'lovely.';
-    const errWord = {en:'Return must be after departure.', sl:'Datum vrnitve mora biti po datumu odhoda.', de:'Rückreise muss nach der Abreise sein.', it:'Il ritorno deve essere dopo la partenza.'}[currentLang]||'Return must be after departure.';
+    const nightWord = diff===1 ? t('date_night_one') : t('date_night_many');
+    const lovelyWord = t('date_lovely');
+    const errWord = t('date_error');
     fb.textContent = diff>0 ? `${diff} ${nightWord} — ${lovelyWord}` : (diff<=0?errWord:'');
     fb.classList.toggle('show', diff>0);
   }
@@ -6147,6 +5948,18 @@ const heroImgs={
   'Bali':'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=80&auto=format&fit=crop',
 };
 const foodImgs=['https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=300&q=70&auto=format&fit=crop','https://images.unsplash.com/photo-1551218808-94e220e084d2?w=300&q=70&auto=format&fit=crop'];
+// Curated pool for "Surprise me" — each entry is a city Claude will plan specifically for.
+// A random entry is drawn once per trip and stored in window._surpriseCity for chunk consistency.
+const SURPRISE_CITIES = [
+  'Porto, Portugal','Ghent, Belgium','Bologna, Italy','Valletta, Malta',
+  'Kotor, Montenegro','Plovdiv, Bulgaria','Tallinn, Estonia','Tbilisi, Georgia',
+  'Trieste, Italy','Funchal, Madeira','Palermo, Sicily','Olomouc, Czech Republic',
+  'Seville, Spain','Matera, Italy','Rijeka, Croatia','Biarritz, France',
+  'Colmar, France','Girona, Spain','Mostar, Bosnia and Herzegovina','Lecce, Italy',
+  'Sibiu, Romania','Nicosia, Cyprus','Braga, Portugal','Chania, Crete',
+  'Skopje, North Macedonia','Zadar, Croatia','Pula, Croatia','Sintra, Portugal',
+  'Noto, Sicily','Aarhus, Denmark'
+];
 // Destination-specific stay image pools — picked by region/city
 const stayImgSets = {
   italy:    ['https://images.unsplash.com/photo-1555992336-03a23c7b20ee?w=400&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=400&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=400&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=75&auto=format&fit=crop','https://images.unsplash.com/photo-1529260830199-42c24126f198?w=400&q=75&auto=format&fit=crop'],
@@ -6188,14 +6001,29 @@ function gHero(){
   }
   return 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=900&q=80&auto=format&fit=crop';
 }
-function gFood(i){ return foodImgs[i%foodImgs.length]; }
+function gFood(idx, cuisine, city){
+  // Try to build a cuisine + city relevant Unsplash search URL.
+  // Falls back to the curated foodImgs array if no context is given.
+  if(cuisine || city){
+    const terms = [];
+    if(cuisine) terms.push(cuisine.split(/[\s,\/]+/)[0].toLowerCase().replace(/[^a-z]/g,''));
+    if(city)    terms.push((city.split(',')[0]||'').toLowerCase().replace(/[^a-z]/g,''));
+    terms.push('restaurant');
+    const q = terms.filter(Boolean).join(',');
+    // sig keeps different slots from getting identical images
+    return 'https://source.unsplash.com/300x210/?' + q + '&sig=' + idx;
+  }
+  return foodImgs[idx%foodImgs.length];
+}
 function gStay(i){ const s=getStaySet(); return s[i%s.length]; }
 
 /* ══ API ══ */
 const VOICE_GUIDE = `EDITORIAL VOICE:
-- Friend giving advice, not a brochure. Max 1-2 SHORT sentences per time block.
-- Specific, concrete. No "vibrant", "stunning", "must-see", "hidden gem".
-- Keep all prose tight — brevity is quality here.`;
+- Write like a sharp travel editor who spent a weekend there last month — not a chatbot, not a brochure.
+- Every sentence must earn its place. 1–2 SHORT sentences per time block, max.
+- Concrete over atmospheric: name the street, the dish, the neighbourhood — never "vibrant area", "stunning views", "must-see", "hidden gem", "bustling", "quaint", or "charming".
+- No filler transitions ("After that, head to…"). Just the next thing, as if continuing mid-conversation.
+- Dry wit and genuine opinion are welcome. Breathless enthusiasm is not.`;
 
 async function fetchItinerary(overrideDays){
   const nights = (S.dateFrom&&S.dateTo) ? Math.max(1,Math.round((new Date(S.dateTo)-new Date(S.dateFrom))/86400000)) : 4;
@@ -6219,9 +6047,15 @@ async function fetchItinerary(overrideDays){
 
   // Localise "Surprise me" label
   const surpriseLabels = ['Surprise me','Preseneti me','Überrasch mich','Sorprendimi','Iznenadi me'];
-  const dest = surpriseLabels.includes(S.dest)
-    ? 'a surprising lesser-known European city matching the traveller profile (reveal it in the title)'
-    : S.dest;
+  let dest;
+  if(surpriseLabels.includes(S.dest)){
+    // fetchItinerary always runs before fetchItineraryChunk — pick fresh here; chunk picks up window._surpriseCity
+    window._surpriseCity = SURPRISE_CITIES[Math.floor(Math.random() * SURPRISE_CITIES.length)];
+    dest = window._surpriseCity + ' (treat this as a delightful reveal — open the title with the city name so it reads as a discovery)';
+  } else {
+    window._surpriseCity = null;
+    dest = S.dest;
+  }
 
   // cacheParams — stable identifiers used as the KV key (no name/dates which vary)
   const cacheParams = {
@@ -6241,9 +6075,17 @@ ${langNote}
 OUTPUT LANGUAGE: ${lang}
 
 EDITORIAL VOICE:
-- Friend giving advice, not a brochure. Max 1-2 SHORT sentences per time block.
-- Specific, concrete. No "vibrant", "stunning", "must-see", "hidden gem".
-- Keep all prose tight — brevity is quality here.
+- Write like a sharp travel editor who spent a weekend there last month — not a chatbot, not a brochure.
+- Every sentence must earn its place. 1–2 SHORT sentences per time block, max.
+- Concrete over atmospheric: name the street, the dish, the neighbourhood — never "vibrant area", "stunning views", "must-see", "hidden gem", "bustling", "quaint", or "charming".
+- No filler transitions ("After that, head to…"). Just the next thing, as if continuing mid-conversation.
+- Dry wit and genuine opinion are welcome. Breathless enthusiasm is not.
+
+INSPIRATION SOURCES for ${dest}:
+- Draw on what the official national/city tourism board for ${dest} actively features and recommends this season.
+- Cross-reference with respected travel journalism: Guardian Travel, Condé Nast Traveler, National Geographic Travel, Lonely Planet, Monocle, Eater, and local food/culture media specific to ${dest}.
+- Recommend places that credible editorial sources with real taste have featured — not just the highest-reviewed on aggregators.
+- Prioritise neighbourhood spots, recently opened gems, and local institutions over tourist-strip staples. Surface the restaurant a local chef would eat at, the museum the guidebook underrates, the bar that doesn't appear on the main strip.
 
 PACE: The traveller chose "\${S.pace||'balanced'}" pace.
 - relaxed: Max 2-3 activities per day. Include intentional downtime — a specific café, a piazza to sit in, time to wander. Meals are events, not logistics.
@@ -6286,8 +6128,8 @@ Return this exact JSON structure:
         "afternoon_to_dinner": "~12 min metro"
       },
       "hidden_gem": {
-        "title": "short evocative name (3–6 words) in ${lang}",
-        "desc": "2 sentences — specific, non-obvious, local. Not a top-10 sight. Something a local would actually recommend. In ${lang}."
+        "title": "3-5 word name",
+        "desc": "One concrete actionable sentence: a specific stall number, a table location, a back door, a bus route, a time of day. Never 'locals love this' or 'off the beaten path'."
       },
       "recommendations": {
         "lunch": {
@@ -6383,7 +6225,7 @@ IMPORTANT — LINKS: In every "link" field, replace "Restaurant name", "Activity
 // ── Continuation call for trips > 7 days ──────────────────────────────────
 // Returns an array of day objects (no wrapper). Claude is told it is generating
 // days (dayOffset+1) through (dayOffset+chunkDays) of an ongoing trip.
-async function fetchItineraryChunk(chunkDays, dayOffset, totalDays){
+async function fetchItineraryChunk(chunkDays, dayOffset, totalDays, continuityCtx){
   const budgetLabel = {budget:'backpacker (under €50/day)',mid:'mid-range (€50–150/day)',comfortable:'comfortable (€150–300/day)',luxury:'luxury (€300+/day)'}[S.budget]||'mid-range';
   const langMap = {
     en:{ name:'English', note:'' },
@@ -6399,7 +6241,10 @@ async function fetchItineraryChunk(chunkDays, dayOffset, totalDays){
   const lang = langCfg.name;
   const langNote = langCfg.note;
   const surpriseLabels = ['Surprise me','Preseneti me','Überrasch mich','Sorprendimi','Iznenadi me'];
-  const dest = surpriseLabels.includes(S.dest) ? 'a surprising lesser-known European city' : S.dest;
+  // Use the same city already chosen in fetchItinerary() for chunk consistency
+  const dest = surpriseLabels.includes(S.dest)
+    ? (window._surpriseCity || SURPRISE_CITIES[Math.floor(Math.random() * SURPRISE_CITIES.length)])
+    : S.dest;
 
   const cacheParams = {
     dest, days: chunkDays, budget: S.budget, vibes: S.vibes,
@@ -6415,7 +6260,7 @@ OUTPUT LANGUAGE: ${lang}
 You are continuing a ${totalDays}-day trip to ${dest}. Generate days ${dayOffset+1} through ${dayOffset+chunkDays} ONLY.
 Traveller: ${S.name||'Guest'}, Group: ${S.comp}, Style: ${S.vibes.join(', ')}, Budget: ${budgetLabel}, Pace: ${S.pace||'balanced'}
 
-BREVITY OVERRIDE: Keep ALL prose to 1 sentence maximum (≤15 words). Restaurant and activity desc: ≤7 words each.
+${continuityCtx ? `\nCONTINUITY: ${continuityCtx}. Day ${dayOffset + 1} should feel like a natural geographic and narrative continuation — same city/area unless the trip calls for a move.\n` : ''}BREVITY OVERRIDE: Keep ALL prose to 1 sentence maximum (≤15 words). Restaurant and activity desc: ≤7 words each.
 PACE — ${S.pace||'balanced'}: ${S.pace==='relaxed'?'Max 2-3 activities per day, intentional downtime.':S.pace==='full'?'5+ things per day, route geographically.':'3-4 activities per day, one morning anchor, one afternoon focus.'}
 
 Return EXACTLY ${chunkDays} day objects as a JSON array:
@@ -6434,8 +6279,8 @@ Return EXACTLY ${chunkDays} day objects as a JSON array:
       "afternoon_to_dinner": "~15 min metro"
     },
     "hidden_gem": {
-      "title": "short name in ${lang}",
-      "desc": "one specific local sentence in ${lang}"
+      "title": "3-5 word name",
+      "desc": "One concrete actionable sentence: a specific stall number, a table location, a back door, a bus route, a time of day. Never 'locals love this' or 'off the beaten path'."
     },
     "recommendations": {
       "lunch": {
@@ -6540,10 +6385,15 @@ async function doSubmit(){
       // ── Phase 1: days 1–7 ──
       setChunkLoadLabel(1, 7);
       const week1 = await fetchItinerary(7);
+      // Pass last-day context for narrative continuity between chunks
+      const lastDay7 = week1.days && week1.days[6];
+      const contCtx = lastDay7
+        ? 'Day 7 ended in: ' + (lastDay7.title || '') + '. Evening: ' + (lastDay7.evening || '').slice(0, 120)
+        : '';
       // ── Phase 2: days 8–totalDays ──
       h.resetProgress(50);
       setChunkLoadLabel(8, totalDays);
-      const extraDays = await fetchItineraryChunk(totalDays - 7, 7, totalDays);
+      const extraDays = await fetchItineraryChunk(totalDays - 7, 7, totalDays, contCtx);
       itinData = week1;
       itinData.days = week1.days.concat(extraDays);
     } else {
@@ -6581,7 +6431,7 @@ async function doSubmit(){
     // Fire-and-forget email — only if we have a real itinerary and a real email
     if(S.email && !itinData._isFallback){
       sendItineraryEmail(itinData)
-        .then(function(){ showToast('✓ Itinerary sent to ' + S.email); })
+        .then(function(){ showToast((t('itin_sent')||'Itinerary sent to {email}').replace('{email}', S.email)); })
         .catch(function(e){ console.warn('[via] email send failed:', e.message); });
     }
   }, 400);
@@ -6599,7 +6449,7 @@ async function sendItineraryEmail(data){
 }
 
 /* ══ HELPERS ══ */
-function fmtDate(s){ if(!s)return''; const d=new Date(s+'T12:00:00'); const locale={en:'en-GB',sl:'sl-SI',de:'de-DE',it:'it-IT',fr:'fr-FR',hr:'hr-HR',es:'es-ES'}[currentLang]||'en-GB'; return d.toLocaleDateString(locale,{day:'numeric',month:'short'}); }
+function fmtDate(s){ if(!s)return''; const d=new Date(s+'T12:00:00'); const locale={en:'en-GB',sl:'sl-SI',de:'de-DE',it:'it-IT',fr:'fr-FR',hr:'hr-HR',es:'es-ES',sr:'sr-Latn-RS'}[currentLang]||'en-GB'; return d.toLocaleDateString(locale,{day:'numeric',month:'short'}); }
 function parseP(s){ return parseInt((s||'0').replace(/[^0-9]/g,''))||0; }
 function esc(s){ return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"'); }
 
@@ -6609,7 +6459,7 @@ function _plusGenKey(){ return 'via_plus_gen_' + (currentUser && currentUser.id 
 function getPlusGenCount(){ return parseInt(localStorage.getItem(_plusGenKey()) || '0', 10); }
 function incrementPlusGenCount(){ localStorage.setItem(_plusGenKey(), String(getPlusGenCount() + 1)); }
 function checkPlusGenLimit(){
-  const isPlus = currentUser && currentUser.plan === 'plus';
+  const isPlus = (currentUser && currentUser.plan === 'plus') || isAdmin();
   if(!isPlus) return true; // free users are not affected by this cap
   if(getPlusGenCount() < PLUS_GEN_LIMIT) return true;
   // Limit reached — show a short message and prompt to contact support
@@ -6647,7 +6497,19 @@ function renderItin(data){
 
   heroImg.src = gHero();
   kickerEl.textContent = (S.name ? S.name + t('itin_kicker') : '') + (data.destination_display||S.dest);
-  titleEl.innerHTML = '<em>'+sanitiseAI(data.title||'Your journey')+'</em>';
+  // Typing animation for the title
+  titleEl.innerHTML = '<em></em>';
+  const titleEm = titleEl.querySelector('em');
+  const fullTitle = sanitiseAI(data.title || 'Your journey');
+  let charIdx = 0;
+  const typeInterval = setInterval(function(){
+    if(charIdx <= fullTitle.length){
+      titleEm.textContent = fullTitle.slice(0, charIdx);
+      charIdx++;
+    } else {
+      clearInterval(typeInterval);
+    }
+  }, 28);
   document.getElementById('iChips').innerHTML = [
     `<span class="mchip">${S.dateFrom ? fmtDate(S.dateFrom)+' – '+fmtDate(S.dateTo) : (data.days||[]).length+' '+t('day_label').toLowerCase()+'s'}</span>`,
     `<span class="mchip">${S.comp}</span>`,
@@ -6714,6 +6576,10 @@ function renderItin(data){
       setTimeout(function(){ hint.style.transition='opacity .5s'; hint.style.opacity='0'; setTimeout(function(){ hint.remove(); },500); }, 4000);
     }
   }, 600);
+
+  // Mobile floating action bar — show when itinerary renders
+  const ab = document.getElementById('itinActionBar');
+  if(ab) ab.style.display = '';
 }
 
 /* ══════════════════════════════════════
@@ -6829,6 +6695,8 @@ async function sendChatMsg(){
       newPane.classList.add('revealed');   // already visible — skip entrance animation
       pane.replaceWith(newPane);
     }
+    // Restore any swaps the user had selected before the chat tweak
+    restoreSwapChoices();
     // Update tab title
     const tab = document.getElementById('dtab'+di);
     if(tab && newDay.title) tab.innerHTML = t('day_label')+' '+(di+1)+' · '+sanitiseAI(newDay.title);
@@ -7245,6 +7113,11 @@ function switchTier(tier,btn){
   currentTier = tier;
   document.querySelectorAll('.btog-pill').forEach(p=>p.classList.toggle('on',p.dataset.tier===tier));
   if(!itinData) return;
+  // Clear restaurant/activity swap selections — they are tier-specific.
+  // Preserve stays and transport since those are selected independently.
+  Object.keys(userChoices).forEach(function(k){
+    if(k !== 'transport' && !k.startsWith('stay_')){ delete userChoices[k]; }
+  });
   // Preserve which days were already revealed so they don't re-animate
   var revealedSet = new Set();
   document.querySelectorAll('.day-pane').forEach(function(p,j){ if(p.classList.contains('revealed')) revealedSet.add(j); });
@@ -7254,6 +7127,7 @@ function switchTier(tier,btn){
   document.querySelectorAll('.day-pane').forEach(function(p,j){
     if(revealedSet.has(j)){ p.classList.add('revealed'); }
   });
+  updateAside();
 }
 
 // ── Progressive day reveal ────────────────────────────────────────────────────
@@ -7364,10 +7238,11 @@ function renderDayPane(day, di){
 
   var out = '';
   out += '<div class="day-pane" id="dpane'+di+'">';
-  out += '<div class="day-hdr"><div class="day-num">0'+(di+1)+'</div>';
+  out += '<div class="day-hdr"><div class="day-num">'+String(di+1).padStart(2,'0')+'</div>';
   out += '<div style="flex:1"><div class="day-lbl">'+t('day_label')+' '+(di+1)+'</div>';
   out += '<div class="day-title">'+sanitiseAI(day.title||'')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' '+t('note_btn')+'</button></div>';
   out += '<div class="note-inline" id="ni_day'+di+'">'+renderNoteField('day'+di)+'</div>';
+  out += '<button class="day-copy-btn" onclick="copyDay('+di+')" title="Copy day to clipboard">⎘ Copy day</button>';
   out += '</div></div>';
   const tn = day.transit_notes || {};
   out += '<div class="tblock morning"><div class="thdr"><span class="tpip"></span><span class="tlbl">'+t('morning')+'</span></div>';
@@ -7404,10 +7279,11 @@ function renderFreeDayPane(day, di){
   out += '<div class="day-pane" id="dpane'+di+'">';
 
   // Dark header bar matching normal day header
-  out += '<div class="day-hdr"><div class="day-num" style="opacity:.5">0'+(di+1)+'</div>';
+  out += '<div class="day-hdr"><div class="day-num" style="opacity:.5">'+String(di+1).padStart(2,'0')+'</div>';
   out += '<div style="flex:1"><div class="day-lbl">'+t('day_label')+' '+(di+1)+'</div>';
   out += '<div class="day-title">'+sanitiseAI(day.title||'No plans today.')+'<button class="note-trigger" id="nt_day'+di+'" data-noteid="day'+di+'" onclick="toggleNote(this.dataset.noteid,event)">'+getNoteIcon('day'+di)+' '+t('note_btn')+'</button></div>';
   out += '<div class="note-inline" id="ni_day'+di+'">'+renderNoteField('day'+di)+'</div>';
+  out += '<button class="day-copy-btn" onclick="copyDay('+di+')" title="Copy day to clipboard">⎘ Copy day</button>';
   out += '</div></div>';
 
   // Dark free-day card
@@ -7435,6 +7311,32 @@ function renderHiddenGem(gem){
     '<div class="hg-title">' + sanitiseAI(gem.title) + '</div>' +
     '<div class="hg-desc">'  + sanitiseAI(gem.desc  || '') + '</div>' +
   '</div>';
+}
+
+/* ══ COPY DAY ══ */
+function copyDay(di){
+  if(!itinData || !itinData.days) return;
+  const day = itinData.days[di];
+  if(!day) return;
+  const r = day.recommendations || {};
+  const lunch  = (r.lunch  && (r.lunch[currentTier]  || r.lunch.mid))  || {};
+  const dinner = (r.dinner && (r.dinner[currentTier] || r.dinner.mid)) || {};
+  const act    = (r.activity && (r.activity[currentTier] || r.activity.mid)) || {};
+  const lines = [
+    'Day ' + (di + 1) + ': ' + (day.title || ''),
+    '',
+    '🌅 ' + (day.morning  || ''),
+    lunch.name  ? '🍽  Lunch: '  + lunch.name  + (lunch.cuisine  ? ' (' + lunch.cuisine  + ')' : '') + (lunch.price_pp  ? ' · ' + lunch.price_pp  : '') : '',
+    act.name    ? '☀️  ' + act.name + (act.desc ? ' — ' + act.desc : '') : (day.afternoon ? '☀️  ' + day.afternoon : ''),
+    dinner.name ? '🍷  Dinner: ' + dinner.name + (dinner.cuisine ? ' (' + dinner.cuisine + ')' : '') + (dinner.price_pp ? ' · ' + dinner.price_pp : '') : '',
+    '🌙 ' + (day.evening  || ''),
+    day.hidden_gem && day.hidden_gem.title ? '💡 ' + day.hidden_gem.title + ': ' + (day.hidden_gem.desc || '') : '',
+  ].filter(Boolean).join('\n');
+  navigator.clipboard.writeText(lines).then(function(){
+    showToast('Day ' + (di + 1) + ' copied to clipboard');
+  }).catch(function(){
+    showToast('Couldn\'t copy — try selecting the text manually');
+  });
 }
 
 /* ══ TWEAK THIS DAY ══ */
@@ -7506,6 +7408,9 @@ Return ONLY the modified day as valid JSON with the exact same structure and all
       newPane.classList.add('revealed');   // already visible — skip entrance animation
       pane.replaceWith(newPane);
     }
+
+    // Restore any swaps the user had selected before the tweak
+    restoreSwapChoices();
 
     // Update tab title if it changed
     const tab = document.getElementById('dtab'+di);
@@ -7604,7 +7509,7 @@ function renderRecBlock(type, di, rec, alts, tierData){
   const safeCuisine = sanitiseAI(rec.cuisine||'');
   const safeLink = rec.link || '';
   const safeRating = sanitiseAI(rec.rating||'');
-  return '<div class="rec-block '+colorClass+'">' +
+  return '<div class="rec-block '+colorClass+'" id="rb_'+uid+'">' +
     '<div class="rec-hdr">' +
       '<span class="rec-type">'+typeLabel+'</span>' +
       (safeRating ? '<span class="rec-rating">&#9733; '+safeRating+'</span>' : '') +
@@ -7612,12 +7517,12 @@ function renderRecBlock(type, di, rec, alts, tierData){
     '<div class="rec-body">' +
       '<div class="rec-name">' +
         '<button class="place-chip" id="chip_'+uid+'" data-uid="'+uid+'" onclick="openSwap(this.dataset.uid,event)">'+safeName+'</button>' +
-        (safeLink ? '<a href="'+safeLink+'" target="_blank" rel="noopener" class="rec-map-link" title="Find on Google Maps">↗</a>' : '') +
+        '<a id="mlink_'+uid+'" href="'+safeLink+'" target="_blank" rel="noopener" class="rec-map-link" title="Find on Google Maps" style="'+(safeLink?'':'display:none')+'">↗</a>' +
       '</div>' +
       (safeCuisine ? '<div class="rec-meta">'+safeCuisine+'</div>' : '') +
       '<div class="rec-desc">'+safeDesc+'</div>' +
       '<div class="rec-footer">' +
-        '<div class="rec-price">'+price+(price&&rec.price_pp?'<span style="font-family:var(--ui);font-size:.6rem;color:var(--ink3);letter-spacing:.06em"> /p.p.</span>':'')+'</div>' +
+        '<div class="rec-price" id="rprice_'+uid+'">'+price+(price&&rec.price_pp?'<span style="font-family:var(--ui);font-size:.6rem;color:var(--ink3);letter-spacing:.06em"> /p.p.</span>':'')+'</div>' +
         '<button class="rec-swap-btn" data-uid="'+uid+'" onclick="openSwap(this.dataset.uid,event)">'+t('rec_swap')+'</button>' +
       '</div>' +
     '</div>' +
@@ -7636,7 +7541,7 @@ function renderSwapPanel(uid, type, alts, tierData, di){
   const tierTabs = tiers.map(function(tier){
     return '<button class="swap-tier'+(tier===currentTier?' on':'')+'" '+
       'data-uid="'+uid+'" data-type="'+type+'" data-tier="'+tier+'" data-di="'+di+'" '+
-      'onclick="swapTierClick(this.dataset.uid,this.dataset.type,this.dataset.tier,this,parseInt(this.dataset.di))">'+
+      'onclick="swapTierClick(this.dataset.uid,this.dataset.type,this.dataset.tier,this,parseInt(this.dataset.di),event)">'+
       tierLabels[tier]+'</button>';
   }).join('');
   const opts = buildSwapOpts(type, currentTier, alts, tierData, di, uid);
@@ -7659,12 +7564,13 @@ function buildSwapOpts(type, tier, alts, tierData, di, uid){
   }
   return all.map(function(o, i){
     const price = o.price_pp||o.price||'';
-    const img = gFood(di*6 + (type==='dinner'?3:0) + i);
+    const img = gFood(di*6 + (type==='dinner'?3:0) + i, o.cuisine||'', S.dest||'');
     const oName = (o.name||'').replace(/"/g,'&quot;');
     const oPriceEsc = price.replace(/"/g,'&quot;');
+    const oLink = (o.link||'').replace(/"/g,'&quot;');
     return '<div class="swap-opt'+(i===0?' active':'')+'" '
-      +'data-name="'+oName+'" data-price="'+oPriceEsc+'" data-uid="'+uid+'" '
-      +'onclick="selectSwap(this.dataset.uid,this,this.dataset.name,this.dataset.price)">'
+      +'data-name="'+oName+'" data-price="'+oPriceEsc+'" data-link="'+oLink+'" data-uid="'+uid+'" '
+      +'onclick="selectSwap(this.dataset.uid,this,this.dataset.name,this.dataset.price,event)">'
       +'<img src="'+img+'" alt="" loading="lazy">'
       +'<div>'
         +'<div class="so-name">'+sanitiseAI(o.name||'')+'</div>'
@@ -7678,6 +7584,29 @@ function buildSwapOpts(type, tier, alts, tierData, di, uid){
     +'</div>';
   }).join('');
 }
+// Restore chip text, map links, and price displays after any DOM rebuild that
+// replaces the day panes (e.g. tweakDay, regenItin, swSharedPayload).
+// Only restores meal/activity swaps — stays and transport have their own restore paths.
+function restoreSwapChoices(){
+  Object.keys(userChoices).forEach(function(uid){
+    if(uid === 'transport' || uid.startsWith('stay_')) return;
+    const choice = userChoices[uid];
+    if(!choice || !choice.name) return;
+    const chip = document.getElementById('chip_'+uid);
+    if(chip){ chip.textContent = choice.name; chip.classList.add('swapped'); }
+    const linkEl = document.getElementById('mlink_'+uid);
+    if(linkEl){
+      if(choice.link){ linkEl.href = choice.link; linkEl.style.display = ''; }
+      else { linkEl.style.display = 'none'; }
+    }
+    const priceEl = document.getElementById('rprice_'+uid);
+    if(priceEl && choice.price !== undefined){
+      priceEl.innerHTML = sanitiseAI(choice.price) +
+        (choice.price ? '<span style="font-family:var(--ui);font-size:.6rem;color:var(--ink3);letter-spacing:.06em"> /p.p.</span>' : '');
+    }
+  });
+}
+
 function closeAllSwaps(){
   document.querySelectorAll('.swap-panel.open').forEach(p=>p.classList.remove('open'));
   document.getElementById('swapBackdrop')?.classList.remove('on');
@@ -7706,8 +7635,8 @@ function closeSwap(uid, e){
 // Close swap panels when clicking outside
 document.addEventListener('click', ()=>{ closeAllSwaps(); });
 
-function swapTierClick(uid, type, tier, btn, di){
-  event.stopPropagation();
+function swapTierClick(uid, type, tier, btn, di, e){
+  if(e) e.stopPropagation(); else if(typeof event!=='undefined') event.stopPropagation();
   const ttBar = document.getElementById('sp_'+uid)?.querySelector('.swap-tier-tabs');
   if(ttBar) ttBar.querySelectorAll('.swap-tier').forEach(t=>t.classList.toggle('on',t===btn));
   const optsEl = document.getElementById('so_'+uid);
@@ -7721,16 +7650,34 @@ function swapTierClick(uid, type, tier, btn, di){
   optsEl.innerHTML = buildSwapOpts(type, tier, altOpts, tierData, di, uid);
 }
 
-function selectSwap(uid, el, name, price){
-  event.stopPropagation();
+function selectSwap(uid, el, name, price, e){
+  if(e) e.stopPropagation(); else if(typeof event!=='undefined') event.stopPropagation();
   el.closest('.swap-opts').querySelectorAll('.swap-opt').forEach(o=>o.classList.remove('active'));
   el.classList.add('active');
-  // update chip
+
+  // Update chip name
   const chip = document.getElementById('chip_'+uid);
-  if(chip){ chip.textContent=name; chip.classList.add('swapped'); }
+  if(chip){ chip.textContent = name; chip.classList.add('swapped'); }
+
+  // Update map link — use the link stored on the selected option, hide if absent
+  const link = el.dataset.link || '';
+  const linkEl = document.getElementById('mlink_'+uid);
+  if(linkEl){
+    if(link){ linkEl.href = link; linkEl.style.display = ''; }
+    else { linkEl.style.display = 'none'; }
+  }
+
+  // Update in-block price display
+  const priceEl = document.getElementById('rprice_'+uid);
+  if(priceEl && price !== undefined){
+    priceEl.innerHTML = sanitiseAI(price) +
+      (price ? '<span style="font-family:var(--ui);font-size:.6rem;color:var(--ink3);letter-spacing:.06em"> /p.p.</span>' : '');
+  }
+
+  // Persist full selection (name + price + link) for aside and post-render restore
   const parts = uid.split('_');
   const type = parts[1];
-  userChoices[uid] = {type: t('rec_'+(type==='activity'?'activity':type)), name, price};
+  userChoices[uid] = { type: t('rec_'+(type==='activity'?'activity':type)), name, price, link };
   updateAside();
   setTimeout(()=>closeSwap(uid), 500);
 }
@@ -7777,6 +7724,15 @@ function updateAside(){
 }
 
 /* ══ STAYS ══ */
+function enrichBookingLink(link, dateFrom, dateTo){
+  if(!link) return '';
+  if(link.includes('booking.com') && dateFrom && dateTo){
+    const sep = link.includes('?') ? '&' : '?';
+    return link + sep + 'checkin=' + dateFrom + '&checkout=' + dateTo;
+  }
+  return link;
+}
+
 function renderStays(data){
   const el = document.getElementById('staysContent');
   if(!data.days){ el.innerHTML=''; return; }
@@ -7801,12 +7757,12 @@ function renderStays(data){
             <div class="stay-desc">${sanitiseAI(o.desc||'')}</div>
             <div class="stay-footer">
               <div>
-                <div class="stay-price">${sanitiseAI(o.price_per_night||'')}<span>/noč</span></div>
+                <div class="stay-price">${sanitiseAI(o.price_per_night||'')}<span>${t('stays_per_night')}</span></div>
                 ${best?`<div class="best-tag">${t('stays_best')}</div>`:''}
               </div>
               <div style="text-align:right">
                 <div class="stay-stars">★ ${sanitiseAI(o.rating||'')}</div>
-                <a class="btn-bk" href="${safeUrl(o.link)}" target="_blank" onclick="event.stopPropagation()">Book →</a>
+                <a class="btn-bk" href="${safeUrl(enrichBookingLink(o.link, S.dateFrom, S.dateTo))}" target="_blank" onclick="event.stopPropagation()">Book →</a>
               </div>
             </div>
           </div>
@@ -7892,9 +7848,9 @@ function renderTransport(data){
     const priceWidth = maxPrice > 0 ? Math.round((numPrice(tr)/maxPrice)*100) : 50;
 
     const badges = [];
-    if(isRec)      badges.push('<span class="trans-badge tb-rec">Recommended</span>');
-    if(isFastest)  badges.push('<span class="trans-badge tb-fast">Fastest</span>');
-    if(isCheapest) badges.push('<span class="trans-badge tb-cheap">Best price</span>');
+    if(isRec)      badges.push('<span class="trans-badge tb-rec">'+t('trans_badge_rec')+'</span>');
+    if(isFastest)  badges.push('<span class="trans-badge tb-fast">'+t('trans_badge_fastest')+'</span>');
+    if(isCheapest) badges.push('<span class="trans-badge tb-cheap">'+t('trans_badge_cheap')+'</span>');
 
     const detailItems = [
       tr.duration ? '<div class="td-item"><span class="td-label">Duration</span>' + sanitiseAI(tr.duration) + '</div>' : '',
@@ -7935,9 +7891,9 @@ function renderTransport(data){
       '<p class="transport-intro-text">' + (t('trans_intro')||'Getting there') + '</p>' +
       '<div class="transport-header">' +
         '<div class="transport-sort">' +
-          '<button class="trans-sort-btn' + (transportSortMode==="recommended"?" on":"") + '" onclick="sortTransport(\'recommended\')">Recommended</button>' +
-          '<button class="trans-sort-btn' + (transportSortMode==="price"?" on":"") + '" onclick="sortTransport(\'price\')">Cheapest first</button>' +
-          '<button class="trans-sort-btn' + (transportSortMode==="time"?" on":"") + '" onclick="sortTransport(\'time\')">Fastest first</button>' +
+          '<button class="trans-sort-btn' + (transportSortMode==="recommended"?" on":"") + '" onclick="sortTransport(\'recommended\')">'+t('trans_sort_rec')+'</button>' +
+          '<button class="trans-sort-btn' + (transportSortMode==="price"?" on":"") + '" onclick="sortTransport(\'price\')">'+t('trans_sort_cheap')+'</button>' +
+          '<button class="trans-sort-btn' + (transportSortMode==="time"?" on":"") + '" onclick="sortTransport(\'time\')">'+t('trans_sort_fast')+'</button>' +
         '</div>' +
       '</div>' +
       cardsHtml +
@@ -7990,7 +7946,7 @@ function closeMastMore(){ const m=document.getElementById('mastMoreMenu'); if(m)
 document.addEventListener('click', closeMastMore);
 async function regenItin(){
   // Regeneration is a Plus-only feature
-  if(!(currentUser && currentUser.plan === 'plus')){ openUpgradeModal(); return; }
+  if(!(currentUser && (currentUser.plan === 'plus' || isAdmin()))){ openUpgradeModal(); return; }
   if(!checkPlusGenLimit()) return;
   // Confirm before discarding the current itinerary
   const msg = t('regen_confirm') || 'Regenerate this itinerary? Your current plan will be replaced.';
@@ -8005,9 +7961,14 @@ async function regenItin(){
     if(isTwoPass){
       setChunkLoadLabel(1, 7);
       const week1 = await fetchItinerary(7);
+      // Pass last-day context for narrative continuity between chunks
+      const lastDay7 = week1.days && week1.days[6];
+      const contCtx = lastDay7
+        ? 'Day 7 ended in: ' + (lastDay7.title || '') + '. Evening: ' + (lastDay7.evening || '').slice(0, 120)
+        : '';
       h.resetProgress(50);
       setChunkLoadLabel(8, totalDays);
-      const extraDays = await fetchItineraryChunk(totalDays - 7, 7, totalDays);
+      const extraDays = await fetchItineraryChunk(totalDays - 7, 7, totalDays, contCtx);
       itinData = week1;
       itinData.days = week1.days.concat(extraDays);
     } else {
@@ -8245,7 +8206,7 @@ let pdfUsed = false;
 
 /* ══ CALENDAR EXPORT (.ics) ══════════════════════════════════════════ */
 function exportCalendar(){
-  if(!itinData){ showToast('Generate an itinerary first.'); return; }
+  if(!itinData){ showToast(t('gen_first')||'Generate an itinerary first.'); return; }
 
   const days  = itinData.days || [];
   const dest  = S.dest || itinData.title || 'Trip';
@@ -8299,12 +8260,12 @@ function exportCalendar(){
 
     // Build description parts
     const parts = [];
-    if(day.morning)   parts.push('Morning' + NL + esc(day.morning));
-    if(lunch.name)    parts.push('Lunch: ' + esc(lunch.name) + (lunch.price_pp  ? ' · ' + esc(lunch.price_pp)  : ''));
-    if(day.afternoon) parts.push('Afternoon' + NL + esc(day.afternoon));
-    if(dinner.name)   parts.push('Dinner: ' + esc(dinner.name) + (dinner.price_pp ? ' · ' + esc(dinner.price_pp) : ''));
-    if(day.evening)   parts.push('Evening' + NL + esc(day.evening));
-    if(day.insider_tip) parts.push('Insider tip: ' + esc(day.insider_tip));
+    if(day.morning)   parts.push((t('cal_morning')||'Morning') + NL + esc(day.morning));
+    if(lunch.name)    parts.push((t('cal_lunch')||'Lunch:') + ' ' + esc(lunch.name) + (lunch.price_pp  ? ' · ' + esc(lunch.price_pp)  : ''));
+    if(day.afternoon) parts.push((t('cal_afternoon')||'Afternoon') + NL + esc(day.afternoon));
+    if(dinner.name)   parts.push((t('cal_dinner')||'Dinner:') + ' ' + esc(dinner.name) + (dinner.price_pp ? ' · ' + esc(dinner.price_pp) : ''));
+    if(day.evening)   parts.push((t('cal_evening')||'Evening') + NL + esc(day.evening));
+    if(day.insider_tip) parts.push((t('cal_insider_tip')||'Insider tip:') + ' ' + esc(day.insider_tip));
     parts.push(NL + '— Via Travel Planner · viawander.co');
 
     const uid = 'via-day' + (i+1) + '-' + Date.now() + '@viawander.co';
@@ -8313,7 +8274,7 @@ function exportCalendar(){
     cal.push('UID:' + uid);
     cal.push('DTSTART;VALUE=DATE:' + ymd(dtStart));
     cal.push('DTEND;VALUE=DATE:'   + ymd(dtEnd));
-    cal.push(fold('SUMMARY:Day ' + (i+1) + ' – ' + esc(day.title || ('Day ' + (i+1)))));
+    cal.push(fold('SUMMARY:' + (t('cal_day')||'Day') + ' ' + (i+1) + ' – ' + esc(day.title || ((t('cal_day')||'Day') + ' ' + (i+1)))));
     cal.push(fold('DESCRIPTION:' + parts.join(NL + NL)));
     cal.push('END:VEVENT');
   });
@@ -8329,16 +8290,24 @@ function exportCalendar(){
   a.click();
   document.body.removeChild(a);
   setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
-  showToast(days.length + ' day' + (days.length!==1?'s':'') + ' added to calendar file');
+  const calKey = days.length === 1 ? 'cal_added_one' : 'cal_added_many';
+  showToast((t(calKey)||'{n} days added to your calendar').replace('{n}', days.length));
 }
 
 function exportPDF(){
-  if(!itinData){ alert('Generate an itinerary first.'); return; }
+  if(!itinData){ showToast(t('gen_first')||'Generate an itinerary first.'); return; }
 
   // Build print layer
   buildPrintLayer();
 
   // Show print dialog (browser handles PDF save)
+  // On iOS Safari window.print() is blocked in some contexts — guide the user instead
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  if(isIOS){
+    showToast(t('pdf_ios_tip')||'Tap Share → Print to save as PDF');
+    pdfUsed = true;
+    return;
+  }
   setTimeout(()=>{
     window.print();
     // After print, mark as used (in real app would be server-side)
@@ -8400,7 +8369,7 @@ function buildPrintLayer(){
     h += '<div class="pdf-day">';
     // Header
     h += '<div class="pdf-day-header">';
-    h += '<div class="pdf-day-badge"><div class="pdf-day-badge-eye">'+(t('day_label')||'Day')+'</div><div class="pdf-day-badge-num">0'+(di+1)+'</div></div>';
+    h += '<div class="pdf-day-badge"><div class="pdf-day-badge-eye">'+(t('day_label')||'Day')+'</div><div class="pdf-day-badge-num">'+String(di+1).padStart(2,'0')+'</div></div>';
     h += '<div class="pdf-day-title-wrap"><div class="pdf-day-dest">'+dest.toUpperCase()+'</div><div class="pdf-day-title">'+(day.title||'')+'</div></div>';
     h += '</div>';
 
@@ -8693,7 +8662,7 @@ function closeAlertModal(){
 }
 
 function submitAlert(){
-  const isPlusPlan = currentUser && currentUser.plan === 'plus';
+  const isPlusPlan = (currentUser && currentUser.plan === 'plus') || isAdmin();
   const FREE_LIMIT = 3;
 
   if(!isPlusPlan && activeAlerts.length >= FREE_LIMIT){
@@ -8775,7 +8744,7 @@ function extractBaselinePrices(){
 function updateAlertButton(dest){
   const btn = document.getElementById('alertBtn');
   if(!btn) return;
-  btn.innerHTML = `Alert active <span class="alert-active-badge"><span class="alert-dot"></span>live</span>`;
+  btn.innerHTML = (t('alert_active_label')||'Alert active') + ' <span class="alert-active-badge"><span class="alert-dot"></span>live</span>';
   btn.style.borderColor = 'var(--forest)';
   btn.style.color = 'var(--forest)';
 }
@@ -8793,8 +8762,7 @@ function checkExistingAlerts(){
 ══════════════════════════════════════ */
 
 // ── Supabase config (public anon key — safe client-side) ──────────────────
-// Replace these two values with your project's URL and anon key from:
-// Supabase dashboard → Settings → API
+// Production credentials — do not overwrite. Source: Supabase dashboard → Settings → API
 const SUPABASE_URL  = 'https://ondtqkpgctvgmhastpxi.supabase.co';
 const SUPABASE_ANON = 'sb_publishable_hZdUSt8cbUaf1Xe1_nfA_Q_LyaWKDop';
 const _supa = window.supabase
@@ -8803,7 +8771,8 @@ const _supa = window.supabase
 
 // ── State ─────────────────────────────
 let currentUser = null; // { id, name, email, plan:'free'|'plus', avatarUrl? }
-const PLUS_PRICE  = 7;
+const PLUS_PRICE         = 9;
+const VIA_PLUS_PRICE_DISPLAY = '€9';
 
 // In-memory saves cache — populated from Supabase on login, kept in sync on mutations
 let _viaSaves = [];
@@ -8873,10 +8842,6 @@ function getSaves(){
   return obj;
 }
 
-// No-op stubs kept so any remaining callsites don't throw
-function getUsers(){ return {}; }
-function saveUsers(){}
-
 /* ── Save itinerary ────────────────────────────────────────────────── */
 async function saveItinerary(){
   if(!itinData) return;
@@ -8888,9 +8853,9 @@ async function saveItinerary(){
     return;
   }
 
-  if(!_supa){ showToast('Auth not configured.'); return; }
+  if(!_supa){ showToast(t('auth_error')||'Service unavailable — try again later.'); return; }
 
-  const isPlusPlan = currentUser.plan === 'plus';
+  const isPlusPlan = currentUser.plan === 'plus' || isAdmin();
 
   // Free plan: cap at 1 save
   if(!isPlusPlan && _viaSaves.length >= 1){
@@ -8914,14 +8879,14 @@ async function saveItinerary(){
   };
 
   const { data, error } = await _supa.from('saved_itineraries').insert(saveRow).select().single();
-  if(error){ showToast('Could not save trip — ' + error.message); return; }
+  if(error){ showToast(t('save_error')||'Could not save — please try again.'); return; }
 
   _viaSaves.unshift(data);
 
   const btn = document.getElementById('saveItinBtn');
   if(btn){ btn.textContent = t('save_saved'); btn.style.color='var(--burg)'; btn.style.borderColor='var(--burg)'; }
 
-  showToast('Itinerary saved to your profile.');
+  showToast(tToast('saved'));
   renderProfilePage();
 }
 
@@ -8988,7 +8953,7 @@ async function doRegister(){
   if(!name || !email.includes('@') || pass.length < 8){
     errEl.textContent = as.regValidation; errEl.style.display='block'; return;
   }
-  if(!_supa){ errEl.textContent='Auth not configured.'; errEl.style.display='block'; return; }
+  if(!_supa){ errEl.textContent=t('auth_error')||'Service unavailable — try again later.'; errEl.style.display='block'; return; }
 
   const btn = document.getElementById('regSubmitBtn');
   if(btn){ btn.disabled=true; btn.textContent='…'; }
@@ -9072,7 +9037,11 @@ function renderProfilePage(){
   badge.className = 'profile-plan-badge ' + (isPlusPlan ? 'plan-plus' : 'plan-free');
   // Show/hide sidebar upgrade CTA
   const ducEl = document.getElementById('dashUpgradeCta');
-  if(ducEl) ducEl.style.display = isPlusPlan ? 'none' : '';
+  if(ducEl){
+    ducEl.style.display = isPlusPlan ? 'none' : '';
+    const ducPriceEl = ducEl.querySelector('.duc-price');
+    if(ducPriceEl) ducPriceEl.textContent = VIA_PLUS_PRICE_DISPLAY;
+  }
 
   // Stats
   const saves = getSaves();
@@ -9111,7 +9080,7 @@ function renderProfilePage(){
             '</div>' +
           '</div>' +
           '<div class="pcc-right">' +
-            '<div class="pcc-price">€9</div>' +
+            '<div class="pcc-price">'+VIA_PLUS_PRICE_DISPLAY+'</div>' +
             '<div class="pcc-price-sub">'+t('pcc_price_sub')+'</div>' +
             '<button class="btn-pcc-upgrade" onclick="openUpgradeModal()">'+t('pcc_cta')+'</button>' +
           '</div>' +
@@ -9191,7 +9160,7 @@ function renderProfilePage(){
       '<div class="locked-icon">+</div>' +
       '<div class="locked-title">'+t('locked_title')+'</div>' +
       '<div class="locked-sub">'+t('locked_sub')+'</div>' +
-      '<div class="locked-price">€9 →</div></div>');
+      '<div class="locked-price">'+VIA_PLUS_PRICE_DISPLAY+' →</div></div>');
   }
   grid.innerHTML = cardsHtml.join('');
 }
@@ -9278,7 +9247,7 @@ function planSimilarTrip(saveId){
   // ── Navigate ──────────────────────────────────────────────────────
   showPg('pg-quiz');
   updateQ();
-  showToast('Destination & vibes from ' + (save.destination || 'your saved trip') + ' — pick your dates below');
+  showToast(t('similar_trip_hint')||'Destination & vibes copied — pick your dates below.');
 }
 
 function exportSavedPDF(saveId){
@@ -9289,11 +9258,15 @@ function exportSavedPDF(saveId){
   itinData = save.itinData;
   currentTier = save.budget||'mid';
   buildPrintLayer();
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  if(isIOS){ showToast('Tap Share → Print to save as PDF', 'info'); return; }
   setTimeout(()=>window.print(), 200);
 }
 
 // ── Upgrade / paywall ──────────────────
 function openUpgradeModal(){
+  const priceEl = document.getElementById('upgradePriceEl');
+  if(priceEl) priceEl.textContent = VIA_PLUS_PRICE_DISPLAY;
   const titleEl = document.getElementById('upgradeTitleEl');
   if(titleEl) titleEl.textContent = t('pcc_title');
   const subEl = document.querySelector('.upgrade-sub');
@@ -9375,7 +9348,7 @@ async function handleUpgradeReturn(){
     const data = await res.json();
 
     if(!data.valid){
-      showToast('Could not verify payment. Email hello@viawander.co if you were charged.');
+      showToast(t('payment_fail')||'Could not verify payment. Email hello@viawander.co if you were charged.');
       return;
     }
 
@@ -9404,7 +9377,7 @@ async function handleUpgradeReturn(){
 
   } catch(err){
     console.error('Verify session error:', err);
-    showToast('Payment received but verification failed. Email hello@viawander.co.');
+    showToast(t('payment_error')||'Payment received but could not be verified. Email hello@viawander.co.');
   }
 }
 
@@ -9566,7 +9539,8 @@ async function renderPackingPanel(data){
   const season = inferSeason(S.dateFrom);
   const vibeStr = S.vibes.join(', ');
   const group = S.comp;
-  document.getElementById('packSub').textContent = `For your ${dest} trip · ${season} · ${group}`;
+  document.getElementById('packSub').textContent = (t('pack_sub')||'For your {dest} trip · {season} · {group}')
+    .replace('{dest}', dest).replace('{season}', season).replace('{group}', group);
 
   // Already generated
   if(packingData){ renderPackingList(); return; }
@@ -9624,10 +9598,6 @@ function packTeaserText(shown, total){
   };
   return (tmpl[currentLang]||tmpl.en).replace('${shown}',shown).replace('${total}',total);
 }
-function packUnlockText(){
-  const t = {en:'Unlock all — €9 →',sl:'Odkleni vse — 9 € →',de:'Alles freischalten — 9 € →',it:'Sblocca tutto — 9 € →',fr:'Tout débloquer — 9 € →',hr:'Otključaj sve — 9 € →',es:'Desbloquear todo — 9 € →'};
-  return t[currentLang]||t.en;
-}
 function inferSeason(dateStr){
   if(!dateStr) return 'summer';
   const m = new Date(dateStr+'T12:00:00').getMonth()+1;
@@ -9670,7 +9640,7 @@ function renderPackingList(){
   const teaserHtml = !isPlusPlan ? `
     <div class="pack-teaser" style="grid-column:1/-1">
       <div class="pack-teaser-text">${packTeaserText(shownItems, totalItems)}</div>
-      <button class="pack-teaser-btn" onclick="openUpgradeModal()">${packUnlockText()}</button>
+      <button class="pack-teaser-btn" onclick="openUpgradeModal()">${t('pack_unlock_btn')}</button>
     </div>` : '';
 
   const checkedCount = Object.values(packingChecked).filter(Boolean).length;
@@ -9702,28 +9672,28 @@ async function renderMap(data){
     location.hostname === 'localhost' || location.search.includes('maptest=1');
 
   const mapT = {
-    en:{title:'Map view is Via Plus',sub:'See all recommendations on a real interactive map.',price:'€9 once, yours forever',btn:'Unlock Via Plus →',
+    en:{title:'Map view is Via Plus',sub:'See all recommendations on a real interactive map.',price:VIA_PLUS_PRICE_DISPLAY+' once, yours forever',btn:'Unlock Via Plus →',
         lunch:'Lunch',dinner:'Dinner',activity:'Activity',stay:'Stay',allDays:'All days',
         noKey:'Add your Google Maps API key to see the live map.',noKeyLink:'Get a free key →'},
-    sl:{title:'Pogled na zemljevidu je Via Plus',sub:'Vsa priporočila na interaktivnem zemljevidu.',price:'9 € enkrat, za vedno',btn:'Odkleni Via Plus →',
+    sl:{title:'Pogled na zemljevidu je Via Plus',sub:'Vsa priporočila na interaktivnem zemljevidu.',price:VIA_PLUS_PRICE_DISPLAY+' enkrat, za vedno',btn:'Odkleni Via Plus →',
         lunch:'Kosilo',dinner:'Večerja',activity:'Aktivnost',stay:'Nastanitev',allDays:'Vsi dnevi',
         noKey:'Dodaj Google Maps API ključ za živi zemljevid.',noKeyLink:'Pridobi brezplačen ključ →'},
-    de:{title:'Kartenansicht ist Via Plus',sub:'Alle Empfehlungen auf einer echten Karte.',price:'9 € einmalig',btn:'Via Plus freischalten →',
+    de:{title:'Kartenansicht ist Via Plus',sub:'Alle Empfehlungen auf einer echten Karte.',price:VIA_PLUS_PRICE_DISPLAY+' einmalig',btn:'Via Plus freischalten →',
         lunch:'Mittagessen',dinner:'Abendessen',activity:'Aktivität',stay:'Unterkunft',allDays:'Alle Tage',
         noKey:'Google Maps API-Schlüssel hinzufügen für die Live-Karte.',noKeyLink:'Kostenlosen Schlüssel holen →'},
-    it:{title:'La mappa è Via Plus',sub:'Tutti i consigli su una vera mappa interattiva.',price:'€9 una volta',btn:'Sblocca Via Plus →',
+    it:{title:'La mappa è Via Plus',sub:'Tutti i consigli su una vera mappa interattiva.',price:VIA_PLUS_PRICE_DISPLAY+' una volta',btn:'Sblocca Via Plus →',
         lunch:'Pranzo',dinner:'Cena',activity:'Attività',stay:'Alloggio',allDays:'Tutti i giorni',
         noKey:'Aggiungi la chiave API di Google Maps per la mappa live.',noKeyLink:'Ottieni chiave gratuita →'},
-    fr:{title:'La vue carte est Via Plus',sub:'Toutes vos recommandations sur une vraie carte.',price:'9 € une fois',btn:'Débloquer Via Plus →',
+    fr:{title:'La vue carte est Via Plus',sub:'Toutes vos recommandations sur une vraie carte.',price:VIA_PLUS_PRICE_DISPLAY+' une seule fois',btn:'Débloquer Via Plus →',
         lunch:'Déjeuner',dinner:'Dîner',activity:'Activité',stay:'Hébergement',allDays:'Tous les jours',
         noKey:'Ajoutez votre clé API Google Maps pour la carte en direct.',noKeyLink:'Obtenir une clé gratuite →'},
-    hr:{title:'Prikaz karte je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj karti.',price:'9 € jednom',btn:'Otključaj Via Plus →',
+    hr:{title:'Prikaz karte je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj karti.',price:VIA_PLUS_PRICE_DISPLAY+' jednom',btn:'Otključaj Via Plus →',
         lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smještaj',allDays:'Svi dani',
         noKey:'Dodaj Google Maps API ključ za live kartu.',noKeyLink:'Uzmi besplatni ključ →'},
-    es:{title:'La vista de mapa es Via Plus',sub:'Todas las recomendaciones en un mapa real.',price:'9 € una vez',btn:'Desbloquear Via Plus →',
+    es:{title:'La vista de mapa es Via Plus',sub:'Todas las recomendaciones en un mapa real.',price:VIA_PLUS_PRICE_DISPLAY+' una vez',btn:'Desbloquear Via Plus →',
         lunch:'Almuerzo',dinner:'Cena',activity:'Actividad',stay:'Alojamiento',allDays:'Todos los días',
         noKey:'Añade tu clave de API de Google Maps para ver el mapa en vivo.',noKeyLink:'Obtener clave gratuita →'},
-    sr:{title:'Prikaz mape je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj mapi.',price:'9 € jednom, tvoje zauvek',btn:'Aktiviraj Via Plus →',
+    sr:{title:'Prikaz mape je Via Plus',sub:'Sve preporuke na pravoj interaktivnoj mapi.',price:VIA_PLUS_PRICE_DISPLAY+' jednom, tvoje zauvek',btn:'Aktiviraj Via Plus →',
         lunch:'Ručak',dinner:'Večera',activity:'Aktivnost',stay:'Smeštaj',allDays:'Svi dani',
         noKey:'Dodaj Google Maps API ključ za live mapu.',noKeyLink:'Uzmi besplatni ključ →'},
   };
@@ -10013,32 +9983,70 @@ function buildSharePayload(){
   };
 }
 
-function buildShareUrl(payload){
+function buildShareUrlFallback(payload){
+  // Compact base64 fallback — strips swap_options to reduce size
   try {
-    const json = JSON.stringify(payload || buildSharePayload());
+    const stripped = Object.assign({}, payload);
+    if(stripped.itinData && stripped.itinData.days){
+      stripped.itinData = Object.assign({}, stripped.itinData, {
+        days: stripped.itinData.days.map(function(d){
+          const r = Object.assign({}, d);
+          delete r.swap_options;
+          return r;
+        })
+      });
+    }
+    const json = JSON.stringify(stripped);
     const b64  = btoa(String.fromCharCode(...new TextEncoder().encode(json)));
     return window.location.origin + window.location.pathname + '?trip=' + b64;
   } catch(e){ return window.location.href; }
 }
 
-function updateShareableLink(){
-  if(!itinData) return;
-  const payload = buildSharePayload();
-  // 1. Save draft to localStorage (silent, no friction)
-  try { localStorage.setItem(VIA_DRAFT_KEY, JSON.stringify(payload)); } catch(e){}
-  // 2. Stash the URL for the card modal / share button
-  try { window._shareUrl = buildShareUrl(payload); } catch(e){}
-  // 3. Populate the card modal URL preview if it's open
+async function buildShareUrlShort(payload){
+  // Try server-side storage first (short ?s= URL, no size limit)
+  try {
+    const r = await fetch('/api/share', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ payload }),
+    });
+    if(r.ok){
+      const { id } = await r.json();
+      if(id) return window.location.origin + window.location.pathname + '?s=' + id;
+    }
+  } catch(e){}
+  return null; // fall through to base64
+}
+
+function updateShareUrlEl(url){
   const urlEl = document.getElementById('tcmShareUrl');
-  if(urlEl && window._shareUrl){
-    const short = window._shareUrl.replace(/^https?:\/\/(www\.)?/,'').slice(0,55);
-    urlEl.textContent = short + (window._shareUrl.length > 58 ? '…' : '');
+  if(urlEl && url){
+    const short = url.replace(/^https?:\/\/(www\.)?/,'').slice(0,55);
+    urlEl.textContent = short + (url.length > 58 ? '…' : '');
   }
 }
 
-function shareItin(){
+async function updateShareableLink(){
   if(!itinData) return;
-  const url = window._shareUrl || buildShareUrl();
+  const payload = buildSharePayload();
+  // 1. Save draft to localStorage
+  try { localStorage.setItem(VIA_DRAFT_KEY, JSON.stringify(payload)); } catch(e){}
+  // 2. Build short URL (async, server-stored) or compact base64 fallback
+  const shortUrl = await buildShareUrlShort(payload);
+  window._shareUrl = shortUrl || buildShareUrlFallback(payload);
+  // 3. Populate card modal URL preview if open
+  updateShareUrlEl(window._shareUrl);
+}
+
+async function shareItin(){
+  if(!itinData) return;
+  // Use cached URL, or build fresh if not yet ready
+  let url = window._shareUrl;
+  if(!url){
+    const payload = buildSharePayload();
+    url = (await buildShareUrlShort(payload)) || buildShareUrlFallback(payload);
+    window._shareUrl = url;
+  }
   if(navigator.share){
     navigator.share({
       title: itinData.title || 'My Via Trip',
@@ -10047,7 +10055,7 @@ function shareItin(){
     }).catch(()=>{});
   } else {
     navigator.clipboard.writeText(url).then(()=>{
-      showToast('Link copied ✓');
+      showToast(tToast('linkCopied'));
     }).catch(()=>{});
   }
 }
@@ -10093,7 +10101,7 @@ function checkDraftBanner(){
 
     const titleEl = document.getElementById('draftBannerTitle');
     const subEl   = document.getElementById('draftBannerSub');
-    if(titleEl) titleEl.textContent = 'Resume your ' + dest + ' trip';
+    if(titleEl) titleEl.textContent = (t('draft_resume') || 'Resume your {dest} trip').replace('{dest}', dest);
     if(subEl)   subEl.textContent   = (draft.itinData.title||'Your itinerary') + (agoStr ? ' · saved ' + agoStr : '');
 
     const banner = document.getElementById('draftBanner');
@@ -10450,7 +10458,7 @@ function downloadTripCard(){
 }
 
 function copyTripLink(){
-  const url = window._shareUrl || buildShareUrl();
+  const url = window._shareUrl || buildShareUrlFallback(buildSharePayload());
   const btn = document.getElementById('tcmCopyLinkBtn');
   navigator.clipboard.writeText(url).then(()=>{
     if(btn){ btn.textContent='✓ Copied!'; btn.classList.add('copied'); }
@@ -10472,27 +10480,46 @@ function switchProfileTab(id, btn){
 }
 
 // ── Avatar upload ──────────────────────
-function handleAvatarUpload(input){
+async function handleAvatarUpload(input){
   const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = async function(e){
-    const dataUrl = e.target.result;
-    // Persist in Supabase user metadata
-    if(_supa && currentUser){
-      await _supa.auth.updateUser({ data: { avatarUrl: dataUrl } });
-      currentUser.avatarUrl = dataUrl;
+  if(!file || !_supa || !currentUser) return;
+
+  // Validate: images only, max 2 MB
+  if(!file.type.startsWith('image/')) return;
+  if(file.size > 2 * 1024 * 1024){ showToast(t('avatar_too_large')||'Image too large — max 2 MB.'); return; }
+
+  try {
+    // Upload to Supabase Storage bucket "avatars"
+    const ext  = file.name.split('.').pop() || 'jpg';
+    const path = currentUser.id + '/avatar-' + Date.now() + '.' + ext;
+    const { data: upData, error: upErr } = await _supa.storage
+      .from('avatars')
+      .upload(path, file, { upsert: true, contentType: file.type });
+
+    let avatarUrl;
+    if(upErr){
+      // Storage not configured — fall back to local object URL (session-only, never persisted)
+      console.warn('[via] avatar storage unavailable, using object URL:', upErr.message);
+      avatarUrl = URL.createObjectURL(file);
+    } else {
+      const { data: urlData } = _supa.storage.from('avatars').getPublicUrl(path);
+      avatarUrl = urlData.publicUrl;
+      // Persist public URL in user metadata (tiny string, well within 2 KB limit)
+      await _supa.auth.updateUser({ data: { avatarUrl } });
+      currentUser.avatarUrl = avatarUrl;
     }
-    // Show image
+
+    // Update UI
     const img = document.getElementById('profileAvatarImg');
     const initials = document.getElementById('profileAvatarInitials');
-    if(img){ img.src = dataUrl; img.style.display='block'; }
-    if(initials) initials.style.display='none';
-    // Update composer avatar
+    if(img){ img.src = avatarUrl; img.style.display = 'block'; }
+    if(initials) initials.style.display = 'none';
     const ca = document.getElementById('socialComposerAvatar');
-    if(ca) ca.innerHTML = '<img src="'+dataUrl+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
-  };
-  reader.readAsDataURL(file);
+    if(ca) ca.innerHTML = '<img src="'+avatarUrl+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
+  } catch(err){
+    console.error('[via] avatar upload failed:', err);
+    showToast(t('avatar_upload_failed')||'Avatar upload failed — please try again.');
+  }
 }
 
 // ── Social feed ─────────────────────────
@@ -10506,16 +10533,6 @@ function savePosts(posts){
 }
 
 let currentPostTag = null;
-function tagPost(tag){
-  currentPostTag = currentPostTag===tag ? null : tag;
-  document.querySelectorAll('.pc-tag-btn').forEach(b=>b.classList.remove('active'));
-  if(currentPostTag){
-    const map = {tip:'Travel tip',rec:'Recommendation',q:'Question'};
-    document.querySelectorAll('.pc-tag-btn').forEach(b=>{
-      if(b.textContent.trim()===map[currentPostTag]) b.classList.add('active');
-    });
-  }
-}
 
 function filterFeed(filter, btn){
   window._feedFilter = filter;
@@ -10571,11 +10588,6 @@ function toggleLike(postId){
 
 /* renderSocialFeed — defined below in Dashboard section */
 
-function replyToPost(postId){
-  const text = document.getElementById('socialPostText');
-  if(text){ text.focus(); text.placeholder = 'Replying to a post…'; }
-}
-
 function escHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
@@ -10620,13 +10632,16 @@ const socialPosts = [
 function renderSocialFeed(){
   const list = document.getElementById('socialPostsList');
   if(!list) return;
+  // Show local-only note
+  const localNote = document.getElementById('socialLocalNote');
+  if(localNote) localNote.textContent = t('social_local_note') || 'Your travel notes (saved on this device)';
   // Update composer avatar
   if(currentUser){
     const ca = document.getElementById('composerAvatar');
     if(ca){
       const initials = currentUser.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
       ca.innerHTML = currentUser.avatarUrl
-        ? '<img src="'+currentUser.avatarUrl+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'
+        ? '<img src="'+currentUser.avatarUrl+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'
         : initials;
     }
   }
@@ -10636,9 +10651,13 @@ function renderSocialFeed(){
   const allPosts = [...savedPosts, ...seedPosts].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
   const avatarColors = ['var(--burg)','var(--forest)','#2E5B8A','#8B5E10','#5B3E8A'];
   function userCol(id){ let h=0; for(const c of String(id)) h=(h*31+c.charCodeAt(0))&0xffff; return avatarColors[h%avatarColors.length]; }
-  const tagMeta2 = {tip:{label:'Travel tip',cls:'spc-tag-tip'},rec:{label:'Recommendation',cls:'spc-tag-rec'},q:{label:'Question',cls:'spc-tag-q'}};
+  const tagMeta2 = {
+    tip:{label:t('social_tag_tip')||'Travel tip',cls:'spc-tag-tip'},
+    rec:{label:t('social_tag_rec')||'Recommendation',cls:'spc-tag-rec'},
+    q:{label:t('social_tag_q')||'Question',cls:'spc-tag-q'}
+  };
   if(!allPosts.length){
-    list.innerHTML = '<div class="feed-empty"><div class="feed-empty-icon">✈</div><div class="feed-empty-title">No posts yet.</div><div class="feed-empty-sub">Be the first to share a tip or ask the community a question.</div></div>';
+    list.innerHTML = '<div class="feed-empty"><div class="feed-empty-icon">✈</div><div class="feed-empty-title">'+(t('social_no_posts')||'No posts yet.')+'</div><div class="feed-empty-sub">'+(t('social_no_posts_sub')||'Be the first to share a tip or ask the community a question.')+'</div></div>';
     return;
   }
   list.innerHTML = allPosts.map(post=>{
@@ -10653,7 +10672,7 @@ function renderSocialFeed(){
     const likeCount = (post.likes||[]).length || (typeof post.likes==='number'?post.likes:0);
     const isLiked = currentUser && Array.isArray(post.likes) && post.likes.includes(currentUser.email);
     const avatarInner = post.avatarUrl
-      ? '<img src="'+post.avatarUrl+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'
+      ? '<img src="'+post.avatarUrl+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'
       : initials;
     return '<div class="social-post-card">' +
       '<div class="spc-head">' +
@@ -10664,9 +10683,9 @@ function renderSocialFeed(){
       (dest?'<div class="spc-dest">'+dest+'</div>':'') +
       '<div class="spc-body">'+body+'</div>' +
       '<div class="spc-footer">' +
-        '<button class="spc-action'+(isLiked?' liked':'')+'" onclick="toggleLike(\'' + post.id + '\')">' +(isLiked?'♥':'♡')+'&nbsp;'+likeCount+' '+(likeCount===1?'like':'likes')+'</button>' +
+        '<button class="spc-action'+(isLiked?' liked':'')+'" onclick="toggleLike(\'' + post.id + '\')">' +(isLiked?'♥':'♡')+'&nbsp;'+likeCount+' '+(likeCount===1?(t('social_like_one')||'like'):(t('social_like_many')||'likes'))+'</button>' +
         '<div class="spc-sep"></div>' +
-        '<button class="spc-action" onclick="focusComposer()">Reply</button>' +
+        '<button class="spc-action" onclick="focusComposer()">'+(t('social_reply')||'Reply')+'</button>' +
       '</div>' +
     '</div>';
   }).join('');
@@ -10689,9 +10708,9 @@ function postSocialUpdate(){
     body: text,
     likes:0, liked:false, isUser:true
   };
-  const saved = JSON.parse(localStorage.getItem('via_social_posts')||'[]');
+  const saved = getPosts();
   saved.push(post);
-  try{ localStorage.setItem('via_social_posts', JSON.stringify(saved)); }catch(e){}
+  savePosts(saved);
   if(ta) ta.value = '';
   renderSocialFeed();
 }
@@ -10704,9 +10723,8 @@ function likePost(id, btn){
 }
 
 function deletePost(id){
-  const saved = JSON.parse(localStorage.getItem('via_social_posts')||'[]');
-  const updated = saved.filter(p=>p.id!==id);
-  try{ localStorage.setItem('via_social_posts', JSON.stringify(updated)); }catch(e){}
+  const updated = getPosts().filter(p=>p.id!==id);
+  savePosts(updated);
   renderSocialFeed();
 }
 
@@ -10736,7 +10754,7 @@ function showOnboardTooltip(){
   const tip = document.createElement('div');
   tip.className = 'onboard-tooltip';
   tip.id = 'onboardTip';
-  tip.innerHTML = '<div class="onboard-dot"></div><span>Tap any restaurant or hotel name to swap it</span><span style="opacity:.45;font-size:.6rem;margin-left:.3rem">✕</span>';
+  tip.innerHTML = '<div class="onboard-dot"></div><span>'+(t('onboard_tip')||'Tap any restaurant or hotel name to swap it')+'</span><span style="opacity:.45;font-size:.6rem;margin-left:.3rem">✕</span>';
   tip.onclick = () => { tip.remove(); localStorage.setItem(SEEN_KEY,'1'); };
   document.body.appendChild(tip);
   setTimeout(() => { if(tip.parentNode){ tip.remove(); localStorage.setItem(SEEN_KEY,'1'); } }, 6000);
@@ -10771,32 +10789,80 @@ function initDayTabsScroll(){
    SHARED TRIP READ-ONLY VIEW
 ══════════════════════════════════════ */
 let isSharedView = false;
-function checkSharedTrip(){
-  const params = new URLSearchParams(window.location.search);
+function _applySharedPayload(payload){
+  const qd = payload.quizData;
+  if(!payload.itinData || !qd || typeof qd.dest !== 'string') return false;
+  const VALID_BUDGETS = ['budget','mid','comfortable','luxury','comf','back'];
+  itinData   = payload.itinData;
+  S.dest     = String(qd.dest).slice(0, 200);
+  S.dateFrom = typeof qd.dateFrom === 'string' ? qd.dateFrom.slice(0,10) : '';
+  S.dateTo   = typeof qd.dateTo   === 'string' ? qd.dateTo.slice(0,10)   : '';
+  S.comp     = typeof qd.comp     === 'string' ? qd.comp.slice(0,100)    : '';
+  S.vibes    = Array.isArray(qd.vibes) ? qd.vibes.filter(v=>typeof v==='string').slice(0,10) : [];
+  S.budget   = VALID_BUDGETS.includes(qd.budget) ? qd.budget : 'mid';
+  S.pace     = typeof qd.pace === 'string' ? qd.pace.slice(0,50) : 'balanced';
+  currentTier = S.budget;
+  applyLang(payload.lang);
+  isSharedView = true;
+  renderItin(itinData);
+  const banner = document.getElementById('sharedBanner');
+  if(banner){
+    banner.style.display = 'block';
+    const bannerText = banner.querySelector('.shared-banner-text');
+    if(bannerText) bannerText.innerHTML = '<b>' + (t('shared_banner') || 'You\'re viewing a shared Via itinerary. Plan your own trip free in under 2 minutes.') + '</b>' +
+      '<span style="display:block;font-size:.82em;opacity:.8;margin-top:.2rem">Built in under 2 minutes. Start with the same destination or pick your own.</span>';
+    const bannerCta = banner.querySelector('.shared-banner-cta');
+    if(bannerCta) bannerCta.textContent = t('shared_banner_cta') || 'Plan my own trip →';
+  }
+  showPg('pg-itin');
+  return true;
+}
+
+function handleSharedCta(){
+  const savedDest = S.dest;
+  // Reset state (no confirm needed — user clicked the CTA intentionally)
+  Object.assign(S,{step:1,dest:'',dateFrom:'',dateTo:'',comp:'',vibes:[],budget:'mid',pace:'balanced',freeDay:false,coplanners:[],name:'',email:'',notes:''});
+  const cpList = document.getElementById('coplannerList'); if(cpList) cpList.innerHTML='';
+  document.querySelectorAll('.pace-card').forEach(function(c){c.classList.remove('on')}); const defPace=document.querySelector('.pace-card[data-v="balanced"]'); if(defPace)defPace.classList.add('on');
+  currentTier = 'mid';
+  document.querySelectorAll('.dest-card,.comp-card,.vc').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.qpill').forEach(e=>e.classList.remove('on'));
+  ['customDestInput','uName','uEmail','uNotes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  ['dateFrom','dateTo'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  Object.keys(userChoices).forEach(k=>delete userChoices[k]);
+  isSharedView = false;
+  const ab = document.getElementById('itinActionBar'); if(ab) ab.style.display = 'none';
+  showPg('pg-quiz');
+  updateQ();
+  if(savedDest){
+    const inp = document.getElementById('customDestInput');
+    if(inp){ inp.value = savedDest; customDest(savedDest); }
+    showToast(t('similar_trip_hint') || 'Destination copied — pick your dates below.');
+  }
+}
+
+async function checkSharedTrip(){
+  const params  = new URLSearchParams(window.location.search);
+  const shareId = params.get('s');
   const tripB64 = params.get('trip');
+
+  // ── New short ID format: ?s=<uuid> ──────────────────────────────────────
+  if(shareId){
+    try {
+      const r = await fetch('/api/share?id=' + encodeURIComponent(shareId));
+      if(!r.ok) throw new Error('not found');
+      const { payload } = await r.json();
+      if(_applySharedPayload(payload)) return;
+    } catch(e){ console.warn('[via] Could not load shared trip:', e.message); }
+    return;
+  }
+
+  // ── Legacy base64 format: ?trip=<base64> ────────────────────────────────
   if(!tripB64) return;
   try {
     const json = new TextDecoder().decode(new Uint8Array(Array.from(atob(tripB64), c => c.charCodeAt(0))));
-    const payload = JSON.parse(json);
-    const qd = payload.quizData;
-    if(!payload.itinData || !qd || typeof qd.dest !== 'string') return;
-    const VALID_BUDGETS = ['budget','mid','comfortable','luxury'];
-    itinData = payload.itinData;
-    S.dest     = String(qd.dest).slice(0, 200);
-    S.dateFrom = typeof qd.dateFrom === 'string' ? qd.dateFrom.slice(0,10) : '';
-    S.dateTo   = typeof qd.dateTo   === 'string' ? qd.dateTo.slice(0,10)   : '';
-    S.comp     = typeof qd.comp     === 'string' ? qd.comp.slice(0,100)    : '';
-    S.vibes    = Array.isArray(qd.vibes) ? qd.vibes.filter(v=>typeof v==='string').slice(0,10) : [];
-    S.budget   = VALID_BUDGETS.includes(qd.budget) ? qd.budget : 'mid';
-    S.pace     = typeof qd.pace === 'string' ? qd.pace.slice(0,50) : 'balanced';
-    currentTier = S.budget;
-    applyLang(payload.lang);
-    isSharedView = true;
-    renderItin(itinData);
-    const banner = document.getElementById('sharedBanner');
-    if(banner) banner.style.display = 'block';
-    showPg('pg-itin');
-  } catch(e){ console.warn('Invalid shared trip URL'); }
+    _applySharedPayload(JSON.parse(json));
+  } catch(e){ console.warn('[via] Invalid shared trip URL'); }
 }
 
 /* ══════════════════════════════════════
@@ -10834,7 +10900,7 @@ const authStrings = {
     regFooter:'Že imaš račun?', regFooterLink:'Prijavi se',
     regError:'Ta e-poštni naslov je že registriran.',
     regValidation:'Izpolni vsa polja. Geslo mora imeti vsaj 8 znakov.',
-    regBenefits:['Prvo potovanje shranjeno brezplačno','Dostop do načrtov na vseh napravah','PDF izvoz in opozorila o cenah','Neomejeno shranjevanje od 7 €'],
+    regBenefits:['Prvo potovanje shranjeno brezplačno','Dostop do načrtov na vseh napravah','PDF izvoz in opozorila vključena','Neomejeno shranjevanje od 9 €'],
     divider:'tvoji podatki',
   },
   de:{
@@ -10851,7 +10917,7 @@ const authStrings = {
     regFooter:'Bereits ein Konto?', regFooterLink:'Anmelden',
     regError:'Diese E-Mail ist bereits registriert.',
     regValidation:'Bitte alle Felder ausfüllen. Passwort muss mindestens 8 Zeichen haben.',
-    regBenefits:['Erste Reise kostenlos gespeichert','Pläne auf allen Geräten','PDF-Export und Preisalarme inklusive','Unbegrenzte Speicherung ab 7 €'],
+    regBenefits:['Erste Reise kostenlos gespeichert','Pläne auf allen Geräten','PDF-Export und Preisalarme inklusive','Unbegrenzte Speicherung ab 9 €'],
     divider:'deine Daten',
   },
   it:{
@@ -10868,7 +10934,7 @@ const authStrings = {
     regFooter:'Hai già un account?', regFooterLink:'Accedi',
     regError:'Questa email è già registrata.',
     regValidation:'Compila tutti i campi. La password deve avere almeno 8 caratteri.',
-    regBenefits:['Primo itinerario salvato gratis','Accesso ai piani su qualsiasi dispositivo','Esportazione PDF e avvisi prezzi inclusi','Salvataggi illimitati da 7 €'],
+    regBenefits:['Primo itinerario salvato gratis','Accesso ai piani su qualsiasi dispositivo','Esportazione PDF e avvisi prezzi inclusi','Salvataggi illimitati da 9 €'],
     divider:'i tuoi dati',
   },
   fr:{
@@ -10885,7 +10951,7 @@ const authStrings = {
     regFooter:'Déjà un compte ?', regFooterLink:'Se connecter',
     regError:'Cet e-mail est déjà enregistré.',
     regValidation:'Remplis tous les champs. Le mot de passe doit contenir au moins 8 caractères.',
-    regBenefits:['Premier itinéraire sauvegardé gratuitement','Accès aux plans sur tous vos appareils','Export PDF et alertes prix inclus','Sauvegardes illimitées à partir de 7 €'],
+    regBenefits:['Premier itinéraire sauvegardé gratuitement','Accès aux plans sur tous vos appareils','Export PDF et alertes prix inclus','Sauvegardes illimitées à partir de 9 €'],
     divider:'vos coordonnées',
   },
   hr:{
@@ -10902,7 +10968,7 @@ const authStrings = {
     regFooter:'Već imaš račun?', regFooterLink:'Prijavi se',
     regError:'Ovaj e-mail je već registriran.',
     regValidation:'Ispuni sva polja. Lozinka mora imati najmanje 8 znakova.',
-    regBenefits:['Prvo putovanje spremljeno besplatno','Pristup planovima na svim uređajima','PDF izvoz i upozorenja o cijenama','Neograničeno spremanje od 7 €'],
+    regBenefits:['Prvo putovanje spremljeno besplatno','Pristup planovima na svim uređajima','PDF izvoz i upozorenja o cijenama uključena','Neograničeno spremanje od 9 €'],
     divider:'tvoji podaci',
   },
   es:{
@@ -10919,7 +10985,7 @@ const authStrings = {
     regFooter:'¿Ya tienes cuenta?', regFooterLink:'Iniciar sesión',
     regError:'Este correo ya está registrado.',
     regValidation:'Completa todos los campos. La contraseña debe tener al menos 8 caracteres.',
-    regBenefits:['Primer itinerario guardado gratis','Accede a tus planes en cualquier dispositivo','Exportación PDF y alertas de precios','Guardados ilimitados desde 7 €'],
+    regBenefits:['Primer itinerario guardado gratis','Accede a tus planes en cualquier dispositivo','Exportación PDF y alertas de precios incluidas','Guardados ilimitados desde 9 €'],
     divider:'tus datos',
   },
   sr:{
@@ -10936,7 +11002,7 @@ const authStrings = {
     regFooter:'Već imaš nalog?', regFooterLink:'Prijavi se',
     regError:'Ovaj imejl je već registrovan.',
     regValidation:'Popuni sva polja. Lozinka mora imati najmanje 8 karaktera.',
-    regBenefits:['Sačuvaj koliko god planova hoćeš','Vrati se i uredi u bilo kom trenutku','Podeli plan s ekipom jednim klikom','Obaveštenja kad cene padnu'],
+    regBenefits:['Prvo putovanje sačuvano besplatno','Pristupi planovima na svim uređajima','PDF izvoz i obaveštenja o cenama uključena','Neograničeno čuvanje od 9 €'],
     divider:'tvoji podaci',
   },
 };
@@ -11004,10 +11070,10 @@ function localiseAuthModal(){
    TOAST — localised
 ══════════════════════════════════════ */
 const toastStrings = {
-  linkCopied:{en:'Link copied to clipboard.',sl:'Povezava kopirana.',de:'Link kopiert.',it:'Link copiato.',fr:'Lien copié.',hr:'Veza kopirana.',es:'Enlace copiado.'},
-  alertSet:{en:'Price alert set. We will email you when prices drop.',sl:'Opozorilo nastavljeno. Sporočili ti bomo, ko cene padejo.',de:'Preisalarm gesetzt.',it:'Avviso prezzi impostato.',fr:'Alerte prix activée.',hr:'Upozorenje postavljeno.',es:'Alerta de precios activada.'},
-  saved:{en:'Trip saved to your profile.',sl:'Potovanje shranjeno.',de:'Reise gespeichert.',it:'Viaggio salvato.',fr:'Voyage sauvegardé.',hr:'Putovanje spremljeno.',es:'Viaje guardado.'},
-  unlocked:{en:'Via Plus unlocked. Save unlimited trips.',sl:'Via Plus odklenjen.',de:'Via Plus freigeschaltet.',it:'Via Plus sbloccato.',fr:'Via Plus débloqué.',hr:'Via Plus otključan.',es:'Via Plus desbloqueado.'},
+  linkCopied:{en:'Link copied to clipboard.',sl:'Povezava kopirana.',de:'Link kopiert.',it:'Link copiato.',fr:'Lien copié.',hr:'Veza kopirana.',es:'Enlace copiado.',sr:'Link kopiran.'},
+  alertSet:{en:'Price alert set. We will email you when prices drop.',sl:'Opozorilo nastavljeno. Sporočili ti bomo, ko cene padejo.',de:'Preisalarm gesetzt.',it:'Avviso prezzi impostato.',fr:'Alerte prix activée.',hr:'Upozorenje postavljeno.',es:'Alerta de precios activada.',sr:'Obaveštenje postavljeno. Pisaćemo ti kad cene padnu.'},
+  saved:{en:'Trip saved to your profile.',sl:'Potovanje shranjeno.',de:'Reise gespeichert.',it:'Viaggio salvato.',fr:'Voyage sauvegardé.',hr:'Putovanje spremljeno.',es:'Viaje guardado.',sr:'Putovanje sačuvano.'},
+  unlocked:{en:'Via Plus unlocked. Save unlimited trips.',sl:'Via Plus odklenjen.',de:'Via Plus freigeschaltet.',it:'Via Plus sbloccato.',fr:'Via Plus débloqué.',hr:'Via Plus otključan.',es:'Via Plus desbloqueado.',sr:'Via Plus aktiviran.'},
 };
 function tToast(key){ return (toastStrings[key]||{})[currentLang] || (toastStrings[key]||{}).en || key; }
 
@@ -11085,6 +11151,7 @@ function renderTripCostSummary(data){
     fr:{title:'Estimation des coûts du voyage',sub:'Tous les jours, par personne.',food:'Restauration',act:'Activités',stay:'Hébergement',perDay:'Par jour',total:'Total voyage',note:'Estimation par personne. Hébergement par chambre.',disclaimer:'Prix estimés par IA selon le budget.'},
     hr:{title:'Ukupna procjena troškova',sub:'Svi dani zajedno, po osobi, za vaš proračun.',food:'Hrana',act:'Aktivnosti',stay:'Smještaj',perDay:'Po danu',total:'Ukupno putovanje',note:'Procjena po osobi. Smještaj po sobi.',disclaimer:'AI procjene na temelju odabranog proračuna.'},
     es:{title:'Estimación de costes totales',sub:'Todos los días, por persona, en tu nivel de presupuesto.',food:'Comida',act:'Actividades',stay:'Alojamiento',perDay:'Por día',total:'Total viaje',note:'Estimación por persona. Alojamiento por habitación.',disclaimer:'Precios estimados por IA según el presupuesto elegido.'},
+    sr:{title:'Ukupna procjena troškova',sub:'Svi dani zajedno, po osobi, za vaš budžet.',food:'Hrana',act:'Aktivnosti',stay:'Smeštaj',perDay:'Po danu',total:'Ukupno putovanje',note:'Procena po osobi. Smeštaj po sobi.',disclaimer:'AI procene na osnovu izabranog budžeta.'},
   };
   const loc = L[currentLang] || L.en;
   const tierLabel = t('budget_' + tier + '_short') || tier;
@@ -11158,8 +11225,12 @@ function openCollabModal(){
   const modal = document.getElementById('collabModal');
   const linkBox = document.getElementById('collabLinkBox');
   if(modal && linkBox){
-    const link = buildCollabLink();
+    // Prefer the short server-stored URL; fall back to base64 collab link
+    const link = window._shareUrl || buildCollabLink();
     linkBox.textContent = link;
+    // Show/hide native share button based on API support
+    const nativeBtn = document.getElementById('collabNativeShareBtn');
+    if(nativeBtn) nativeBtn.style.display = navigator.share ? 'inline-flex' : 'none';
     modal.classList.add('open');
   }
 }
@@ -11180,22 +11251,23 @@ function buildCollabLink(){
   } catch(e){ return window.location.href; }
 }
 function copyCollabLink(){
-  const link = buildCollabLink();
+  const link = window._shareUrl || buildCollabLink();
   navigator.clipboard.writeText(link).then(function(){
     const btn = document.querySelector('.collab-copy-btn');
     if(btn){ btn.textContent = 'Copied!'; setTimeout(function(){ btn.textContent='Copy'; }, 2000); }
-  }).catch(function(){ showToast('Link ready — copy it from the box above.'); });
+  }).catch(function(){ showToast(t('link_copy_fallback')||'Link ready — copy it from the box above.'); });
+}
+function nativeShareItin(){
+  const link = window._shareUrl || buildCollabLink();
+  if(navigator.share){
+    navigator.share({ title: itinData && itinData.title || 'My Via Trip', text:'Check out my travel plan on Via — free AI trip planner', url: link }).catch(()=>{});
+  }
 }
 function addCollabButton(){
-  const acts = document.querySelector('.mast-acts');
-  if(!acts || document.getElementById('collabMastBtn')) return;
-  const btn = document.createElement('button');
-  btn.className = 'mast-btn';
-  btn.id = 'collabMastBtn';
-  btn.style.cssText = 'border-color:var(--forest);color:var(--forest)';
-  btn.innerHTML = 'Share';
-  btn.onclick = openCollabModal;
-  acts.insertBefore(btn, acts.firstChild);
+  // The static masthead "Share →" button (id=mastShareBtn) already opens openCollabModal().
+  // No duplicate button needed — just ensure the static button is styled consistently.
+  const staticBtn = document.getElementById('mastShareBtn');
+  if(staticBtn) staticBtn.onclick = openCollabModal;
 }
 function showCollabBanner(){
   if(!S.coplanners || !S.coplanners.length) return;
@@ -11220,6 +11292,7 @@ function showCollabBanner(){
    Seed: 4 sample posts
 ══════════════════════════════════════ */
 const BLOG_KEY = 'via_blog_posts_v1';
+const ADMIN_EMAIL = 'admin@viawander.co';
 let currentBlogFilter = 'all';
 let currentArticleId = null;
 
@@ -11253,12 +11326,13 @@ function deleteBlogPost(id){
 }
 
 /* ── Open blog page ── */
+function isAdmin(){ return !!(currentUser && currentUser.email === ADMIN_EMAIL); }
+
 function openBlog(){
   showPg('pg-blog');
   renderBlogGrid();
-  // Show admin link for authenticated users who are the "owner"
   const adminLink = document.getElementById('blogAdminLink');
-  if(adminLink) adminLink.style.display = currentUser ? 'inline' : 'none';
+  if(adminLink) adminLink.style.display = isAdmin() ? 'inline' : 'none';
 }
 
 /* ── Render grid ── */
@@ -11321,10 +11395,14 @@ function openBlogArticle(id){
   // Simple markdown-ish body render (already HTML from seed, passthrough)
   const body = post.body || '';
   const fmtDate = new Date(post.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  const catLabel = post.category==='destination'?'Destination':post.category==='tips'?'Travel tips':'Partner story';
+  const catLabel = post.category==='destination'
+    ? t('blog_cat_dest')
+    : post.category==='tips'
+      ? t('blog_cat_tips')
+      : t('blog_cat_partner');
 
   content.innerHTML =
-    (post.sponsored ? '<div class="article-sponsored-banner"><div class="article-sponsored-dot"></div>Partner story in collaboration with ' + post.sponsorName + '. Via earns a commission on bookings at no cost to you.</div>' : '') +
+    (post.sponsored ? '<div class="article-sponsored-banner"><div class="article-sponsored-dot"></div>' + t('blog_sponsored_prefix') + ' ' + post.sponsorName + '. ' + t('blog_sponsored_note') + '</div>' : '') +
     '<div class="article-cat">' + catLabel + '</div>' +
     '<h1 class="article-title">' + post.title + '</h1>' +
     '<div class="article-byline">' +
@@ -11334,8 +11412,8 @@ function openBlogArticle(id){
     '<img class="article-hero-img" src="' + post.image + '" alt="' + post.title + '" loading="lazy">' +
     '<div class="article-body">' + body + '</div>' +
     '<div class="article-cta">' +
-      '<div><div class="article-cta-text">Plan your own trip with Via.</div><div class="article-cta-sub">Full itinerary in under 2 minutes, free.</div></div>' +
-      '<button class="article-cta-btn" onclick="showPg(\'pg-land\');goQuiz()">Plan a trip →</button>' +
+      '<div><div class="article-cta-text">' + t('blog_cta_title') + '</div><div class="article-cta-sub">' + t('blog_cta_sub') + '</div></div>' +
+      '<button class="article-cta-btn" onclick="showPg(\'pg-land\');goQuiz()">' + t('blog_cta_btn') + '</button>' +
     '</div>';
 
   if(gridWrap) gridWrap.style.display = 'none';
@@ -11354,6 +11432,7 @@ function closeBlogArticle(){
 
 /* ── Admin panel ── */
 function showBlogAdmin(){
+  if(!isAdmin()) return;
   const gridWrap = document.getElementById('blogGridWrap');
   const adminWrap = document.getElementById('blogAdminWrap');
   const articleWrap = document.getElementById('blogArticleWrap');
@@ -11465,7 +11544,7 @@ function publishPost(existingId){
   const sponsorName = document.getElementById('peSponsorName') ? document.getElementById('peSponsorName').value.trim() : '';
   const featured = document.getElementById('peFeatured').checked;
 
-  if(!title || !body){ alert('Title and body are required.'); return; }
+  if(!title || !body){ showToast(t('blog_fields_required')||'Title and body are required.'); return; }
 
   const initials = author.split(' ').map(function(n){ return n[0]; }).join('').toUpperCase().slice(0,2);
   const post = {
@@ -11478,7 +11557,7 @@ function publishPost(existingId){
 
   saveBlogPost(post);
   renderAdminList();
-  showToast('Post published: ' + title);
+  showToast((t('blog_post_saved')||'Post published.'));
 }
 
 
@@ -11641,17 +11720,12 @@ const MOODS = [
   {id:'outdoor', label:'Outdoors'},
 ];
 
-const MOOD_LABELS_SL = {slow:'Sproščeno',culture:'Kultura',active:'Aktiven dan',food:'Hrana in vino',outdoor:'Narava'};
-const MOOD_LABELS_DE = {slow:'Gemütlich',culture:'Kultur',active:'Aktiv',food:'Essen & Wein',outdoor:'Natur'};
-const MOOD_LABELS_IT = {slow:'Relax',culture:'Cultura',active:'Avventura',food:'Cibo & Vino',outdoor:'Natura'};
-const MOOD_LABELS_FR = {slow:'Détente',culture:'Culture',active:'Actif',food:'Cuisine',outdoor:'Nature'};
-const MOOD_LABELS_HR = {slow:'Opušteno',culture:'Kultura',active:'Aktivno',food:'Hrana i vino',outdoor:'Priroda'};
-const MOOD_LABELS_ES = {slow:'Relajado',culture:'Cultura',active:'Activo',food:'Gastronomía',outdoor:'Naturaleza'};
-const MOOD_LABELS_SR = {slow:'Opušteno',culture:'Kultura',active:'Aktivno',food:'Hrana i vino',outdoor:'Priroda'};
-
 function getMoodLabel(id){
-  const maps = {sl:MOOD_LABELS_SL,de:MOOD_LABELS_DE,it:MOOD_LABELS_IT,fr:MOOD_LABELS_FR,hr:MOOD_LABELS_HR,es:MOOD_LABELS_ES,sr:MOOD_LABELS_SR};
-  return (maps[currentLang]||{})[id] || MOODS.find(function(m){return m.id===id;}).label;
+  const key = 'mood_' + id;
+  const translated = t(key);
+  if(translated && translated !== key) return translated;
+  const m = MOODS.find(function(m){return m.id===id;});
+  return m ? m.label : id;
 }
 
 function renderMoodPanel(di, dayTitle){
@@ -11972,6 +12046,31 @@ checkSharedTrip();
 // Show draft resume banner on landing page (after shared-trip check, since that sets isSharedView)
 setTimeout(checkDraftBanner, 80);
 
+// Deep-link: ?dest=Lisbon pre-fills the quiz destination and jumps straight to the quiz
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const destParam = params.get('dest');
+  if(destParam && !params.get('s') && !params.get('trip')){
+    // Small delay so auth and page state settle first
+    setTimeout(function(){
+      S.dest = destParam.trim();
+      const inp = document.getElementById('customDestInput');
+      if(inp) inp.value = S.dest;
+      // Try to match a preset card
+      const cards = document.querySelectorAll('.dest-card');
+      cards.forEach(function(c){
+        if(c.dataset.v && c.dataset.v.toLowerCase() === S.dest.toLowerCase()){
+          c.classList.add('on');
+          S.dest = c.dataset.v;
+          if(inp) inp.value = '';
+        }
+      });
+      goQuiz();
+      showToast((t('similar_trip_hint') || 'Destination set — pick your dates below.').replace('{dest}', S.dest));
+    }, 200);
+  }
+})();
+
 /* ══ SERVICE WORKER — offline itinerary ══ */
 (function(){
   if(!('serviceWorker' in navigator)) return;
@@ -12067,22 +12166,25 @@ function swSaveItin(){
   <div class="collab-modal">
     <button class="collab-modal-close" onclick="closeCollabModal()">✕ Close</button>
     <div class="collab-modal-title">Share this itinerary</div>
-    <div class="collab-modal-sub">Anyone with this link can view the full plan and suggest swaps. You stay in control of the final choices.</div>
+    <div class="collab-modal-sub">Anyone with this link can view the full itinerary — restaurants, stays, and day-by-day details.</div>
     <div class="collab-link-wrap">
       <div class="collab-link-box" id="collabLinkBox">Generating link…</div>
       <button class="collab-copy-btn" onclick="copyCollabLink()">Copy</button>
+    </div>
+    <div style="margin-bottom:1.2rem">
+      <button id="collabNativeShareBtn" onclick="nativeShareItin()" style="display:none;align-items:center;gap:.45rem;font-family:var(--ui);font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--forest);color:var(--parch);border:none;padding:.65rem 1.2rem;border-radius:3px;cursor:pointer;width:100%;justify-content:center;transition:opacity .15s">Share via… ↗</button>
     </div>
     <div class="collab-perms">
       <div class="collab-perm-title">What co-planners can do</div>
       <div class="collab-perm-list">
         <div class="collab-perm">View the full day-by-day itinerary</div>
         <div class="collab-perm">See restaurant and hotel recommendations</div>
-        <div class="collab-perm">Tap any place to see alternatives</div>
-        <div class="collab-perm">Switch budget tiers to compare</div>
+        <div class="collab-perm">Save the itinerary as PDF</div>
+        <div class="collab-perm">Use it to inspire their own trip</div>
       </div>
     </div>
     <div style="background:rgba(28,21,16,.04);border:1px solid var(--cr3);border-radius:3px;padding:.7rem 1rem;font-family:var(--body);font-size:.82rem;color:var(--ink3);line-height:1.55">
-      The trip creator keeps editing rights. Co-planners view and suggest — they cannot overwrite the plan.
+      The link is view-only. Only you can edit the plan.
     </div>
   </div>
 </div>
@@ -12092,8 +12194,9 @@ function swSaveItin(){
   <div class="shared-banner">
     <div class="shared-banner-text">
       <b>You're viewing a shared Via itinerary.</b> Plan your own trip for free in under 2 minutes.
+      <span style="display:block;font-size:.82em;opacity:.8;margin-top:.2rem">Built in under 2 minutes. Start with the same destination or pick your own.</span>
     </div>
-    <button class="shared-banner-cta" onclick="startOver();showPg('pg-land')">Plan my own trip →</button>
+    <button class="shared-banner-cta" id="sharedBannerCtaBtn" onclick="handleSharedCta()">Plan my own trip →</button>
   </div>
 </div>
 
@@ -12195,11 +12298,11 @@ function swSaveItin(){
       <div class="auth-sub">Your saved trips are waiting.</div>
 
       <div class="auth-field">
-        <label>Email</label>
+        <label for="siEmail">Email</label>
         <input type="email" id="siEmail" placeholder="you@email.com" autocomplete="email">
       </div>
       <div class="auth-field">
-        <label>Password</label>
+        <label for="siPass">Password</label>
         <input type="password" id="siPass" placeholder="Your password" autocomplete="current-password">
       </div>
 
@@ -12227,15 +12330,15 @@ function swSaveItin(){
       <div class="auth-divider">your details</div>
 
       <div class="auth-field">
-        <label>First name</label>
+        <label for="regName">First name</label>
         <input type="text" id="regName" placeholder="What should we call you?" autocomplete="given-name">
       </div>
       <div class="auth-field">
-        <label>Email</label>
+        <label for="regEmail">Email</label>
         <input type="email" id="regEmail" placeholder="you@email.com" autocomplete="email">
       </div>
       <div class="auth-field">
-        <label>Password</label>
+        <label for="regPass">Password</label>
         <input type="password" id="regPass" placeholder="Minimum 8 characters" autocomplete="new-password">
       </div>
 
@@ -12279,7 +12382,7 @@ function swSaveItin(){
       <div class="upgrade-title" id="upgradeTitleEl">Save every trip you plan.</div>
       <div class="upgrade-sub">Your first itinerary is always free. Everything else for less than one restaurant meal.</div>
       <div class="upgrade-price-row">
-        <div class="upgrade-price">€9</div>
+        <div class="upgrade-price" id="upgradePriceEl">€9</div>
         <div class="upgrade-price-sub" data-t="upgrade_price_sub">one-time payment · unlimited saves, forever</div>
       </div>
     </div>
@@ -12384,6 +12487,7 @@ function swSaveItin(){
         <div class="trips-header">
           <div class="trips-title" data-t="community_title">Community</div>
           <div class="trips-count" data-t="community_sub">Share ideas, tips and inspiration with other Via travellers</div>
+          <div id="socialLocalNote" style="font-family:var(--ui);font-size:.62rem;color:var(--ink3);margin-top:.3rem;opacity:.7"></div>
         </div>
         <div class="social-feed" id="socialFeed">
 

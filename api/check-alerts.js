@@ -63,7 +63,7 @@ Rules: negative = cheaper, positive = more expensive. Set notable_change:true on
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model:      'claude-haiku-4-5',
+      model:      'claude-haiku-4-5-20251004',
       max_tokens:  256,
       messages: [{ role: 'user', content: prompt }],
     }),
@@ -215,12 +215,11 @@ export default async function handler(req, res) {
   if (req.method !== 'GET' && req.method !== 'POST') return res.status(405).end();
 
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret) {
-    const headerSecret = (req.headers.authorization || '').replace('Bearer ', '');
-    const urlSecret    = new URL(req.url, 'https://x').searchParams.get('secret');
-    if (headerSecret !== cronSecret && urlSecret !== cronSecret) {
-      return res.status(401).end('Unauthorized');
-    }
+  if (!cronSecret) return res.status(500).end('CRON_SECRET not configured');
+  const headerSecret = (req.headers.authorization || '').replace('Bearer ', '');
+  const urlSecret    = new URL(req.url, 'https://x').searchParams.get('secret');
+  if (headerSecret !== cronSecret && urlSecret !== cronSecret) {
+    return res.status(401).end('Unauthorized');
   }
 
   const apiKey    = process.env.ANTHROPIC_API_KEY;

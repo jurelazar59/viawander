@@ -10,7 +10,8 @@
     "api/unsubscribe-alert.js": { "maxDuration": 15 },
     "api/verify-session.js": { "maxDuration": 10 },
     "api/mood.js":           { "maxDuration": 10 },
-    "api/packing.js":        { "maxDuration": 10 }
+    "api/packing.js":        { "maxDuration": 10 },
+    "api/share.js":          { "maxDuration": 10 }
   },
   "crons": [
     { "path": "/api/check-alerts", "schedule": "0 8 * * *" }
@@ -29,6 +30,12 @@
       ]
     },
     {
+      "source": "/itinerary/:path*",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=3600" }
+      ]
+    },
+    {
       "source": "/sw.js",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
@@ -39,7 +46,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://*.unsplash.com data: blob:; frame-src https://www.openstreetmap.org https://www.google.com; connect-src 'self' https://nominatim.openstreetmap.org https://*.supabase.co https://api.anthropic.com"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://*.unsplash.com data: blob:; frame-src https://www.openstreetmap.org https://www.google.com; connect-src 'self' https://nominatim.openstreetmap.org https://*.supabase.co https://api.anthropic.com https://geocoding-api.open-meteo.com https://api.open-meteo.com https://climate-api.open-meteo.com"
         },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options",         "value": "SAMEORIGIN" },
